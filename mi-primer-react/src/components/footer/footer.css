@@ -1,0 +1,54 @@
+.footer-caja{
+  background-color: rgb(43, 37, 32); 
+  border-top: 1px solid rgba(0, 0, 0, 0.06); 
+  padding: 30px 40px;
+  margin-top: 60px; 
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.03); 
+  display: flex;
+  justify-content: center;
+  gap: 175px;
+  text-align: center;
+  color: white;
+  align-items: center;
+}
+
+.logo{
+    height: 90x;
+    width: 90px;
+}
+.contactos-list li a{
+    text-decoration: none;
+    color: white;
+}   
+
+.contactos-list{
+    list-style: none;
+}
+
+.contactos-list li{
+    margin: 5px 0;
+}
+
+.contactos-list li a:hover{
+    color: #ee5801;
+    transition-duration: 0.3s;
+}
+
+.redes{
+    margin-top: 10px;
+    display: flex;
+    gap:15px;
+    justify-content: center;
+}
+
+svg{
+    stroke:white;
+    fill:white;
+}
+svg:hover{
+    stroke: #ee5801;
+}
+
+.titulo-footer{
+    font-size: 20px;
+}

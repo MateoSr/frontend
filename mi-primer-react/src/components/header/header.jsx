@@ -8,16 +8,11 @@ function Header(){
     return(
         <div className='header-caja'>
                 <a href='/'>
-                    <img className="logo" src={logo}></img>
+                    <img className="logo-header" src={logo}></img>
                 </a>
                 <nav className='nav-barra'>
                     <ul className='nav-links'>
-                        <li className='nav-item-dropdown'><a href='/complejos'>Complejos</a>
-                            <ul className='submenu'>
-                                <li></li>
-
-                            </ul>
-                        </li>
+                        <li className='nav-item-dropdown'><a href='/complejos'>Complejos</a></li>
                         <li><a href='/software'>Software</a></li>
 
                         {estaLog ? 
