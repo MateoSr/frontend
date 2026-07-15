@@ -5,9 +5,11 @@ main{
     min-height: 1500px;
     display: block;
 }
-
+.contenedor-imagenes{
+    min-height: 500px;
+    margin: 0px;
+}
 .div{
-    background-color: white;
     min-height: 500px;
     margin: 0px;
     text-align: center;

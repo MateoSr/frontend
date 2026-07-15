@@ -5,21 +5,21 @@ import fondo_2 from '../../assets/fondo-2.jpg';
 import fondo_3 from '../../assets/fondo-3.jpg';
 
 const imagenes = [
-  { img: fondo_1 },
-  { img: fondo_2 },
-  { img: fondo_3 }
+    { img: fondo_1 },
+    { img: fondo_2 },
+    { img: fondo_3 }
 ];
 
 function Home(){
     const [imagenActual, setimagenActual] = useState(0);
 
-    const cronometro = setTimeout(() => {
+    setTimeout(() => {
     imagenActual === imagenes.length - 1 ? setimagenActual(0) : setimagenActual(imagenActual + 1);
     }, 8000);
 
     return(
         <main>
-            <div className='div'>
+            <div className='contenedor-imagenes'>
                 <img src={imagenes[0].img} className={`imagenes-fondo ${imagenActual === 0 ? 'active' : ''}`}/>
                 <img src={imagenes[1].img} className={`imagenes-fondo ${imagenActual === 1 ? 'active' : ''}`}/>
                 <img src={imagenes[2].img} className={`imagenes-fondo ${imagenActual === 2 ? 'active' : ''}`}/>
