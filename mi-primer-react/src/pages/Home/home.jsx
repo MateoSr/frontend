@@ -3,6 +3,7 @@ import './home.css'
 import fondo_1 from '../../assets/fondo-1.jpg';
 import fondo_2 from '../../assets/fondo-2.jpg';
 import fondo_3 from '../../assets/fondo-3.jpg';
+import BarraBusqueda from '../../components/barraBusqueda/barra'
 
 const imagenes = [
     { img: fondo_1 },
@@ -23,6 +24,11 @@ function Home(){
                 <img src={imagenes[0].img} className={`imagenes-fondo ${imagenActual === 0 ? 'active' : ''}`}/>
                 <img src={imagenes[1].img} className={`imagenes-fondo ${imagenActual === 1 ? 'active' : ''}`}/>
                 <img src={imagenes[2].img} className={`imagenes-fondo ${imagenActual === 2 ? 'active' : ''}`}/>
+                <div></div>
+                <div className='contenedor-barra'>
+                    <h1 style={{color:"#ffff",textShadow:"2px 2px 4px rgba(0, 0, 0, 0.5)",fontSize:"50px"}}>Busca tu cancha ya!</h1>
+                    <BarraBusqueda></BarraBusqueda>
+                </div>
             </div>
             <div className='div'>
                 <h2>Bienvenidos a Turno Libre</h2>

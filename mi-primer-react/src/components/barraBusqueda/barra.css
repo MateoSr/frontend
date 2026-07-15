@@ -1,0 +1,63 @@
+.barraBusqueda-contenedor{
+    margin: 10px 0;
+    background-color: rgb(255, 255, 255);
+    border-radius:30px;
+    min-height: 30px;
+    width: fit-content;
+    box-shadow:  0 5px 10px rgb(0, 0, 0,0.5);
+}
+
+.filtro-form{
+    
+    margin: 15px 15px;
+    display: flex;
+    justify-content: center;
+    min-height: 25px;
+    gap: 5px;
+}
+
+.filtro-form input,.filtro-form select{
+    border: none;
+}
+
+.barraBusqueda-form{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.my-button {
+  padding: 10px 20px;
+  background-color: #ee5801;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.my-button:hover {
+  background-color: #ee5801;
+  opacity: 0.8;
+  
+}
+.my-button:active {
+  background-color: #ff5e00;
+}
+
+.icon{
+    stroke:#ff5e00;
+    fill:rgb(255, 255, 255);
+}
+
+.filtro-select:invalid {
+  color: #a0a0a0; /* El gris clarito clásico de un placeholder */
+}
+
+/* 2. Para asegurarnos de que, al abrir la lista, las opciones reales se vean en negro */
+.filtro-select option {
+  color: #333333; /* Color oscuro para las opciones válidas */
+}
+
+/* 3. Evitamos que la opción oculta "Seleccionar deporte" tenga estilos raros en navegadores viejos */
+.filtro-select option[disabled] {
+  color: #a0a0a0;
+}

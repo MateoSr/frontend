@@ -1,4 +1,3 @@
-
 main{
     margin-top: 0px;
     flex-grow: 1;
@@ -6,8 +5,19 @@ main{
     display: block;
 }
 .contenedor-imagenes{
-    min-height: 500px;
+    position: relative; 
+    height: 80vh;       
+    width: 100%;
     margin: 0px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.contenedor-barra{
+    position: absolute;
+    z-index: 10;
+    margin-top:45vh;
 }
 .div{
     min-height: 500px;
@@ -20,7 +30,7 @@ main{
     left: 0;
     position: absolute;
     width:100%;
-    height: 70vh;
+    height: 100%;
     object-fit: cover;
     opacity: 0;
     transition: opacity 3s ease-in-out;
