@@ -4,6 +4,7 @@ import fondo_1 from '../../assets/fondo-1.jpg';
 import fondo_2 from '../../assets/fondo-2.jpg';
 import fondo_3 from '../../assets/fondo-3.jpg';
 import BarraBusqueda from '../../components/barraBusqueda/barra'
+import CarruselDeporte from '../../components/carruselDeportes/carruselDeporte'
 
 const imagenes = [
     { img: fondo_1 },
@@ -36,6 +37,7 @@ function Home(){
                 <h2>Bienvenidos a Turno Libre</h2>
                 <p>Turno Libre es una plataforma que permite a los usuarios reservar turnos en diferentes complejos deportivos y acceder a software de gestión para optimizar la administración de sus instalaciones. Con Turno Libre, los usuarios pueden encontrar fácilmente disponibilidad de turnos, realizar reservas en línea y gestionar sus actividades deportivas de manera eficiente.</p>
             </div>
+            <CarruselDeporte></CarruselDeporte>
         </main>
     )
 }

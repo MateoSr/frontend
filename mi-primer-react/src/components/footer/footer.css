@@ -1,15 +1,15 @@
 .footer-caja{
-  background-color: rgb(43, 37, 32); 
-  border-top: 1px solid rgba(0, 0, 0, 0.06); 
-  padding: 30px 40px;
-  margin-top: 60px; 
-  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.03); 
-  display: flex;
-  justify-content: center;
-  gap: 175px;
-  text-align: center;
-  color: white;
-  align-items: center;
+    background-color: rgb(43, 37, 32); 
+    border-top: 1px solid rgba(0, 0, 0, 0.06); 
+    padding: 30px 40px;
+    margin-top: 60px; 
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.03); 
+    display: flex;
+    justify-content: center;
+    gap: 175px;
+    text-align: center;
+    color: white;
+    align-items: center;
 }
 
 .logo{
