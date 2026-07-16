@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './home.css'
 import fondo_1 from '../../assets/fondo-1.jpg';
 import fondo_2 from '../../assets/fondo-2.jpg';
@@ -14,9 +14,11 @@ const imagenes = [
 function Home(){
     const [imagenActual, setimagenActual] = useState(0);
 
-    setTimeout(() => {
+    useEffect(() => {const cronometro = setTimeout(() => {
     imagenActual === imagenes.length - 1 ? setimagenActual(0) : setimagenActual(imagenActual + 1);
     }, 8000);
+    return() => clearTimeout(cronometro);
+}, [imagenActual]);
 
     return(
         <main>
