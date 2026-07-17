@@ -1,9 +1,11 @@
-
 .carrusel-ancho-contenedor {
+    background-image: url('../../assets/background-carrusel.jpg');
+    background-image: opacity(0.5);
+    background-size: cover;
     width: 100%; 
     overflow: hidden; 
     position: relative;
-    background-color: #ee5801; 
+    background-color: #ee5801;
     pointer-events: none; 
     padding: 20px 0;
     height: fit-content;
@@ -16,11 +18,11 @@
     position: relative;
     z-index: 10;
     text-align: center;
-    transform: TranslateY(-3vh);
+    transform: translateY(-3vh);
     color: white;
     margin-top: 2vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: xx-large;
+    font-size: 4.5vh;
 }
 
 .carrusel-ancho-cinta {

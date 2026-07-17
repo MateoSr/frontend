@@ -39,3 +39,63 @@ main{
 .imagenes-fondo.active{
     opacity: 1;
 }
+
+.contenedor-home {
+    display: flex;
+    width: 100%;
+    min-height: 500px;
+    margin: 7vh 0;
+    align-items: stretch;
+}
+
+.contenedor-home-texto {
+    text-align: left;
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    gap: 7vh;
+    margin: 0 5vh;
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.contenedor-home-boton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    box-sizing: border-box;
+    
+}
+
+.boton-home {
+    padding: 10px 20px;
+    background-color: #ee5801;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    height: 10vh;
+    width: 45vh;
+    font-size: 3vh;
+    z-index: 1;
+    position: absolute;
+}
+
+.boton-home:hover {
+    background-color: #d34d00;
+}
+
+.boton-home:active {
+    background-color: #ff5e00;
+}
+
+.contenedor-home-imagen{
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    border-radius: 30px;
+    box-shadow: 0 5px 10px rgb(0, 0, 0, 0.5);
+}

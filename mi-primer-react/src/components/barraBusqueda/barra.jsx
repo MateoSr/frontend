@@ -65,7 +65,7 @@ function BarraBusqueda(){
                 </select>
             </div>
             <div className='filtro-form'>
-                <button className='my-button'type='submit'>Buscar</button>
+                <button className='boton'type='submit'>Buscar</button>
             </div>
 
 

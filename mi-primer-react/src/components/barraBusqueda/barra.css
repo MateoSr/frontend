@@ -26,7 +26,7 @@
     align-items: center;
 }
 
-.my-button {
+.boton {
   padding: 10px 20px;
   background-color: #ee5801;
   color: white;
@@ -34,12 +34,13 @@
   border-radius: 30px;
   cursor: pointer;
 }
-.my-button:hover {
+
+.boton:hover {
   background-color: #ee5801;
   opacity: 0.8;
   
 }
-.my-button:active {
+.boton:active {
   background-color: #ff5e00;
 }
 
