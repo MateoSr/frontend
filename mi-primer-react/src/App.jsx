@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import Header from './components/header/header'
 import Footer from './components/footer/footer'
 import Home from './pages/Home/home'
+import Faq from './pages/Faq/faq'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -10,7 +12,10 @@ function App() {
   return (
     <>
       <Header></Header>
-      <Home></Home>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/faq" element={<Faq />} />
+      </Routes>
       <Footer></Footer>
     </>
   )
