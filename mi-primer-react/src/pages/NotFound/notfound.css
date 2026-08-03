@@ -1,0 +1,71 @@
+/* --- Estilos Generales del Contenedor --- */
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrado horizontal */
+  justify-content: center; /* Centrado vertical en pantalla */
+  min-height: 100vh; /* Ocupa todo el alto de la ventana */
+  padding: 40px;
+  text-align: center;
+  color: #1a1a1a;
+  box-sizing: border-box; /* Importante para el padding */
+}
+
+/* --- Estilos de los Títulos y Texto --- */
+.not-found-title {
+  font-size: 6rem;
+  font-weight: 900;
+  color: #ff5500; /* Naranja principal */
+  margin: 0 0 10px 0;
+  line-height: 1;
+}
+
+.not-found-subtitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+  color: #222222;
+}
+
+.not-found-text {
+  font-size: 1.1rem;
+  color: #666666;
+  max-width: 480px;
+  margin: 0 0 40px 0; /* Mayor espacio para separar del botón */
+  line-height: 1.5;
+}
+
+/* --- Estilos del Botón de Enlace (El Arreglo Clave) --- */
+.notfound-home {
+  /* 1. Resetear el aspecto nativo de enlace */
+  text-decoration: none !important; /* Forzar quitar subrayado */
+  color: #ffffff !important; /* Forzar texto blanco */
+  display: inline-flex; /* Para alineación perfecta del texto */
+  align-items: center; /* Centrado vertical del texto */
+  justify-content: center; /* Centrado horizontal del texto */
+
+  /* 2. Re-introducir el estilo de botón naranja */
+  background-color: #ff5500; /* Fondo naranja */
+  padding: 14px 30px; /* Relleno para darle cuerpo */
+  border-radius: 30px; /* Bordes muy redondeados (píldora) */
+  font-size: 1rem;
+  font-weight: bold;
+  border: none; /* Sin bordes extraños */
+  cursor: pointer; /* Mano del cursor */
+
+  /* 3. Efectos y Transición */
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+/* 4. Asegurar que el texto interno (strong) no traiga estilos */
+.notfound-home strong {
+  color: inherit;
+  text-decoration: none !important;
+  line-height: 1;
+}
+
+/* Efectos al pasar el mouse por encima (hover) */
+.notfound-home:hover {
+  background-color: #e04b00; /* Naranja más oscuro */
+  transform: translateY(-2px); /* Pequeño levantamiento */
+}

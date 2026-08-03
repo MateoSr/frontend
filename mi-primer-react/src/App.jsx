@@ -5,6 +5,7 @@ import Header from './components/header/header'
 import Footer from './components/footer/footer'
 import Home from './pages/Home/home'
 import Faq from './pages/Faq/faq'
+import NotFound from './pages/NotFound/notfound'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/faq" element={<Faq />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer></Footer>
     </>
