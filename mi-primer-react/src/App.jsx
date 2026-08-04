@@ -6,6 +6,9 @@ import Footer from './components/footer/footer'
 import Home from './pages/Home/home'
 import Faq from './pages/Faq/faq'
 import NotFound from './pages/NotFound/notfound'
+import Login from './pages/Login/login'
+import Register from './pages/Register/register'
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,6 +19,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/faq" element={<Faq />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer></Footer>
