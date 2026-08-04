@@ -1,7 +1,6 @@
 main{
     margin-top: 0px;
     flex-grow: 1;
-    min-height: 1500px;
     display: block;
 }
 .contenedor-imagenes{
