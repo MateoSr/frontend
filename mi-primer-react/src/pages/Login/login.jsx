@@ -14,7 +14,7 @@ function Login(){
             password: password
         }
         try{
-            const response = await fetch('http://localhost:3000/api/users', {
+            const response = await fetch('http://localhost:3000/api/login', {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json', 
@@ -24,13 +24,13 @@ function Login(){
 
             const data = await response.json();
             if(response.ok){
-                console.log('Inicio de sesion exitoso', data);
+                alert(data.message);
             }
             else{
-                console.log('Credenciales invalidas', data);
+                alert(data.message)
             }
         }catch(error){
-            console.log("Error en la conexion",error)
+            alert("Error en la conexion",error)
             
         }
     }
@@ -41,9 +41,11 @@ function Login(){
                 <h2>Iniciar Sesion</h2>
                 <InputForum label="Correo Electrónico" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tuemail@ejemplo.com" required={true}></InputForum>
                 <InputForum label="Contraseña" type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="******" required={true}></InputForum>
+                <div className="login-links">
                 <Link to="/register" className="redirect-form"><strong>Crear cuenta</strong></Link>
                 <Link to="/forgot" className="redirect-form"><strong>Olvide mi contraseña</strong></Link>
-                <button className="boton" type="submit"> Enviar </button>
+                </div>
+                <button className="boton" type="submit"> Iniciar Sesion </button>
 
             </form>
         </div>

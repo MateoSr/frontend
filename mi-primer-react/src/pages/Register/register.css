@@ -1,4 +1,4 @@
-.login-container{
+.register-container{
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -6,8 +6,7 @@
     margin: 7vh 0;
     align-items: center;
 }
-
-.login-form{
+.register-form{
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -18,10 +17,10 @@
     gap: 10px;
 }
 
-.login-links{
-  display:flex;
-  justify-content:space-around;
-
+.register-form h2{
+    text-align: center;
+    margin-bottom: 10px;  
+    font-size: 30px;
 }
 
 .redirect-form{
@@ -29,34 +28,9 @@
     color: #ee5801;
     font-size: 14px;
     margin-top:10px;
-
-}
-
-.login-form h2{
     text-align: center;
-    margin-bottom: 20px;
+
 }
 
 
-
-
-
-.boton {
-    margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #ee5801;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-}
-
-.boton:hover {
-  background-color: #ee5801;
-  opacity: 0.8;
-  
-}
-.boton:active {
-  background-color: #ff5e00;
-}
 

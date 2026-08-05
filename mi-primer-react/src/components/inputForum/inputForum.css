@@ -3,3 +3,21 @@
     flex-direction: column;
     gap:5px
 }
+
+.form-group label{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-group input{
+    border-radius: 50px;
+    padding: 12px 20px; 
+    border: 1.5px solid #cccccc;
+    outline: none;
+    font-size: 15px;
+    
+}
+
+.form-group input:focus{
+    border-color: #ee5801;
+}
