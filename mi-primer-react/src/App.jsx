@@ -6,6 +6,7 @@ import Footer from './components/footer/footer'
 import Home from './pages/Home/home'
 import Faq from './pages/Faq/faq'
 import NotFound from './pages/NotFound/notfound'
+import Aboutus from './pages/AboutUs/aboutUs'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/faq" element={<Faq />} />
+        <Route path="/sobre-nosotros" element={<Aboutus />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer></Footer>
