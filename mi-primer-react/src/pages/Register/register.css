@@ -1,0 +1,36 @@
+.register-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    margin: 7vh 0;
+    align-items: center;
+}
+.register-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+}
+
+.register-form h2{
+    text-align: center;
+    margin-bottom: 10px;  
+    font-size: 30px;
+}
+
+.redirect-form{
+    text-decoration: none;
+    color: #ee5801;
+    font-size: 14px;
+    margin-top:10px;
+    text-align: center;
+
+}
+
+
+
