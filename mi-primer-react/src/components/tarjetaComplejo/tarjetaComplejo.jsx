@@ -10,7 +10,7 @@ export function TarjetaComplejo({ turno }) {
   const { nro_cancha,horarioInicio, estado, imagenUrl, complejoNombre,deporte,fecha} = turno;
   
   // controla la carga de la imagen
-  const [imgSrc, setImgSrc] = useState(imagenUrl || IMAGEN_FALLBACK);
+  const [imgSrc, setImgSrc] = useState(imagenUrl || imagen_fallo);
 
   const handleErrorImage = () => {
     setImgSrc(imagen_fallo);
