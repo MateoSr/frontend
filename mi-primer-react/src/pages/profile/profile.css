@@ -96,3 +96,9 @@
   margin: 0;
 }
 
+.grid-turnos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}

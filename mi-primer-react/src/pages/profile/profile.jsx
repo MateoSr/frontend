@@ -1,16 +1,11 @@
 import {useState,useEffect} from 'react'
 import './profile.css'
 import InputForum from '../../components/inputForum/inputForum';
+import TarjetaComplejo from '../../components/tarjetaComplejo/tarjetaComplejo';
 
 function Profile(){
-    const [usuario,setUsuario] = useState({
-        nombre: 'Mirko',
-        apellido: 'García',
-        email:'mirko.garcia@example.com',
-        telefono: '123-456-7890',
-        fechaNacimiento: '1990-01-01'
-    })
-
+    const [usuario,setUsuario] = useState({})
+    const [turnos,setTurnos] = useState([])
     const [isEditing, setIsEditing] = useState(false);
     const [originalUsuario, setOriginalUsuario] = useState({});
 
@@ -19,9 +14,10 @@ function Profile(){
       const obtenerPerfil = async () => {
       try{
         const id = 1
-        const response = await fetch(`http://localhost:3000/api/users/${id}`)
+        const response = await fetch(`http://localhost:3000/api/users/${id}/perfil`)
         if(response.ok){
-          const data = response.json()
+          const data = await response.json()
+          console.log(data)
           setUsuario(data)
           setOriginalUsuario(data)
         }
@@ -30,6 +26,23 @@ function Profile(){
       }
     }
     obtenerPerfil()
+    },[])
+
+    useEffect(() => {
+    const buscarTurnos = async () => {
+      try{
+        //id de ejemplo para probar la api hasta tener autenticacion
+        const id =1 
+        const response = await fetch(`http://localhost:3000/api/turnos?id_cliente=${id}`)
+        if(response.ok){
+          const respuesta = await response.json()
+          setTurnos(respuesta)
+        }
+      }catch(error){
+        alert("Error cargando turnos del usuario:", error)
+      }
+    }
+    buscarTurnos()
     },[])
 
 
@@ -42,10 +55,11 @@ function Profile(){
   };
 
     async function actualizarCambios(e){
+        e.preventDefault()
         //aca harias el put a la api actualizando los datos
         try{
           const id = 1
-          const response = await fetch(`http://localhost:3000/api/users/${id}`,{
+          const response = await fetch(`http://localhost:3000/api/users/${id}/perfil`,{
             method:'PUT',
             headers: {
               'Content-Type': 'application/json'
@@ -59,17 +73,18 @@ function Profile(){
             }
         }catch(error){
         alert("Error actualizando perfil:", error)
+        console.log(error)
       }
       }
 
     const handleCancel = () => {
-    setUsuario(originalUsuario); 
+    setUsuario({ ...originalUsuario }); 
     setIsEditing(false);
-    };
+  };
 
-    const editarDatos = () =>{
+    const editarDatos = (e) =>{
+      if(e) e.preventDefault()
       setIsEditing(true)
-      setOriginalUsuario(usuario)
     }
 
     return(
@@ -83,11 +98,11 @@ function Profile(){
         <h2 className='seccion-subtitulo'>Datos Personales </h2>
         <form onSubmit={actualizarCambios}>
           <div className='grid-inputs'>
-          <InputForum label="Nombre" type="text" id="nombre" name="nombre" value={usuario.nombre} readOnly={!isEditing} onChange={actualizarCambio}/>
-          <InputForum label="Apellido" type="text" id="apellido" name="apellido" value={usuario.apellido} readOnly={!isEditing} onChange={actualizarCambio}/>
-          <InputForum label="Email" type="email" id="email" name="email" value={usuario.email} readOnly = {!isEditing} onChange={actualizarCambio} />
-          <InputForum label="Teléfono" type="tel" id="telefono" name="telefono" value={usuario.telefono} readOnly = {!isEditing} onChange={actualizarCambio} />
-          <InputForum label="Fecha de Nacimiento" type="date" id="fechaNacimiento" name="fechaNacimiento" value={usuario.fechaNacimiento} readOnly = {!isEditing}onChange={actualizarCambio}/>
+          <InputForum label="Nombre" type="text" id="nombre" name="nombre" value={usuario?.nombre || ""} readOnly={!isEditing} onChange={actualizarCambio}/>
+          <InputForum label="Apellido" type="text" id="apellido" name="apellido" value={usuario?.apellido || ""} readOnly={!isEditing} onChange={actualizarCambio}/>
+          <InputForum label="Email" type="email" id="email" name="email" value={usuario?.email || ""} readOnly = {!isEditing} onChange={actualizarCambio} />
+          <InputForum label="Teléfono" type="tel" id="telefono" name="telefono" value={usuario?.telefono || ""} readOnly = {!isEditing} onChange={actualizarCambio} />
+          <InputForum label="Fecha de Nacimiento" type="date" id="fechaNacimiento" name="fechaNacimiento" value={usuario?.fechaNacimiento || ""} readOnly = {!isEditing}onChange={actualizarCambio}/>
           </div>
           
           <div className="acciones-form">
@@ -107,9 +122,15 @@ function Profile(){
 
       <div className="card-seccion">
         <h2 className="seccion-subtitulo">Tus Ultimos Turnos</h2>
-        <div className="turnos-contenido">
-          <p className="texto-vacio">No tenés turnos registrados actualmente.</p>
-        </div>
+        {turnos.length > 0 ? (
+          <div className="grid-turnos">
+            {turnos.slice(0, 3).map((turno) => (
+              <TarjetaComplejo key={turno.id} turno={turno} />
+            ))}
+          </div>
+        ) : (
+          <p className="turnos-vacio">No tenés turnos registrados actualmente.</p>
+        )}
       </div>
       <button type="button" className='btn-primario'>Cerrar Sesion</button>
     </section>
