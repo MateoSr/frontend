@@ -39,8 +39,8 @@ function Login(){
         <div className="login-container">
             <form onSubmit={handleSubmit} className='login-form'>
                 <h2>Iniciar Sesion</h2>
-                <InputForum label="Correo Electrónico" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tuemail@ejemplo.com" required={true}></InputForum>
-                <InputForum label="Contraseña" type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="******" required={true}></InputForum>
+                <InputForum label="Correo Electrónico" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tuemail@ejemplo.com" required={true} readOnly={false}></InputForum>
+                <InputForum label="Contraseña" type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="******" required={true} readOnly={false}></InputForum>
                 <div className="login-links">
                 <Link to="/register" className="redirect-form"><strong>Crear cuenta</strong></Link>
                 <Link to="/forgot" className="redirect-form"><strong>Olvide mi contraseña</strong></Link>
