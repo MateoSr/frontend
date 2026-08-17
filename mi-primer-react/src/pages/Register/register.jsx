@@ -53,12 +53,10 @@ function Register(){
         <div className="register-container">
             <form className='register-form' onSubmit={handleSubmit}>
                 <h2>Registrarse</h2>
-             
                 <InputForum label="Correo Electrónico" type="email" id="email" value={usuario.email} onChange={(e) => setUsuario(prev => ({ ...prev, email: e.target.value }))} placeholder="tuemail@ejemplo.com" required={true} />
                 <InputForum label="Contraseña" type="password" id="password" name="password" autoComplete="new-password" value={usuario.password} onChange={(e) => setUsuario(prev => ({ ...prev, password: e.target.value }))} placeholder="******" required={true} />
                 <InputForum label="Confirmar Contraseña" type="password" id="confirmPassword" name="confirmPassword" autoComplete="new-password"value={usuario.confirmPassword} onChange={(e) => setUsuario(prev => ({ ...prev, confirmPassword: e.target.value }))} placeholder="******" required={true} />
-                <InputForum label="Teléfono" type="tel" id="telefono" value={usuario.telefono} onChange={(e) => setUsuario(prev => ({ ...prev, telefono: e.target.value }))} placeholder="123-456-7890" required={true} />
-                
+                <InputForum label="Teléfono" type="tel" id="telefono" value={usuario.telefono} onChange={(e) => setUsuario(prev => ({ ...prev, telefono: e.target.value }))} placeholder="123-456-7890" required={true} />                
                 <InputForum label="DNI" type="text" id="dni" value={usuario.dni} onChange={(e) => setUsuario(prev => ({ ...prev, dni: e.target.value }))} placeholder="12345678" required={true} />
                 <InputForum label="Nombre" type="text" id="nombre" value={usuario.nombre} onChange={(e) => setUsuario(prev => ({ ...prev, nombre: e.target.value }))} placeholder="Lionel" required={true} />
                 <InputForum label="Apellido" type="text" id="apellido" value={usuario.apellido} onChange={(e) => setUsuario(prev => ({ ...prev, apellido: e.target.value }))} placeholder="Messi" required={true} />

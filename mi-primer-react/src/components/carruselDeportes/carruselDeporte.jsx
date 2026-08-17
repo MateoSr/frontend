@@ -56,7 +56,7 @@ function CarruselDeporte() {
             key={index} 
             style={{ width: `${porcentajePorImagen}%` }}
         >
-            <img src={img} alt={`png-${index}`} />
+            <img src={img}/>
         </div>
         ))}
     </div>

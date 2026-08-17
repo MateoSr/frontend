@@ -8,6 +8,7 @@ import Faq from './pages/Faq/faq'
 import NotFound from './pages/NotFound/notfound'
 import Login from './pages/Login/login'
 import Register from './pages/Register/register'
+import Software from './pages/Software/software'
 
 import Aboutus from './pages/AboutUs/aboutUs'
 
@@ -22,7 +23,7 @@ function App() {
         <Route path="/faq" element={<Faq />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
+        <Route path="/software" element={<Software/>}/>
         <Route path="/sobre-nosotros" element={<Aboutus />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
