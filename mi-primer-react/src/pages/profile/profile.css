@@ -1,0 +1,104 @@
+.perfil-container {
+  max-width: 950px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #1e293b;
+  box-sizing: border-box;
+}
+
+.perfil-header {
+  margin-bottom: 2rem;
+}
+
+.saludo-titulo {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0 0 0.4rem 0;
+  color: #0f172a;
+}
+
+.perfil-subtitulo {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Tarjeta Ficha con Borde de Acento Naranja a la Izquierda */
+.card-seccion {
+  background-color: #f8fafc; /* Fondo gris ultra suave */
+  border: none;
+  border-left: 5px solid #f97316; /* Borde de acento llamativo */
+  border-radius: 0 16px 16px 0; /* Esquinas redondeadas del lado derecho */
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.seccion-subtitulo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.grid-inputs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 2rem;
+}
+
+/* Acciones */
+.acciones-form {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.8rem;
+}
+
+.btn-primario {
+  background-color: #f97316;
+  color: #ffffff;
+  border: none;
+  padding: 0.7rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 8px; /* Bordes ligeramente suavizados, más modernos */
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-accent:hover {
+  background-color: #ea580c;
+  transform: translateY(-1px);
+}
+
+.btn-secundario {
+  background-color: #e2e8f0;
+  color: #475569;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-secundario:hover {
+  background-color: #cbd5e1;
+}
+
+.turnos-vacio p {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.grid-turnos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}

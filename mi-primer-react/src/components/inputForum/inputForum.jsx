@@ -1,5 +1,5 @@
 import './inputForum.css'
-function InputForum({ label, id, type, value, onChange, placeholder, required, name, autoComplete, options = [] }) {
+function InputForum({ label, id, type, value, onChange, placeholder, required, name, autoComplete = "off",readOnly="false", options = [] }) {
     return (
         <div className="form-group">
             <label htmlFor={id}>{label}</label>
@@ -32,7 +32,8 @@ function InputForum({ label, id, type, value, onChange, placeholder, required, n
                     onChange={onChange}
                     placeholder={placeholder}
                     required={required}
-                />
+                readOnly={readOnly}
+            />
             )}
         </div>
     );

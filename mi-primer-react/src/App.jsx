@@ -8,7 +8,11 @@ import Faq from './pages/Faq/faq'
 import NotFound from './pages/NotFound/notfound'
 import Login from './pages/Login/login'
 import Register from './pages/Register/register'
+<<<<<<< HEAD
 import Software from './pages/Software/software'
+=======
+import Profile from './pages/profile/profile'
+>>>>>>> afa15bedd453e125686073e78109d4eb162cee15
 
 import Aboutus from './pages/AboutUs/aboutUs'
 
@@ -25,6 +29,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/software" element={<Software/>}/>
         <Route path="/sobre-nosotros" element={<Aboutus />} />
+        <Route path="/perfil" element={<Profile />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer></Footer>
