@@ -10,7 +10,7 @@ function Footer(){
                 <p ><strong className='titulo-footer'>Datos contacto</strong></p>
                 <ul className='contactos-list'>
                     <li>
-                        <a href="mailto:turnolibre@gmail.com">turnolibre@gmail.com</a>
+                        <a href="mailto:soporteturnolibre@gmail.com">soporteturnolibre@gmail.com</a>
                     </li>
                     <li><p>+54 9 3412 12-3456</p></li>
                     <div className='redes'>

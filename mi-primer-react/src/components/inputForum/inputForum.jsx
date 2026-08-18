@@ -32,7 +32,7 @@ function InputForum({ label, id, type, value, onChange, placeholder, required, n
                     onChange={onChange}
                     placeholder={placeholder}
                     required={required}
-                readOnly={readOnly}
+                    readOnly={readOnly}
             />
             )}
         </div>
