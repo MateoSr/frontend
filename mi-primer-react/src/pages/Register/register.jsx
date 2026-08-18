@@ -70,6 +70,7 @@ function Register() {
                 onChange={(e) => setUsuario(prev => ({ ...prev, nombre: e.target.value }))} 
                 placeholder="Lionel" 
                 required={true} 
+                readOnly={false}
               />
               <InputForum 
                 label="Apellido" 
@@ -79,6 +80,7 @@ function Register() {
                 onChange={(e) => setUsuario(prev => ({ ...prev, apellido: e.target.value }))} 
                 placeholder="Messi" 
                 required={true} 
+                readOnly={false}
               />
             </div>
 
@@ -91,6 +93,7 @@ function Register() {
               onChange={(e) => setUsuario(prev => ({ ...prev, email: e.target.value }))} 
               placeholder="tuemail@ejemplo.com" 
               required={true} 
+              readOnly={false}
             />
 
             {/* Fila 2: DNI y Teléfono */}
@@ -103,6 +106,7 @@ function Register() {
                 onChange={(e) => setUsuario(prev => ({ ...prev, dni: e.target.value }))} 
                 placeholder="12345678" 
                 required={true} 
+                readOnly={false}
               />
               <InputForum 
                 label="Teléfono" 
@@ -112,6 +116,7 @@ function Register() {
                 onChange={(e) => setUsuario(prev => ({ ...prev, telefono: e.target.value }))} 
                 placeholder="123-456-7890" 
                 required={true} 
+                readOnly={false}
               />
             </div>
 
@@ -123,6 +128,7 @@ function Register() {
               value={usuario.fechaNacimiento} 
               onChange={(e) => setUsuario(prev => ({ ...prev, fechaNacimiento: e.target.value }))} 
               required={true} 
+              readOnly={false}
             />
 
             {/* Fila 3: Contraseña y Confirmar */}
@@ -137,6 +143,7 @@ function Register() {
                 onChange={(e) => setUsuario(prev => ({ ...prev, password: e.target.value }))} 
                 placeholder="••••••••" 
                 required={true} 
+                readOnly={false}
               />
               <InputForum 
                 label="Confirmar Contraseña" 
@@ -148,6 +155,7 @@ function Register() {
                 onChange={(e) => setUsuario(prev => ({ ...prev, confirmPassword: e.target.value }))} 
                 placeholder="••••••••" 
                 required={true} 
+                readOnly={false}
               />
             </div>
 

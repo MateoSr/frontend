@@ -12,6 +12,7 @@ import Software from './pages/Software/software'
 import Profile from './pages/profile/profile'
 import Aboutus from './pages/AboutUs/aboutUs'
 import OlvideContra from './pages/olvidePassword/olvideContra'
+import ResetPassword from './pages/resetPassword/resetPassword'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,6 +29,8 @@ function App() {
         <Route path="/sobre-nosotros" element={<Aboutus />} />
         <Route path="/perfil" element={<Profile />} />
         <Route path="/forgot" element={<OlvideContra />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+
 
         <Route path="*" element={<NotFound />} />
       </Routes>
