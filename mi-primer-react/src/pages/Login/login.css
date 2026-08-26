@@ -93,7 +93,7 @@
 }
 
 /* Botón Principal */
-.boton {
+.login-boton {
   margin-top: 10px;
   padding: 12px 20px;
   background-color: #ee5801;
@@ -107,12 +107,12 @@
   box-shadow: 0 4px 12px rgba(238, 88, 1, 0.25);
 }
 
-.boton:hover {
+.login-boton:hover {
   background-color: #d14d00;
   transform: translateY(-1px);
 }
 
-.boton:active {
+.login-boton:active {
   transform: translateY(0);
 }
 

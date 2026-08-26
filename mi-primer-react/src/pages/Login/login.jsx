@@ -32,7 +32,7 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login-card">
-        
+
         {/* LADO IZQUIERDO: Formulario */}
         <div className="login-form-side">
           <div className="login-header">
@@ -42,27 +42,27 @@ function Login() {
           </div>
 
           <form onSubmit={handleSubmit} className="login-form">
-            <InputForum 
-              label="Correo Electrónico" 
-              type="email" 
-              id="email" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
-              placeholder="tuemail@ejemplo.com" 
-              required={true} 
-              readOnly={false} 
+            <InputForum
+              label="Correo Electrónico"
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="tuemail@ejemplo.com"
+              required={true}
+              readOnly={false}
             />
 
             <div className="password-group">
-              <InputForum 
-                label="Contraseña" 
-                type="password" 
-                id="password" 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
-                placeholder="••••••••" 
-                required={true} 
-                readOnly={false} 
+              <InputForum
+                label="Contraseña"
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required={true}
+                readOnly={false}
               />
               <div className="forgot-wrapper">
                 <Link to="/forgot" className="redirect-forgot">
@@ -71,7 +71,7 @@ function Login() {
               </div>
             </div>
 
-            <button className="boton" type="submit">
+            <button className="login-boton" type="submit">
               Iniciar Sesión
             </button>
           </form>

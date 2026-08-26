@@ -5,28 +5,28 @@ import InputForum from '../../components/inputForum/inputForum';
 import './olvideContra.css'
 
 function OlvideContra() {
-    const [email,setEmail] = useState('')
-    const [estado,setEstado] = useState('')
+    const [email, setEmail] = useState('')
+    const [estado, setEstado] = useState('')
 
 
-    const enviarEmail = async (e) =>{
+    const enviarEmail = async (e) => {
         e.preventDefault()
-        try{
-             const response = await fetch('http://localhost:3000/api/forgot', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({email}),
+        try {
+            const response = await fetch('http://localhost:3000/api/forgot', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
             });
-        const data = await response.json
-        if(response.ok){
-            alert("Email enviado")
-        }
-        }catch(error){
+            const data = await response.json
+            if (response.ok) {
+                alert("Email enviado")
+            }
+        } catch (error) {
             alert("Error en servidor ")
         }
     }
 
-    return(
+    return (
         <div className='olvide-contenedor'>
             <div className='olvide-card'>
 
@@ -38,7 +38,7 @@ function OlvideContra() {
                     </div>
                     <form className='olvide-form' onSubmit={enviarEmail}>
                         <InputForum label="Correo Electrónico" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tuemail@ejemplo.com" required={true} readOnly={false} />
-                        <button className='boton' type='submit'> Enviar</button>
+                        <button className='olvide-boton' type='submit'> Enviar</button>
                     </form>
                     <div className="register-footer">
                         <p>¿Ya tenés una cuenta? <Link to="/login" className="redirect-login">Iniciar sesión</Link></p>
@@ -53,7 +53,7 @@ function OlvideContra() {
                 </div>
             </div>
 
-            
+
         </div>
     )
 }

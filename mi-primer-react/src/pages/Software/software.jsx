@@ -41,9 +41,9 @@ function Software() {
                     <h2>Contratá la plataforma</h2>
                     <p>Dejanos tus datos y nos ponemos en contacto para configurar tu complejo.</p>
                     <form onSubmit={handleSubmit} className='formulario-contratacion'>
-                        <InputForum label="Razón social" type="text" id="RazonSocial" placeholder="Messi S.A." required={true} />
-                        <InputForum label="Nombre de contacto" type="text" id="nombre" placeholder="Antonella Roccuzzo" required={true} />
-                        <InputForum label="Correo Electrónico" type="email" id="email" placeholder="tuemail@ejemplo.com" required={true} />
+                        <InputForum label="Razón social" type="text" id="RazonSocial" placeholder="Messi S.A." required={true} readOnly={false} />
+                        <InputForum label="Nombre de contacto" type="text" id="nombre" placeholder="Antonella Roccuzzo" required={true} readOnly={false} />
+                        <InputForum label="Correo Electrónico" type="email" id="email" placeholder="tuemail@ejemplo.com" required={true} readOnly={false} />
                         <InputForum label="Plan de Preferencia" type="select" id="plan" required={true} options={[
                             { value: 'Plan Base', label: 'Plan Base (1-3 Canchas)' },
                             { value: 'Plan Estándar', label: 'Plan Estándar (4-6 Canchas)' },
@@ -51,10 +51,10 @@ function Software() {
                         ]} />
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                             <label style={{ fontSize: '14px', fontWeight: 'bold' }}>Comentario</label>
-                            <textarea 
-                                id="comentario" 
-                                name="comentario" 
-                                placeholder="Dejá tu comentario..." 
+                            <textarea
+                                id="comentario"
+                                name="comentario"
+                                placeholder="Dejá tu comentario..."
                                 className="textarea-comentario"
                             />
                         </div>
