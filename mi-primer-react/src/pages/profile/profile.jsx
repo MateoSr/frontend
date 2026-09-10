@@ -10,11 +10,22 @@ function Profile(){
     const [originalUsuario, setOriginalUsuario] = useState({});
 
     useEffect(() => {
+      const token = localStorage.getItem("gestor_token");
+      if (!token) {
+      console.log("No hay token almacenado. El usuario no está logueado.");
+      return;
+      }
       //funciuon que trae los datos del usuario
       const obtenerPerfil = async () => {
       try{
-        const id = 1
-        const response = await fetch(`http://localhost:3000/api/users/${id}/perfil`)
+      
+        const response = await fetch(`http://localhost:3000/api/users/perfil`,{
+          method: "GET",
+           headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}` 
+        }
+        })
         if(response.ok){
           const data = await response.json()
           console.log(data)
@@ -32,7 +43,6 @@ function Profile(){
     const buscarTurnos = async () => {
       try{
         //id de ejemplo para probar la api hasta tener autenticacion
-        const id =1 
         const response = await fetch(`http://localhost:3000/api/turnos?id_cliente=${id}`)
         if(response.ok){
           const respuesta = await response.json()

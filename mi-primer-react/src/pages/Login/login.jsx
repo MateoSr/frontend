@@ -1,10 +1,11 @@
 import InputForum from '../../components/inputForum/inputForum';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import './login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
@@ -19,8 +20,11 @@ function Login() {
       });
 
       const data = await response.json();
+      console.log(data.token.token);
       if (response.ok) {
         alert(data.message);
+        localStorage.setItem("gestor_token", data.token.token);
+        navigate('/');
       } else {
         alert(data.message);
       }
