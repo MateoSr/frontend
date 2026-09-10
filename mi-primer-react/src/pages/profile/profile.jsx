@@ -49,7 +49,7 @@ function Profile(){
           setTurnos(respuesta)
         }
       }catch(error){
-        alert("Error cargando turnos del usuario:", error)
+        // alert("Error cargando turnos del usuario:", error)
       }
     }
     buscarTurnos()
@@ -66,13 +66,19 @@ function Profile(){
 
     async function actualizarCambios(e){
         e.preventDefault()
+        const token = localStorage.getItem("gestor_token");
+        if (!token) {
+        console.log("No hay token almacenado. El usuario no está logueado.");
+        return;
+        }
         //aca harias el put a la api actualizando los datos
         try{
-          const id = 1
-          const response = await fetch(`http://localhost:3000/api/users/${id}/perfil`,{
+          
+          const response = await fetch(`http://localhost:3000/api/users/perfil`,{
             method:'PUT',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(usuario)
             });
@@ -95,6 +101,11 @@ function Profile(){
     const editarDatos = (e) =>{
       if(e) e.preventDefault()
       setIsEditing(true)
+    }
+
+    const cerrarSesion = () => {
+      localStorage.removeItem("gestor_token");
+      window.location.href = '/';
     }
 
     return(
@@ -142,7 +153,7 @@ function Profile(){
           <p className="turnos-vacio">No tenés turnos registrados actualmente.</p>
         )}
       </div>
-      <button type="button" className='btn-primario'>Cerrar Sesion</button>
+      <button type="button" className='btn-primario' onClick={cerrarSesion}>Cerrar Sesion</button>
     </section>
     )
 }
