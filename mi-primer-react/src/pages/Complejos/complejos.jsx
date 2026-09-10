@@ -1,37 +1,39 @@
-import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import BarraBusqueda from '../../components/barraBusqueda/barra';
 import { BarraFiltros } from '../../components/barraFiltros/barraFiltros';
 import { GrillaComplejos } from '../../components/grillaComplejos/grillaComplejos';
-import { complejosDisponibles } from '../../datosDePrueba';
+import { useComplejos } from '../../hooks/useComplejos';
 import './complejos.css';
 
 export const Complejos = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const min = Number(searchParams.get('min')) || 0;
-  const max = Number(searchParams.get('max')) || Infinity;
   const ordenActual = searchParams.get('sort') || 'relevantes';
+  const queryString = searchParams.toString();
+  const { complejos, cargando, error } = useComplejos(queryString);
 
   const cambiarOrden = (e) => {
     const nuevoOrden = e.target.value;
 
-    setSearchParams({ min, max, sort: nuevoOrden });
+    const nuevosParametros = new URLSearchParams(searchParams);
+    nuevosParametros.set('sort', nuevoOrden);
+    setSearchParams(nuevosParametros);
   };
 
   const aplicarFiltroPrecio = ({ min: nuevoMin, max: nuevoMax }) => {
-    setSearchParams({
-      min: nuevoMin,
-      max: nuevoMax === Infinity ? '' : nuevoMax,
-      sort: ordenActual,
-    });
+    const nuevosParametros = new URLSearchParams(searchParams);
+    nuevosParametros.set('min', nuevoMin);
+
+    if (nuevoMax === Infinity) {
+      nuevosParametros.delete('max');
+    } else {
+      nuevosParametros.set('max', nuevoMax);
+    }
+
+    nuevosParametros.set('sort', ordenActual);
+    setSearchParams(nuevosParametros);
   };
 
-  const complejosFiltrados = complejosDisponibles.filter((complejo) => {
-    return complejo.precio >= min && complejo.precio <= max;
-  });
-
-  const complejosOrdenados = [...complejosFiltrados].sort((a, b) => {
+  const complejosOrdenados = [...complejos].sort((a, b) => {
     if (ordenActual === 'precio_menor') {
       return a.precio - b.precio;
     }
@@ -58,7 +60,7 @@ export const Complejos = () => {
         </aside>
         <main className="seccion-resultados">
           <div className="encabezado-resultados">
-            <h1>{complejosOrdenados.length} complejos encontrados</h1>
+            <h1>{cargando ? 'Buscando complejos...' : `${complejosOrdenados.length} complejos encontrados`}</h1>
             <div className="selector-orden">
               Ordenar por:
               <select value={ordenActual} onChange={cambiarOrden}>
@@ -70,8 +72,7 @@ export const Complejos = () => {
               </select>
             </div>
           </div>
-
-          <GrillaComplejos complejos={complejosOrdenados} />
+          {error ? <p>{error}</p> : <GrillaComplejos complejos={complejosOrdenados} />}
         </main>
       </div>
     </div>
