@@ -1,0 +1,94 @@
+.contenedor-filtros {
+  display: flex;
+  flex-direction: column;
+}
+
+.seccion-filtro h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+.rango-precio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.input-precio {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-precio:focus {
+  border-color: #ee5801;
+}
+
+.input-precio::-webkit-inner-spin-button, 
+.input-precio::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.separador {
+  color: #999;
+}
+
+.btn-aplicar-precio {
+  background-color: #ee5801;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  min-width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn-aplicar-precio:hover {
+  background-color: #ee5801;
+}
+
+.lista-precios {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lista-precios label {
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.lista-precios label:hover {
+  color: #ee5801;
+}
+
+.lista-precios input[type="radio"] {
+  accent-color: #ee5801;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}

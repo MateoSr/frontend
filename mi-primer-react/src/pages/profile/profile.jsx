@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react'
 import './profile.css'
 import InputForum from '../../components/inputForum/inputForum';
-import TarjetaComplejo from '../../components/tarjetaComplejo/tarjetaComplejo';
+import TarjetaTurno from '../../components/tarjetaTurno/tarjetaTurno';
 
 function Profile(){
     const [usuario,setUsuario] = useState({})
@@ -125,7 +125,7 @@ function Profile(){
         {turnos.length > 0 ? (
           <div className="grid-turnos">
             {turnos.slice(0, 3).map((turno) => (
-              <TarjetaComplejo key={turno.id} turno={turno} />
+              <TarjetaTurno key={turno.id} turno={turno} />
             ))}
           </div>
         ) : (

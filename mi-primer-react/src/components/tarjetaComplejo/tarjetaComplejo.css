@@ -1,96 +1,96 @@
+
 .tarjeta-complejo {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border: 1px solid #eaeaea;
+  border-radius: 16px;
   overflow: hidden;
+  background-color: white;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 100%;
 }
 
 .tarjeta-complejo:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Contenedor e Imagen */
-.tarjeta-img-contenedor {
+.complejo-media {
   position: relative;
-  width: 100%;
-  height: 140px;
-  background-color: #f1f5f9;
+  height: 200px;
 }
 
-.tarjeta-img {
+.complejo-imagen {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Badge de Estado sobre la foto */
-.badge-estado {
+.precio-overlay {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: capitalize;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  bottom: 12px;
+  right: 12px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
 }
 
-/* Variaciones de colores para los estados */
-.estado-reservado {
-  background-color: #dbeafe;
-  color: #1e40af; /* Azul */
+.precio-overlay strong {
+  font-size: 16px;
 }
 
-.estado-encurso {
-  background-color: #fef3c7;
-  color: #92400e; /* Amarillo/Naranja */
-}
-
-.estado-finalizado {
-  background-color: #dcfce7;
-  color: #166534; /* Verde */
-}
-
-.estado-cancelado {
-  background-color: #fee2e2;
-  color: #991b1b; /* Rojo */
-}
-
-/* Cuerpo de la Tarjeta */
-.tarjeta-body {
-  padding: 1rem;
+.complejo-info {
+  padding: 1.2rem;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 6px;
 }
 
-.complejo-nombre {
+.complejo-info h3 {
   margin: 0;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #0f172a;
+  font-size: 20px;
+  color: #2c3e50;
 }
 
-.cancha-info {
+.complejo-info p {
   margin: 0;
-  font-size: 0.85rem;
-  color: #64748b;
-  font-weight: 600;
+  font-size: 14px;
+  color: #7f8c8d;
 }
 
-.tarjeta-fechas {
+.complejo-turnos {
+  padding: 0 1.2rem 1.2rem 1.2rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
-  border-top: 1px dashed #e2e8f0;
-  font-size: 0.85rem;
-  color: #334155;
-  font-weight: 500;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.complejo-turnos::-webkit-scrollbar {
+  height: 4px;
+}
+
+.complejo-turnos::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.turno-button {
+  background: white;
+  border: 1px solid #bdc3c7;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 13px;
+  color: #7f8c8d;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.turno-button:hover {
+  border-color: #ee5801;
+  color: #ee5801;
+  background-color: #fde0d0;
 }
