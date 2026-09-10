@@ -1,58 +1,32 @@
-// components/tarjetaComplejo/TarjetaComplejo.jsx
-import { useState } from 'react';
+import React from 'react';
 import './tarjetaComplejo.css';
-
-//imagen si falla la carga.
-const imagen_fallo = "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=600";
-
-
-export function TarjetaComplejo({ turno }) {
-  const { nro_cancha,horarioInicio, estado, imagenUrl, complejoNombre,deporte,fecha} = turno;
-  
-  // controla la carga de la imagen
-  const [imgSrc, setImgSrc] = useState(imagenUrl || imagen_fallo);
-
-  const handleErrorImage = () => {
-    setImgSrc(imagen_fallo);
-  };
-
-  // clase dinamica segun el estado(cambia color)
-  const getEstadoClass = (est) => {
-    switch (est.toLowerCase()) {
-      case 'reservado': return 'estado-reservado';
-      case 'en curso': return 'estado-encurso';
-      case 'completado': return 'estado-finalizado';
-      case 'cancelado': return 'estado-cancelado';
-      default: return '';
-    }
-  };
+export const TarjetaComplejo = ({ complejo }) => {
+  const { nombre, direccion, precio, imagenUrl, disponibilidad } = complejo;
 
   return (
     <div className="tarjeta-complejo">
-      <div className="tarjeta-img-contenedor">
-        <img 
-          src={imgSrc} 
-          alt={complejoNombre} 
-          onError={handleErrorImage} 
-          className="tarjeta-img"
-        />
-        <span className={`badge-estado ${getEstadoClass(estado)}`}>
-          {estado}
-        </span>
-      </div>
-
-      <div className="tarjeta-body">
-        <h3 className="complejo-nombre">{complejoNombre}</h3>
-        <p className="cancha-info">Cancha N° {nro_cancha}</p>
-        <p className="cancha-info"> Deporte {deporte}</p>
-        
-        <div className="tarjeta-fechas">
-          <span className="fecha-item">📅 {fecha}</span>
-          <span className="fecha-item">⏰ {horarioInicio}</span>
+      <div className="complejo-media">
+        <img src={imagenUrl} alt={nombre} className="complejo-imagen" />
+        <div className="precio-overlay">
+          desde <strong>${precio.toLocaleString('es-AR')}</strong>
         </div>
+      </div>
+      <div className="complejo-info">
+        <h3>{nombre}</h3>
+        <p>📍 {direccion}</p>
+      </div>
+      <div className="complejo-turnos">
+        {disponibilidad && disponibilidad.map((slot, i) => (
+          <button 
+            key={i} 
+            className="turno-button"
+          >
+            {slot.time}
+          </button>
+        ))}
       </div>
     </div>
   );
-}
+};
 
 export default TarjetaComplejo;

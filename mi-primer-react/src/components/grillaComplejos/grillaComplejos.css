@@ -1,0 +1,15 @@
+.contenedor-grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.mensaje-vacio {
+  padding: 3rem;
+  text-align: center;
+  color: #777;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
