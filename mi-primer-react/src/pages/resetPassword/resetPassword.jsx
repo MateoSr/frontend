@@ -10,15 +10,16 @@ function ResetPassword() {
     })
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
-    const id = searchParams.get('id');
+    const token = searchParams.get('token');
 
-    if (!id) {
-        alert("Enlace inválido o sin ID de usuario.");
-        return;
-    }
 
     const cambiarPassword = async (e) => {
         e.preventDefault()
+        if (!token) {
+        alert("Enlace inválido o expirado (falta el token).");
+        return;
+        }
+
         if (credenciales.confirmpassword !== credenciales.password) {
             alert("Las contraseñas no coinciden");
             return
@@ -29,7 +30,7 @@ function ResetPassword() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ id: Number(id), password: credenciales.password }),
+                body: JSON.stringify({ token:token, password: credenciales.password }),
             });
             const data = await response.json()
             if (response.ok) {
