@@ -39,16 +39,21 @@
     font-weight: 600;
     
 }
-
-.nav-links li a:hover{
-    color: #ee5801;
-    transition-duration: 0.3s;
+.nav-links li .nav-link {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease;
 }
+
+.nav-links li .nav-link:hover {
+    color: #ee5801;
+}
+
+.nav-links li .nav-link.active {
+    color: #ee5801;
+}
+
 
 .nav-links li:last-child {
   margin-right: 70px;
-}
-.nav-links li a{
-    text-decoration: none;
-    color: black
 }

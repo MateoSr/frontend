@@ -5,13 +5,40 @@ import Planes from '../../components/planes/planes';
 import InputForum from '../../components/inputForum/inputForum';
 
 function Software() {
+    const [formData, setFormData] = useState({
+        razonSocial: '',
+        nombreContacto: '',
+        email: '',
+        plan: '',
+        comentario: ''
+    });
     const planesRef = useRef(null);
+
     const scrollToPlanes = () => {
         planesRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    };
+    const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch('http://localhost:3000/api/contacto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData) // datos de razonSocial, nombreContacto, email, plan, comentario
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert(data.message);
+      // Limpiar formulario o cerrar modal
+    } else {
+      alert(data.message || "Error al enviar formulario");
+    }
+  } catch (error) {
+    console.error("Error de conexión:", error);
+  }
+};
     return (
         <main>
             <section className='seccion-contenedor-imagen-complejo'>
@@ -41,10 +68,10 @@ function Software() {
                     <h2>Contratá la plataforma</h2>
                     <p>Dejanos tus datos y nos ponemos en contacto para configurar tu complejo.</p>
                     <form onSubmit={handleSubmit} className='formulario-contratacion'>
-                        <InputForum label="Razón social" type="text" id="RazonSocial" placeholder="Messi S.A." required={true} readOnly={false} />
-                        <InputForum label="Nombre de contacto" type="text" id="nombre" placeholder="Antonella Roccuzzo" required={true} readOnly={false} />
-                        <InputForum label="Correo Electrónico" type="email" id="email" placeholder="tuemail@ejemplo.com" required={true} readOnly={false} />
-                        <InputForum label="Plan de Preferencia" type="select" id="plan" required={true} options={[
+                        <InputForum label="Razón social" type="text" id="RazonSocial" value={formData.razonSocial} onChange={(e) => setFormData({...formData, razonSocial: e.target.value})} placeholder="Messi S.A." required={true} readOnly={false} />
+                        <InputForum label="Nombre de contacto" type="text" id="nombre" value={formData.nombreContacto} onChange={(e) => setFormData({...formData, nombreContacto: e.target.value})} placeholder="Antonella Roccuzzo" required={true} readOnly={false} />
+                        <InputForum label="Correo Electrónico" type="email" id="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="tuemail@ejemplo.com" required={true} readOnly={false} />
+                        <InputForum label="Plan de Preferencia" type="select" id="plan" value={formData.plan} onChange={(e) => setFormData({...formData, plan: e.target.value})} required={true} options={[
                             { value: 'Plan Base', label: 'Plan Base (1-3 Canchas)' },
                             { value: 'Plan Estándar', label: 'Plan Estándar (4-6 Canchas)' },
                             { value: 'Plan Full', label: 'Plan Full (7+ Canchas)' }
@@ -54,6 +81,7 @@ function Software() {
                             <textarea
                                 id="comentario"
                                 name="comentario"
+                                onChange={(e) => setFormData({...formData, comentario: e.target.value})}
                                 placeholder="Dejá tu comentario..."
                                 className="textarea-comentario"
                             />
