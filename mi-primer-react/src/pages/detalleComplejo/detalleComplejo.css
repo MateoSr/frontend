@@ -1,0 +1,106 @@
+.detalle-complejo {
+	width: min(100% - 2rem, 1200px);
+	margin: 2rem auto;
+}
+
+.detalle-complejo-imagen {
+	display: block;
+	width: 100%;
+	max-height: 360px;
+	object-fit: cover;
+	border-radius: 8px;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.5);
+}
+
+.detalle-complejo-nombre {
+	margin: 1rem 0 1.5rem;
+	text-align: center;
+}
+
+.detalle-complejo .contenedor-horarios-cancha {
+	width: calc(100vw - 2rem);
+	margin-left: 50%;
+	transform: translateX(-50%);
+	box-sizing: border-box;
+}
+
+
+.detalle-complejo-acordeon {
+    background-color: #ffffff;
+    margin-bottom: 2rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    color: #17324d;
+    margin-top: 2rem;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.detalle-complejo-acordeon:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-color: #d1d5db;
+}
+
+
+.detalle-complejo-acordeon summary {
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fafafa;
+    user-select: none;
+}
+
+.detalle-complejo-acordeon summary::-webkit-details-marker {
+    display: none; 
+}
+
+.detalle-complejo-acordeon summary::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #17324d;
+    border-bottom: 2px solid #17324d;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+
+.detalle-complejo-acordeon[open] summary::after {
+    transform: rotate(-135deg);
+}
+
+.detalle-complejo-acordeon[open] summary {
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #ffffff;
+}
+
+
+.contenido-acordeon {
+    padding: 1.25rem;
+}
+
+.contenido-acordeon p {
+    margin: 0;
+    line-height: 1.5;
+    color: #4b5563;
+}
+
+.horario-fila {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed #e5e7eb;
+    color: #4b5563;
+}
+
+
+.horario-fila:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}

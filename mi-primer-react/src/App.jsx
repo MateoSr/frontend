@@ -14,6 +14,7 @@ import Aboutus from './pages/AboutUs/aboutUs'
 import OlvideContra from './pages/olvidePassword/olvideContra'
 import ResetPassword from './pages/resetPassword/resetPassword'
 import Complejos from './pages/Complejos/complejos'
+import DetalleComplejo from './pages/detalleComplejo/detalleComplejo'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -32,6 +33,7 @@ function App() {
         <Route path="/forgot" element={<OlvideContra />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/complejos" element={<Complejos/>} />
+        <Route path="/detalle-complejo/:id" element={<DetalleComplejo/>} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

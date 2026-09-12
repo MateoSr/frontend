@@ -1,0 +1,104 @@
+.contenedor-horarios-cancha {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #eaeaea;
+  padding: 1.5rem;
+  font-family: sans-serif;
+  overflow-x: auto;
+}
+
+.fila-cabecera, .fila-cancha {
+  display: flex;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.columna-info-vacia, .info-cancha {
+  width: 250px; 
+  flex-shrink: 0;
+  padding: 1rem;
+  border-right: 1px solid #f0f0f0;
+}
+
+.info-cancha h4 {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.info-cancha p {
+  margin: 0;
+  font-size: 12px;
+  color: #888;
+}
+
+.contenedor-columnas-horas, .contenedor-celdas {
+  display: flex;
+  flex-grow: 1;
+}
+
+.celda-cabecera-hora,
+.celda-turno {
+  flex: 1 1 0;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 4px;
+}
+
+.celda-cabecera-hora {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  padding: 0.5rem 0;
+  border-right: 1px solid #f0f0f0;
+}
+
+.celda-turno {
+  border-right: 1px solid #f0f0f0;
+  min-height: 60px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.celda-turno.ocupada {
+  background-color: #798b9c; 
+  cursor: not-allowed;
+}
+
+.celda-turno.libre {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.celda-turno.libre:hover {
+  background-color: #ee5801; 
+  opacity: 0.2;
+}
+
+.modal-contenido {
+  position: fixed;
+  text-align: center;
+  top: 1rem;
+  left: 1rem;
+  background: white;
+  padding: 1.5rem;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  width: min(360px, calc(100vw - 3rem));
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  z-index: 1000;
+}
+
+.modal-botones {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.btn-pagar {
+  background: #ee5801;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
