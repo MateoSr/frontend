@@ -1,0 +1,48 @@
+.contenedor-administrarComplejos {
+  margin-top: 0px;
+  flex-grow: 1;
+  display: block;
+}
+
+.titulo-administrarComplejos {
+  text-align: left;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  margin-top: 2vh;
+  margin-left: 3vh;
+}
+
+.div {
+  min-height: 500px;
+  margin: 0px;
+  text-align: center;
+}
+
+.contenedor-administrarComplejos-header {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.boton-administrarComplejos {
+  background-color: #e65100;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-left: 3vh;
+}
+
+.boton-administrarComplejos:hover {
+  background-color: #d34d00;
+}
+
+.boton-administrarComplejos:active {
+  background-color: #ff5e00;
+}

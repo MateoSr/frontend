@@ -1,0 +1,42 @@
+.contenedor-menuAdmin {
+  margin-top: 0px;
+  flex-grow: 1;
+  display: block;
+}
+.titulo-menuAdmin {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  margin-top: 14vh;
+}
+.div {
+  min-height: 500px;
+  margin: 0px;
+  text-align: center;
+}
+.contenedor-menuAdmin-boton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  box-sizing: border-box;
+}
+.boton-menuAdmin {
+  background-color: #e65100;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: 10vh;
+}
+.boton-menuAdmin:hover {
+  background-color: #d34d00;
+}
+
+.boton-menuAdmin:active {
+  background-color: #ff5e00;
+}
