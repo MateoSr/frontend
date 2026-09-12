@@ -1,6 +1,8 @@
 import { useState,useEffect } from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import './header.css'
+
 
 function Header(){
     const [estaLog,setLog] = useState(false)
@@ -12,18 +14,26 @@ function Header(){
 
     return (
     <div className='header-caja'>
-      <a href='/'>
+      <Link to='/'>
         <img className="logo-header" src={logo} alt="Logo" />
-      </a>
+      </Link>
       <nav className='nav-barra'>
         <ul className='nav-links'>
-          <li className='nav-item-dropdown'><a href='/complejos'>Complejos</a></li>
-          <li><a href='/software'>Software</a></li>
-
+          <li className='nav-item-dropdown'>
+            <NavLink to='/complejos' className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Complejos</NavLink>
+          </li>
+          <li>
+            <NavLink to='/software' className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Software</NavLink>
+          </li>
           {estaLog ? (
-            <li><a href='/perfil'>Perfil</a></li> // 3. Agregamos href='/perfil'
+            <li>
+              <NavLink to='/perfil' className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Mi Perfil</NavLink>
+            </li>
           ) : (
-            <li><a href='/login'>Iniciar Sesión</a></li>
+            <li>
+              <NavLink 
+                to='/login'className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Iniciar Sesión</NavLink>
+            </li>
           )}
         </ul>
       </nav>

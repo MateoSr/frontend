@@ -1,0 +1,250 @@
+:root {
+  --primary-orange: #ee5801;
+  --hover-orange: #d44d00;
+  --bg-light: #f8fafc;
+  --text-dark: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-light);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-dark);
+}
+
+.confirmar-reserva-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 50px 24px;
+  box-sizing: border-box;
+}
+
+/* Contenedor más amplio */
+.reserva-container {
+  width: 100%;
+  max-width: 1050px;
+}
+
+/* Header principal */
+.reserva-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.reserva-header h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.3rem;
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+.reserva-header p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1.15rem;
+}
+
+/* Grilla principal */
+.reserva-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* Tarjetas */
+.card-reserva {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 36px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  font-size: 1.4rem;
+  color: var(--primary-orange);
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+/* Estilos de Turno y Separadores */
+.info-grupo {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+/* Línea divisora entre elementos */
+.info-grupo.con-linea,
+.info-row.con-linea {
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.info-row {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.info-row .info-grupo {
+  flex: 1;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.info-valor {
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.info-valor.destacado {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.precio-row {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.precio-row .info-valor.sena {
+  color: var(--primary-orange);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.precio-row.total {
+  margin-top: 4px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.precio-row.total .total-monto {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+/* Formulario */
+.reserva-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-dark);
+}
+
+.input-group input {
+  padding: 14px 16px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 1.05rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-group input:focus {
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 4px rgba(238, 88, 1, 0.15);
+}
+
+/* Botón inferior */
+.confirmar-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 44px;
+}
+
+.btn-confirmar {
+  padding: 16px 64px;
+  background-color: var(--primary-orange);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(238, 88, 1, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-confirmar:hover {
+  background-color: var(--hover-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(238, 88, 1, 0.4);
+}
+
+/* Alineación de ícono y texto */
+.info-detalle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Tamaño y color del ícono */
+.icon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.icon-orange {
+  stroke: var(--primary-orange);
+}
+
+/* Ajustes adicionales para filas de precios */
+.precio-row {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.precio-row.total .icon {
+  stroke: var(--text-dark);
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 768px) {
+  .reserva-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-confirmar {
+    width: 100%;
+  }
+}
