@@ -12,6 +12,6 @@ export const obtenerComplejos = async (queryString, signal) => {
   }
 
   const data = await response.json();
-  return Array.isArray(data) ? data : [];
+  return Array.isArray(data) ? data : data.data ?? [];
 };
 
