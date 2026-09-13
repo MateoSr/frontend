@@ -1,0 +1,80 @@
+/* Fondo oscuro que cubre toda la pantalla */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px); /* Efecto desfoque elegante */
+}
+
+/* Caja principal del Modal */
+.modal-confirmacion-contenido {
+  background-color: #ffffff;
+  padding: 32px 24px;
+  border-radius: 16px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: modalEntrada 0.3s ease-out forwards;
+}
+
+@keyframes modalEntrada {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-icono {
+  margin-bottom: 16px;
+}
+
+.modal-confirmacion-contenido h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #111827;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.modal-confirmacion-contenido p {
+  color: #374151;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.modal-confirmacion-contenido .modal-subtexto {
+  font-size: 0.9rem !important;
+  color: #6b7280 !important;
+  margin-bottom: 24px !important;
+}
+
+/* Botón que redirige al Home */
+.btn-modal-home {
+  width: 100%;
+  background-color: #ee5801;
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-modal-home:hover {
+  background-color: #d44d00;
+}

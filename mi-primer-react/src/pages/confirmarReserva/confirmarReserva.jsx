@@ -1,30 +1,32 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import './confirmarReserva.css';
+import './modalConfirmar.css';
 import InputForum from '../../components/inputForum/inputForum';
 import { useReserva } from '../../hooks/useReserva';
 
 export default function ConfirmarReserva() {
-    const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-    const complejo = searchParams.get('complejo');
-    const canchaNro = searchParams.get('cancha');
-    const fecha = searchParams.get('fecha');
-    const horaInicio = searchParams.get('horaInicio');
+  const complejo = searchParams.get('complejoId');
+  const canchaNro = searchParams.get('canchaNro');
+  const fecha = searchParams.get('fecha');
+  const horaInicio = searchParams.get('horarioInicio');
 
-    const {
-      reserva,
-      titular,
-      cargando,
-      horaFin,
-      handleChange,
-      handleConfirmar
-    } = useReserva({
-      complejo: complejo || '',
-      canchaNro: canchaNro || '',
-      fecha: fecha || '',
-      horaInicio: horaInicio || ''
-    });
-
+  const {
+    reserva,
+    titular,
+    cargando,
+    horaFin,
+    mostrarModal,
+    handleChange,
+    handleConfirmar
+  } = useReserva({
+    complejo: complejo || '',
+    canchaNro: canchaNro || '',
+    fecha: fecha || '',
+    horaInicio: horaInicio || ''
+  });
   return (
     <div className="confirmar-reserva-wrapper">
       <div className="reserva-container">
@@ -190,8 +192,27 @@ export default function ConfirmarReserva() {
             Confirmar Reserva
           </button>
         </div>
-
       </div>
+
+      {/* Modal renderizado fuera de la jerarquía mediante Portal */}
+      {mostrarModal && (
+  <div className="modal-overlay">
+    <div className="modal-confirmacion-contenido">
+      <h2>¡Reserva Confirmada!</h2>
+      
+      <p>
+        Su turno se ha creado correctamente, le enviamos el comprobante por email.
+      </p>
+      <p className="modal-subtexto">
+        Recuerde que puede ver sus turnos en su perfil.
+      </p>
+
+      <button type="button" className="btn-modal-home" onClick={() => navigate('/')}>
+        Ir al Home
+      </button>
     </div>
-  )
+  </div>
+  )}
+    </div>
+  );
 }

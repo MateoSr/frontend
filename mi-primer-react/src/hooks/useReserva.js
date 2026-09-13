@@ -35,6 +35,7 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio }) => {
     email: ''
   });
   const [cargando, setCargando] = useState(true);
+  const [mostrarModal, setMostrarModal] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('gestor_token');
@@ -116,7 +117,7 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio }) => {
 
     try {
       await crearReserva(turno, token);
-      alert('Turno creado');
+      setMostrarModal(true);
     } catch (error) {
       console.error(error);
       alert(`Error creando la reserva: ${error.message}`);
@@ -127,6 +128,7 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio }) => {
     reserva,
     titular,
     cargando,
+    mostrarModal,
     horaFin: calcularHoraFin(reserva.horaInicio, reserva.duracion),
     handleChange,
     handleConfirmar
