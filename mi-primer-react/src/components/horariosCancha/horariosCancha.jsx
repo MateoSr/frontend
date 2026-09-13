@@ -47,7 +47,12 @@ export const HorariosCancha = ({ complejo, fechaActual }) => {
 
   const horario = complejo.horarios?.[0];
   const aperturaMinutos = extraerMinutos(horario?.horaApertura);
-  const cierreMinutos = extraerMinutos(horario?.horaCierre);
+  const cierreHorario = extraerMinutos(horario?.horaCierre);
+  const cierreMinutos = aperturaMinutos !== null
+    && cierreHorario !== null
+    && cierreHorario <= aperturaMinutos
+    ? cierreHorario + 24 * 60
+    : cierreHorario;
   const canchas = complejo.canchas ?? [];
 
   if (aperturaMinutos === null || cierreMinutos === null) {

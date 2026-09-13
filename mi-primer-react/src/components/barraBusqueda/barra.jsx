@@ -7,6 +7,8 @@ function BarraBusqueda() {
     const [searchParams] = useSearchParams();
 
     const [deportes, setDeportes] = useState([]);
+    const deporteActual = searchParams.get('deporte') || '';
+    const [deporteSeleccionado, setDeporteSeleccionado] = useState(deporteActual);
 
     useEffect(() => {
         const fetchDeportes = async () => {
@@ -24,9 +26,12 @@ function BarraBusqueda() {
     }, []);
 
     const ciudadActual = searchParams.get('ciudad') || '';
-    const deporteActual = searchParams.get('deporte') || '';
     const fechaActual = searchParams.get('fecha') || '';
     const horaActual = searchParams.get('hora') || '';
+
+    useEffect(() => {
+        setDeporteSeleccionado(deporteActual);
+    }, [deporteActual]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -53,7 +58,13 @@ function BarraBusqueda() {
                 </div>
                 <div className='filtro-form'>
                     <svg className='icon' viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="10" /><path d="M12 2v20M2 12h20" /><path d="M6.2 6.2c3.2 3.2 3.2 8.4 0 11.6" /><path d="M17.8 6.2c-3.2 3.2-3.2 8.4 0 11.6" /></svg>
-                    <select name='deporte' className="filtro-select" defaultValue={deporteActual} required>
+                    <select
+                        name='deporte'
+                        className="filtro-select"
+                        value={deporteSeleccionado}
+                        onChange={(e) => setDeporteSeleccionado(e.target.value)}
+                        required
+                    >
                         <option value="" disabled hidden>
                             Seleccionar un Deporte
                         </option>
