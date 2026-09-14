@@ -15,3 +15,34 @@ export const obtenerComplejos = async (queryString, signal) => {
   return Array.isArray(data) ? data : data.data ?? [];
 };
 
+export const crearComplejo = async (complejoData, /*token*/) => {
+  const response = await fetch(`${API_URL}/complejos`, {
+    method: 'POST',
+    headers: { 
+      'Content-Type': 'application/json',
+      // 'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(complejoData),
+  });
+
+  if (!response.ok) {
+    throw new Error('No se pudo crear el complejo.');
+  }
+
+  const data = await response.json();
+  return data;
+};
+
+export const obtenerDetalleComplejo = async (id, signal) => {
+  const response = await fetch(`${API_URL}/complejos/${id}`, { signal });
+
+  if (response.status === 404) {
+    throw new Error('No se encontro el complejo.');
+  }
+
+  if (!response.ok) {
+    throw new Error('No se pudo cargar el complejo.');
+  }
+
+  return response.json();
+};

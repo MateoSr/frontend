@@ -23,13 +23,13 @@ function Login({ endpoint = '/api/login', redirectTo = '/' }) {
       const data = await response.json();
       if (response.ok) {
         alert(data.message);
-        localStorage.setItem("gestor_token", data.token.token);
+        localStorage.setItem("gestor_token", data.token);
         navigate(redirectTo);
       } else {
-        alert(data.message);
+        alert(data.error);
       }
     } catch (error) {
-      alert("Error en la conexión con el servidor");
+      alert("Error de conexión con el servidor");
     }
   };
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { HorariosCancha } from "../../components/horariosCancha/horariosCancha";
 import imagenComplejo from "../../assets/foto-complejo-AlAngulo.jpg";
-import { obtenerDetalleComplejo } from "../../services/detalleComplejoService";
+import { obtenerDetalleComplejo } from "../../services/complejosService";
 import "./detalleComplejo.css";
 
 const diasSemana = [
@@ -77,7 +77,7 @@ function DetalleComplejo() {
                 <summary>Ubicación</summary>
                 <div className="contenido-acordeon">
                     <p>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '8px', verticalAlign: 'text-bottom'}}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px', verticalAlign: 'text-bottom' }}>
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                             <circle cx="12" cy="10" r="3"></circle>
                         </svg>

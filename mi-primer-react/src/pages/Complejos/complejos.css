@@ -6,6 +6,16 @@
   font-family: system-ui, -apple-system, sans-serif;
 }
 
+.contenedor-pagina {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.contenido-principal {
+  flex: 1;
+}
+
 .cabecera-pagina {
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
