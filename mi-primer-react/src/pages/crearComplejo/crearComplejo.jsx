@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { crearComplejo } from '../../services/complejosService';
 import { obtenerLocalidades } from '../../services/localidadesService';
+import { obtenerUsuarioPorId } from '../../services/usuariosService';
 import './crearComplejo.css';
 
-function CrearComplejo() {
+export const CrearComplejo = () => {
   const navigate = useNavigate();
 
   const [localidades, setLocalidades] = useState([]);
@@ -12,8 +13,13 @@ function CrearComplejo() {
     nombre: '',
     direccion: '',
     localidadId: '',
-    imagenUrl: ''
+    imagenUrl: '/assets/foto-complejo.jpg',
+    duenoId: '',
+    encargadoId: ''
   });
+
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [datosConfirmacion, setDatosConfirmacion] = useState(null);
 
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState('');
@@ -31,7 +37,6 @@ function CrearComplejo() {
         console.error('Error cargando localidades:', err);
       }
     };
-
     cargarLocalidades();
   }, []);
 
@@ -49,16 +54,48 @@ function CrearComplejo() {
     setError('');
 
     try {
-      const payload = {
+      const dueno = await obtenerUsuarioPorId(formData.duenoId);
+      const encargado = await obtenerUsuarioPorId(formData.encargadoId);
+
+      const localidadSel = localidades.find(l => l.id === parseInt(formData.localidadId, 10));
+
+      setDatosConfirmacion({
         ...formData,
-        localidadId: parseInt(formData.localidadId, 10)
+        localidadNombre: localidadSel ? localidadSel.nombre : formData.localidadId,
+        duenoEmail: dueno.email,
+        duenoNombre: dueno.nombre || 'Sin nombre',
+        encargadoEmail: encargado.email,
+        encargadoNombre: encargado.nombre || 'Sin nombre'
+      });
+
+      setMostrarModal(true);
+    } catch (err) {
+      setError(err.message || 'Error al verificar las IDs de dueño o encargado');
+    } finally {
+      setCargando(false);
+    }
+  };
+
+  const handleConfirmarCreacion = async () => {
+    setCargando(true);
+    setError('');
+
+    try {
+      const payload = {
+        nombre: formData.nombre,
+        direccion: formData.direccion,
+        localidadId: parseInt(formData.localidadId, 10),
+        imagenUrl: formData.imagenUrl,
+        duenoId: parseInt(formData.duenoId, 10),
+        encargadoId: parseInt(formData.encargadoId, 10)
       };
 
       await crearComplejo(payload);
-      alert('¡Complejo creado exitosamente!');
+      alert('¡Complejo registrado con éxito!');
       navigate('/admin/complejos');
     } catch (err) {
       setError(err.message);
+      setMostrarModal(false);
     } finally {
       setCargando(false);
     }
@@ -91,10 +128,44 @@ function CrearComplejo() {
           <label>Imagen (Ruta/URL):</label>
           <input type="text" name="imagenUrl" value={formData.imagenUrl} onChange={handleChange} placeholder="/assets/foto-complejo.jpg" />
         </div>
-        <button className="crear-complejo-boton" type="submit" disabled={cargando} >
-          {cargando ? 'Guardando...' : 'Crear Complejo'}
+        <div className='crear-complejo-campo'>
+          <label>ID dueño:</label>
+          <input type="text" name="duenoId" value={formData.duenoId} onChange={handleChange} placeholder="ID del dueño" />
+        </div>
+        <div className='crear-complejo-campo'>
+          <label>ID encargado:</label>
+          <input type="text" name="encargadoId" value={formData.encargadoId} onChange={handleChange} placeholder="ID del encargado" />
+        </div>
+        <button className="crear-complejo-boton" type="submit" disabled={cargando}>
+          {cargando ? 'Verificando...' : 'Crear Complejo'}
         </button>
       </form>
+      {mostrarModal && datosConfirmacion && (
+        <div className="modal-overlay">
+          <div className="modal-contenido">
+            <h3>Verificar Datos del Complejo</h3>
+
+            <div className="modal-datos">
+              <p><strong>Nombre:</strong> {datosConfirmacion.nombre}</p>
+              <p><strong>Dirección:</strong> {datosConfirmacion.direccion}</p>
+              <p><strong>Localidad:</strong> {datosConfirmacion.localidadNombre}</p>
+              <p><strong>Imagen:</strong> {datosConfirmacion.imagenUrl}</p>
+              <hr />
+              <p><strong>Dueño (ID {datosConfirmacion.duenoId}):</strong></p>
+              <p className="detalle-usuario">{datosConfirmacion.duenoNombre} — <span>{datosConfirmacion.duenoEmail}</span></p>
+              <hr />
+              <p><strong>Encargado (ID {datosConfirmacion.encargadoId}):</strong></p>
+              <p className="detalle-usuario">{datosConfirmacion.encargadoNombre} — <span>{datosConfirmacion.encargadoEmail}</span></p>
+            </div>
+            <div className="modal-acciones">
+              <button type="button" className="btn-cancelar" onClick={() => setMostrarModal(false)} disabled={cargando}> Cancelar </button>
+              <button type="button" className="btn-confirmar" onClick={handleConfirmarCreacion} disabled={cargando}>
+                {cargando ? 'Guardando...' : 'Confirmar y Crear'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 };
