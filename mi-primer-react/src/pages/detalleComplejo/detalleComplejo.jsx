@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { HorariosCancha } from "../../components/horariosCancha/horariosCancha";
 import imagenComplejo from "../../assets/foto-complejo-AlAngulo.jpg";
 import { obtenerDetalleComplejo } from "../../services/complejosService";
@@ -24,6 +24,7 @@ function formatearHora(valor) {
 
 function DetalleComplejo() {
     const { id } = useParams();
+    const [searchParams] = useSearchParams();
     const [complejo, setComplejo] = useState(null);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState("");
@@ -71,7 +72,7 @@ function DetalleComplejo() {
             <h1 className="detalle-complejo-nombre">{complejo.nombre}</h1>
             <HorariosCancha
                 complejo={complejo}
-                fechaActual={new Date().toISOString().slice(0, 10)}
+                fechaActual={searchParams.get("fecha") || new Date().toISOString().slice(0, 10)}
             />
             <details className="detalle-complejo-acordeon" open>
                 <summary>Ubicación</summary>

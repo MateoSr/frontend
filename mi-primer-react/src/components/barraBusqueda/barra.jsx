@@ -82,7 +82,7 @@ function BarraBusqueda() {
                 <div className='filtro-form'>
                     <svg className='icon' viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 12" /></svg>
                     <select name='hora' required className="filtro-select" defaultValue={horaActual}>
-                        <option value="" disabled selected hidden style={{ color: "gray" }}>Seleccionar un Horario</option>
+                        <option value="" disabled hidden style={{ color: "gray" }}>Seleccionar un Horario</option>
                         <option value="09:00">09:00</option>
                         <option value="09:30">09:30</option>
                         <option value="10:00">10:00</option>

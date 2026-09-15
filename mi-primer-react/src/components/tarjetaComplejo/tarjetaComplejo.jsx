@@ -1,11 +1,15 @@
 import React from 'react';
 import './tarjetaComplejo.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 export const TarjetaComplejo = ({ complejo }) => {
   const { nombre, direccion, precio, imagenUrl, disponibilidad } = complejo;
   const navigate = useNavigate();
-const manejarClic = () => {
-    navigate(`/detalle-complejo/${complejo.id}`);
+  const [searchParams] = useSearchParams();
+
+  const manejarClic = () => {
+    const fecha = searchParams.get('fecha');
+    const parametros = fecha ? `?fecha=${encodeURIComponent(fecha)}` : '';
+    navigate(`/detalle-complejo/${complejo.id}${parametros}`);
   };
   return (
     <div className="tarjeta-complejo" onClick={manejarClic} style={{ cursor: 'pointer' }}>
