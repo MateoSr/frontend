@@ -19,6 +19,8 @@ import DetalleComplejo from './pages/detalleComplejo/detalleComplejo'
 import MenuAdmin from './pages/menuAdmin/menuAdmin'
 import AdministrarComplejos from './pages/administrarComplejos/administrarComplejos'
 import CrearComplejo from './pages/crearComplejo/crearComplejo'
+import MenuDueño from './pages/menuDueño/menuDueño'
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -43,6 +45,7 @@ function App() {
         <Route path="/menuAdmin" element={<MenuAdmin />} />
         <Route path="/administrar-complejos" element={<AdministrarComplejos />} />
         <Route path="/crear-complejo" element={<CrearComplejo />} />
+        <Route path="/menuDueño" element={<MenuDueño/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer></Footer>

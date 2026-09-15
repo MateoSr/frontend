@@ -1,0 +1,110 @@
+/* Contenedor principal de la vista */
+.contenedor-menuDueño {
+  padding: 36px 80px 36px 80px;
+  background-color: #f8fafc; /* Fondo gris claro moderno */
+  min-height: 100vh;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: #1e293b;
+  box-sizing: border-box;
+}
+
+/* Parte superior: Saludo y fecha */
+.partesuperior {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.titsulos .titulo-menuDueño {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+}
+
+.titsulos p {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Contenido principal estructurado */
+.contenidoprincipal {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* Espacio vertical entre secciones */
+}
+
+/* Grilla de las 4 tarjetas métricas */
+.tarjetasMetricas {
+  display: grid;
+  /* Por defecto en pantallas grandes reparte exactamente en 4 columnas iguales */
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 20px;
+  width: 100%;
+}
+
+/* Responsividad para tablets y pantallas medianas (2 columnas) */
+@media (max-width: 1024px) {
+  .tarjetasMetricas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Responsividad para celulares (1 columna) */
+@media (max-width: 600px) {
+  .tarjetasMetricas {
+    grid-template-columns: 1fr;
+  }
+  
+  .partesuperior {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+/* Secciones secundarias inferiores (para cuando agregues gráficos o listas) */
+.infoComplejos, 
+.reportesFinancieros {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  min-height: 200px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.infoComplejos {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.seccion-header {
+  margin-bottom: 20px;
+}
+
+.seccion-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ee5801;
+  margin: 0 0 4px 0;
+}
+
+.sub-hint {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Grilla para las tarjetas de complejos */
+.grilla-complejos {
+  display: grid;
+  /* Usamos minmax(0, 1fr) para que las tarjetas fuercen el estiramiento y se repartan el ancho */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+}

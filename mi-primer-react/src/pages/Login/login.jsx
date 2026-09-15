@@ -6,9 +6,6 @@ import './login.css';
 function Login({ endpoint = '/api/login', redirectTo = '/' }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const datosFormulario = { email, password };
@@ -23,8 +20,8 @@ function Login({ endpoint = '/api/login', redirectTo = '/' }) {
       const data = await response.json();
       if (response.ok) {
         alert(data.message);
-        localStorage.setItem("gestor_token", data.token);
-        navigate(redirectTo);
+        localStorage.setItem("gestor_token", data.token.token);
+        window.location.href = redirectTo;
       } else {
         alert(data.error);
       }

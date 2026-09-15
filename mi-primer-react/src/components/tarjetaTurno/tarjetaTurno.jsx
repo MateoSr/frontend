@@ -1,13 +1,27 @@
-// components/tarjetaTurno/TarjetaTurno.jsx
+//components/tarjetaTurno/TarjetaTurno.jsx
 import { useState } from 'react';
 import './tarjetaTurno.css';
 
 //imagen si falla la carga.
 const imagen_fallo = "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=600";
 
+//TRANSFORMA LA FECHA
+const formatearFecha = (fechaISO) => {
+  if (!fechaISO) return "";
+  const fechaSolo = fechaISO.split('T')[0]; 
+  const [year, month, day] = fechaSolo.split('-');
+  return `${day}/${month}/${year}`;
+};
+
+// TRANSFORMA LA HORA
+const formatearHora = (horaISO) => {
+  if (!horaISO) return "";
+  const horaSolo = horaISO.split('T')[1]; 
+  return horaSolo.substring(0, 5); 
+};
 
 export function TarjetaTurno({ turno }) {
-  const { nro_cancha,horarioInicio, estado, imagenUrl, complejoNombre,deporte,fecha} = turno;
+  const { canchaNro,horaInicio, estado, imagenUrl, complejo,cancha,fecha} = turno;
   
   // controla la carga de la imagen
   const [imgSrc, setImgSrc] = useState(imagenUrl || imagen_fallo);
@@ -32,7 +46,7 @@ export function TarjetaTurno({ turno }) {
       <div className="tarjeta-img-contenedor">
         <img 
           src={imgSrc} 
-          alt={complejoNombre} 
+          alt={complejo.nombre} 
           onError={handleErrorImage} 
           className="tarjeta-img"
         />
@@ -42,13 +56,13 @@ export function TarjetaTurno({ turno }) {
       </div>
 
       <div className="tarjeta-body">
-        <h3 className="complejo-nombre">{complejoNombre}</h3>
-        <p className="cancha-info">Cancha N° {nro_cancha}</p>
-        <p className="cancha-info"> Deporte {deporte}</p>
+        <h3 className="complejo-nombre">{complejo.nombre}</h3>
+        <p className="cancha-info">Cancha N° {canchaNro}</p>
+        <p className="cancha-info"> Deporte {cancha.tipoCancha.deporte}</p>
         
         <div className="tarjeta-fechas">
-          <span className="fecha-item">📅 {fecha}</span>
-          <span className="fecha-item">⏰ {horarioInicio}</span>
+          <span className="fecha-item">📅 {formatearFecha(fecha)}</span>
+          <span className="fecha-item">⏰ {formatearHora(horaInicio)}</span>
         </div>
       </div>
     </div>

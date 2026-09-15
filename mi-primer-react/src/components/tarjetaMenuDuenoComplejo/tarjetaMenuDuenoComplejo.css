@@ -1,0 +1,94 @@
+.tarjeta-complejo {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box; /* Fundamental para que los paddings no rompan el ancho */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+
+/* Contenedor con relación de aspecto fija (16:9) */
+.complejo-imagen-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/1; /* Esto obliga a que el recuadro siempre tenga forma de rectángulo prolijo */
+  background-color: #f1f5f9; /* Color de fondo mientras carga la imagen */
+  overflow: hidden;
+}
+
+.complejo-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Rellena el espacio recortando lo que sobra sin deformar */
+  object-position: center;
+  display: block;
+}
+
+.badge-activo {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #10b981;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 2; /* Asegura que el badge flote siempre por encima de la foto */
+}
+
+.complejo-contenido {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  gap: 16px;
+}
+.complejo-nombre {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+}
+
+.complejo-direccion {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0 0 8px 0;
+}
+
+.complejo-detalles {
+  font-size: 13px;
+  color: #334155;
+  margin: 0;
+}
+
+.btn-ver-detalle {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-ver-detalle:hover {
+  background-color: #ee5801;
+  color: white;
+}

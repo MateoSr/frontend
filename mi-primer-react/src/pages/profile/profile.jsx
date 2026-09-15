@@ -41,11 +41,19 @@ function Profile(){
 
     useEffect(() => {
     const buscarTurnos = async () => {
+      const token = localStorage.getItem("gestor_token");
       try{
         //id de ejemplo para probar la api hasta tener autenticacion
-        const response = await fetch(`http://localhost:3000/api/turnos?id_cliente=${id}`)
+        const response = await fetch('http://localhost:3000/api/turnos', {
+          method: 'GET', 
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // Estándar para envío de JWT
+          }
+        });
         if(response.ok){
           const respuesta = await response.json()
+          console.log(respuesta)
           setTurnos(respuesta)
         }
       }catch(error){
