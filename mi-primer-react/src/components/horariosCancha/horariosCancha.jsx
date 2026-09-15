@@ -9,7 +9,7 @@ function extraerMinutos(valor, convertirHoraLocal = false) {
   if (convertirHoraLocal && valor.includes('T')) {
     const fecha = new Date(valor);
     if (!Number.isNaN(fecha.getTime())) {
-      return fecha.getHours() * 60 + fecha.getMinutes();
+      return fecha.getUTCHours() * 60 + fecha.getUTCMinutes();
     }
   }
 
@@ -65,7 +65,9 @@ export const HorariosCancha = ({ complejo, fechaActual }) => {
     return () => document.removeEventListener('mousedown', cerrarAlHacerClickAfuera);
   }, [reservaSeleccionada]);
 
-  const horario = complejo.horarios?.[0];
+  const fechaSeleccionada = new Date(`${fechaAUsar}T00:00:00Z`);
+  const diaSeleccionado = fechaSeleccionada.getUTCDay() || 7;
+  const horario = complejo.horarios?.find(item => item.nroDia === diaSeleccionado);
   const aperturaMinutos = extraerMinutos(horario?.horaApertura);
   const cierreHorario = extraerMinutos(horario?.horaCierre);
   
@@ -84,7 +86,7 @@ export const HorariosCancha = ({ complejo, fechaActual }) => {
   // Todas las filas deben compartir la misma escala para que cada celda quede
   // alineada con la hora que muestra la cabecera.
   const duracionGrilla = Math.min(...canchas.map(obtenerDuracion), 60);
-  const totalBloques = Math.ceil((cierreMinutos - aperturaMinutos) / duracionGrilla);
+  const totalBloques = Math.floor((cierreMinutos - aperturaMinutos) / duracionGrilla);
 
   const abrirModal = (cancha, horaString, evento) => {
     const celda = evento.currentTarget.getBoundingClientRect();

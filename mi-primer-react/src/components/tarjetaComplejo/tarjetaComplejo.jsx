@@ -23,16 +23,6 @@ export const TarjetaComplejo = ({ complejo }) => {
         <h3>{nombre}</h3>
         <p>📍 {direccion}</p>
       </div>
-      <div className="complejo-turnos">
-        {disponibilidad && disponibilidad.map((slot, i) => (
-          <button 
-            key={i} 
-            className="turno-button"
-          >
-            {slot.time}
-          </button>
-        ))}
-      </div>
     </div>
   );
 };
