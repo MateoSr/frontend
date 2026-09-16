@@ -3,8 +3,15 @@ import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import './horariosCancha.css';
 
-function extraerMinutos(valor) {
+function extraerMinutos(valor, convertirHoraLocal = false) {
   if (typeof valor !== 'string') return null;
+
+  if (convertirHoraLocal && valor.includes('T')) {
+    const fecha = new Date(valor);
+    if (!Number.isNaN(fecha.getTime())) {
+      return fecha.getUTCHours() * 60 + fecha.getUTCMinutes();
+    }
+  }
 
   const hora = valor.match(/(?:T|^)(\d{1,2}):(\d{2})/);
   return hora ? Number(hora[1]) * 60 + Number(hora[2]) : null;
@@ -17,8 +24,17 @@ function formatearHora(minutos) {
 }
 
 function obtenerDuracion(cancha) {
-  const duracion = Number(cancha.tipoCancha?.duracionMinutos);
+  const duracion = Number(cancha.tipoCancha?.duracion);
   return Number.isFinite(duracion) && duracion > 0 ? duracion : 60;
+}
+
+// Función auxiliar para obtener la fecha de hoy en formato YYYY-MM-DD (hora local)
+function obtenerFechaHoy() {
+  const hoy = new Date();
+  const anio = hoy.getFullYear();
+  const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+  const dia = String(hoy.getDate()).padStart(2, '0');
+  return `${anio}-${mes}-${dia}`;
 }
 
 export const HorariosCancha = ({ complejo, fechaActual }) => {
@@ -26,6 +42,10 @@ export const HorariosCancha = ({ complejo, fechaActual }) => {
   const [reservaSeleccionada, setReservaSeleccionada] = useState(null);
   const [posicionModal, setPosicionModal] = useState(null);
   const modalRef = useRef(null);
+
+  // Si no se pasa 'fechaActual' o viene vacía, usamos la fecha de hoy por defecto
+  const fechaAUsar = fechaActual ? fechaActual : obtenerFechaHoy();
+  
 
   const cerrarModal = () => {
     setReservaSeleccionada(null);
@@ -45,19 +65,28 @@ export const HorariosCancha = ({ complejo, fechaActual }) => {
     return () => document.removeEventListener('mousedown', cerrarAlHacerClickAfuera);
   }, [reservaSeleccionada]);
 
-  const horario = complejo.horarios?.[0];
+  const fechaSeleccionada = new Date(`${fechaAUsar}T00:00:00Z`);
+  const diaSeleccionado = fechaSeleccionada.getUTCDay() || 7;
+  const horario = complejo.horarios?.find(item => item.nroDia === diaSeleccionado);
   const aperturaMinutos = extraerMinutos(horario?.horaApertura);
   const cierreHorario = extraerMinutos(horario?.horaCierre);
+  
   const cierreMinutos = aperturaMinutos !== null
     && cierreHorario !== null
     && cierreHorario <= aperturaMinutos
     ? cierreHorario + 24 * 60
     : cierreHorario;
+
   const canchas = complejo.canchas ?? [];
 
   if (aperturaMinutos === null || cierreMinutos === null) {
     return <p>No hay un horario configurado para este complejo.</p>;
   }
+
+  // Todas las filas deben compartir la misma escala para que cada celda quede
+  // alineada con la hora que muestra la cabecera.
+  const duracionGrilla = Math.min(...canchas.map(obtenerDuracion), 60);
+  const totalBloques = Math.floor((cierreMinutos - aperturaMinutos) / duracionGrilla);
 
   const abrirModal = (cancha, horaString, evento) => {
     const celda = evento.currentTarget.getBoundingClientRect();
@@ -75,7 +104,7 @@ export const HorariosCancha = ({ complejo, fechaActual }) => {
 
     setPosicionModal({ top, left });
     setReservaSeleccionada({
-      fecha: fechaActual,
+      fecha: fechaAUsar, // Usará la seleccionada o la de hoy por defecto
       canchaNro: cancha.nro,
       complejoId: complejo.id,
       horarioInicio: horaString
@@ -90,73 +119,75 @@ export const HorariosCancha = ({ complejo, fechaActual }) => {
   return (
     <>
       <div className="contenedor-horarios-cancha">
-      <div className="fila-cabecera">
-        <div className="columna-info-vacia"></div>
-        <div className="contenedor-columnas-horas">
-          {canchas[0] && Array.from(
-            {
-              length: Math.ceil(
-                (cierreMinutos - aperturaMinutos)
-                / obtenerDuracion(canchas[0])
-              ),
-            },
-            (_, indice) => {
-              const inicio = aperturaMinutos + indice * obtenerDuracion(canchas[0]);
+        
+        {/* (Opcional visual) Puedes mostrar la fecha activa en la grilla si lo deseas */}
+        <div className="info-fecha-grilla" style={{ marginBottom: '10px', fontWeight: 'bold' }}>
+          Fecha: {fechaAUsar}
+        </div>
+
+        {/* CABECERA DE HORAS */}
+        <div className="fila-cabecera">
+          <div className="columna-info-vacia"></div>
+          <div className="contenedor-columnas-horas">
+            {Array.from({ length: totalBloques }, (_, indice) => {
+              const inicio = aperturaMinutos + indice * duracionGrilla;
               return (
-                <div key={inicio} className="celda-cabecera-hora">
+                <div key={`cabecera-${inicio}`} className="celda-cabecera-hora">
                   {formatearHora(inicio)}
                 </div>
               );
-            }
-          )}
-        </div>
-      </div>
-
-      {canchas.map((cancha) => (
-        <div key={`${complejo.id}-${cancha.nro}`} className="fila-cancha">
-          <div className="info-cancha">
-            <h4>Cancha {cancha.nro}</h4>
-            <p>{cancha.tipoCancha?.deporte ?? 'Deporte no especificado'}</p>
+            })}
           </div>
+        </div>
 
-          <div className="contenedor-celdas">
-            {Array.from(
-              {
-                length: Math.ceil(
-                  (cierreMinutos - aperturaMinutos)
-                  / obtenerDuracion(cancha)
-                ),
-              },
-              (_, indice) => {
-              const duracionMinutos = obtenerDuracion(cancha);
-              const inicioBloque = aperturaMinutos + indice * duracionMinutos;
-              const finBloque = Math.min(inicioBloque + duracionMinutos, cierreMinutos);
-              const hora = formatearHora(inicioBloque);
-              
-              const estaOcupado = (cancha.turnos ?? []).some(turno => {
-                const estado = turno.estado?.toLowerCase();
-                const turnoInicio = extraerMinutos(turno.horaInicio);
-                const turnoFin = extraerMinutos(turno.horaFin);
+        {/* FILAS DE CANCHAS */}
+        {canchas.map((cancha) => (
+          <div key={`${complejo.id}-${cancha.nro}`} className="fila-cancha">
+            <div className="info-cancha">
+              <h4>Cancha {cancha.nro}</h4>
+              <p>{cancha.tipoCancha?.deporte ?? 'Deporte no especificado'}</p>
+            </div>
 
-                return estado !== 'cancelado'
-                  && turnoInicio !== null
-                  && turnoFin !== null
-                  && inicioBloque < turnoFin
-                  && finBloque > turnoInicio;
-              });
+            <div className="contenedor-celdas">
+              {Array.from({ length: totalBloques }, (_, indice) => {
+                const inicioBloque = aperturaMinutos + indice * duracionGrilla;
+                const finBloque = Math.min(inicioBloque + duracionGrilla, cierreMinutos);
+                const hora = formatearHora(inicioBloque);
+                
+                const estaOcupado = (cancha.turnos ?? []).some(turno => {
+                  const estado = turno.estado?.toLowerCase();
+                  
+                  const fechaTurnoStr = turno.fecha ? turno.fecha.split('T')[0] : '';
+                  const fechaActualStr = fechaAUsar.split('T')[0];
+                  const esMismaFecha = fechaTurnoStr === fechaActualStr;
 
-              return (
-                <div 
-                  key={hora} 
-                  className={`celda-turno ${estaOcupado ? 'ocupada' : 'libre'}`}
-                  onClick={evento => !estaOcupado && abrirModal(cancha, hora, evento)}
-                >
-                </div>
-              );
+                  const turnoInicio = extraerMinutos(turno.horaInicio, true);
+                  let turnoFin = extraerMinutos(turno.horaFin, true);
+
+                  if (turnoInicio !== null && turnoFin !== null && turnoFin <= turnoInicio) {
+                    turnoFin += 24 * 60;
+                  }
+
+                  return esMismaFecha 
+                    && estado !== 'cancelado'
+                    && turnoInicio !== null
+                    && turnoFin !== null
+                    && inicioBloque < turnoFin
+                    && finBloque > turnoInicio;
+                });
+
+                return (
+                  <div 
+                    key={`celda-${cancha.nro}-${inicioBloque}`} 
+                    className={`celda-turno ${estaOcupado ? 'ocupada' : 'libre'}`}
+                    onClick={evento => !estaOcupado && abrirModal(cancha, hora, evento)}
+                  >
+                  </div>
+                );
               })}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
 
       </div>
 
