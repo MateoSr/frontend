@@ -69,3 +69,13 @@ export const eliminarComplejo = async (id) => {
 
   return response.json();
 };
+
+export const modificarComplejo = async (id,datosActualizados) => {
+  const response = await fetch(`${API_URL}/complejos/${id}`,{
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(datosActualizados),
+  });
+  if (!response.ok) throw new Error("Error al modificar el complejo");
+  return await response.json();
+}

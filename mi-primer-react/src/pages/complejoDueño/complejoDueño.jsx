@@ -3,20 +3,13 @@ import './complejoDueño.css';
 import { useEffect, useState } from 'react';
 import { ListadoCanchas } from '../../components/listadoCanchas/listadoCanchas';
 import { Edit3, Trash2, Plus, Check, X } from 'lucide-react';
-import { obtenerDetalleComplejo } from "../../services/complejosService";
+import { obtenerDetalleComplejo,modificarComplejo } from "../../services/complejosService";
 import { crearCancha, modificarCancha, crearPrecioCancha } from "../../services/canchasService";
 import { crearHorario, modificarHorario, borrarHorario } from "../../services/horarioService";
 import { ModalCanchaDueno } from '../../components/modalCanchaDueno/modalCanchaDueno';
+import { TarjetaDatosComplejoMenu } from '../../components/tarjetaDatosComplejoMenu/tarjetaDatosComplejoMenu';
 
-const diasSemana = [
-  "Domingo",
-  "Lunes",
-  "Martes",
-  "Miercoles",
-  "Jueves",
-  "Viernes",
-  "Sabado",
-];
+const diasSemana = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado",];
 
 function formatearHora(valor) {
   if (typeof valor !== "string") return "-";
@@ -80,7 +73,6 @@ function ComplejoDueño() {
   const handleEditar = (cancha) => { setModalCanchaState({ isOpen: true, tipo: 'EDITAR', cancha }); };
   const handleCerrarModal = () => { setModalCanchaState({ isOpen: false, tipo: null, cancha: null }); };
   const handleAgregarPrecio = (cancha) => { setModalCanchaState({ isOpen: true, tipo: 'PRECIO', cancha }); };
-
   const handleConfirmarModalCancha = async (tipoAccion, payload) => {
     try {
       if (tipoAccion === 'CREAR') {
@@ -154,22 +146,24 @@ function ComplejoDueño() {
       alert(error.message);
     }
   };
-
+  //Handle de complejo datos
+  const handleGuardarComplejo = async (datosActualizados) => {
+  try {
+    await modificarComplejo(id, datosActualizados);
+    await recargarComplejo();
+  } catch (error) {
+    alert("Error al actualizar los datos del complejo: " + error.message);
+  }
+  };
   return (
     <div className='complejoDueño-container'>
       <div className='complejoDueño-header'>
-        <h1>{complejo.nombre}</h1>
-        <h2> 📍 {complejo.direccion}, {complejo.localidad.nombre}</h2>
+        <TarjetaDatosComplejoMenu complejo={complejo} onGuardar={handleGuardarComplejo} />
       </div>
 
       <div className='complejoDueño-body'>
         <div className='grilla-canchas'>
-          <ListadoCanchas
-            canchas={complejo.canchas}
-            onEditar={handleEditar}
-            onAgregarPrecio={handleAgregarPrecio}
-            onAgregarCancha={handleAgregarCancha}
-          />
+          <ListadoCanchas canchas={complejo.canchas} onEditar={handleEditar} onAgregarPrecio={handleAgregarPrecio} onAgregarCancha={handleAgregarCancha}/>
         </div>
 
         {/* Sección Horarios Centrada */}
@@ -263,18 +257,11 @@ function ComplejoDueño() {
             </div>
           </div>
         </div>
-
         <div className='grilla-reportes-propios'></div>
       </div>
 
       <Link to={`/menuDueño`} className="link-volver"> &larr; Volver</Link>
-      <ModalCanchaDueno
-        isOpen={modalCanchaState.isOpen}
-        tipo={modalCanchaState.tipo}
-        cancha={modalCanchaState.cancha}
-        onClose={handleCerrarModal}
-        onConfirmar={handleConfirmarModalCancha}
-      />
+      <ModalCanchaDueno isOpen={modalCanchaState.isOpen} tipo={modalCanchaState.tipo} cancha={modalCanchaState.cancha} onClose={handleCerrarModal} onConfirmar={handleConfirmarModalCancha}/>
     </div>
   );
 }

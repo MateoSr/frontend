@@ -37,6 +37,7 @@
 .columna-acciones, .acciones-celda { text-align: right !important; }
 .acciones-celda { display: flex; justify-content: flex-end; gap: 7px; }
 .accion { display: inline-grid; width: 34px; height: 34px; place-items: center; border: 1px solid #cbd5e1; border-radius: 7px; background: #ffffff; cursor: pointer; transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; }
+.accion svg, .boton-agregar-cancha svg { display: block; width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2; }
 .accion-editar { color: #2563eb; }
 .accion-precio { color: #059669; }
 .accion-borrar { color: #dc2626; }
