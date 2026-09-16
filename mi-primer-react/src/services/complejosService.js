@@ -46,3 +46,18 @@ export const obtenerDetalleComplejo = async (id, signal) => {
 
   return response.json();
 };
+
+export const obtenerComplejoDelEncargado = async (signal) => {
+  const token = localStorage.getItem('gestor_token');
+  const response = await fetch(`${API_URL}/complejos/encargado`, {
+    signal,
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.message || 'No se pudo cargar el complejo asignado.');
+  }
+
+  return response.json();
+};

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import Header from './components/header/header'
@@ -20,11 +19,11 @@ import MenuAdmin from './pages/menuAdmin/menuAdmin'
 import AdministrarComplejos from './pages/administrarComplejos/administrarComplejos'
 import CrearComplejo from './pages/crearComplejo/crearComplejo'
 import MenuDueño from './pages/menuDueño/menuDueño'
+import MenuEncargado from './pages/menuEncargado/menuEncargado'
+import { RutaProtegida } from './components/rutaProtegida/rutaProtegida'
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Header></Header>
@@ -46,6 +45,11 @@ function App() {
         <Route path="/administrar-complejos" element={<AdministrarComplejos />} />
         <Route path="/crear-complejo" element={<CrearComplejo />} />
         <Route path="/menuDueño" element={<MenuDueño/>}/>
+        <Route path="/menuEncargado" element={
+          <RutaProtegida rol="Encargado">
+            <MenuEncargado />
+          </RutaProtegida>
+        }/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer></Footer>

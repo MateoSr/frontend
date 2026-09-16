@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import './confirmarReserva.css';
 import './modalConfirmar.css';
@@ -12,6 +13,7 @@ export default function ConfirmarReserva() {
   const canchaNro = searchParams.get('canchaNro');
   const fecha = searchParams.get('fecha');
   const horaInicio = searchParams.get('horarioInicio');
+  const modo = searchParams.get('modo');
 
   const {
     reserva,
@@ -19,22 +21,31 @@ export default function ConfirmarReserva() {
     cargando,
     horaFin,
     mostrarModal,
+    esEncargado,
     handleChange,
     handleConfirmar
   } = useReserva({
     complejo: complejo || '',
     canchaNro: canchaNro || '',
     fecha: fecha || '',
-    horaInicio: horaInicio || ''
+    horaInicio: horaInicio || '',
+    modo
   });
+
+  useEffect(() => {
+    if (!mostrarModal || !esEncargado) return undefined;
+
+    const temporizador = setTimeout(() => navigate('/menuEncargado'), 1500);
+    return () => clearTimeout(temporizador);
+  }, [mostrarModal, esEncargado, navigate]);
   return (
     <div className="confirmar-reserva-wrapper">
       <div className="reserva-container">
         
         {/* Encabezado Principal */}
         <header className="reserva-header">
-          <h1>¡Ya casi terminamos!</h1>
-          <p>Revisá los detalles de tu turno y tus datos para confirmar la reserva.</p>
+          <h1>{esEncargado ? 'Agendar turno' : '¡Ya casi terminamos!'}</h1>
+          <p>{esEncargado ? 'Seleccioná el cliente y confirmá el turno.' : 'Revisá los detalles de tu turno y tus datos para confirmar la reserva.'}</p>
         </header>
 
         {/* Sección de Tarjetas Separadas */}
@@ -112,7 +123,7 @@ export default function ConfirmarReserva() {
               </div>
             </div>
 
-            <div className="info-grupo precio-row con-linea">
+            {!esEncargado && <div className="info-grupo precio-row con-linea">
               <span className="info-label">Precio Seña</span>
               <div className="info-detalle">
                 <svg className="icon icon-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,9 +133,9 @@ export default function ConfirmarReserva() {
                   $ {cargando ? '...' : reserva?.precioSena || '10.000'}
                 </span>
               </div>
-            </div>
+            </div>}
 
-            <div className="info-grupo precio-row total">
+            {!esEncargado && <div className="info-grupo precio-row total">
               <span className="info-label">Precio Total</span>
               <div className="info-detalle">
                 <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -134,12 +145,12 @@ export default function ConfirmarReserva() {
                   $ {cargando ? '...' : reserva?.precioTotal || '37.000'}
                 </span>
               </div>
-            </div>
+            </div>}
           </div>
 
           {/* Tarjeta 2: Datos del Titular */}
           <div className="card-reserva card-titular">
-            <h2>Datos del Titular</h2>
+            <h2>{esEncargado ? 'Cliente del turno' : 'Datos del Titular'}</h2>
             
             <form className="reserva-form">
               <InputForum
@@ -150,6 +161,7 @@ export default function ConfirmarReserva() {
                 value={titular.nombre}
                 onChange={handleChange}
                 placeholder="Ej. Mirko"
+                required={esEncargado}
               />
 
               <InputForum
@@ -160,6 +172,7 @@ export default function ConfirmarReserva() {
                 value={titular.apellido}
                 onChange={handleChange}
                 placeholder="Ej. Surjak"
+                required={esEncargado}
               />
 
               <InputForum
@@ -170,6 +183,7 @@ export default function ConfirmarReserva() {
                 value={titular.telefono}
                 onChange={handleChange}
                 placeholder="Ej. +54 3471 330992"
+                required={esEncargado}
               />
 
               <InputForum
@@ -180,6 +194,7 @@ export default function ConfirmarReserva() {
                 value={titular.email}
                 onChange={handleChange}
                 placeholder="tuemail@ejemplo.com"
+                required={esEncargado}
               />
             </form>
           </div>
@@ -189,7 +204,7 @@ export default function ConfirmarReserva() {
         {/* Botón de Confirmar centrado */}
         <div className="confirmar-action">
           <button type="button" className="btn-confirmar" onClick={handleConfirmar}>
-            Confirmar Reserva
+            {esEncargado ? 'Agendar turno' : 'Confirmar Reserva'}
           </button>
         </div>
       </div>
@@ -198,17 +213,19 @@ export default function ConfirmarReserva() {
       {mostrarModal && (
   <div className="modal-overlay">
     <div className="modal-confirmacion-contenido">
-      <h2>¡Reserva Confirmada!</h2>
+      <h2>{esEncargado ? '¡Turno agendado!' : '¡Reserva Confirmada!'}</h2>
       
       <p>
-        Su turno se ha creado correctamente, le enviamos el comprobante por email.
+        {esEncargado
+          ? 'El turno se creó correctamente para el cliente seleccionado.'
+          : 'Su turno se ha creado correctamente, le enviamos el comprobante por email.'}
       </p>
       <p className="modal-subtexto">
-        Recuerde que puede ver sus turnos en su perfil.
+        {!esEncargado && 'Recuerde que puede ver sus turnos en su perfil.'}
       </p>
 
-      <button type="button" className="btn-modal-home" onClick={() => navigate('/')}>
-        Ir al Home
+      <button type="button" className="btn-modal-home" onClick={() => navigate(esEncargado ? '/menuEncargado' : '/')}>
+        {esEncargado ? 'Volver al panel' : 'Ir al Home'}
       </button>
     </div>
   </div>

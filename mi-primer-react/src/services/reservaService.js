@@ -33,3 +33,17 @@ export const crearReserva = async (turno, token) => obtenerJson(`${API_URL}/turn
   },
   body: JSON.stringify(turno)
 });
+
+export const obtenerClientes = async (token, signal) => obtenerJson(`${API_URL}/users/clientes`, {
+  signal,
+  headers: { Authorization: `Bearer ${token}` }
+});
+
+export const crearReservaEncargado = async (turno, cliente, token) => obtenerJson(`${API_URL}/turnos/encargado`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
+  },
+  body: JSON.stringify({ turno, cliente })
+});

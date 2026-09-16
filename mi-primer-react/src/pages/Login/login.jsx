@@ -19,9 +19,11 @@ function Login({ endpoint = '/api/login', redirectTo = '/' }) {
 
       const data = await response.json();
       if (response.ok) {
-        alert(data.message);
-        localStorage.setItem("gestor_token", data.token.token);
-        window.location.href = redirectTo;
+        const token = data.token.token;
+        localStorage.setItem("gestor_token", token);
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const destino = payload.rol === 'Encargado' ? '/menuEncargado' : redirectTo;
+        window.location.href = destino;
       } else {
         alert(data.error);
       }

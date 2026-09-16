@@ -37,7 +37,12 @@ function obtenerFechaHoy() {
   return `${anio}-${mes}-${dia}`;
 }
 
-export const HorariosCancha = ({ complejo, fechaActual }) => {
+function formatearFecha(fecha) {
+  const [anio, mes, dia] = fecha.split('-');
+  return `${dia}/${mes}/${anio}`;
+}
+
+export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false }) => {
   const navigate = useNavigate();
   const [reservaSeleccionada, setReservaSeleccionada] = useState(null);
   const [posicionModal, setPosicionModal] = useState(null);
@@ -111,21 +116,48 @@ export const HorariosCancha = ({ complejo, fechaActual }) => {
     });
   };
 
+  const mostrarReserva = (cancha, turno, evento) => {
+    const celda = evento.currentTarget.getBoundingClientRect();
+    const margen = 16;
+    const altoModal = 240;
+    const anchoModal = 360;
+    const espacioAbajo = window.innerHeight - celda.bottom - margen;
+    const top = espacioAbajo >= altoModal
+      ? celda.bottom + 8
+      : Math.max(margen, celda.top - altoModal - 8);
+    const left = Math.min(
+      Math.max(margen, celda.left),
+      window.innerWidth - anchoModal - margen
+    );
+
+    setPosicionModal({ top, left });
+    setReservaSeleccionada({ cancha, turno });
+  };
+
   const confirmarYPagar = () => {
     const parametros = new URLSearchParams(reservaSeleccionada);
+    navigate(`/confirmar-reserva?${parametros.toString()}`);
+  };
+
+  const agendarComoEncargado = (cancha, horaString) => {
+    const parametros = new URLSearchParams({
+      complejoId: String(complejo.id),
+      canchaNro: String(cancha.nro),
+      fecha: fechaAUsar,
+      horarioInicio: horaString,
+      modo: 'encargado'
+    });
     navigate(`/confirmar-reserva?${parametros.toString()}`);
   };
 
   return (
     <>
       <div className="contenedor-horarios-cancha">
-        
-        {/* (Opcional visual) Puedes mostrar la fecha activa en la grilla si lo deseas */}
-        <div className="info-fecha-grilla" style={{ marginBottom: '10px', fontWeight: 'bold' }}>
-          Fecha: {fechaAUsar}
-        </div>
-
-        {/* CABECERA DE HORAS */}
+        {!esPanelEncargado && (
+          <div className="info-fecha-grilla" style={{ marginBottom: '10px', fontWeight: 'bold',fontSize: '2.2vh' }}>
+            Fecha: {formatearFecha(fechaAUsar)}
+          </div>
+        )}
         <div className="fila-cabecera">
           <div className="columna-info-vacia"></div>
           <div className="contenedor-columnas-horas">
@@ -139,8 +171,6 @@ export const HorariosCancha = ({ complejo, fechaActual }) => {
             })}
           </div>
         </div>
-
-        {/* FILAS DE CANCHAS */}
         {canchas.map((cancha) => (
           <div key={`${complejo.id}-${cancha.nro}`} className="fila-cancha">
             <div className="info-cancha">
@@ -175,12 +205,39 @@ export const HorariosCancha = ({ complejo, fechaActual }) => {
                     && inicioBloque < turnoFin
                     && finBloque > turnoInicio;
                 });
+                const turnoActivo = (cancha.turnos ?? []).find(turno => {
+                  const estado = turno.estado?.toLowerCase();
+                  const fechaTurnoStr = turno.fecha ? turno.fecha.split('T')[0] : '';
+                  const fechaActualStr = fechaAUsar.split('T')[0];
+                  const turnoInicio = extraerMinutos(turno.horaInicio, true);
+                  let turnoFin = extraerMinutos(turno.horaFin, true);
+                  if (turnoInicio !== null && turnoFin !== null && turnoFin <= turnoInicio) {
+                    turnoFin += 24 * 60;
+                  }
+                  return fechaTurnoStr === fechaActualStr
+                    && estado !== 'cancelado'
+                    && turnoInicio !== null
+                    && turnoFin !== null
+                    && inicioBloque < turnoFin
+                    && finBloque > turnoInicio;
+                });
 
                 return (
                   <div 
                     key={`celda-${cancha.nro}-${inicioBloque}`} 
                     className={`celda-turno ${estaOcupado ? 'ocupada' : 'libre'}`}
-                    onClick={evento => !estaOcupado && abrirModal(cancha, hora, evento)}
+                    title={esPanelEncargado && !estaOcupado ? 'Hacé clic para agendar un turno' : undefined}
+                    onClick={evento => {
+                      if (estaOcupado && esPanelEncargado && turnoActivo) {
+                        mostrarReserva(cancha, turnoActivo, evento);
+                      } else if (!estaOcupado) {
+                        if (esPanelEncargado) {
+                          agendarComoEncargado(cancha, hora);
+                        } else {
+                          abrirModal(cancha, hora, evento);
+                        }
+                      }
+                    }}
                   >
                   </div>
                 );
@@ -198,13 +255,29 @@ export const HorariosCancha = ({ complejo, fechaActual }) => {
           style={{ top: posicionModal.top, left: posicionModal.left }}
           aria-label="Confirmar reserva"
         >
-          <h3>Confirmar reserva</h3>
-          <p>Fecha: {reservaSeleccionada.fecha}</p>
-          <p>Horario: {reservaSeleccionada.horarioInicio} hs</p>
-          <p>Cancha: {reservaSeleccionada.canchaNro}</p>
-          <div className="modal-botones">
-            <button className="btn-pagar" onClick={confirmarYPagar}>Ir a pagar</button>
-          </div>
+          {reservaSeleccionada.turno ? (
+            <>
+              <h3>Detalle de la reserva</h3>
+              <p>Cancha: {reservaSeleccionada.cancha.nro}</p>
+              <p>Horario: {formatearHora(extraerMinutos(reservaSeleccionada.turno.horaInicio, true))} a {formatearHora(extraerMinutos(reservaSeleccionada.turno.horaFin, true))}</p>
+              <p>Estado: {reservaSeleccionada.turno.estado}</p>
+              <p><strong>{reservaSeleccionada.turno.cliente?.personaFisica
+                ? `${reservaSeleccionada.turno.cliente.personaFisica.nombre} ${reservaSeleccionada.turno.cliente.personaFisica.apellido}`
+                : reservaSeleccionada.turno.cliente?.personaJuridica?.razonSocial || 'Cliente sin nombre'}</strong></p>
+              <p>{reservaSeleccionada.turno.cliente?.email}</p>
+              <p>{reservaSeleccionada.turno.cliente?.telefono}</p>
+            </>
+          ) : (
+            <>
+              <h3>Confirmar reserva</h3>
+              <p>Fecha: {reservaSeleccionada.fecha}</p>
+              <p>Horario: {reservaSeleccionada.horarioInicio} hs</p>
+              <p>Cancha: {reservaSeleccionada.canchaNro}</p>
+              <div className="modal-botones">
+                <button className="btn-pagar" onClick={confirmarYPagar}>Ir a pagar</button>
+              </div>
+            </>
+          )}
         </aside>,
         document.body
       )}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { crearReserva, obtenerDatosReserva } from '../services/reservaService';
+import { crearReserva, crearReservaEncargado, obtenerDatosReserva } from '../services/reservaService';
 
 const calcularHoraFin = (horaInicio, duracionMinutos) => {
   if (!horaInicio) return '';
@@ -14,7 +14,8 @@ const calcularHoraFin = (horaInicio, duracionMinutos) => {
     .padStart(2, '0')}`;
 };
 
-export const useReserva = ({ complejo, canchaNro, fecha, horaInicio }) => {
+export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => {
+  const esEncargado = modo === 'encargado';
   const [reserva, setReserva] = useState({
     complejo,
     canchaNro,
@@ -58,13 +59,15 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio }) => {
           signal: controller.signal
         });
 
-        setTitular({
-          id: perfil.id,
-          nombre: perfil.nombre || '',
-          apellido: perfil.apellido || '',
-          telefono: perfil.telefono || '',
-          email: perfil.email || ''
-        });
+        if (!esEncargado) {
+          setTitular({
+            id: perfil.id,
+            nombre: perfil.nombre || '',
+            apellido: perfil.apellido || '',
+            telefono: perfil.telefono || '',
+            email: perfil.email || ''
+          });
+        }
         setReserva((reservaActual) => ({
           ...reservaActual,
           complejoNombre: datosComplejo.nombre || '',
@@ -74,6 +77,7 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio }) => {
           precioSenia: cancha.precioSenia || '',
           precioTotal: cancha.precioTotal || ''
         }));
+
       } catch (error) {
         if (error.name !== 'AbortError') {
           alert(`Error cargando información: ${error.message}`);
@@ -87,7 +91,7 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio }) => {
 
     cargarDatos();
     return () => controller.abort();
-  }, [complejo, canchaNro]);
+  }, [complejo, canchaNro, esEncargado]);
 
   const handleChange = (event) => {
     setTitular((titularActual) => ({
@@ -103,9 +107,13 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio }) => {
       return;
     }
 
+    if (esEncargado && (!titular.nombre || !titular.apellido || !titular.telefono || !titular.email)) {
+      alert('Completá todos los datos del cliente para agendar el turno.');
+      return;
+    }
+
     const horaFin = calcularHoraFin(reserva.horaInicio, reserva.duracion);
     const turno = {
-      clienteId: titular.id,
       tipoTurnoId: 1,
       complejoId: parseInt(complejo, 10),
       canchaNro: parseInt(canchaNro, 10),
@@ -115,8 +123,21 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio }) => {
       estado: 'Reservado'
     };
 
+    if (!esEncargado) {
+      turno.clienteId = titular.id;
+    }
+
     try {
-      await crearReserva(turno, token);
+      if (esEncargado) {
+        await crearReservaEncargado(turno, {
+          nombre: titular.nombre,
+          apellido: titular.apellido,
+          telefono: titular.telefono,
+          email: titular.email
+        }, token);
+      } else {
+        await crearReserva(turno, token);
+      }
       setMostrarModal(true);
     } catch (error) {
       console.error(error);
@@ -129,6 +150,7 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio }) => {
     titular,
     cargando,
     mostrarModal,
+    esEncargado,
     horaFin: calcularHoraFin(reserva.horaInicio, reserva.duracion),
     handleChange,
     handleConfirmar
