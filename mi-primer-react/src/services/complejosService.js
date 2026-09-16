@@ -47,3 +47,25 @@ export const obtenerDetalleComplejo = async (id, signal) => {
   return response.json();
 };
 
+export const obtenerTodosLosComplejos = async () => {
+  const response = await fetch(`${API_URL}/complejos`);
+
+  if (!response.ok) {
+    throw new Error('No se pudieron cargar los complejos.');
+  }
+
+  const data = await response.json();
+  return Array.isArray(data) ? data : data.data ?? [];
+};
+
+export const eliminarComplejo = async (id) => {
+  const response = await fetch(`${API_URL}/complejos/${id}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    throw new Error('No se pudo eliminar el complejo.');
+  }
+
+  return response.json();
+};

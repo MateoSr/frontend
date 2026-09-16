@@ -1,10 +1,10 @@
-.crear-complejo-contenedor {
+.crear-usuario-contenedor {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.crear-complejo-titulo {
+.crear-usuario-titulo {
   margin-bottom: 30px;
   text-align: center;
   margin-top: 30px;
@@ -12,21 +12,21 @@
   font-weight: bold;
 }
 
-.crear-complejo-form {
+.crear-usuario-form {
   display: flex;
   flex-direction: column;
   width: 300px;
 }
 
-.crear-complejo-campo {
+.crear-usuario-campo {
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   font-size: 22px;
 }
 
-.crear-complejo-campo input,
-.crear-complejo-campo select {
+.crear-usuario-campo input,
+.crear-usuario-campo select {
   padding: 6px;
   font-size: 18px;
   margin-top: 8px;
@@ -34,7 +34,7 @@
   border-radius: 4px;
 }
 
-.crear-complejo-boton {
+.crear-usuario-boton {
   padding: 10px 20px;
   font-size: 18px;
   background-color: #ee5801;
@@ -47,11 +47,11 @@
   margin-top: 35px;
 }
 
-.crear-complejo-boton:hover {
+.crear-usuario-boton:hover {
   background-color: #d44b00;
 }
 
-.modal-overlay-complejo {
+.modal-overlay-usuario {
   position: fixed;
   top: 0;
   left: 0;
@@ -65,7 +65,7 @@
   backdrop-filter: blur(4px);
 }
 
-.modal-confirmacion-contenido-complejo {
+.modal-confirmacion-contenido-usuario {
   background-color: #ffffff;
   padding: 32px 24px;
   border-radius: 16px;
@@ -76,7 +76,7 @@
   animation: modalEntrada 0.25s ease-out forwards;
 }
 
-.modal-confirmacion-contenido-complejo h2 {
+.modal-confirmacion-contenido-usuario h2 {
   margin-top: 0;
   margin-bottom: 16px;
   color: #111827;
@@ -84,31 +84,31 @@
   font-weight: 700;
 }
 
-.modal-confirmacion-contenido-complejo p {
+.modal-confirmacion-contenido-usuario p {
   color: #374151;
   font-size: 1.25rem;
   margin-bottom: 6px;
 }
 
-.modal-divisor-complejo {
+.modal-divisor-usuario {
   margin: 12px 0;
   border: 0;
   border-top: 1px solid #e5e7eb;
 }
 
-.modal-subtexto-complejo {
+.modal-subtexto-usuario {
   font-size: 1.125rem;
   color: #6b7280;
   margin-bottom: 15px !important;
 }
 
-.modal-acciones-complejo {
+.modal-acciones-usuario {
   display: flex;
   gap: 12px;
   margin-top: 20px;
 }
 
-.btn-modal-cancelar-complejo {
+.btn-modal-cancelar-usuario {
   flex: 1;
   background-color: #e5e7eb;
   color: #374151;
@@ -120,7 +120,7 @@
   cursor: pointer;
 }
 
-.btn-modal-confirmar-complejo {
+.btn-modal-confirmar-usuario {
   flex: 1;
   background-color: #ee5801;
   color: #ffffff;

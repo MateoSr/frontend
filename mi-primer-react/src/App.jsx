@@ -20,6 +20,8 @@ import MenuAdmin from './pages/menuAdmin/menuAdmin'
 import AdministrarComplejos from './pages/administrarComplejos/administrarComplejos'
 import CrearComplejo from './pages/crearComplejo/crearComplejo'
 import MenuDueño from './pages/menuDueño/menuDueño'
+import AdministrarUsuarios from './pages/administrarUsuarios/administrarUsuarios'
+import CrearUsuario from './pages/crearUsuario/crearUsuario'
 import ComplejoDueño from './pages/complejoDueño/complejoDueño'
 
 
@@ -46,8 +48,10 @@ function App() {
         <Route path="/loginAdmin" element={<Login endpoint="/api/loginAdmin" redirectTo="/menuAdmin" />} />
         <Route path="/menuAdmin" element={<MenuAdmin />} />
         <Route path="/administrar-complejos" element={<AdministrarComplejos />} />
+        <Route path="/administrar-usuarios" element={<AdministrarUsuarios />} />
         <Route path="/crear-complejo" element={<CrearComplejo />} />
-        <Route path="/menuDueño" element={<MenuDueño/>}/>
+        <Route path="/crear-usuario" element={<CrearUsuario />} />
+        <Route path="/menuDueño" element={<MenuDueño />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer></Footer>
