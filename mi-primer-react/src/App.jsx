@@ -20,6 +20,7 @@ import MenuAdmin from './pages/menuAdmin/menuAdmin'
 import AdministrarComplejos from './pages/administrarComplejos/administrarComplejos'
 import CrearComplejo from './pages/crearComplejo/crearComplejo'
 import MenuDueño from './pages/menuDueño/menuDueño'
+import ComplejoDueño from './pages/complejoDueño/complejoDueño'
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/forgot" element={<OlvideContra />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/complejos" element={<Complejos />} />
+        <Route path="/complejo/:id" element={<ComplejoDueño />} />
         <Route path="/confirmar-reserva" element={<ConfirmarReserva />} />
         <Route path="/detalle-complejo/:id" element={<DetalleComplejo />} />
         <Route path="/loginAdmin" element={<Login endpoint="/api/loginAdmin" redirectTo="/menuAdmin" />} />

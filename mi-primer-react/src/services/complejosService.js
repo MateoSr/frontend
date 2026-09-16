@@ -46,3 +46,4 @@ export const obtenerDetalleComplejo = async (id, signal) => {
 
   return response.json();
 };
+
