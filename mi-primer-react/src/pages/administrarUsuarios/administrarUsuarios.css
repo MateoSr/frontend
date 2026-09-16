@@ -1,11 +1,11 @@
-.admin-complejos-page {
+.admin-usuarios-page {
   width: 100%;
   max-width: 1000px;
   margin: 30px auto;
   padding: 0 16px;
 }
 
-.admin-complejos-card {
+.admin-usuarios-card {
   background: #ffffff;
   border-radius: 16px;
   border: 1px solid #e2e8f0;
@@ -13,27 +13,27 @@
   padding: 24px;
 }
 
-.admin-complejos-header {
+.admin-usuarios-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.admin-complejos-titulo-box {
+.admin-usuarios-titulo-box {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.admin-complejos-titulo-box h2 {
+.admin-usuarios-titulo-box h2 {
   font-size: 1.5rem;
   font-weight: 700;
   color: #0f172a;
   margin: 0;
 }
 
-.admin-complejos-badge {
+.admin-usuarios-badge {
   background-color: #f1f5f9;
   color: #475569;
   font-size: 0.8rem;
@@ -43,7 +43,7 @@
   border: 1px solid #e2e8f0;
 }
 
-.btn-nuevo-complejo {
+.btn-nuevo-usuario {
   background-color: #ee5801;
   color: #ffffff;
   border: none;
@@ -55,7 +55,7 @@
   transition: background 0.2s ease;
 }
 
-.btn-nuevo-usuario:hover {
+.btn-nuevo-complejo:hover {
   background-color: #d44d00;
 }
 
@@ -63,7 +63,7 @@
   margin-bottom: 20px;
 }
 
-.input-busqueda-complejo {
+.input-busqueda-usuario {
   width: 100%;
   max-width: 320px;
   padding: 8px 12px;
@@ -73,26 +73,26 @@
   outline: none;
 }
 
-.input-busqueda-complejo:focus {
+.input-busqueda-usuario:focus {
   border-color: #ee5801;
 }
 
-.admin-complejos-tabla-container {
+.admin-usuarios-tabla-container {
   width: 100%;
   overflow-x: auto;
 }
 
-.admin-complejos-tabla {
+.admin-usuarios-tabla {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
 }
 
-.admin-complejos-tabla thead tr {
+.admin-usuarios-tabla thead tr {
   background-color: #f8fafc;
 }
 
-.admin-complejos-tabla th {
+.admin-usuarios-tabla th {
   padding: 12px 16px;
   font-size: 0.75rem;
   font-weight: 700;
@@ -101,7 +101,7 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-.admin-complejos-tabla td {
+.admin-usuarios-tabla td {
   padding: 14px 16px;
   font-size: 0.9rem;
   color: #334155;
@@ -127,7 +127,7 @@
 
 .acciones-contenedor {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
   gap: 8px;
 }
 
