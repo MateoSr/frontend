@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 export function TarjetaMenuDuenoComplejo({ 
   id,
   nombre, 
-  direccion, 
+  direccion,
+  ciudad,
   deportes, 
   canchasDisponibles, 
   
@@ -24,9 +25,9 @@ export function TarjetaMenuDuenoComplejo({
       <div className="complejo-contenido">
         <div>
           <h3 className="complejo-nombre">{nombre}</h3>
-          <p className="complejo-direccion">📍 {direccion}</p>
+          <p className="complejo-direccion">📍 {direccion} {ciudad}</p>
           <p className="complejo-detalles">
-            🎾 {deportes} &bull; <strong>{canchasDisponibles} canchas</strong>
+            🎾 {Array.isArray(deportes) ? deportes.join(', ') : deportes} &bull; <strong>{canchasDisponibles} canchas</strong>
           </p>
         </div>
 
