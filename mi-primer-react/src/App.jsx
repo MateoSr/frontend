@@ -19,8 +19,14 @@ import MenuAdmin from './pages/menuAdmin/menuAdmin'
 import AdministrarComplejos from './pages/administrarComplejos/administrarComplejos'
 import CrearComplejo from './pages/crearComplejo/crearComplejo'
 import MenuDueño from './pages/menuDueño/menuDueño'
+<<<<<<< HEAD
 import MenuEncargado from './pages/menuEncargado/menuEncargado'
 import { RutaProtegida } from './components/rutaProtegida/rutaProtegida'
+=======
+import AdministrarUsuarios from './pages/administrarUsuarios/administrarUsuarios'
+import CrearUsuario from './pages/crearUsuario/crearUsuario'
+import ComplejoDueño from './pages/complejoDueño/complejoDueño'
+>>>>>>> 76bbdeb8d1f2f510d7b09912c4cece44d8f7f053
 
 
 function App() {
@@ -38,18 +44,25 @@ function App() {
         <Route path="/forgot" element={<OlvideContra />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/complejos" element={<Complejos />} />
+        <Route path="/complejo/:id" element={<ComplejoDueño />} />
         <Route path="/confirmar-reserva" element={<ConfirmarReserva />} />
         <Route path="/detalle-complejo/:id" element={<DetalleComplejo />} />
         <Route path="/loginAdmin" element={<Login endpoint="/api/loginAdmin" redirectTo="/menuAdmin" />} />
         <Route path="/menuAdmin" element={<MenuAdmin />} />
         <Route path="/administrar-complejos" element={<AdministrarComplejos />} />
+        <Route path="/administrar-usuarios" element={<AdministrarUsuarios />} />
         <Route path="/crear-complejo" element={<CrearComplejo />} />
+<<<<<<< HEAD
         <Route path="/menuDueño" element={<MenuDueño/>}/>
         <Route path="/menuEncargado" element={
           <RutaProtegida rol="Encargado">
             <MenuEncargado />
           </RutaProtegida>
         }/>
+=======
+        <Route path="/crear-usuario" element={<CrearUsuario />} />
+        <Route path="/menuDueño" element={<MenuDueño />} />
+>>>>>>> 76bbdeb8d1f2f510d7b09912c4cece44d8f7f053
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer></Footer>

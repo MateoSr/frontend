@@ -1,0 +1,54 @@
+.listado-canchas {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+.listado-canchas-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.listado-canchas-kicker {
+  margin: 0 0 4px;
+  color: #ee5801;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.listado-canchas h2 { margin: 0; color: #0f172a; font-size: 22px; }
+.listado-canchas-contador { flex-shrink: 0; padding: 7px 12px; color: #334155; background: #f1f5f9; border-radius: 8px; font-size: 13px; font-weight: 700; }
+.tabla-canchas-wrapper { overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 10px; }
+.tabla-canchas { width: 100%; min-width: 780px; border-collapse: collapse; color: #334155; font-size: 14px; }
+.tabla-canchas th, .tabla-canchas td { padding: 15px 16px; text-align: left; border-bottom: 1px solid #e2e8f0; white-space: nowrap; }
+.tabla-canchas th { color: #64748b; background: #f8fafc; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+.tabla-canchas tbody tr:last-child td { border-bottom: 0; }
+.deporte-celda { color: #0f172a; font-weight: 700; }
+.columna-acciones, .acciones-celda { text-align: right !important; }
+.acciones-celda { display: flex; justify-content: flex-end; gap: 7px; }
+.accion { display: inline-grid; width: 34px; height: 34px; place-items: center; border: 1px solid #cbd5e1; border-radius: 7px; background: #ffffff; cursor: pointer; transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; }
+.accion-editar { color: #2563eb; }
+.accion-precio { color: #059669; }
+.accion-borrar { color: #dc2626; }
+.accion:hover, .accion:focus-visible { color: #ffffff; }
+.accion-editar:hover, .accion-editar:focus-visible { background: #2563eb; border-color: #2563eb; }
+.accion-precio:hover, .accion-precio:focus-visible { background: #059669; border-color: #059669; }
+.accion-borrar:hover, .accion-borrar:focus-visible { background: #dc2626; border-color: #dc2626; }
+.canchas-vacio { padding: 30px 16px !important; color: #64748b; text-align: center !important; }
+.boton-agregar-cancha { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 11px 16px; color: #ffffff; background: #ee5801; border: 0; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; transition: background-color 0.2s ease, transform 0.2s ease; }
+.boton-agregar-cancha:hover, .boton-agregar-cancha:focus-visible { background: #c94700; transform: translateY(-1px); }
+
+@media (max-width: 640px) {
+  .listado-canchas { padding: 18px; }
+  .listado-canchas-header { align-items: flex-start; flex-direction: column; }
+}

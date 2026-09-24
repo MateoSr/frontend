@@ -1,0 +1,231 @@
+.complejoDueño-container {
+  padding: 30px;
+  background-color: #f8fafc;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.complejoDueño-header {
+  text-align: center;
+  margin-bottom: 24px; /* Espaciado con respecto al contenido de abajo */
+}
+
+.complejoDueño-header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #0f172a;
+}
+
+.complejoDueño-header h2 {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: #f97316;
+}
+
+.complejoDueño-body {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+/* Envoltorio para centrar los horarios en el medio de la pantalla */
+.contenedor-horarios-centrado {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.complejoDueño-horarios {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+  max-width: 1250px; /* Ancho ajustado para centrar prolijamente */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.horarios-header-acciones {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 12px;
+}
+
+.complejoDueño-horarios-subtitulo {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.btn-agregar-horario {
+  background-color: #f97316;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-agregar-horario:hover {
+  background-color: #ea580c;
+}
+
+/* Formulario inline para alta/edición */
+.form-horario-inline {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.form-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.form-campo label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.form-campo select,
+.form-campo input {
+  padding: 6px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 13px;
+  background-color: white;
+}
+
+.form-acciones {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-guardar-horario,
+.btn-cancelar-horario {
+  border: none;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btn-guardar-horario {
+  background-color: #10b981;
+  color: white;
+}
+
+.btn-cancelar-horario {
+  background-color: #ef4444;
+  color: white;
+}
+
+/* Listado de horarios */
+.complejoDueño-listado {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.horario-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  font-size: 14px;
+  border: 1px solid #f1f5f9;
+}
+
+.horario-fila strong {
+  color: #334155;
+  font-weight: 600;
+}
+
+.horario-info-acciones {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.horario-info-acciones span {
+  color: #059669;
+  font-weight: 600;
+  background-color: #ecfdf5;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.accion-horario {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.accion-horario.accion-editar {
+  color: #64748b;
+}
+
+.accion-horario.accion-editar:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+.accion-horario.accion-borrar {
+  color: #ef4444;
+}
+
+.accion-horario.accion-borrar:hover {
+  background-color: #fef2f2;
+}
+
+.horarios-vacio {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 13px;
+  padding: 16px 0;
+}
+
+.link-volver {
+  display: inline-block;
+  margin-top: 24px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.link-volver:hover {
+  text-decoration: underline;
+}
