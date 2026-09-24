@@ -82,3 +82,24 @@ export const eliminarComplejo = async (id) => {
 
   return response.json();
 };
+
+export const modificarComplejo = async (id,datosActualizados) => {
+  const response = await fetch(`${API_URL}/complejos/${id}`,{
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(datosActualizados),
+  });
+  if (!response.ok) throw new Error("Error al modificar el complejo");
+  return await response.json();
+}
+
+export const busquedaComplejoDueno = async (token) => {
+  const response = await fetch(`${API_URL}/complejos/dueno`,{
+          method: "GET",
+           headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}` 
+        }})
+  if(!response) throw new Error("No hay complejos para el dueno")
+  return await response.json();
+}

@@ -41,11 +41,11 @@
     justify-content: center;
 }
 
-svg{
+.redes svg{
     stroke:white;
     fill:white;
 }
-svg:hover{
+.redes svg:hover{
     stroke: #ee5801;
 }
 

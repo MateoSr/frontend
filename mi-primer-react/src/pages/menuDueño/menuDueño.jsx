@@ -1,28 +1,51 @@
 import './menuDueño.css';
 import {TarjetaMenuDueno} from '../../components/tarjetaMenuDueno/tarjetaMenuDueno'
 import {TarjetaMenuDuenoComplejo} from '../../components/tarjetaMenuDuenoComplejo/tarjetaMenuDuenoComplejo'
+import { useEffect, useState } from 'react';
+import { busquedaComplejoDueno } from '../../services/complejosService';
+import { obtenerDatosMenuDueno } from '../../services/dashboarService';
+
 
 
 
 function MenuDueño() {
-    const misComplejos = [
-    {
-      id: 1,
-      nombre: "Complejo Norte Pádel & Fútbol",
-      direccion: "Av. Libertador 4500",
-      deportes: "Fútbol 5, Pádel",
-      canchas: 5,
-      imagenUrl: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      id: 2,
-      nombre: "Central Sports Club",
-      direccion: "San Martín 1220",
-      deportes: "Fútbol 7, Tenis",
-      canchas: 3,
-      imagenUrl: "https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=600&q=80"
-    }
-  ];
+  const [complejos, setComplejos] = useState([])
+  const [datos,setDatos] = useState({})
+
+  useEffect(() => {
+      const token = localStorage.getItem('gestor_token');
+      if (!token) {
+        alert('No estás logueado. Por favor, inicia sesión.');
+        window.location.href = '/login';
+        return undefined;
+      }
+      //obteniendo los datos de los comnplejos del dueño
+      const obtenerComplejos = async () => {
+        try{
+          const data = await busquedaComplejoDueno(token)
+          setComplejos(data)
+          console.log(complejos)
+        }catch(error){
+          if (error.name === 'AbortError' || error.name === 'CanceledError') {
+        return;
+      }
+      alert(error.message);
+      }
+      }
+
+      const obtenerDatos = async () => {
+        try{
+          const data = await obtenerDatosMenuDueno(token)
+          console.log(data)
+          setDatos(data)
+        }catch(error){
+          alert(error.message)
+        }
+      }
+      obtenerComplejos()
+      obtenerDatos()
+    },[])
+
 
 
   return (
@@ -41,8 +64,8 @@ function MenuDueño() {
             <div className='tarjetasMetricas'>
                 <TarjetaMenuDueno 
           titulo="Ingresos Estimados Hoy" 
-          valor="$63.500" 
-          subtitulo="+12% vs ayer" 
+          valor={`$${datos.ingresosEstimados}`}
+      
           icono="💵" 
           esVerde={true} 
         />
@@ -50,26 +73,26 @@ function MenuDueño() {
         {/* Tarjeta 2: Reservas Totales */}
         <TarjetaMenuDueno 
           titulo="Reservas Totales" 
-          valor="23" 
-          subtitulo="En 8 canchas disponibles" 
+          valor={datos.cantidadTurnos} 
+          subtitulo={`En ${datos.cantidadCanchas} canchas disponibles`}
           icono="📅" 
         />
         
         {/* Tarjeta 3: Ocupación Promedio (Activando la barra de progreso) */}
         <TarjetaMenuDueno 
           titulo="Ocupación Promedio" 
-          valor="73%" 
-          progreso="73%" 
+          valor={`${datos?.ocupacionPorcentaje ?? 0}%`}
+          progreso={datos?.ocupacionPorcentaje ?? 0}
           icono="🔥" 
           esVerde={true}
         />
         
         {/* Tarjeta 4: Complejos Activos (Activando el indicador de estado) */}
         <TarjetaMenuDueno 
-          titulo="Complejos Activos" 
-          valor="2" 
-          estadoNormal="Todos operando normal" 
-          icono="🏟️" 
+          titulo="Deporte top" 
+          valor={datos.deporteEstrella?.nombre || "Sin reservas"}
+          subtitulo={datos?.deporteEstrella?.reservas != null? `${datos.deporteEstrella.reservas} reservas hoy`: "0 reservas hoy"}
+          icono="⚽" 
         />
 
             </div>
@@ -80,14 +103,15 @@ function MenuDueño() {
                 </div>
 
                 <div className="grilla-complejos">
-                    {misComplejos.map((complejo) => (
+                    {complejos.map((complejo) => (
                     <TarjetaMenuDuenoComplejo 
                         key={complejo.id}
                         id={complejo.id}
                         nombre={complejo.nombre}
                         direccion={complejo.direccion}
+                        ciudad = {complejo.localidad.nombre}
                         deportes={complejo.deportes}
-                        canchasDisponibles={complejo.canchas}
+                        canchasDisponibles={complejo.canchas.length}
                         
                     />
                     ))}
@@ -99,7 +123,7 @@ function MenuDueño() {
                     <span className="sub-hint">Estadisticas de tus complejos actualizadas</span>
                 </div>
                 <div>
-                    <h1> LAUTI Y MATEO GILES SI LEEN ESTO SON PUTOS </h1>
+                    
                 </div>
             </div>
 
