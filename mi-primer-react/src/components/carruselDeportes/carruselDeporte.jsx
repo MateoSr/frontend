@@ -13,8 +13,15 @@ const imagenesOriginales = [futbol, basquet, volley, hockey, tenis, padel];
 function CarruselDeporte() {    
     const [paso, setPaso] = useState(0);
     const [conTransicion, setConTransicion] = useState(true);
+    const [ancho, setAncho] = useState(() => window.innerWidth);
 
-    const imagenesVisibles = 4; 
+    useEffect(() => {
+        const onResize = () => setAncho(window.innerWidth);
+        window.addEventListener('resize', onResize);
+        return () => window.removeEventListener('resize', onResize);
+    }, []);
+
+    const imagenesVisibles = ancho < 480 ? 1 : ancho < 768 ? 2 : 4;
     const porcentajePorImagen = 100 / imagenesVisibles;
 
     const imagenesDuplicadas = [
@@ -56,7 +63,7 @@ function CarruselDeporte() {
             key={index} 
             style={{ width: `${porcentajePorImagen}%` }}
         >
-            <img src={img}/>
+            <img src={img} alt="Deporte" loading="lazy" />
         </div>
         ))}
     </div>

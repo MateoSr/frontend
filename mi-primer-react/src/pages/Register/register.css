@@ -158,3 +158,12 @@
  color: #e2e8f0;
  line-height: 1.4;
 }
+/* --- Responsive mobile --- */
+@media (max-width: 768px) {
+  .register-card { flex-direction: column; }
+  .register-form-side { padding: 28px 22px; }
+  .register-image-side { display: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .register-form input { font-size: 16px; }
+  .register-boton { min-height: 48px; width: 100%; }
+}

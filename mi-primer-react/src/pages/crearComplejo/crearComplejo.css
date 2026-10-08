@@ -131,3 +131,6 @@
   border-radius: 8px;
   cursor: pointer;
 }
+/* Responsive mobile */
+.crear-complejo-form, .crear-complejo-campo input { max-width: 100%; box-sizing: border-box; } input, select, textarea { font-size: 16px; } @media (max-width: 480px) { .crear-complejo-form { width: 100%; max-width: 320px; } }
+

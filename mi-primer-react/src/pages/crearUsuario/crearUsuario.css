@@ -131,3 +131,6 @@
   border-radius: 8px;
   cursor: pointer;
 }
+/* Responsive mobile */
+.crear-usuario-form, .crear-usuario-campo input { max-width: 100%; box-sizing: border-box; } input, select, textarea { font-size: 16px; } @media (max-width: 480px) { .crear-usuario-form { width: 100%; max-width: 320px; } }
+

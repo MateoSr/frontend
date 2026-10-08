@@ -149,3 +149,6 @@
 .redirect-login:hover {
  text-decoration: underline;
 }
+/* Responsive mobile */
+@media (max-width: 768px) { .olvide-card { flex-direction: column; min-height: auto; } .olvide-izquierda { padding: 28px 22px; } .olvide-imagen { display: none; } .olvide-form input { font-size: 16px; } .olvide-boton { min-height: 48px; width: 100%; } }
+

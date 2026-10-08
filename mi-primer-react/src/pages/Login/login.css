@@ -176,3 +176,23 @@
   color: #e2e8f0;
   line-height: 1.4;
 }
+
+/* --- Responsive mobile --- */
+@media (max-width: 768px) {
+  .login-card {
+    flex-direction: column;
+    min-height: auto;
+  }
+  .login-form-side {
+    padding: 28px 22px;
+  }
+  .login-image-side {
+    display: none;
+  }
+  .login-form input {
+    font-size: 16px;
+  }
+  .login-boton {
+    min-height: 48px;
+  }
+}

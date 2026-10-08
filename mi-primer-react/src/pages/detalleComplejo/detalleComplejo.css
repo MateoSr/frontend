@@ -104,3 +104,6 @@
     border-bottom: none;
     padding-bottom: 0;
 }
+/* Responsive mobile */
+@media (max-width: 640px) { .detalle-complejo .contenedor-horarios-cancha { width: 100%; margin-left: 0; transform: none; } .horario-fila { flex-wrap: wrap; gap: 8px; } }
+

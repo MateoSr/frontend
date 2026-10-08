@@ -165,3 +165,6 @@
   padding: 30px;
   color: #64748b;
 }
+/* Responsive mobile */
+@media (max-width: 640px) { .admin-usuarios-header { flex-direction: column; align-items: stretch; gap: 12px; } .admin-usuarios-header button { min-height: 44px; } }
+

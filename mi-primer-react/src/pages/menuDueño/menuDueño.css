@@ -108,3 +108,6 @@
   gap: 20px;
   width: 100%;
 }
+/* Responsive mobile */
+@media (max-width: 640px) { .contenedor-menuDueño { padding: 24px 16px; } }
+

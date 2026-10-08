@@ -206,3 +206,22 @@ display: flex;
 .textarea-comentario:focus {
     border-color: #ee5801;
 }
+/* Responsive mobile */
+@media (max-width: 860px) {
+  .seccion-contenedor-imagen-complejo { height: auto; min-height: 70svh; padding: 48px 20px; }
+  .seccion-celular { flex-direction: column; gap: 24px; padding: 24px 0; }
+  .contenedor-imagen-celular { width: min(320px, 90%); height: 320px; margin-left: 0; background-size: contain; }
+  .contenedor-imagen-complejo { width: 100%; min-height: auto; margin: 0; padding: 24px 20px; box-sizing: border-box; }
+  .contenedor-imagen-complejo h1 { font-size: clamp(1.8rem, 8vw, 2.6rem); margin-left: 0; }
+  .contenedor-imagen-complejo h2 { font-size: clamp(1.3rem, 6vw, 1.8rem); margin-left: 0; margin-top: 16px; }
+  .contenedor-texto-celular { width: 100%; min-height: auto; margin-right: 0; padding: 0 20px 24px 20px; box-sizing: border-box; align-items: flex-start; }
+  .contenedor-texto-celular h1 { font-size: clamp(1.8rem, 8vw, 2.6rem); margin-left: 0; }
+  .contenedor-texto-celular h2 { font-size: clamp(1.3rem, 6vw, 1.8rem); margin-left: 0; }
+  .contenedor-texto-celular p { font-size: 1rem; margin-left: 0; }
+  .planes h1 { font-size: clamp(1.6rem, 7vw, 2.2rem); padding: 0 16px; }
+  .btn-ver-planes { margin: 24px 0 0 0; font-size: 1rem; align-self: center; min-height: 48px; }
+  .contenedor-formulario { padding: 24px 20px; }
+  .contenedor-formulario h2 { font-size: clamp(1.4rem, 6vw, 1.8rem); }
+  .contenedor-formulario p { font-size: 0.95rem; }
+  .btn-enviar-formulario { font-size: 1rem; min-height: 48px; }
+}

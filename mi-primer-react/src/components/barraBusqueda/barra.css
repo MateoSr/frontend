@@ -13,17 +13,41 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .filtro-form {
-  margin: 10px 15px;
+  margin: 10px 12px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  text-align: left;
   min-height: 25px;
   gap: 8px;
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Anchos mínimos por campo para que no se corte el texto en desktop */
+.barraBusqueda-form .filtro-form:nth-child(1) {
+  min-width: 160px;
+}
+
+.barraBusqueda-form .filtro-form:nth-child(2) {
+  min-width: 200px;
+}
+
+.barraBusqueda-form .filtro-form:nth-child(3) {
+  min-width: 155px;
+}
+
+.barraBusqueda-form .filtro-form:nth-child(4) {
+  min-width: 200px;
+}
+
+.barraBusqueda-form .filtro-form:nth-child(5) {
+  min-width: 140px;
+  flex: 0 0 auto;
 }
 
 .filtro-form input,
@@ -33,6 +57,7 @@
   background: transparent;
   font-size: 1rem;
   width: 100%;
+  text-align: left;
 }
 
 .boton {
@@ -79,6 +104,10 @@
   .barraBusqueda-contenedor {
     border-radius: 20px;
   }
+
+  .barraBusqueda-form {
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 768px) {
@@ -99,6 +128,11 @@
     padding-bottom: 10px;
   }
 
+  .barraBusqueda-form .filtro-form:nth-child(n) {
+    min-width: 0;
+    flex: none;
+  }
+
   .filtro-form:last-child {
     border-bottom: none;
     margin-top: 15px;
@@ -109,5 +143,11 @@
     border-radius: 15px;
     padding: 12px;
     font-size: 1.1rem;
+  }
+
+  .filtro-form input,
+  .filtro-form select {
+    font-size: 16px;
+    min-height: 44px;
   }
 }

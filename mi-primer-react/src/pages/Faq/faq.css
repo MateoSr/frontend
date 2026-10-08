@@ -31,3 +31,6 @@ main {
 .lista-faq li p {
   font-size: 2.7vh;
 }
+/* Responsive mobile */
+@media (max-width: 768px) { .contenedor-faq { padding-left: 20px; padding-right: 20px; padding-top: 24px; } .titulo-faq { font-size: clamp(1.8rem, 8vw, 2.5rem); } .lista-faq li { padding-top: 24px; } .lista-faq li h2 { font-size: 1.15rem; padding-bottom: 12px; } .lista-faq li p { font-size: 1rem; line-height: 1.5; } }
+

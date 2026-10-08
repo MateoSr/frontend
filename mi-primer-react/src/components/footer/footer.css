@@ -104,3 +104,6 @@
         font-size: 1.1rem;
     }
 }
+/* Responsive mobile */
+.contactos-list a, .footer a { overflow-wrap: anywhere; } img { max-width: 100%; } @media (max-width: 768px) { .logo { width: 90px; } }
+

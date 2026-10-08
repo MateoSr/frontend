@@ -46,3 +46,14 @@
     max-height: 100px;
     object-fit: contain;
 }
+/* Responsive mobile */
+.carrusel-ancho-contenedor { pointer-events: auto; }
+.carrusel-ancho-item img { max-width: 100%; }
+@media (max-width: 768px) {
+  .carrusel-ancho-contenedor { gap: 16px; }
+  .carrusel-ancho-contenedor h2 { transform: none; margin-top: 8px; font-size: clamp(1.4rem, 6vw, 2rem); }
+  .carrusel-ancho-item { padding: 0 10px; margin-bottom: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .carrusel-ancho-cinta { transition: none !important; }
+}

@@ -229,3 +229,6 @@
 .link-volver:hover {
   text-decoration: underline;
 }
+/* Responsive mobile */
+@media (max-width: 640px) { .form-horario-inline { flex-wrap: wrap; } .horarios-header-acciones, .horario-fila { flex-direction: column; align-items: stretch; gap: 8px; } .horarios-header-acciones button, .form-horario-inline button { min-height: 44px; } }
+

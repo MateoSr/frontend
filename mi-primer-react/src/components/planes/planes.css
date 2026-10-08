@@ -85,3 +85,7 @@
     margin-top: 10px;
     font-weight: 500;
 }
+
+/* Responsive mobile */
+@media (max-width: 480px) { .seccion-planes { padding: 40px 16px; } .tarjeta-plan { width: 100%; max-width: 340px; } }
+

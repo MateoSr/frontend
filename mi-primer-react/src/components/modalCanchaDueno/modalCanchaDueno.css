@@ -177,3 +177,6 @@
 .btn-eliminar:hover {
   background: #dc2626;
 }
+/* Responsive mobile */
+@media (max-width: 480px) { .form-row { flex-direction: column; } }
+

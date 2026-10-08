@@ -98,3 +98,96 @@ main{
     border-radius: 30px;
     box-shadow: 0 5px 10px rgb(0, 0, 0, 0.5);
 }
+
+.contenedor-home-boton {
+    position: relative;
+}
+
+.boton-home {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+}
+
+.hero-titulo {
+  color: #ffff;
+  text-shadow: 4px 4px 10px rgba(0, 0, 0, 1);
+  font-size: 50px;
+  text-align: center;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+
+.contenedor-home-texto h2 {
+  font-size: 3.7vh;
+  line-height: 1.3;
+}
+
+.contenedor-home-texto p {
+  font-size: 2.6vh;
+  letter-spacing: 0.1vh;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .contenedor-imagenes {
+    height: auto;
+    min-height: 100svh;
+    align-items: center;
+  }
+  .contenedor-barra {
+    position: relative;
+    margin-top: 0;
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 90px 16px 32px 16px;
+    box-sizing: border-box;
+    z-index: 5;
+  }
+  .hero-titulo {
+    font-size: clamp(28px, 8vw, 36px);
+    margin-bottom: 16px;
+  }
+  .contenedor-home {
+    flex-direction: column;
+    min-height: auto;
+    margin: 32px 0;
+    gap: 24px;
+  }
+  .contenedor-home-texto {
+    width: auto;
+    margin: 0 20px;
+    gap: 16px;
+  }
+  .contenedor-home-texto h2 {
+    font-size: 1.25rem;
+  }
+  .contenedor-home-texto p {
+    font-size: 1rem;
+    letter-spacing: normal;
+    line-height: 1.6;
+  }
+  .contenedor-home-boton {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    min-height: 240px;
+  }
+  .contenedor-home-imagen {
+    width: 100%;
+    height: 240px;
+  }
+  .boton-home {
+    width: min(300px, 85%);
+    height: auto;
+    padding: 14px 20px;
+    font-size: 1rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
