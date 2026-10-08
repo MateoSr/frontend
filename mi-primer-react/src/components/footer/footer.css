@@ -1,54 +1,106 @@
-.footer-caja{
-    background-color: rgb(43, 37, 32); 
-    border-top: 1px solid rgba(0, 0, 0, 0.06); 
-    padding: 30px 40px;
-    margin-top: 60px; 
-    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.03); 
+.footer-caja {
+    background-color: rgb(43, 37, 32);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 40px 20px;
+    margin-top: 60px;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.03);
     display: flex;
-    justify-content: center;
-    gap: 175px;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 40px;
     text-align: center;
     color: white;
-    align-items: center;
+    flex-wrap: wrap;
 }
 
-.logo{
-    height: 90x;
+.logo {
+    height: 90px;
     width: 90px;
+    object-fit: contain;
 }
-.contactos-list li a{
+
+.contactos-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 8px;
+}
+
+.contactos-list li {
+    margin: 6px 0;
+}
+
+.contactos-list li a {
     text-decoration: none;
     color: white;
-}   
-
-.contactos-list{
-    list-style: none;
+    transition: color 0.3s ease;
 }
 
-.contactos-list li{
-    margin: 5px 0;
-}
-
-.contactos-list li a:hover{
+.contactos-list li a:hover {
     color: #ee5801;
-    transition-duration: 0.3s;
 }
 
-.redes{
-    margin-top: 10px;
+.redes {
+    margin-top: 12px;
     display: flex;
-    gap:15px;
+    gap: 15px;
     justify-content: center;
 }
 
-.redes svg{
-    stroke:white;
-    fill:white;
-}
-.redes svg:hover{
-    stroke: #ee5801;
+.redes svg {
+    fill: white;
+    transition: fill 0.3s ease;
 }
 
-.titulo-footer{
-    font-size: 20px;
+.redes svg:hover {
+    fill: #ee5801;
+}
+
+.titulo-footer {
+    font-size: 1.1rem;
+}
+
+/* --- RESPONSIVE: Celulares (sm y md) --- */
+@media (max-width: 768px) {
+    .footer-caja {
+        display: grid;
+        grid-template-columns: auto 1fr;
+
+        gap: 15px;
+        padding: 30px 20px;
+        text-align: right;
+        /* Empuja los textos contra el margen derecho */
+        align-items: center;
+    }
+
+    .logo-caja {
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+        /* El logo abarca el alto de las dos secciones de texto */
+    }
+
+    .logo {
+        height: 120px;
+        width: 120px;
+    }
+
+    .datos-contact {
+        text-align: center;
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+    }
+
+    .enlace {
+        text-align: center;
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+
+    .redes {
+        justify-content:center
+        /* Alinea los íconos a la derecha */
+    }
+
+    .titulo-footer {
+        font-size: 1.1rem;
+    }
 }

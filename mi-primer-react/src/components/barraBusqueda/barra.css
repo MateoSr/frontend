@@ -1,65 +1,113 @@
-.barraBusqueda-contenedor{
-    margin: 10px 0;
-    background-color: rgb(255, 255, 255);
-    border-radius:30px;
-    min-height: 30px;
-    width: fit-content;
-    box-shadow:  0 5px 10px rgb(0, 0, 0,0.5);
+.barraBusqueda-contenedor {
+  margin: 20px auto;
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  min-height: 50px;
+  width: fit-content;
+  max-width: 95%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  padding: 5px 15px;
 }
 
-.filtro-form{
-    
-    margin: 15px 15px;
-    display: flex;
-    justify-content: center;
-    min-height: 25px;
-    gap: 5px;
+.barraBusqueda-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.filtro-form input,.filtro-form select{
-    border: none;
+.filtro-form {
+  margin: 10px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 25px;
+  gap: 8px;
+  flex: 1;
 }
 
-.barraBusqueda-form{
-    display: flex;
-    justify-content:center;
-    align-items: center;
+.filtro-form input,
+.filtro-form select {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  width: 100%;
 }
 
 .boton {
-  padding: 10px 20px;
+  padding: 10px 25px;
   background-color: #ee5801;
   color: white;
   font-weight: bold;
   border: none;
   border-radius: 30px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
 }
 
 .boton:hover {
-  background-color: #ee5801;
-  opacity: 0.8;
-  
-}
-.boton:active {
-  background-color: #ff5e00;
+  background-color: #d14d00;
+  transform: scale(1.05);
 }
 
-.icon{
-    stroke:#ff5e00;
-    fill:rgb(255, 255, 255);
+.boton:active {
+  background-color: #ff5e00;
+  transform: scale(0.95);
+}
+
+.icon {
+  stroke: #ff5e00;
+  fill: rgb(255, 255, 255);
+  flex-shrink: 0;
 }
 
 .filtro-select:invalid {
-  color: #a0a0a0; /* El gris clarito clásico de un placeholder */
+  color: #a0a0a0;
 }
 
-/* 2. Para asegurarnos de que, al abrir la lista, las opciones reales se vean en negro */
 .filtro-select option {
-  color: #333333; /* Color oscuro para las opciones válidas */
+  color: #333333;
 }
 
-/* 3. Evitamos que la opción oculta "Seleccionar deporte" tenga estilos raros en navegadores viejos */
 .filtro-select option[disabled] {
   color: #a0a0a0;
+}
+
+@media (max-width: 1024px) {
+  .barraBusqueda-contenedor {
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .barraBusqueda-contenedor {
+    width: 90%;
+    border-radius: 20px;
+    padding: 15px 10px;
+  }
+
+  .barraBusqueda-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filtro-form {
+    margin: 10px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+  }
+
+  .filtro-form:last-child {
+    border-bottom: none;
+    margin-top: 15px;
+    padding-bottom: 0;
+  }
+
+  .boton {
+    border-radius: 15px;
+    padding: 12px;
+    font-size: 1.1rem;
+  }
 }

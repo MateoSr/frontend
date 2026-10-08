@@ -47,7 +47,6 @@ export const obtenerDetalleComplejo = async (id, signal) => {
   return response.json();
 };
 
-<<<<<<< HEAD
 export const obtenerComplejoDelEncargado = async (signal) => {
   const token = localStorage.getItem('gestor_token');
   const response = await fetch(`${API_URL}/complejos/encargado`, {
@@ -58,8 +57,11 @@ export const obtenerComplejoDelEncargado = async (signal) => {
   if (!response.ok) {
     const data = await response.json().catch(() => ({}));
     throw new Error(data.message || 'No se pudo cargar el complejo asignado.');
-=======
-export const obtenerTodosLosComplejos = async () => {
+  }
+  return await response.json();
+};
+  
+  export const obtenerTodosLosComplejos = async () => {
   const response = await fetch(`${API_URL}/complejos`);
 
   if (!response.ok) {
@@ -77,7 +79,6 @@ export const eliminarComplejo = async (id) => {
 
   if (!response.ok) {
     throw new Error('No se pudo eliminar el complejo.');
->>>>>>> 76bbdeb8d1f2f510d7b09912c4cece44d8f7f053
   }
 
   return response.json();

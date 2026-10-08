@@ -1,19 +1,12 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.logo-header{
-    padding: 10px;
-    margin-left: 30px;
-    height: 80px;
-    width: fit-content
-}
-
-.header-caja{
-    top:0;
+.header-caja {
+    top: 0;
     width: 100%;
     height: 80px;
     display: flex;
@@ -23,37 +16,102 @@
     position: sticky;
     z-index: 1000;
     background-color: white;
-
 }
 
+.logo-header {
+    padding: 10px;
+    margin-left: 30px;
+    height: 80px;
+    width: auto;
+}
 
-.nav-links{
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 30px;
+    color: black;
+}
+
+.nav-links {
     display: flex;
-    gap: 100px;
+    gap: 40px;
     list-style: none;
+    margin-right: 40px;
 }
 
-.nav-links li{
-    margin: 10px;
-    font-size: 25px;
+.nav-links li {
+    font-size: 1.2rem;
     font-weight: 600;
-    
 }
+
 .nav-links li .nav-link {
     text-decoration: none;
     color: black;
     transition: color 0.3s ease;
 }
 
-.nav-links li .nav-link:hover {
-    color: #ee5801;
-}
-
+.nav-links li .nav-link:hover,
 .nav-links li .nav-link.active {
     color: #ee5801;
 }
 
+@media (max-width: 1024px) {
+    .nav-links {
+        gap: 20px;
+        margin-right: 20px;
+    }
 
-.nav-links li:last-child {
-  margin-right: 70px;
+    .logo-header {
+        margin-left: 20px;
+    }
+
+    .nav-links li {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-barra {
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transform: translateY(-150%);
+        transition: transform 0.3s ease-in-out;
+        z-index: -1;
+    }
+
+    .nav-barra.abierto {
+        transform: translateY(0);
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    .nav-links li {
+        margin: 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .nav-links li:last-child {
+        margin-right: 0;
+        border-bottom: none;
+    }
+
+    .nav-links li .nav-link {
+        display: block;
+        padding: 20px;
+    }
 }
