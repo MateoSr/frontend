@@ -101,6 +101,11 @@ export const busquedaComplejoDueno = async (token) => {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}` 
         }})
-  if(!response) throw new Error("No hay complejos para el dueno")
-  return await response.json();
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.message || "No se pudieron cargar los complejos del dueño.");
+  }
+  const data = await response.json();
+  if (!Array.isArray(data)) throw new Error("Respuesta inesperada del servidor.");
+  return data;
 }

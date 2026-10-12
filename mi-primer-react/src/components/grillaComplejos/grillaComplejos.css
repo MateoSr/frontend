@@ -13,6 +13,6 @@
   border-radius: 8px;
   margin-top: 1rem;
 }
-/* Responsive mobile */
+
 .contenedor-grilla { grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); }
 

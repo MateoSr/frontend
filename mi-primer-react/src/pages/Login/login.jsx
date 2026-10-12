@@ -1,6 +1,7 @@
 import InputForum from '../../components/inputForum/inputForum';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { decodificarPayload } from '../../utils/auth';
 import './login.css';
 
 function Login({ endpoint = '/api/login', redirectTo = '/' }) {
@@ -21,8 +22,13 @@ function Login({ endpoint = '/api/login', redirectTo = '/' }) {
       if (response.ok) {
         const token = data.token.token;
         localStorage.setItem("gestor_token", token);
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        const destino = payload.rol === 'Encargado' ? '/menuEncargado' : redirectTo;
+        const payload = decodificarPayload(token);
+        const destinoPorRol = {
+          Encargado: '/menuEncargado',
+          'Dueño': '/menuDueño',
+          Administrador: '/menuAdmin',
+        };
+        const destino = (payload && destinoPorRol[payload.rol]) ?? redirectTo;
         window.location.href = destino;
       } else {
         alert(data.error);
