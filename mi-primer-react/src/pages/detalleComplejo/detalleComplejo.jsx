@@ -13,6 +13,8 @@ const diasSemana = [
     "Jueves",
     "Viernes",
     "Sabado",
+    "Domingo"
+
 ];
 
 function formatearHora(valor) {

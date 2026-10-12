@@ -21,8 +21,15 @@ function Login({ endpoint = '/api/login', redirectTo = '/' }) {
       if (response.ok) {
         const token = data.token.token;
         localStorage.setItem("gestor_token", token);
+        
         const payload = JSON.parse(atob(token.split('.')[1]));
-        const destino = payload.rol === 'Encargado' ? '/menuEncargado' : redirectTo;
+        const rutasPorRol = {
+          'Dueño': '/menuDueño',
+          'Administrador': '/menuAdmin',
+          'Encargado': '/menuEncargado'
+        };
+        const destino = rutasPorRol[payload.rol] || redirectTo || '/';
+        
         window.location.href = destino;
       } else {
         alert(data.error);

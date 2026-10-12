@@ -63,6 +63,32 @@ function Profile(){
     buscarTurnos()
     },[])
 
+    const cancelarTurno = async (idTurno) => {
+      try {
+    const token = localStorage.getItem("gestor_token"); 
+    
+    const respuesta = await fetch(`http://localhost:3000/api/turnos/${idTurno}/cancelar`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const data = await respuesta.json();
+
+    if (respuesta.ok) {
+      alert("Turno cancelado correctamente");
+      setTurnos(prevTurnos => prevTurnos.filter(t => t.id !== idTurno));
+      window.location.reload();
+    } else {
+      alert(data.error || "No se pudo cancelar el turno");
+    }
+  } catch (error) {
+    alert("Error de conexión con el servidor");
+  }
+};
+
 
     const actualizarCambio = (e) => {
     const { name, value } = e.target;
@@ -154,7 +180,11 @@ function Profile(){
         {turnos.length > 0 ? (
           <div className="grid-turnos">
             {turnos.slice(0, 3).map((turno) => (
-              <TarjetaTurno key={turno.id} turno={turno} />
+              <TarjetaTurno 
+                key={turno.id} 
+                turno={turno} 
+                onCancelar={(idTurno) => {cancelarTurno(idTurno);}} 
+              />
             ))}
           </div>
         ) : (

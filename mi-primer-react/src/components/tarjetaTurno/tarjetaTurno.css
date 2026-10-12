@@ -27,6 +27,34 @@
   object-fit: cover;
 }
 
+/* Botón de Cancelar (Cruz Roja) arriba a la izquierda */
+.btn-cancelar-turno {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #f87171;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+  z-index: 2;
+}
+
+.btn-cancelar-turno:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
 /* Badge de Estado sobre la foto */
 .badge-estado {
   position: absolute;

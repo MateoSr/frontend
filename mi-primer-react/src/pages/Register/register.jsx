@@ -37,6 +37,7 @@ function Register() {
       const data = await response.json();
       if (response.ok) {
         alert(data.message);
+        window.location.href = '/login';
       } else {
         alert(data.message || "Error al crear usuario");
       }
