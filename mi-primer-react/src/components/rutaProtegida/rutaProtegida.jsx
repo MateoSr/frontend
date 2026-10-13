@@ -1,25 +1,41 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
+import { obtenerRol } from '../../utils/auth';
 
-function obtenerPayload(token) {
+// Cada rol operativo vive encerrado en sus rutas: cualquier otra URL rebota a su menú.
+const ZONAS_POR_ROL = {
+  Encargado: { inicio: '/menuEncargado', permitidas: ['/menuEncargado', '/confirmar-reserva'] },
+  'Dueño': { inicio: '/menuDueño', permitidas: ['/menuDueño', '/complejo/'] },
+};
+
+export function BloqueoPorRol({ children }) {
+  const { pathname } = useLocation();
+  // El navegador entrega el pathname con la ñ codificada (%C3%B1) mientras que
+  // las rutas están escritas con ñ. Sin decodificar, nada coincide y el guard
+  // rebotaría a la misma URL en loop, dejando la página en blanco.
+  let ruta = pathname;
   try {
-    const partePayload = token.split('.')[1];
-    const payloadBase64 = partePayload.replace(/-/g, '+').replace(/_/g, '/');
-    return JSON.parse(atob(payloadBase64));
+    ruta = decodeURIComponent(pathname);
   } catch {
-    return null;
+    ruta = pathname;
   }
+  const rol = obtenerRol();
+  const zona = rol ? ZONAS_POR_ROL[rol] : null;
+  if (!zona) return children;
+  const permitida = zona.permitidas.some(
+    (base) => ruta === base || ruta.startsWith(base) || pathname === base || pathname.startsWith(base)
+  );
+  if (!permitida) return <Navigate to={zona.inicio} replace />;
+  return children;
 }
 
 export function RutaProtegida({ rol, children }) {
-  const token = localStorage.getItem('gestor_token');
-  const payload = token ? obtenerPayload(token) : null;
+  const rolActual = obtenerRol();
 
-  if (!payload) {
-    localStorage.removeItem('gestor_token');
+  if (!rolActual) {
     return <Navigate to="/login" replace />;
   }
 
-  if (payload.rol !== rol) {
+  if (rolActual !== rol) {
     return <Navigate to="/" replace />;
   }
 

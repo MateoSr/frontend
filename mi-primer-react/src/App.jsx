@@ -20,7 +20,7 @@ import AdministrarComplejos from './pages/administrarComplejos/administrarComple
 import CrearComplejo from './pages/crearComplejo/crearComplejo'
 import MenuDueño from './pages/menuDueño/menuDueño'
 import MenuEncargado from './pages/menuEncargado/menuEncargado'
-import { RutaProtegida } from './components/rutaProtegida/rutaProtegida'
+import { RutaProtegida, BloqueoPorRol } from './components/rutaProtegida/rutaProtegida'
 import AdministrarUsuarios from './pages/administrarUsuarios/administrarUsuarios'
 import CrearUsuario from './pages/crearUsuario/crearUsuario'
 import ComplejoDueño from './pages/complejoDueño/complejoDueño'
@@ -30,6 +30,7 @@ function App() {
   return (
     <>
       <Header></Header>
+      <BloqueoPorRol>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/faq" element={<Faq />} />
@@ -41,23 +42,39 @@ function App() {
         <Route path="/forgot" element={<OlvideContra />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/complejos" element={<Complejos />} />
-        <Route path="/complejo/:id" element={<ComplejoDueño />} />
+        <Route path="/complejo/:id" element={<RutaProtegida rol="Dueño">
+            <ComplejoDueño />
+          </RutaProtegida>} />
         <Route path="/confirmar-reserva" element={<ConfirmarReserva />} />
         <Route path="/detalle-complejo/:id" element={<DetalleComplejo />} />
         <Route path="/loginAdmin" element={<Login endpoint="/api/loginAdmin" redirectTo="/menuAdmin" />} />
-        <Route path="/menuAdmin" element={<MenuAdmin />} />
-        <Route path="/administrar-complejos" element={<AdministrarComplejos />} />
-        <Route path="/administrar-usuarios" element={<AdministrarUsuarios />} />
-        <Route path="/crear-complejo" element={<CrearComplejo />} />
-        <Route path="/menuDueño" element={<MenuDueño />} />
+        <Route path="/menuAdmin" element={<RutaProtegida rol="Administrador">
+            <MenuAdmin />
+          </RutaProtegida>} />
+        <Route path="/administrar-complejos" element={<RutaProtegida rol="Administrador">
+            <AdministrarComplejos />
+          </RutaProtegida>} />
+        <Route path="/administrar-usuarios" element={<RutaProtegida rol="Administrador">
+            <AdministrarUsuarios />
+          </RutaProtegida>} />
+        <Route path="/crear-complejo" element={<RutaProtegida rol="Administrador">
+            <CrearComplejo />
+          </RutaProtegida>} />
+        <Route path="/menuDueño" element={
+          <RutaProtegida rol="Dueño">
+            <MenuDueño />
+          </RutaProtegida>} />
         <Route path="/menuEncargado" element={
           <RutaProtegida rol="Encargado">
             <MenuEncargado />
           </RutaProtegida>
         } />
-        <Route path="/crear-usuario" element={<CrearUsuario />} />
+        <Route path="/crear-usuario" element={<RutaProtegida rol="Administrador">
+            <CrearUsuario />
+          </RutaProtegida>} />
         <Route path="*" element={<NotFound />} />
       </Routes >
+      </BloqueoPorRol>
       <Footer></Footer>
     </>
   )

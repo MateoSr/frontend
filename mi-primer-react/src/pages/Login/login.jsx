@@ -2,6 +2,7 @@ import InputForum from '../../components/inputForum/inputForum';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useModal } from '../../context/modal/ModalContext';
+import { decodificarPayload } from '../../utils/auth';
 import './login.css';
 
 function Login({ endpoint = '/api/login', redirectTo = '/' }) {
@@ -23,15 +24,13 @@ function Login({ endpoint = '/api/login', redirectTo = '/' }) {
       if (response.ok) {
         const token = data.token.token;
         localStorage.setItem("gestor_token", token);
-        
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        const rutasPorRol = {
+        const payload = decodificarPayload(token);
+        const destinoPorRol = {
+          Encargado: '/menuEncargado',
           'Dueño': '/menuDueño',
-          'Administrador': '/menuAdmin',
-          'Encargado': '/menuEncargado'
+          Administrador: '/menuAdmin',
         };
-        const destino = rutasPorRol[payload.rol] || redirectTo || '/';
-        
+        const destino = (payload && destinoPorRol[payload.rol]) ?? redirectTo;
         window.location.href = destino;
       } else {
         mostrarModal({

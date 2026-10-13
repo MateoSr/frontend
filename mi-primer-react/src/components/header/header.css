@@ -57,6 +57,16 @@
     color: #ee5801;
 }
 
+/* Botón con apariencia de link (cerrar sesión) */
+.boton-cerrar-sesion {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    color: black;
+    padding: 0;
+}
+
 @media (max-width: 1024px) {
     .nav-links {
         gap: 20px;
@@ -84,12 +94,15 @@
         width: 100%;
         background-color: white;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transform: translateY(-150%);
-        transition: transform 0.3s ease-in-out;
-        z-index: -1;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
     }
 
     .nav-barra.abierto {
+        visibility: visible;
+        opacity: 1;
         transform: translateY(0);
     }
 
@@ -97,6 +110,7 @@
         flex-direction: column;
         gap: 0;
         margin: 0;
+        padding: 0;
         text-align: center;
     }
 
@@ -106,12 +120,24 @@
     }
 
     .nav-links li:last-child {
-        margin-right: 0;
         border-bottom: none;
     }
 
-    .nav-links li .nav-link {
+    /* Link y botón con exactamente la misma caja: centrados */
+    .nav-links li .nav-link,
+    .nav-links li button.nav-link {
         display: block;
-        padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 18px 20px;
+        text-align: center;
+    }
+
+    .nav-links li button.nav-link {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font: inherit;
+        color: black;
     }
 }

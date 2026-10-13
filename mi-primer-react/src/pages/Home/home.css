@@ -120,12 +120,12 @@ main{
 }
 
 .contenedor-home-texto h2 {
-  font-size: 3.7vh;
-  line-height: 1.3;
+  font-size: 4vh;
+  margin-bottom: -2.5vh;
 }
 
 .contenedor-home-texto p {
-  font-size: 2.6vh;
+  font-size: 3.3vh;
   letter-spacing: 0.1vh;
   line-height: 1.8;
 }
@@ -163,8 +163,13 @@ main{
     margin: 0 20px;
     gap: 16px;
   }
+  /* Segunda sección: en mobile el texto va primero y la imagen después */
+  .contenedor-home-invertido .contenedor-home-texto {
+    order: -1;
+  }
   .contenedor-home-texto h2 {
     font-size: 1.25rem;
+    margin-bottom: 0.5rem;
   }
   .contenedor-home-texto p {
     font-size: 1rem;
