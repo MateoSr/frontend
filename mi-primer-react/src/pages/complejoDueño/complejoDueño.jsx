@@ -8,6 +8,7 @@ import { crearCancha, modificarCancha, crearPrecioCancha } from "../../services/
 import { crearHorario, modificarHorario, borrarHorario } from "../../services/horarioService";
 import { ModalCanchaDueno } from '../../components/modalCanchaDueno/modalCanchaDueno';
 import { TarjetaDatosComplejoMenu } from '../../components/tarjetaDatosComplejoMenu/tarjetaDatosComplejoMenu';
+import { useModal } from '../../context/modal/ModalContext';
 
 const diasSemana = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado",];
 
@@ -19,6 +20,7 @@ function formatearHora(valor) {
 
 function ComplejoDueño() {
   const { id } = useParams();
+  const { mostrarModal, confirmar } = useModal();
   const [complejo, setComplejo] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [modalCanchaState, setModalCanchaState] = useState({ isOpen: false, tipo: null, cancha: null });
@@ -34,7 +36,11 @@ function ComplejoDueño() {
       const data = await obtenerDetalleComplejo(id);
       setComplejo(data);
     } catch (error) {
-      alert("Error al actualizar la información: " + error.message);
+      mostrarModal({
+        titulo: 'Error',
+        mensaje: 'Error al actualizar la información: ' + error.message,
+        tipo: 'error'
+      });
     }
   };
 
@@ -51,7 +57,11 @@ function ComplejoDueño() {
       if (error.name === 'AbortError' || error.name === 'CanceledError') {
         return;
       }
-      alert(error.message);
+      mostrarModal({
+        titulo: 'Error',
+        mensaje: error.message,
+        tipo: 'error'
+      });
       setComplejo(null);
     } finally {
       if (!controller.signal.aborted) {
@@ -63,7 +73,7 @@ function ComplejoDueño() {
   cargarComplejo();
 
   return () => controller.abort();
-}, [id]);
+}, [id, mostrarModal]);
 
   if (cargando) return <p>Cargando complejo...</p>;
   if (!complejo) return null;
@@ -89,7 +99,11 @@ function ComplejoDueño() {
       await recargarComplejo();
       handleCerrarModal();
     } catch (error) {
-      alert(error.message);
+      mostrarModal({
+        titulo: 'Error',
+        mensaje: error.message,
+        tipo: 'error'
+      });
     }
   };
 
@@ -133,17 +147,31 @@ function ComplejoDueño() {
       await recargarComplejo();
       setModoEdicion(false);
     } catch (error) {
-      alert(error.message);
+      mostrarModal({
+        titulo: 'Error',
+        mensaje: error.message,
+        tipo: 'error'
+      });
     }
   };
 
   const handleBorrarHorario = async (nroDia) => {
-    if (!window.confirm(`¿Estás seguro de eliminar el horario del día ${diasSemana[nroDia]}?`)) return;
+    const confirmado = await confirmar({
+      titulo: 'Eliminar horario',
+      mensaje: `¿Estás seguro de eliminar el horario del día ${diasSemana[nroDia]}?`,
+      tipo: 'peligro',
+      textoConfirmar: 'Eliminar'
+    });
+    if (!confirmado) return;
     try {
       await borrarHorario(id, nroDia);
       await recargarComplejo();
     } catch (error) {
-      alert(error.message);
+      mostrarModal({
+        titulo: 'Error',
+        mensaje: error.message,
+        tipo: 'error'
+      });
     }
   };
   //Handle de complejo datos
@@ -152,7 +180,11 @@ function ComplejoDueño() {
     await modificarComplejo(id, datosActualizados);
     await recargarComplejo();
   } catch (error) {
-    alert("Error al actualizar los datos del complejo: " + error.message);
+    mostrarModal({
+      titulo: 'Error',
+      mensaje: 'Error al actualizar los datos del complejo: ' + error.message,
+      tipo: 'error'
+    });
   }
   };
   return (

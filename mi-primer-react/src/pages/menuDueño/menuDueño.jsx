@@ -4,19 +4,26 @@ import {TarjetaMenuDuenoComplejo} from '../../components/tarjetaMenuDuenoComplej
 import { useEffect, useState } from 'react';
 import { busquedaComplejoDueno } from '../../services/complejosService';
 import { obtenerDatosMenuDueno } from '../../services/dashboarService';
+import { useModal } from '../../context/modal/ModalContext';
 
 
 
 
 function MenuDueño() {
+  const { mostrarModal } = useModal();
   const [complejos, setComplejos] = useState([])
   const [datos,setDatos] = useState({})
 
   useEffect(() => {
       const token = localStorage.getItem('gestor_token');
       if (!token) {
-        alert('No estás logueado. Por favor, inicia sesión.');
-        window.location.href = '/login';
+        mostrarModal({
+          titulo: 'Sesión requerida',
+          mensaje: 'No estás logueado. Por favor, inicia sesión.',
+          tipo: 'info'
+        }).then(() => {
+          window.location.href = '/login';
+        });
         return undefined;
       }
       //obteniendo los datos de los comnplejos del dueño
@@ -29,7 +36,11 @@ function MenuDueño() {
           if (error.name === 'AbortError' || error.name === 'CanceledError') {
         return;
       }
-      alert(error.message);
+      mostrarModal({
+        titulo: 'Error',
+        mensaje: error.message,
+        tipo: 'error'
+      });
       }
       }
 
@@ -39,12 +50,16 @@ function MenuDueño() {
           console.log(data)
           setDatos(data)
         }catch(error){
-          alert(error.message)
+          mostrarModal({
+            titulo: 'Error',
+            mensaje: error.message,
+            tipo: 'error'
+          })
         }
       }
       obtenerComplejos()
       obtenerDatos()
-    },[])
+    },[mostrarModal])
 
 
 

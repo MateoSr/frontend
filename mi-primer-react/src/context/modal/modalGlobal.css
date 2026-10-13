@@ -1,0 +1,129 @@
+.modal-global-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  backdrop-filter: blur(3px);
+  padding: 16px;
+  animation: modalGlobalFade 0.15s ease-out;
+}
+
+.modal-global-contenido {
+  background: #ffffff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: modalGlobalEntrada 0.25s ease-out;
+}
+
+@keyframes modalGlobalFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalGlobalEntrada {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-global-icono {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.modal-global-icono-exito {
+  color: #16a34a;
+}
+
+.modal-global-icono-error {
+  color: #ef4444;
+}
+
+.modal-global-icono-info {
+  color: #ee5801;
+}
+
+.modal-global-icono-pregunta {
+  color: #ee5801;
+}
+
+.modal-global-icono-peligro {
+  color: #ef4444;
+}
+
+.modal-global-contenido h2 {
+  margin: 0 0 10px 0;
+  color: #111827;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.modal-global-contenido p {
+  margin: 0 0 22px 0;
+  color: #374151;
+  font-size: 1rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.modal-global-acciones {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.modal-global-btn {
+  width: 100%;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal-global-btn-primario {
+  background-color: #ee5801;
+  color: #ffffff;
+}
+
+.modal-global-btn-primario:hover {
+  background-color: #d44d00;
+}
+
+.modal-global-btn-peligro {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.modal-global-btn-peligro:hover {
+  background-color: #dc2626;
+}
+
+.modal-global-btn-secundario {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.modal-global-btn-secundario:hover {
+  background-color: #e2e8f0;
+}

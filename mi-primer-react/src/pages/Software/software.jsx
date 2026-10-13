@@ -3,8 +3,10 @@ import { useState, useRef } from 'react';
 import './software.css';
 import Planes from '../../components/planes/planes';
 import InputForum from '../../components/inputForum/inputForum';
+import { useModal } from '../../context/modal/ModalContext';
 
 function Software() {
+    const { mostrarModal } = useModal();
     const [formData, setFormData] = useState({
         razonSocial: '',
         nombreContacto: '',
@@ -30,13 +32,26 @@ function Software() {
     const data = await response.json();
 
     if (response.ok) {
-      alert(data.message);
+      mostrarModal({
+        titulo: 'Solicitud enviada',
+        mensaje: data.message,
+        tipo: 'exito'
+      });
       // Limpiar formulario o cerrar modal
     } else {
-      alert(data.message || "Error al enviar formulario");
+      mostrarModal({
+        titulo: 'Error',
+        mensaje: data.message || "Error al enviar formulario",
+        tipo: 'error'
+      });
     }
   } catch (error) {
     console.error("Error de conexión:", error);
+    mostrarModal({
+      titulo: 'Error',
+      mensaje: "Error de conexión con el servidor",
+      tipo: 'error'
+    });
   }
 };
     return (

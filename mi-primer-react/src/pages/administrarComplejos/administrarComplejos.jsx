@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { obtenerTodosLosComplejos, eliminarComplejo } from '../../services/complejosService.js';
+import { useModal } from '../../context/modal/ModalContext';
 import './administrarComplejos.css';
 
 function AdministrarComplejos() {
@@ -8,6 +9,7 @@ function AdministrarComplejos() {
   const [busqueda, setBusqueda] = useState('');
   const [cargando, setCargando] = useState(true);
   const navigate = useNavigate();
+  const { mostrarModal, confirmar } = useModal();
 
   useEffect(() => {
     const cargarDatos = async () => {
@@ -16,24 +18,38 @@ function AdministrarComplejos() {
         setComplejos(data);
       } catch (error) {
         console.error('Error fetching complejos:', error);
-        alert(error.message);
+        mostrarModal({
+          titulo: 'Error',
+          mensaje: error.message || 'Error al cargar complejos',
+          tipo: 'error'
+        });
       } finally {
         setCargando(false);
       }
     };
 
     cargarDatos();
-  }, []);
+  }, [mostrarModal]);
 
   const handleEliminar = async (id) => {
-    if (!window.confirm('¿Estás seguro de eliminar este complejo?')) return;
+    const confirmado = await confirmar({
+      titulo: 'Eliminar complejo',
+      mensaje: '¿Estás seguro de eliminar este complejo?',
+      tipo: 'peligro',
+      textoConfirmar: 'Eliminar'
+    });
+    if (!confirmado) return;
 
     try {
       await eliminarComplejo(id);
       setComplejos((prev) => prev.filter((complejo) => complejo.id !== id));
     } catch (error) {
       console.error('Error deleting complejo:', error);
-      alert('No se pudo eliminar el complejo.');
+      mostrarModal({
+        titulo: 'Error',
+        mensaje: 'No se pudo eliminar el complejo.',
+        tipo: 'error'
+      });
     }
   };
 

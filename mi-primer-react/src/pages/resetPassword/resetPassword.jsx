@@ -2,8 +2,10 @@ import { useState } from "react"
 import './resetPassword.css'
 import InputForum from "../../components/inputForum/inputForum"
 import { useSearchParams, useNavigate } from 'react-router-dom'
+import { useModal } from '../../context/modal/ModalContext'
 
 function ResetPassword() {
+    const { mostrarModal } = useModal();
     const [credenciales, setCredenciales] = useState({
         password: '',
         confirmpassword: ''
@@ -16,12 +18,20 @@ function ResetPassword() {
     const cambiarPassword = async (e) => {
         e.preventDefault()
         if (!token) {
-        alert("Enlace inválido o expirado (falta el token).");
+        mostrarModal({
+            titulo: 'Enlace inválido',
+            mensaje: "Enlace inválido o expirado (falta el token).",
+            tipo: 'error'
+        });
         return;
         }
 
         if (credenciales.confirmpassword !== credenciales.password) {
-            alert("Las contraseñas no coinciden");
+            mostrarModal({
+                titulo: 'Las contraseñas no coinciden',
+                mensaje: "Las contraseñas no coinciden",
+                tipo: 'error'
+            });
             return
         }
         try {
@@ -34,15 +44,27 @@ function ResetPassword() {
             });
             const data = await response.json()
             if (response.ok) {
-                alert(data.message || "Credenciales cambiadas");
+                await mostrarModal({
+                    titulo: 'Contraseña actualizada',
+                    mensaje: data.message || "Credenciales cambiadas",
+                    tipo: 'exito'
+                });
                 navigate('/login')
             } else {
-                alert(data.message || "Error al crear usuario");
+                mostrarModal({
+                    titulo: 'Error',
+                    mensaje: data.message || "Error al crear usuario",
+                    tipo: 'error'
+                });
             }
 
         } catch (error) {
             console.log("Error en la conexion", error);
-            alert("Error en la conexión con el servidor");
+            mostrarModal({
+                titulo: 'Error',
+                mensaje: "Error en la conexión con el servidor",
+                tipo: 'error'
+            });
         }
     }
 

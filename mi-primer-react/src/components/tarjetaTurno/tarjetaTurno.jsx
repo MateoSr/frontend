@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useModal } from '../../context/modal/ModalContext';
 import './tarjetaTurno.css';
 
 const imagen_fallo = "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=600";
@@ -18,6 +19,7 @@ const formatearHora = (horaISO) => {
 
 export function TarjetaTurno({ turno, onCancelar }) {
   const { id, canchaNro, horaInicio, estado, imagenUrl, complejo, cancha, fecha } = turno;
+  const { confirmar } = useModal();
   
   const [imgSrc, setImgSrc] = useState(imagenUrl || imagen_fallo);
 
@@ -36,9 +38,15 @@ export function TarjetaTurno({ turno, onCancelar }) {
   };
 
   // Maneja la confirmación y llamada a la función de cancelación
-  const handleCancelarClick = () => {
-    const confirmar = window.confirm("¿Estás seguro de que quieres cancelar este turno?");
-    if (confirmar && onCancelar) {
+  const handleCancelarClick = async () => {
+    const confirmado = await confirmar({
+      titulo: 'Cancelar turno',
+      mensaje: '¿Estás seguro de que quieres cancelar este turno?',
+      tipo: 'peligro',
+      textoConfirmar: 'Cancelar turno',
+      textoCancelar: 'Volver'
+    });
+    if (confirmado && onCancelar) {
       onCancelar(id); // Pasa el ID del turno a la función que maneja la lógica
     }
   };

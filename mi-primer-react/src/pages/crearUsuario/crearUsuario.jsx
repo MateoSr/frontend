@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { crearUsuario } from '../../services/usuariosService';
 import { crearPersonaJuridica } from '../../services/personaJuridicaService';
+import { useModal } from '../../context/modal/ModalContext';
 
 import './crearUsuario.css';
 
 export const CrearUsuario = () => {
   const navigate = useNavigate();
+  const { mostrarModal: mostrarAviso } = useModal();
 
   const [tipoUsuarioId, setTipoUsuarioId] = useState(4);
 
@@ -65,12 +67,20 @@ export const CrearUsuario = () => {
       const resUser = await crearUsuario(payloadUsuario);
 
       setMostrarModal(false);
-      alert(`¡${tipoUsuarioId === 4 ? 'Dueño' : 'Encargado'} creado con éxito! ID de usuario: ${resUser.user.id}`);
+      await mostrarAviso({
+        titulo: 'Usuario creado',
+        mensaje: `¡${tipoUsuarioId === 4 ? 'Dueño' : 'Encargado'} creado con éxito! ID de usuario: ${resUser.user.id}`,
+        tipo: 'exito'
+      });
       navigate('/administrar-usuarios');
 
     } catch (err) {
       setMostrarModal(false);
-      alert('Error al crear el usuario: ' + (err.message || 'Error de servidor'));
+      mostrarAviso({
+        titulo: 'Error',
+        mensaje: 'Error al crear el usuario: ' + (err.message || 'Error de servidor'),
+        tipo: 'error'
+      });
     } finally {
       setCargando(false);
     }

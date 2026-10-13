@@ -2,8 +2,10 @@ import {useState,useEffect} from 'react'
 import './profile.css'
 import InputForum from '../../components/inputForum/inputForum';
 import TarjetaTurno from '../../components/tarjetaTurno/tarjetaTurno';
+import { useModal } from '../../context/modal/ModalContext';
 
 function Profile(){
+    const { mostrarModal } = useModal();
     const [usuario,setUsuario] = useState({})
     const [turnos,setTurnos] = useState([])
     const [isEditing, setIsEditing] = useState(false);
@@ -33,11 +35,15 @@ function Profile(){
           setOriginalUsuario(data)
         }
       }catch(error){
-        alert("Error cargando perfil:", error)
+        mostrarModal({
+          titulo: 'Error',
+          mensaje: `Error cargando perfil: ${error.message || error}`,
+          tipo: 'error'
+        })
       }
     }
     obtenerPerfil()
-    },[])
+    },[mostrarModal])
 
     useEffect(() => {
     const buscarTurnos = async () => {
@@ -57,7 +63,7 @@ function Profile(){
           setTurnos(respuesta)
         }
       }catch(error){
-        // alert("Error cargando turnos del usuario:", error)
+        console.log("Error cargando turnos del usuario:", error)
       }
     }
     buscarTurnos()
@@ -78,14 +84,26 @@ function Profile(){
     const data = await respuesta.json();
 
     if (respuesta.ok) {
-      alert("Turno cancelado correctamente");
+      await mostrarModal({
+        titulo: 'Turno cancelado',
+        mensaje: "Turno cancelado correctamente",
+        tipo: 'exito'
+      });
       setTurnos(prevTurnos => prevTurnos.filter(t => t.id !== idTurno));
       window.location.reload();
     } else {
-      alert(data.error || "No se pudo cancelar el turno");
+      mostrarModal({
+        titulo: 'Error',
+        mensaje: data.error || "No se pudo cancelar el turno",
+        tipo: 'error'
+      });
     }
   } catch (error) {
-    alert("Error de conexión con el servidor");
+    mostrarModal({
+      titulo: 'Error',
+      mensaje: "Error de conexión con el servidor",
+      tipo: 'error'
+    });
   }
 };
 
@@ -117,12 +135,20 @@ function Profile(){
             body: JSON.stringify(usuario)
             });
             if(response.ok){
-              alert("¡Perfil actualizado con éxito!");
+              mostrarModal({
+                titulo: 'Perfil actualizado',
+                mensaje: "¡Perfil actualizado con éxito!",
+                tipo: 'exito'
+              });
               setOriginalUsuario(usuario);
               setIsEditing(false);
             }
         }catch(error){
-        alert("Error actualizando perfil:", error)
+        mostrarModal({
+          titulo: 'Error',
+          mensaje: `Error actualizando perfil: ${error.message || error}`,
+          tipo: 'error'
+        })
         console.log(error)
       }
       }

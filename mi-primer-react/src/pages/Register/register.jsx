@@ -1,9 +1,11 @@
 import InputForum from '../../components/inputForum/inputForum';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useModal } from '../../context/modal/ModalContext';
 import './register.css';
 
 function Register() {
+  const { mostrarModal } = useModal();
   const [usuario, setUsuario] = useState({
     email: '',
     password: '',
@@ -19,7 +21,11 @@ function Register() {
     e.preventDefault();
 
     if (usuario.confirmPassword !== usuario.password) {
-      alert("Las contraseñas no coinciden");
+      mostrarModal({
+        titulo: 'Las contraseñas no coinciden',
+        mensaje: "Las contraseñas no coinciden",
+        tipo: 'error'
+      });
       return;
     }
 
@@ -36,14 +42,26 @@ function Register() {
 
       const data = await response.json();
       if (response.ok) {
-        alert(data.message);
+        await mostrarModal({
+          titulo: 'Cuenta creada',
+          mensaje: data.message,
+          tipo: 'exito'
+        });
         window.location.href = '/login';
       } else {
-        alert(data.message || "Error al crear usuario");
+        mostrarModal({
+          titulo: 'Error',
+          mensaje: data.message || "Error al crear usuario",
+          tipo: 'error'
+        });
       }
     } catch (error) {
       console.log("Error en la conexion", error);
-      alert("Error en la conexión con el servidor");
+      mostrarModal({
+        titulo: 'Error',
+        mensaje: "Error en la conexión con el servidor",
+        tipo: 'error'
+      });
     }
   };
 

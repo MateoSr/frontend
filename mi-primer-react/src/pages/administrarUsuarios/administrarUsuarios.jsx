@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { obtenerTodosLosUsuarios, eliminarUsuario } from '../../services/usuariosService.js';
+import { useModal } from '../../context/modal/ModalContext';
 import './administrarUsuarios.css';
 
 function AdministrarUsuarios() {
@@ -8,6 +9,7 @@ function AdministrarUsuarios() {
   const [busqueda, setBusqueda] = useState('');
   const [cargando, setCargando] = useState(true);
   const navigate = useNavigate();
+  const { mostrarModal, confirmar } = useModal();
 
   useEffect(() => {
     const cargarDatos = async () => {
@@ -16,24 +18,38 @@ function AdministrarUsuarios() {
         setUsuarios(data);
       } catch (error) {
         console.error('Error fetching usuarios:', error);
-        alert(error.message || 'Error al cargar usuarios');
+        mostrarModal({
+          titulo: 'Error',
+          mensaje: error.message || 'Error al cargar usuarios',
+          tipo: 'error'
+        });
       } finally {
         setCargando(false);
       }
     };
 
     cargarDatos();
-  }, []);
+  }, [mostrarModal]);
 
   const handleEliminar = async (id) => {
-    if (!window.confirm('¿Estás seguro de eliminar este usuario?')) return;
+    const confirmado = await confirmar({
+      titulo: 'Eliminar usuario',
+      mensaje: '¿Estás seguro de eliminar este usuario?',
+      tipo: 'peligro',
+      textoConfirmar: 'Eliminar'
+    });
+    if (!confirmado) return;
 
     try {
       await eliminarUsuario(id);
       setUsuarios((prev) => prev.filter((u) => u.id !== id));
     } catch (error) {
       console.error('Error deleting usuario:', error);
-      alert('No se pudo eliminar el usuario.');
+      mostrarModal({
+        titulo: 'Error',
+        mensaje: 'No se pudo eliminar el usuario.',
+        tipo: 'error'
+      });
     }
   };
 

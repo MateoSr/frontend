@@ -1,9 +1,11 @@
 import InputForum from '../../components/inputForum/inputForum';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useModal } from '../../context/modal/ModalContext';
 import './login.css';
 
 function Login({ endpoint = '/api/login', redirectTo = '/' }) {
+  const { mostrarModal } = useModal();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = async (e) => {
@@ -32,10 +34,18 @@ function Login({ endpoint = '/api/login', redirectTo = '/' }) {
         
         window.location.href = destino;
       } else {
-        alert(data.error);
+        mostrarModal({
+          titulo: 'Error de inicio de sesión',
+          mensaje: data.error,
+          tipo: 'error'
+        });
       }
     } catch (error) {
-      alert("Error de conexión con el servidor");
+      mostrarModal({
+        titulo: 'Error',
+        mensaje: "Error de conexión con el servidor",
+        tipo: 'error'
+      });
     }
   };
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { crearReserva, crearReservaEncargado, obtenerDatosReserva } from '../services/reservaService';
+import { useModal } from '../context/modal/ModalContext';
 
 const calcularHoraFin = (horaInicio, duracionMinutos) => {
   if (!horaInicio) return '';
@@ -15,6 +16,7 @@ const calcularHoraFin = (horaInicio, duracionMinutos) => {
 };
 
 export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => {
+  const { mostrarModal: mostrarAviso } = useModal();
   const esEncargado = modo === 'encargado';
   const [reserva, setReserva] = useState({
     complejo,
@@ -41,8 +43,13 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
   useEffect(() => {
     const token = localStorage.getItem('gestor_token');
     if (!token) {
-      alert('No estás logueado. Por favor, inicia sesión.');
-      window.location.href = '/login';
+      mostrarAviso({
+        titulo: 'Sesión requerida',
+        mensaje: 'No estás logueado. Por favor, inicia sesión.',
+        tipo: 'info'
+      }).then(() => {
+        window.location.href = '/login';
+      });
       return undefined;
     }
 
@@ -80,7 +87,11 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
 
       } catch (error) {
         if (error.name !== 'AbortError') {
-          alert(`Error cargando información: ${error.message}`);
+          mostrarAviso({
+            titulo: 'Error',
+            mensaje: `Error cargando información: ${error.message}`,
+            tipo: 'error'
+          });
         }
       } finally {
         if (!controller.signal.aborted) {
@@ -91,7 +102,7 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
 
     cargarDatos();
     return () => controller.abort();
-  }, [complejo, canchaNro, esEncargado]);
+  }, [complejo, canchaNro, esEncargado, mostrarAviso]);
 
   const handleChange = (event) => {
     setTitular((titularActual) => ({
@@ -103,12 +114,20 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
   const handleConfirmar = async () => {
     const token = localStorage.getItem('gestor_token');
     if (!token) {
-      alert('Sesión expirada. Por favor, inicia sesión nuevamente.');
+      mostrarAviso({
+        titulo: 'Sesión expirada',
+        mensaje: 'Sesión expirada. Por favor, inicia sesión nuevamente.',
+        tipo: 'error'
+      });
       return;
     }
 
     if (esEncargado && (!titular.nombre || !titular.apellido || !titular.telefono || !titular.email)) {
-      alert('Completá todos los datos del cliente para agendar el turno.');
+      mostrarAviso({
+        titulo: 'Datos incompletos',
+        mensaje: 'Completá todos los datos del cliente para agendar el turno.',
+        tipo: 'info'
+      });
       return;
     }
 
@@ -141,7 +160,11 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
       setMostrarModal(true);
     } catch (error) {
       console.error(error);
-      alert(`Error creando la reserva: ${error.message}`);
+      mostrarAviso({
+        titulo: 'Error',
+        mensaje: `Error creando la reserva: ${error.message}`,
+        tipo: 'error'
+      });
     }
   };
 

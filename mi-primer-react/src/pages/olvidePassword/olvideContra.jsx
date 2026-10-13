@@ -2,9 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import InputForum from '../../components/inputForum/inputForum';
+import { useModal } from '../../context/modal/ModalContext';
 import './olvideContra.css'
 
 function OlvideContra() {
+    const { mostrarModal } = useModal();
     const [email, setEmail] = useState('')
     const [estado, setEstado] = useState('')
 
@@ -17,12 +19,20 @@ function OlvideContra() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),
             });
-            const data = await response.json
+            const data = await response.json()
             if (response.ok) {
-                alert("Email enviado")
+                mostrarModal({
+                    titulo: 'Email enviado',
+                    mensaje: data.message || "Email enviado",
+                    tipo: 'exito'
+                })
             }
         } catch (error) {
-            alert("Error en servidor ")
+            mostrarModal({
+                titulo: 'Error',
+                mensaje: "Error en servidor",
+                tipo: 'error'
+            })
         }
     }
 

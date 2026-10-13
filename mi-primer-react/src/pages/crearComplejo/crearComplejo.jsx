@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { crearComplejo } from '../../services/complejosService';
 import { obtenerLocalidades } from '../../services/localidadesService';
 import { obtenerUsuarioPorId } from '../../services/usuariosService';
+import { useModal } from '../../context/modal/ModalContext';
 import { createPortal } from 'react-dom';
 import './crearComplejo.css';
 
 export const CrearComplejo = () => {
   const navigate = useNavigate();
+  const { mostrarModal: mostrarAviso } = useModal();
 
   const [localidades, setLocalidades] = useState([]);
   const [formData, setFormData] = useState({
@@ -92,11 +94,20 @@ export const CrearComplejo = () => {
       };
 
       await crearComplejo(payload);
-      alert('¡Complejo registrado con éxito!');
-      navigate('/admin/complejos');
+      setMostrarModal(false);
+      await mostrarAviso({
+        titulo: 'Complejo creado',
+        mensaje: '¡Complejo registrado con éxito!',
+        tipo: 'exito'
+      });
+      navigate('/administrar-complejos');
     } catch (err) {
       setMostrarModal(false);
-      alert(err.message);
+      mostrarAviso({
+        titulo: 'Error',
+        mensaje: err.message,
+        tipo: 'error'
+      });
     } finally {
       setCargando(false);
     }
