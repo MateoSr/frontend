@@ -10,7 +10,7 @@ import { ModalCanchaDueno } from '../../components/modalCanchaDueno/modalCanchaD
 import { TarjetaDatosComplejoMenu } from '../../components/tarjetaDatosComplejoMenu/tarjetaDatosComplejoMenu';
 import { useModal } from '../../context/modal/ModalContext';
 
-const diasSemana = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado",];
+const diasSemana = ["", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
 
 function formatearHora(valor) {
   if (typeof valor !== "string") return "-";
@@ -110,11 +110,11 @@ function ComplejoDueño() {
   // Handlers Horarios
   const handleIniciarAgregar = () => {
     const horariosExistentes = complejo.horarios || [];
-    const diaLibre = diasSemana.findIndex((_, index) => !horariosExistentes.some(h => h.nroDia === index));
+    const diaLibre = diasSemana.findIndex((_, index) => index !== 0 && !horariosExistentes.some(h => h.nroDia === index));
     
     setEsEdicionHorario(false);
     setModoEdicion(true);
-    setDiaEditando(diaLibre !== -1 ? diaLibre : 0);
+    setDiaEditando(diaLibre !== -1 ? diaLibre : 1);
     setFormHorario({ horaApertura: '09:00', horaCierre: '23:00' });
   };
 
@@ -134,8 +134,8 @@ function ComplejoDueño() {
       const payload = {
         complejoId:Number(id),
         nroDia: Number(diaEditando),
-        horarioApertura: formHorario.horaApertura,
-        horarioCierre: formHorario.horaCierre
+        horaApertura: formHorario.horaApertura,
+        horaCierre: formHorario.horaCierre
       };
 
       if (esEdicionHorario) {
@@ -222,7 +222,7 @@ function ComplejoDueño() {
                     onChange={(e) => setDiaEditando(e.target.value)}
                     disabled={esEdicionHorario}
                   >
-                    {diasSemana.map((dia, idx) => (
+                    {diasSemana.map((dia, idx) => idx !== 0 && (
                       <option key={idx} value={idx}>{dia}</option>
                     ))}
                   </select>

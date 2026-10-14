@@ -6,7 +6,7 @@ import { obtenerDetalleComplejo } from "../../services/complejosService";
 import "./detalleComplejo.css";
 
 const diasSemana = [
-    "Domingo",
+    "",
     "Lunes",
     "Martes",
     "Miercoles",

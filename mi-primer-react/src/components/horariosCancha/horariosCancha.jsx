@@ -3,15 +3,8 @@ import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import './horariosCancha.css';
 
-function extraerMinutos(valor, convertirHoraLocal = false) {
+function extraerMinutos(valor) {
   if (typeof valor !== 'string') return null;
-
-  if (convertirHoraLocal && valor.includes('T')) {
-    const fecha = new Date(valor);
-    if (!Number.isNaN(fecha.getTime())) {
-      return fecha.getUTCHours() * 60 + fecha.getUTCMinutes();
-    }
-  }
 
   const hora = valor.match(/(?:T|^)(\d{1,2}):(\d{2})/);
   return hora ? Number(hora[1]) * 60 + Number(hora[2]) : null;
@@ -191,8 +184,8 @@ export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false
                   const fechaActualStr = fechaAUsar.split('T')[0];
                   const esMismaFecha = fechaTurnoStr === fechaActualStr;
 
-                  const turnoInicio = extraerMinutos(turno.horaInicio, true);
-                  let turnoFin = extraerMinutos(turno.horaFin, true);
+                  const turnoInicio = extraerMinutos(turno.horaInicio);
+                  let turnoFin = extraerMinutos(turno.horaFin);
 
                   if (turnoInicio !== null && turnoFin !== null && turnoFin <= turnoInicio) {
                     turnoFin += 24 * 60;
@@ -209,8 +202,8 @@ export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false
                   const estado = turno.estado?.toLowerCase();
                   const fechaTurnoStr = turno.fecha ? turno.fecha.split('T')[0] : '';
                   const fechaActualStr = fechaAUsar.split('T')[0];
-                  const turnoInicio = extraerMinutos(turno.horaInicio, true);
-                  let turnoFin = extraerMinutos(turno.horaFin, true);
+                  const turnoInicio = extraerMinutos(turno.horaInicio);
+                  let turnoFin = extraerMinutos(turno.horaFin);
                   if (turnoInicio !== null && turnoFin !== null && turnoFin <= turnoInicio) {
                     turnoFin += 24 * 60;
                   }
@@ -259,7 +252,7 @@ export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false
             <>
               <h3>Detalle de la reserva</h3>
               <p>Cancha: {reservaSeleccionada.cancha.nro}</p>
-              <p>Horario: {formatearHora(extraerMinutos(reservaSeleccionada.turno.horaInicio, true))} a {formatearHora(extraerMinutos(reservaSeleccionada.turno.horaFin, true))}</p>
+              <p>Horario: {formatearHora(extraerMinutos(reservaSeleccionada.turno.horaInicio))} a {formatearHora(extraerMinutos(reservaSeleccionada.turno.horaFin))}</p>
               <p>Estado: {reservaSeleccionada.turno.estado}</p>
               <p><strong>{reservaSeleccionada.turno.cliente?.personaFisica
                 ? `${reservaSeleccionada.turno.cliente.personaFisica.nombre} ${reservaSeleccionada.turno.cliente.personaFisica.apellido}`

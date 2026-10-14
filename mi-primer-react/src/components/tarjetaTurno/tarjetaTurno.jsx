@@ -11,10 +11,10 @@ const formatearFecha = (fechaISO) => {
   return `${day}/${month}/${year}`;
 };
 
-const formatearHora = (horaISO) => {
-  if (!horaISO) return "";
-  const horaSolo = horaISO.split('T')[1]; 
-  return horaSolo.substring(0, 5); 
+const formatearHora = (hora) => {
+  if (!hora) return "";
+  const coincidencia = String(hora).match(/(\d{1,2}):(\d{2})/);
+  return coincidencia ? `${coincidencia[1].padStart(2, '0')}:${coincidencia[2]}` : hora;
 };
 
 export function TarjetaTurno({ turno, onCancelar }) {
@@ -31,6 +31,7 @@ export function TarjetaTurno({ turno, onCancelar }) {
     switch (est.toLowerCase()) {
       case 'reservado': return 'estado-reservado';
       case 'en curso': return 'estado-encurso';
+      case 'finalizado': return 'estado-finalizado';
       case 'completado': return 'estado-finalizado';
       case 'cancelado': return 'estado-cancelado';
       default: return '';
