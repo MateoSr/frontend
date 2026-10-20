@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import './horariosCancha.css';
-import { fechaArgentinaISO, minutosArgentina } from '../../utils/fechas';
+import { fechaArgentinaISO, minutosArgentina, ahoraArgentinaMinutos, fechaArgentinaHoyISO } from '../../utils/fechas';
 
 function extraerMinutos(valor) {
   if (typeof valor !== 'string') return null;
@@ -211,12 +211,17 @@ export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false
                   return coincideTurno(turno, fechaAUsar, inicioBloque, finBloque);
                 });
 
+                const fechaHoyAR = fechaArgentinaHoyISO();
+                const minutosAhoraAR = ahoraArgentinaMinutos();
+                const esBloquePasado = fechaAUsar === fechaHoyAR && inicioBloque < minutosAhoraAR;
+
                 return (
                   <div 
                     key={`celda-${cancha.nro}-${inicioBloque}`} 
-                    className={`celda-turno ${estaOcupado ? 'ocupada' : 'libre'}`}
-                    title={esPanelEncargado && !estaOcupado ? 'Hacé clic para agendar un turno' : undefined}
+                    className={`celda-turno ${estaOcupado ? 'ocupada' : esBloquePasado ? 'pasado' : 'libre'}`}
+                    title={esBloquePasado ? 'Horario ya pasado' : esPanelEncargado && !estaOcupado ? 'Hacé clic para agendar un turno' : undefined}
                     onClick={evento => {
+                      if (esBloquePasado) return;
                       if (estaOcupado && esPanelEncargado && turnoActivo) {
                         mostrarReserva(cancha, turnoActivo, evento);
                       } else if (!estaOcupado) {

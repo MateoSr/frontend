@@ -38,3 +38,15 @@ export function formatearFechaAR(instanteUTC) {
   const [anio, mes, dia] = fecha.split('-');
   return `${dia}/${mes}/${anio}`;
 }
+
+export function ahoraArgentinaMinutos() {
+  const ahora = new Date();
+  const enAR = new Date(ahora.getTime() - OFFSET_AR_MS);
+  return enAR.getUTCHours() * 60 + enAR.getUTCMinutes();
+}
+
+export function fechaArgentinaHoyISO() {
+  const ahora = new Date();
+  const enAR = new Date(ahora.getTime() - OFFSET_AR_MS);
+  return enAR.toISOString().split('T')[0];
+}
