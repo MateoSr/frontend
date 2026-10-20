@@ -1,24 +1,12 @@
 import { useState } from 'react';
 import { useModal } from '../../context/modal/ModalContext';
+import { formatearFechaAR, horaArgentinaHHmm } from '../../utils/fechas';
 import './tarjetaTurno.css';
 
 const imagen_fallo = "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=600";
 
-const formatearFecha = (fechaISO) => {
-  if (!fechaISO) return "";
-  const fechaSolo = fechaISO.split('T')[0]; 
-  const [year, month, day] = fechaSolo.split('-');
-  return `${day}/${month}/${year}`;
-};
-
-const formatearHora = (hora) => {
-  if (!hora) return "";
-  const coincidencia = String(hora).match(/(\d{1,2}):(\d{2})/);
-  return coincidencia ? `${coincidencia[1].padStart(2, '0')}:${coincidencia[2]}` : hora;
-};
-
 export function TarjetaTurno({ turno, onCancelar }) {
-  const { id, canchaNro, horaInicio, estado, imagenUrl, complejo, cancha, fecha } = turno;
+  const { id, canchaNro, estado, imagenUrl, complejo, cancha, fechaInicio } = turno;
   const { confirmar } = useModal();
   
   const [imgSrc, setImgSrc] = useState(imagenUrl || imagen_fallo);
@@ -88,8 +76,8 @@ export function TarjetaTurno({ turno, onCancelar }) {
         <p className="cancha-info"> Deporte {cancha.tipoCancha.deporte}</p>
         
         <div className="tarjeta-fechas">
-          <span className="fecha-item">📅 {formatearFecha(fecha)}</span>
-          <span className="fecha-item">⏰ {formatearHora(horaInicio)}</span>
+          <span className="fecha-item">📅 {formatearFechaAR(fechaInicio)}</span>
+          <span className="fecha-item">⏰ {horaArgentinaHHmm(fechaInicio)}</span>
         </div>
       </div>
     </div>

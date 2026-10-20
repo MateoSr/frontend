@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { crearReserva, crearReservaEncargado, obtenerDatosReserva } from '../services/reservaService';
 import { useModal } from '../context/modal/ModalContext';
+import { combinarFechaHoraUTC } from '../utils/fechas';
 
 const calcularHoraFin = (horaInicio, duracionMinutos) => {
   if (!horaInicio) return '';
@@ -131,14 +132,13 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
       return;
     }
 
-    const horaFin = calcularHoraFin(reserva.horaInicio, reserva.duracion);
+    const horaFin = calcularHoraFin(horaInicio, reserva.duracion);
     const turno = {
       tipoTurnoId: 1,
       complejoId: parseInt(complejo, 10),
       canchaNro: parseInt(canchaNro, 10),
-      fecha,
-      horaInicio,
-      horaFin,
+      fechaInicio: combinarFechaHoraUTC(fecha, horaInicio),
+      fechaFin: combinarFechaHoraUTC(fecha, horaFin),
       estado: 'Reservado'
     };
 

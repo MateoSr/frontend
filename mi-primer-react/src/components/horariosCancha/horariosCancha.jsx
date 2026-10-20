@@ -2,12 +2,39 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import './horariosCancha.css';
+import { fechaArgentinaISO, minutosArgentina } from '../../utils/fechas';
 
 function extraerMinutos(valor) {
   if (typeof valor !== 'string') return null;
 
   const hora = valor.match(/(?:T|^)(\d{1,2}):(\d{2})/);
   return hora ? Number(hora[1]) * 60 + Number(hora[2]) : null;
+}
+
+// Minutos desde medianoche en horario Argentina para un turno UTC.
+function minutosTurnoAR(turno) {
+  const inicio = minutosArgentina(turno.fechaInicio);
+  return inicio;
+}
+
+function fechaTurnoAR(turno) {
+  return fechaArgentinaISO(turno.fechaInicio);
+}
+
+// Determina si un turno (guardado en UTC) cae en el día y bloque indicados (hora Argentina).
+function coincideTurno(turno, fechaAUsar, inicioBloque, finBloque) {
+  const estado = turno.estado?.toLowerCase();
+  if (estado === 'cancelado' || estado === 'cancelada') return false;
+
+  const fechaActualStr = fechaAUsar.split('T')[0];
+  if (fechaTurnoAR(turno) !== fechaActualStr) return false;
+
+  const turnoInicio = minutosTurnoAR(turno);
+  let turnoFin = minutosArgentina(turno.fechaFin);
+  if (turnoInicio === null || turnoFin === null) return false;
+  if (turnoFin <= turnoInicio) turnoFin += 24 * 60;
+
+  return inicioBloque < turnoFin && finBloque > turnoInicio;
 }
 
 function formatearHora(minutos) {
@@ -178,41 +205,10 @@ export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false
                 const hora = formatearHora(inicioBloque);
                 
                 const estaOcupado = (cancha.turnos ?? []).some(turno => {
-                  const estado = turno.estado?.toLowerCase();
-                  
-                  const fechaTurnoStr = turno.fecha ? turno.fecha.split('T')[0] : '';
-                  const fechaActualStr = fechaAUsar.split('T')[0];
-                  const esMismaFecha = fechaTurnoStr === fechaActualStr;
-
-                  const turnoInicio = extraerMinutos(turno.horaInicio);
-                  let turnoFin = extraerMinutos(turno.horaFin);
-
-                  if (turnoInicio !== null && turnoFin !== null && turnoFin <= turnoInicio) {
-                    turnoFin += 24 * 60;
-                  }
-
-                  return esMismaFecha 
-                    && estado !== 'cancelado'
-                    && turnoInicio !== null
-                    && turnoFin !== null
-                    && inicioBloque < turnoFin
-                    && finBloque > turnoInicio;
+                  return coincideTurno(turno, fechaAUsar, inicioBloque, finBloque);
                 });
                 const turnoActivo = (cancha.turnos ?? []).find(turno => {
-                  const estado = turno.estado?.toLowerCase();
-                  const fechaTurnoStr = turno.fecha ? turno.fecha.split('T')[0] : '';
-                  const fechaActualStr = fechaAUsar.split('T')[0];
-                  const turnoInicio = extraerMinutos(turno.horaInicio);
-                  let turnoFin = extraerMinutos(turno.horaFin);
-                  if (turnoInicio !== null && turnoFin !== null && turnoFin <= turnoInicio) {
-                    turnoFin += 24 * 60;
-                  }
-                  return fechaTurnoStr === fechaActualStr
-                    && estado !== 'cancelado'
-                    && turnoInicio !== null
-                    && turnoFin !== null
-                    && inicioBloque < turnoFin
-                    && finBloque > turnoInicio;
+                  return coincideTurno(turno, fechaAUsar, inicioBloque, finBloque);
                 });
 
                 return (
@@ -252,7 +248,7 @@ export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false
             <>
               <h3>Detalle de la reserva</h3>
               <p>Cancha: {reservaSeleccionada.cancha.nro}</p>
-              <p>Horario: {formatearHora(extraerMinutos(reservaSeleccionada.turno.horaInicio))} a {formatearHora(extraerMinutos(reservaSeleccionada.turno.horaFin))}</p>
+              <p>Horario: {formatearHora(minutosTurnoAR(reservaSeleccionada.turno))} a {formatearHora(minutosArgentina(reservaSeleccionada.turno.fechaFin))}</p>
               <p>Estado: {reservaSeleccionada.turno.estado}</p>
               <p><strong>{reservaSeleccionada.turno.cliente?.personaFisica
                 ? `${reservaSeleccionada.turno.cliente.personaFisica.nombre} ${reservaSeleccionada.turno.cliente.personaFisica.apellido}`

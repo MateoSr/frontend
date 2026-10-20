@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { HorariosCancha } from '../../components/horariosCancha/horariosCancha';
 import { obtenerComplejoDelEncargado } from '../../services/complejosService';
+import { fechaArgentinaISO } from '../../utils/fechas';
 import './menuEncargado.css';
 
 function obtenerFechaHoy() {
@@ -51,7 +52,7 @@ function MenuEncargado() {
 
       <section className="menu-encargado-resumen">
         <div><strong>{complejo.canchas?.length ?? 0}</strong><span>Canchas</span></div>
-        <div><strong>{complejo.canchas?.reduce((total, cancha) => total + (cancha.turnos?.filter(turno => turno.fecha?.slice(0, 10) === fecha).length ?? 0), 0)}</strong><span>Reservas del día</span></div>
+        <div><strong>{complejo.canchas?.reduce((total, cancha) => total + (cancha.turnos?.filter(turno => fechaArgentinaISO(turno.fechaInicio) === fecha).length ?? 0), 0)}</strong><span>Reservas del día</span></div>
         <div><strong>{complejo.horarios?.filter(horario => horario.nroDia === (new Date(`${fecha}T00:00:00Z`).getUTCDay() || 7)).length ? 'Abierto' : 'Cerrado'}</strong><span>Estado del complejo</span></div>
       </section>
 
