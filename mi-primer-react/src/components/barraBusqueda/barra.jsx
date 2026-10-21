@@ -1,10 +1,27 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { fechaArgentinaHoyISO } from '../../utils/fechas';
 import './barra.css'
+
+const HORARIOS = [
+    "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+    "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30",
+    "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30",
+    "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"
+];
+
+function getHoraActualAR() {
+    const ahora = new Date();
+    const enAR = new Date(ahora.getTime() - 3 * 60 * 60 * 1000);
+    return enAR.toISOString().slice(11, 16);
+}
 
 function BarraBusqueda() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
+
+    const hoyAR = fechaArgentinaHoyISO();
+    const horaActualAR = getHoraActualAR();
 
     const [deportes, setDeportes] = useState([]);
     const deporteActual = searchParams.get('deporte') || '';
@@ -27,19 +44,41 @@ function BarraBusqueda() {
 
     const ciudadActual = searchParams.get('ciudad') || '';
     const fechaActual = searchParams.get('fecha') || '';
+    const fechaPorDefecto = fechaActual && fechaActual >= hoyAR ? fechaActual : hoyAR;
     const horaActual = searchParams.get('hora') || '';
+
+    const [fechaSeleccionada, setFechaSeleccionada] = useState(fechaPorDefecto);
+    const [horaSeleccionada, setHoraSeleccionada] = useState(horaActual);
 
     useEffect(() => {
         setDeporteSeleccionado(deporteActual);
     }, [deporteActual]);
+
+    useEffect(() => {
+        if (fechaSeleccionada === hoyAR && horaSeleccionada && horaSeleccionada < horaActualAR) {
+            const primeroDisponible = HORARIOS.find(h => h >= horaActualAR);
+            setHoraSeleccionada(primeroDisponible || '');
+        }
+    }, [fechaSeleccionada, hoyAR, horaActualAR, horaSeleccionada]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const ciudad = formData.get('ciudad');
         const deporte = formData.get('deporte');
-        const fecha = formData.get('fecha');
-        const hora = formData.get('hora');
+        let fecha = formData.get('fecha') || fechaSeleccionada;
+        let hora = formData.get('hora') || horaSeleccionada;
+
+        if (fecha && fecha < hoyAR) {
+            fecha = hoyAR;
+            setFechaSeleccionada(fecha);
+        }
+
+        if (fecha === hoyAR && hora && hora < horaActualAR) {
+            const primeroDisponible = HORARIOS.find(h => h >= horaActualAR);
+            hora = primeroDisponible || '';
+            setHoraSeleccionada(hora);
+        }
 
         const params = new URLSearchParams();
         if (ciudad) params.set('ciudad', ciudad);
@@ -77,43 +116,21 @@ function BarraBusqueda() {
                 </div>
                 <div className='filtro-form'>
                     <svg className='icon' viewBox="0 0 24 24" width="24" height="24"><path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" /><path d="M16 2V6" /><path d="M8 2V6" /><path d="M3 10H21" /></svg>
-                    <input name='fecha' type='date' style={{ color: "gray" }} defaultValue={fechaActual} required></input>
+                    <input name='fecha' type='date' min={hoyAR} style={{ color: "gray" }} value={fechaSeleccionada} onChange={(e) => setFechaSeleccionada(e.target.value)} required></input>
                 </div>
                 <div className='filtro-form'>
                     <svg className='icon' viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 12" /></svg>
-                    <select name='hora' required className="filtro-select" defaultValue={horaActual}>
-                        <option value="" disabled hidden style={{ color: "gray" }}>Seleccionar un horario</option>
-                        <option value="09:00">09:00</option>
-                        <option value="09:30">09:30</option>
-                        <option value="10:00">10:00</option>
-                        <option value="10:30">10:30</option>
-                        <option value="11:00">11:00</option>
-                        <option value="11:30">11:30</option>
-                        <option value="12:00">12:00</option>
-                        <option value="12:30">12:30</option>
-                        <option value="13:00">13:00</option>
-                        <option value="13:30">13:30</option>
-                        <option value="14:00">14:00</option>
-                        <option value="14:30">14:30</option>
-                        <option value="15:00">15:00</option>
-                        <option value="15:30">15:30</option>
-                        <option value="16:00">16:00</option>
-                        <option value="16:30">16:30</option>
-                        <option value="17:00">17:00</option>
-                        <option value="17:30">17:30</option>
-                        <option value="18:00">18:00</option>
-                        <option value="18:30">18:30</option>
-                        <option value="19:00">19:00</option>
-                        <option value="19:30">19:30</option>
-                        <option value="20:00">20:00</option>
-                        <option value="20:30">20:30</option>
-                        <option value="21:00">21:00</option>
-                        <option value="21:30">21:30</option>
-                        <option value="22:00">22:00</option>
-                        <option value="22:30">22:30</option>
-                        <option value="23:00">23:00</option>
-                        <option value="23:30">23:30</option>
-                        <option value="00:00">00:00</option>
+                    <select name='hora' required className="filtro-select" value={horaSeleccionada} onChange={(e) => setHoraSeleccionada(e.target.value)}>
+                        <option value="" disabled hidden style={{ color: "gray" }}>Seleccionar un Horario</option>
+                        {HORARIOS.map((h) => {
+                            const esHoy = fechaSeleccionada === hoyAR;
+                            const deshabilitado = esHoy && h < horaActualAR;
+                            return (
+                                <option key={h} value={h} disabled={deshabilitado}>
+                                    {h}
+                                </option>
+                            );
+                        })}
                     </select>
                 </div>
                 <div className='filtro-form'>

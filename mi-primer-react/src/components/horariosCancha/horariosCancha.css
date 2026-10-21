@@ -75,6 +75,12 @@
   opacity: 0.2;
 }
 
+.celda-turno.pasado {
+  background-color: #e5e7eb;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 .modal-contenido {
   position: fixed;
   text-align: center;

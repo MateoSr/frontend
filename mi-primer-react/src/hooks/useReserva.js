@@ -132,6 +132,16 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
       return;
     }
 
+    const fechaInicioUTC = combinarFechaHoraUTC(fecha, horaInicio);
+    if (fechaInicioUTC && fechaInicioUTC < new Date()) {
+      mostrarAviso({
+        titulo: 'Horario inválido',
+        mensaje: 'No se pueden crear turnos para fechas u horarios pasados.',
+        tipo: 'error'
+      });
+      return;
+    }
+
     const horaFin = calcularHoraFin(horaInicio, reserva.duracion);
     const turno = {
       tipoTurnoId: 1,
