@@ -4,7 +4,7 @@ import foto_nosotros from '../../assets/foto-nosotros.jpg';
 function Aboutus() {
   return (
     <main>
-      <h1 className='titulo-aboutus'>Sobre Nosotros</h1>
+      <h1 className='titulo-aboutus'>Sobre nosotros</h1>
       <div className='contenedor-aboutus'>
         <div className='contenedor-aboutus-izquierda'>
           <img className='contenedor-aboutus-imagen' src={foto_nosotros}></img>

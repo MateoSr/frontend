@@ -23,13 +23,13 @@
 }
 
 .tarjeta-blanca {
-  background-color: #ffffff;
+  background-color: var(--color-blanco);
   border: 1px solid #f0f2f5;
 }
 
 .tarjeta-naranja {
   background-color: #e6793a;
-  color: #ffffff;
+  color: var(--color-blanco);
 }
 
 .tarjeta-header {
@@ -41,7 +41,7 @@
 .titulo-metrica {
   font-size: 14px;
   font-weight: 500;
-  color: #6b7280;
+  color: var(--color-texto-tenue);
 }
 
 .tarjeta-naranja .titulo-metrica {
@@ -73,7 +73,7 @@
   letter-spacing: -0.5px;
 }
 
-.tarjeta-naranja .valor-metrica { color: #ffffff; }
+.tarjeta-naranja .valor-metrica { color: var(--color-blanco); }
 
 .subtitulo-metrica {
   font-size: 12px;
@@ -109,7 +109,7 @@
 .punto-verde {
   width: 8px;
   height: 8px;
-  background-color: #10b981;
+  background-color: var(--color-exito);
   border-radius: 50%;
   display: inline-block;
 }

@@ -1,7 +1,7 @@
 .contenedor-horarios-cancha {
-  background: white;
+  background: var(--color-blanco);
   border-radius: 12px;
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--color-fondo-claro);
   padding: 1.5rem;
   font-family: sans-serif;
   overflow-x: auto;
@@ -9,14 +9,14 @@
 
 .fila-cabecera, .fila-cancha {
   display: flex;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--color-fondo-claro);
 }
 
 .columna-info-vacia, .info-cancha {
   width: 250px; 
   flex-shrink: 0;
   padding: 1rem;
-  border-right: 1px solid #f0f0f0;
+  border-right: 1px solid var(--color-fondo-claro);
 }
 
 .info-cancha h4 {
@@ -50,11 +50,11 @@
   font-size: 13px;
   color: #666;
   padding: 0.5rem 0;
-  border-right: 1px solid #f0f0f0;
+  border-right: 1px solid var(--color-fondo-claro);
 }
 
 .celda-turno {
-  border-right: 1px solid #f0f0f0;
+  border-right: 1px solid var(--color-fondo-claro);
   min-height: 60px;
   border-radius: 6px;
   transition: all 0.2s ease;
@@ -71,7 +71,7 @@
 }
 
 .celda-turno.libre:hover {
-  background-color: #ee5801; 
+  background-color: var(--color-primario); 
   opacity: 0.2;
 }
 
@@ -80,9 +80,9 @@
   text-align: center;
   top: 1rem;
   left: 1rem;
-  background: white;
+  background: var(--color-blanco);
   padding: 1.5rem;
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--color-fondo-claro);
   border-radius: 12px;
   width: min(360px, calc(100vw - 3rem));
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
@@ -96,8 +96,8 @@
 }
 
 .btn-pagar {
-  background: #ee5801;
-  color: white;
+  background: var(--color-primario);
+  color: var(--color-blanco);
   border: none;
   padding: 8px 16px;
   border-radius: 6px;

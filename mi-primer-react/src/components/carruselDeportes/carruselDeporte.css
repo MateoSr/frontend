@@ -5,7 +5,7 @@
     width: 100%; 
     overflow: hidden; 
     position: relative;
-    background-color: #ee5801;
+    background-color: var(--color-primario);
     pointer-events: none; 
     padding: 20px 0;
     height: fit-content;
@@ -19,9 +19,9 @@
     z-index: 10;
     text-align: center;
     transform: translateY(-3vh);
-    color: white;
+    color: var(--color-blanco);
     margin-top: 2vh;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--fuente-base);
     font-size: 4.5vh;
 }
 

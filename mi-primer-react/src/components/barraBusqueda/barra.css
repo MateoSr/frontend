@@ -62,8 +62,8 @@
 
 .boton {
   padding: 10px 25px;
-  background-color: #ee5801;
-  color: white;
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
   font-weight: bold;
   border: none;
   border-radius: 30px;
@@ -73,17 +73,17 @@
 }
 
 .boton:hover {
-  background-color: #d14d00;
+  background-color: var(--color-primario-hover);
   transform: scale(1.05);
 }
 
 .boton:active {
-  background-color: #ff5e00;
+  background-color: var(--color-primario-claro);
   transform: scale(0.95);
 }
 
 .icon {
-  stroke: #ff5e00;
+  stroke: var(--color-primario-claro);
   fill: rgb(255, 255, 255);
   flex-shrink: 0;
 }
@@ -124,7 +124,7 @@
 
   .filtro-form {
     margin: 10px 15px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--color-fondo-claro);
     padding-bottom: 10px;
   }
 

@@ -6,9 +6,9 @@
 }
 
 .admin-complejos-card {
-  background: #ffffff;
+  background: var(--color-blanco);
   border-radius: 16px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-borde);
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
   padding: 24px;
 }
@@ -29,23 +29,23 @@
 .admin-complejos-titulo-box h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-texto);
   margin: 0;
 }
 
 .admin-complejos-badge {
-  background-color: #f1f5f9;
-  color: #475569;
+  background-color: var(--color-fondo-gris);
+  color: var(--color-texto-terciario);
   font-size: 0.8rem;
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--color-borde);
 }
 
 .btn-nuevo-complejo {
-  background-color: #ee5801;
-  color: #ffffff;
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
   border: none;
   padding: 10px 18px;
   border-radius: 8px;
@@ -56,7 +56,7 @@
 }
 
 .btn-nuevo-usuario:hover {
-  background-color: #d44d00;
+  background-color: var(--color-primario-hover);
 }
 
 .admin-usuarios-toolbar {
@@ -68,13 +68,13 @@
   max-width: 320px;
   padding: 8px 12px;
   font-size: 0.9rem;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--color-borde-gris);
   border-radius: 8px;
   outline: none;
 }
 
 .input-busqueda-complejo:focus {
-  border-color: #ee5801;
+  border-color: var(--color-primario);
 }
 
 .admin-complejos-tabla-container {
@@ -89,35 +89,35 @@
 }
 
 .admin-complejos-tabla thead tr {
-  background-color: #f8fafc;
+  background-color: var(--color-fondo);
 }
 
 .admin-complejos-tabla th {
   padding: 12px 16px;
   font-size: 0.75rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--color-texto-gris);
   text-transform: uppercase;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--color-borde);
 }
 
 .admin-complejos-tabla td {
   padding: 14px 16px;
   font-size: 0.9rem;
-  color: #334155;
-  border-bottom: 1px solid #f1f5f9;
+  color: var(--color-texto-secundario);
+  border-bottom: 1px solid var(--color-fondo-gris);
   vertical-align: middle;
 }
 
 .col-id {
-  color: #64748b;
+  color: var(--color-texto-gris);
   font-weight: 600;
   width: 60px;
 }
 
 .col-nombre {
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-texto);
 }
 
 .col-acciones {
@@ -141,9 +141,9 @@
 }
 
 .btn-tabla-editar {
-  background-color: #f8fafc;
-  color: #2563eb;
-  border: 1px solid #cbd5e1;
+  background-color: var(--color-fondo);
+  color: var(--color-info);
+  border: 1px solid var(--color-borde-gris);
 }
 
 .btn-tabla-editar:hover {
@@ -151,19 +151,19 @@
 }
 
 .btn-tabla-eliminar {
-  background-color: #fef2f2;
-  color: #dc2626;
+  background-color: var(--color-error-fondo);
+  color: var(--color-error-fuerte);
   border: 1px solid #fecaca;
 }
 
 .btn-tabla-eliminar:hover {
-  background-color: #fee2e2;
+  background-color: var(--color-error-borde);
 }
 
 .admin-estado-tabla {
   text-align: center;
   padding: 30px;
-  color: #64748b;
+  color: var(--color-texto-gris);
 }
 /* Responsive mobile */
 @media (max-width: 640px) { .admin-complejos-header { flex-direction: column; align-items: stretch; gap: 12px; } }

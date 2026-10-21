@@ -1,9 +1,9 @@
 
 .tarjeta-complejo {
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--color-fondo-claro);
   border-radius: 16px;
   overflow: hidden;
-  background-color: white;
+  background-color: var(--color-blanco);
   display: flex;
   flex-direction: column;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -31,7 +31,7 @@
   bottom: 12px;
   right: 12px;
   background-color: rgba(0, 0, 0, 0.75);
-  color: white;
+  color: var(--color-blanco);
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 13px;
@@ -78,7 +78,7 @@
 }
 
 .turno-button {
-  background: white;
+  background: var(--color-blanco);
   border: 1px solid #bdc3c7;
   padding: 8px 16px;
   border-radius: 25px;
@@ -90,7 +90,7 @@
 }
 
 .turno-button:hover {
-  border-color: #ee5801;
-  color: #ee5801;
+  border-color: var(--color-primario);
+  color: var(--color-primario);
   background-color: #fde0d0;
 }

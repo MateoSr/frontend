@@ -23,7 +23,7 @@
 }
 .boton-menuAdmin {
   background-color: #e65100;
-  color: white;
+  color: var(--color-blanco);
   border: none;
   padding: 15px 30px;
   font-size: 1.1rem;
@@ -38,7 +38,7 @@
 }
 
 .boton-menuAdmin:active {
-  background-color: #ff5e00;
+  background-color: var(--color-primario-claro);
 }
 /* Responsive mobile */
 @media (max-width: 768px) { .contenedor-menuAdmin-boton { flex-direction: column; align-items: stretch; gap: 12px; padding: 0 20px; } .boton-menuAdmin { margin: 0; width: 100%; min-height: 52px; } .titulo-menuAdmin { margin-top: 32px; font-size: clamp(1.5rem,7vw,2rem); text-align:center; padding:0 16px; } }

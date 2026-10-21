@@ -75,7 +75,7 @@ function ResetPassword() {
             <div className="reset-card">
                 <div className="reset-image-side">
                     <div className="imagen-overlay">
-                        <h3>Renová ru contraseña.</h3>
+                        <h3>Renová tu contraseña.</h3>
                         <p>Actualizá tu contraseña para volver a la cancha y seguir jugando.</p>
                     </div>
                 </div>
@@ -98,7 +98,7 @@ function ResetPassword() {
                             style={{ 'marginBottom': '20px' }}
                         />
                         <InputForum
-                            label="Confirmar Contraseña"
+                            label="Confirmar contraseña"
                             type="password"
                             id="confirmpassword"
                             value={credenciales.confirmpassword}

@@ -9,10 +9,10 @@ const diasSemana = [
     "",
     "Lunes",
     "Martes",
-    "Miercoles",
+    "Miércoles",
     "Jueves",
     "Viernes",
-    "Sabado",
+    "Sábado",
     "Domingo"
 
 ];
@@ -53,7 +53,7 @@ function DetalleComplejo() {
 
         if (id) cargarComplejo();
         else {
-            setError("No se recibio el id del complejo.");
+            setError("No se recibió el id del complejo.");
             setCargando(false);
         }
 
@@ -90,7 +90,7 @@ function DetalleComplejo() {
                 </div>
             </details>
             <details className="detalle-complejo-acordeon" open>
-                <summary>Horarios del Club</summary>
+                <summary>Horarios del club</summary>
                 <div className="contenido-acordeon">
                     {(complejo.horarios ?? []).map((horario) => (
                         <div className="horario-fila" key={`${horario.complejoId}-${horario.nroDia}`}>

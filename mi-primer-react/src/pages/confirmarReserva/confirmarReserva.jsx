@@ -52,7 +52,7 @@ export default function ConfirmarReserva() {
         <div className="reserva-grid">
           
           <div className="card-reserva card-turno">
-            <h2>Detalles del Turno</h2>
+            <h2>Detalles del turno</h2>
             
             <div className="info-grupo con-linea">
               <span className="info-label">Complejo</span>
@@ -103,7 +103,7 @@ export default function ConfirmarReserva() {
 
             <div className="info-row con-linea">
               <div className="info-grupo">
-                <span className="info-label">Hora Inicio</span>
+                <span className="info-label">Hora inicio</span>
                 <div className="info-detalle">
                   <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -113,7 +113,7 @@ export default function ConfirmarReserva() {
               </div>
 
               <div className="info-grupo">
-                <span className="info-label">Hora Fin</span>
+                <span className="info-label">Hora fin</span>
                 <div className="info-detalle">
                   <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -124,7 +124,7 @@ export default function ConfirmarReserva() {
             </div>
 
             {!esEncargado && <div className="info-grupo precio-row con-linea">
-              <span className="info-label">Precio Seña</span>
+              <span className="info-label">Precio seña</span>
               <div className="info-detalle">
                 <svg className="icon icon-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -136,7 +136,7 @@ export default function ConfirmarReserva() {
             </div>}
 
             {!esEncargado && <div className="info-grupo precio-row total">
-              <span className="info-label">Precio Total</span>
+              <span className="info-label">Precio total</span>
               <div className="info-detalle">
                 <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -150,7 +150,7 @@ export default function ConfirmarReserva() {
 
           {/* Tarjeta 2: Datos del Titular */}
           <div className="card-reserva card-titular">
-            <h2>{esEncargado ? 'Cliente del turno' : 'Datos del Titular'}</h2>
+            <h2>{esEncargado ? 'Cliente del turno' : 'Datos del titular'}</h2>
             
             <form className="reserva-form">
               <InputForum
@@ -204,7 +204,7 @@ export default function ConfirmarReserva() {
         {/* Botón de Confirmar centrado */}
         <div className="confirmar-action">
           <button type="button" className="btn-confirmar" onClick={handleConfirmar}>
-            {esEncargado ? 'Agendar turno' : 'Confirmar Reserva'}
+            {esEncargado ? 'Agendar turno' : 'Confirmar reserva'}
           </button>
         </div>
       </div>
@@ -213,7 +213,7 @@ export default function ConfirmarReserva() {
       {mostrarModal && (
   <div className="modal-overlay">
     <div className="modal-confirmacion-contenido">
-      <h2>{esEncargado ? '¡Turno agendado!' : '¡Reserva Confirmada!'}</h2>
+      <h2>{esEncargado ? '¡Turno agendado!' : '¡Reserva confirmada!'}</h2>
       
       <p>
         {esEncargado

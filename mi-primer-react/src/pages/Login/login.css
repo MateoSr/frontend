@@ -4,7 +4,7 @@
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  background-color: #f8fafc;
+  background-color: var(--color-fondo);
   font-family: system-ui, -apple-system, sans-serif;
   padding: 20px;
   box-sizing: border-box;
@@ -16,11 +16,11 @@
   width: 100%;
   max-width: 900px;
   min-height: 550px;
-  background-color: #ffffff;
+  background-color: var(--color-blanco);
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e2e8f0;
+  box-shadow: var(--sombra-media);
+  border: 1px solid var(--color-borde);
 }
 
 /* --- LADO IZQUIERDO: Formulario --- */
@@ -42,26 +42,26 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  background-color: #ee5801;
-  color: #ffffff;
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
   font-weight: 800;
   font-size: 1.2rem;
   border-radius: 12px;
   margin-bottom: 12px;
-  box-shadow: 0 4px 12px rgba(238, 88, 1, 0.3);
+  box-shadow: 0 4px 12px var(--color-primario-suave);
 }
 
 .login-header h2 {
   margin: 0;
   font-size: 1.75rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-texto);
 }
 
 .login-subtitle {
   margin-top: 6px;
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--color-texto-gris);
 }
 
 .login-form {
@@ -83,7 +83,7 @@
 
 .redirect-forgot {
   text-decoration: none;
-  color: #ee5801;
+  color: var(--color-primario);
   font-size: 13px;
   font-weight: 600;
 }
@@ -96,19 +96,19 @@
 .login-boton {
   margin-top: 10px;
   padding: 12px 20px;
-  background-color: #ee5801;
-  color: white;
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
   border: none;
   border-radius: 10px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(238, 88, 1, 0.25);
+  box-shadow: 0 4px 12px var(--color-primario-suave-25);
 }
 
 .login-boton:hover {
-  background-color: #d14d00;
+  background-color: var(--color-primario-hover);
   transform: translateY(-1px);
 }
 
@@ -121,8 +121,8 @@
   margin-top: 28px;
   text-align: center;
   font-size: 0.875rem;
-  color: #64748b;
-  border-top: 1px solid #f1f5f9;
+  color: var(--color-texto-gris);
+  border-top: 1px solid var(--color-fondo-gris);
   padding-top: 20px;
 }
 
@@ -132,7 +132,7 @@
 
 .redirect-register {
   text-decoration: none;
-  color: #ee5801;
+  color: var(--color-primario);
   font-weight: 700;
   margin-left: 4px;
 }
@@ -161,7 +161,7 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: 40px;
-  color: #ffffff;
+  color: var(--color-blanco);
 }
 
 .image-overlay h3 {
@@ -173,7 +173,7 @@
 .image-overlay p {
   font-size: 0.9rem;
   margin: 0;
-  color: #e2e8f0;
+  color: var(--color-borde);
   line-height: 1.4;
 }
 

@@ -1,6 +1,6 @@
 .tarjeta-complejo {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--color-blanco);
+  border: 1px solid var(--color-borde);
   border-radius: 16px;
   overflow: hidden;
   display: flex;
@@ -17,7 +17,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 3/1; /* Esto obliga a que el recuadro siempre tenga forma de rectángulo prolijo */
-  background-color: #f1f5f9; /* Color de fondo mientras carga la imagen */
+  background-color: var(--color-fondo-gris); /* Color de fondo mientras carga la imagen */
   overflow: hidden;
 }
 
@@ -36,8 +36,8 @@
   position: absolute;
   top: 12px;
   right: 12px;
-  background-color: #10b981;
-  color: white;
+  background-color: var(--color-exito);
+  color: var(--color-blanco);
   font-size: 11px;
   font-weight: 600;
   padding: 4px 10px;
@@ -57,25 +57,25 @@
 .complejo-nombre {
   font-size: 16px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-texto);
   margin: 0 0 4px 0;
 }
 
 .complejo-direccion {
   font-size: 13px;
-  color: #64748b;
+  color: var(--color-texto-gris);
   margin: 0 0 8px 0;
 }
 
 .complejo-detalles {
   font-size: 13px;
-  color: #334155;
+  color: var(--color-texto-secundario);
   margin: 0;
 }
 
 .btn-ver-detalle {
-  background-color: #f1f5f9;
-  color: #0f172a;
+  background-color: var(--color-fondo-gris);
+  color: var(--color-texto);
   border: none;
   border-radius: 8px;
   padding: 10px 16px;
@@ -89,6 +89,6 @@
 }
 
 .btn-ver-detalle:hover {
-  background-color: #ee5801;
-  color: white;
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
 }

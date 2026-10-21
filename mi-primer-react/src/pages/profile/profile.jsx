@@ -176,14 +176,14 @@ function Profile(){
       </div>
 
       <div className='card-seccion'>
-        <h2 className='seccion-subtitulo'>Datos Personales </h2>
+        <h2 className='seccion-subtitulo'>Datos personales</h2>
         <form onSubmit={actualizarCambios}>
           <div className='grid-inputs'>
           <InputForum label="Nombre" type="text" id="nombre" name="nombre" value={usuario?.nombre || ""} readOnly={!isEditing} onChange={actualizarCambio}/>
           <InputForum label="Apellido" type="text" id="apellido" name="apellido" value={usuario?.apellido || ""} readOnly={!isEditing} onChange={actualizarCambio}/>
           <InputForum label="Email" type="email" id="email" name="email" value={usuario?.email || ""} readOnly = {!isEditing} onChange={actualizarCambio} />
           <InputForum label="Teléfono" type="tel" id="telefono" name="telefono" value={usuario?.telefono || ""} readOnly = {!isEditing} onChange={actualizarCambio} />
-          <InputForum label="Fecha de Nacimiento" type="date" id="fechaNacimiento" name="fechaNacimiento" value={usuario?.fechaNacimiento || ""} readOnly = {!isEditing}onChange={actualizarCambio}/>
+          <InputForum label="Fecha de nacimiento" type="date" id="fechaNacimiento" name="fechaNacimiento" value={usuario?.fechaNacimiento || ""} readOnly = {!isEditing}onChange={actualizarCambio}/>
           </div>
           
           <div className="acciones-form">
@@ -193,7 +193,7 @@ function Profile(){
               </button>
             ) : (
               <>
-                <button type="submit" className='btn-primario'>Guardar Cambios</button>
+                <button type="submit" className='btn-primario'>Guardar cambios</button>
                 <button type="button" className='btn-secundario' onClick={handleCancel} >Cancelar</button>
               </>
             )}
@@ -202,7 +202,7 @@ function Profile(){
       </div>
 
       <div className="card-seccion">
-        <h2 className="seccion-subtitulo">Tus Ultimos Turnos</h2>
+        <h2 className="seccion-subtitulo">Tus últimos turnos</h2>
         {turnos.length > 0 ? (
           <div className="grid-turnos">
             {turnos.slice(0, 3).map((turno) => (
@@ -217,7 +217,7 @@ function Profile(){
           <p className="turnos-vacio">No tenés turnos registrados actualmente.</p>
         )}
       </div>
-      <button type="button" className='btn-primario' onClick={cerrarSesion}>Cerrar Sesion</button>
+      <button type="button" className='btn-primario' onClick={cerrarSesion}>Cerrar sesión</button>
     </section>
     )
 }

@@ -83,7 +83,7 @@ function AdministrarUsuarios() {
             className="btn-nuevo-usuario"
             onClick={() => navigate('/crear-usuario')}
           >
-            + Nuevo Usuario
+            + Nuevo usuario
           </button>
         </div>
 
@@ -108,10 +108,10 @@ function AdministrarUsuarios() {
             <table className="admin-usuarios-tabla">
               <thead>
                 <tr>
-                  <th>NRO.</th>
-                  <th>EMAIL</th>
-                  <th>TELÉFONO</th>
-                  <th>ROL</th>
+                  <th>Nro.</th>
+                  <th>Email</th>
+                  <th>Teléfono</th>
+                  <th>Rol</th>
                   <th className="text-center"></th>
                 </tr>
               </thead>

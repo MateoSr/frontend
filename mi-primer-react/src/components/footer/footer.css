@@ -9,7 +9,7 @@
     align-items: flex-start;
     gap: 40px;
     text-align: center;
-    color: white;
+    color: var(--color-blanco);
     flex-wrap: wrap;
 }
 
@@ -31,12 +31,12 @@
 
 .contactos-list li a {
     text-decoration: none;
-    color: white;
+    color: var(--color-blanco);
     transition: color 0.3s ease;
 }
 
 .contactos-list li a:hover {
-    color: #ee5801;
+    color: var(--color-primario);
 }
 
 .redes {
@@ -47,12 +47,12 @@
 }
 
 .redes svg {
-    fill: white;
+    fill: var(--color-blanco);
     transition: fill 0.3s ease;
 }
 
 .redes svg:hover {
-    fill: #ee5801;
+    fill: var(--color-primario);
 }
 
 .titulo-footer {

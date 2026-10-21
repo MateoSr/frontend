@@ -41,7 +41,7 @@ function Footer() {
             <div className='enlace'>
                 <p><strong className='titulo-footer'>Ayuda</strong></p>
                 <ul className='contactos-list'>
-                    <li><Link to="/faq">Preguntas Frecuentes</Link></li>
+                    <li><Link to="/faq">Preguntas frecuentes</Link></li>
                     <li><Link to="/sobre-nosotros">Sobre Nosotros</Link></li>
                 </ul>
             </div>

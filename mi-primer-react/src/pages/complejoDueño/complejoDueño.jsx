@@ -10,7 +10,7 @@ import { ModalCanchaDueno } from '../../components/modalCanchaDueno/modalCanchaD
 import { TarjetaDatosComplejoMenu } from '../../components/tarjetaDatosComplejoMenu/tarjetaDatosComplejoMenu';
 import { useModal } from '../../context/modal/ModalContext';
 
-const diasSemana = ["", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+const diasSemana = ["", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
 function formatearHora(valor) {
   if (typeof valor !== "string") return "-";
@@ -203,7 +203,7 @@ function ComplejoDueño() {
           <div className='complejoDueño-horarios'>
             <div className='horarios-header-acciones'>
               <div>
-                <h2 className='complejoDueño-horarios-subtitulo'>Horarios del Club</h2>
+                <h2 className='complejoDueño-horarios-subtitulo'>Horarios del club</h2>
               </div>
               {!modoEdicion && (
                 <button type="button" className="btn-agregar-horario" onClick={handleIniciarAgregar}>

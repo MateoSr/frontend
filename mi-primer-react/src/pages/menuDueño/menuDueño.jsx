@@ -67,8 +67,8 @@ function MenuDueño() {
     <main className='contenedor-menuDueño'>
         <div className="partesuperior">
             <div className="titsulos">
-                <h1 className='titulo-menuDueño'>Buen Dia Dueño</h1>
-                <p> Aqui tienes la informacion acerca de tus complejos</p>
+                <h1 className='titulo-menuDueño'>Buen día, dueño</h1>
+                <p>Acá tenés la información sobre tus complejos</p>
             </div>
             <div className="fecha">
 
@@ -113,7 +113,7 @@ function MenuDueño() {
             </div>
             <div className='infoComplejos'> 
                 <div className="seccion-header">
-                    <h2>Mis Complejos</h2>
+                    <h2>Mis complejos</h2>
                     <span className="sub-hint">Selecciona uno para gestionar horarios y detalles</span>
                 </div>
 
@@ -134,8 +134,8 @@ function MenuDueño() {
             </div>
             <div className='reportesFinancieros'>
                 <div className='reportes-header'>
-                    <h2>Reportes Financieros</h2>
-                    <span className="sub-hint">Estadisticas de tus complejos actualizadas</span>
+                    <h2>Reportes financieros</h2>
+                    <span className="sub-hint">Estadísticas de tus complejos actualizadas</span>
                 </div>
                 <div>
                     

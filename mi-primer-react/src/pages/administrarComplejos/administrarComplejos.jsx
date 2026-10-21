@@ -74,7 +74,7 @@ function AdministrarComplejos() {
             className="btn-nuevo-complejo"
             onClick={() => navigate('/crear-complejo')}
           >
-            + Nuevo Complejo
+            + Nuevo complejo
           </button>
         </div>
 
@@ -101,10 +101,10 @@ function AdministrarComplejos() {
             <table className="admin-complejos-tabla">
               <thead>
                 <tr>
-                  <th>NRO.</th>
-                  <th>NOMBRE</th>
-                  <th>DIRECCIÓN</th>
-                  <th className="text-center">ACCIONES</th>
+                  <th>Nro.</th>
+                  <th>Nombre</th>
+                  <th>Dirección</th>
+                  <th className="text-center">Acciones</th>
                 </tr>
               </thead>
               <tbody>

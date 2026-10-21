@@ -30,7 +30,7 @@
 }
 
 .input-precio:focus {
-  border-color: #ee5801;
+  border-color: var(--color-primario);
 }
 
 .input-precio::-webkit-inner-spin-button, 
@@ -44,8 +44,8 @@
 }
 
 .btn-aplicar-precio {
-  background-color: #ee5801;
-  color: white;
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
   border: none;
   border-radius: 50%;
   min-width: 28px;
@@ -60,7 +60,7 @@
 }
 
 .btn-aplicar-precio:hover {
-  background-color: #ee5801;
+  background-color: var(--color-primario);
 }
 
 .lista-precios {
@@ -83,11 +83,11 @@
 }
 
 .lista-precios label:hover {
-  color: #ee5801;
+  color: var(--color-primario);
 }
 
 .lista-precios input[type="radio"] {
-  accent-color: #ee5801;
+  accent-color: var(--color-primario);
   cursor: pointer;
   width: 16px;
   height: 16px;

@@ -44,11 +44,11 @@ function OlvideContra() {
                     <div className="olvide-header">
                         <div className="logo-marca">TL</div>
                         <h2>Turno Libre</h2>
-                        <p className="olvide-subtitulo">Ingresa tu email para restablecer tu usuario</p>
+                        <p className="olvide-subtitulo">Ingresá tu email para restablecer tu usuario</p>
                     </div>
                     <form className='olvide-form' onSubmit={enviarEmail}>
-                        <InputForum label="Correo Electrónico" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tuemail@ejemplo.com" required={true} readOnly={false} />
-                        <button className='olvide-boton' type='submit'> Enviar</button>
+                        <InputForum label="Correo electrónico" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tuemail@ejemplo.com" required={true} readOnly={false} />
+                        <button className='olvide-boton' type='submit'>Enviar</button>
                     </form>
                     <div className="register-footer">
                         <p>¿Ya tenés una cuenta? <Link to="/login" className="redirect-login">Iniciar sesión</Link></p>
@@ -57,7 +57,7 @@ function OlvideContra() {
                 {/* LADO DERECHO */}
                 <div className="olvide-imagen">
                     <div className="imagen-overlay">
-                        <h3>Recupera tu usuario</h3>
+                        <h3>Recuperá tu usuario</h3>
                         <p>Te enviaremos un mail para poder continuar</p>
                     </div>
                 </div>

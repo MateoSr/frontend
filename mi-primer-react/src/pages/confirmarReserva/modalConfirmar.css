@@ -15,13 +15,13 @@
 
 /* Caja principal del Modal */
 .modal-confirmacion-contenido {
-  background-color: #ffffff;
+  background-color: var(--color-blanco);
   padding: 32px 24px;
   border-radius: 16px;
   max-width: 420px;
   width: 90%;
   text-align: center;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--sombra-fuerte);
   animation: modalEntrada 0.3s ease-out forwards;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .modal-confirmacion-contenido p {
-  color: #374151;
+  color: var(--color-texto-oscuro);
   font-size: 1rem;
   line-height: 1.5;
   margin-bottom: 8px;
@@ -57,15 +57,15 @@
 
 .modal-confirmacion-contenido .modal-subtexto {
   font-size: 0.9rem !important;
-  color: #6b7280 !important;
+  color: var(--color-texto-tenue) !important;
   margin-bottom: 24px !important;
 }
 
 /* Botón que redirige al Home */
 .btn-modal-home {
   width: 100%;
-  background-color: #ee5801;
-  color: #ffffff;
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
   border: none;
   padding: 12px 20px;
   font-size: 1rem;
@@ -76,5 +76,5 @@
 }
 
 .btn-modal-home:hover {
-  background-color: #d44d00;
+  background-color: var(--color-primario-hover);
 }

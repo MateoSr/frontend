@@ -1,16 +1,16 @@
 :root {
-  --primary-orange: #ee5801;
-  --hover-orange: #d44d00;
-  --bg-light: #f8fafc;
+  --primary-orange: var(--color-primario);
+  --hover-orange: var(--color-primario-hover);
+  --bg-light: var(--color-fondo);
   --text-dark: #1e293b;
-  --text-muted: #64748b;
-  --border-color: #e2e8f0;
+  --text-muted: var(--color-texto-gris);
+  --border-color: var(--color-borde);
 }
 
 body {
   margin: 0;
   background-color: var(--bg-light);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--fuente-base);
   color: var(--text-dark);
 }
 
@@ -58,7 +58,7 @@ body {
 
 /* Tarjetas */
 .card-reserva {
-  background: #ffffff;
+  background: var(--color-blanco);
   border-radius: 18px;
   padding: 36px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
@@ -179,7 +179,7 @@ h2 {
 
 .input-group input:focus {
   border-color: var(--primary-orange);
-  box-shadow: 0 0 0 4px rgba(238, 88, 1, 0.15);
+  box-shadow: 0 0 0 4px var(--color-primario-fondo);
 }
 
 /* Botón inferior */
@@ -192,13 +192,13 @@ h2 {
 .btn-confirmar {
   padding: 16px 64px;
   background-color: var(--primary-orange);
-  color: #ffffff;
+  color: var(--color-blanco);
   border: none;
   border-radius: 12px;
   font-size: 1.15rem;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(238, 88, 1, 0.3);
+  box-shadow: 0 6px 18px var(--color-primario-suave);
   transition: all 0.2s ease;
 }
 

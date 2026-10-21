@@ -105,9 +105,9 @@ export function ModalCanchaDueno({ isOpen, tipo, cancha, onClose, onConfirmar })
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h3>
-            {esCrear && 'Agregar Nueva Cancha'}
+            {esCrear && 'Agregar nueva cancha'}
             {esEdicion && `Editar Cancha N° ${cancha?.nro}`}
-            {esPrecio && `Gestionar Precios - Cancha N° ${cancha?.nro}`}
+            {esPrecio && `Gestionar precios - Cancha N° ${cancha?.nro}`}
           </h3>
           <button type="button" className="btn-cerrar-modal" onClick={onClose}>
             <X size={20} />
@@ -118,7 +118,7 @@ export function ModalCanchaDueno({ isOpen, tipo, cancha, onClose, onConfirmar })
         {(esCrear || esEdicion) && (
           <form onSubmit={handleSubmit} className="modal-form">
             <div className="form-grupo">
-              <label>Número / ID de Cancha</label>
+              <label>Número / ID de cancha</label>
               <input
                 type="number"
                 name="nro"
@@ -131,14 +131,14 @@ export function ModalCanchaDueno({ isOpen, tipo, cancha, onClose, onConfirmar })
             </div>
 
             <div className="form-grupo">
-              <label>Deporte / Tipo de Cancha</label>
+              <label>Deporte / tipo de cancha</label>
               <select
                 name="tipoCanchaId"
                 value={formCancha.tipoCanchaId}
                 onChange={handleCanchaChange}
                 required
               >
-                <option value="">Seleccionar deporte</option>
+                <option value="">Seleccionar un deporte</option>
                 {deportes.map((dep) => (
                             <option key={dep.id} value={dep.id}>
                                 {dep.deporte}
@@ -166,7 +166,7 @@ export function ModalCanchaDueno({ isOpen, tipo, cancha, onClose, onConfirmar })
                 Cancelar
               </button>
               <button type="submit" className="btn-guardar">
-                {esEdicion ? 'Guardar Cambios' : 'Crear Cancha'}
+                {esEdicion ? 'Guardar cambios' : 'Crear cancha'}
               </button>
             </div>
           </form>
@@ -176,7 +176,7 @@ export function ModalCanchaDueno({ isOpen, tipo, cancha, onClose, onConfirmar })
         {esPrecio && (
           <form onSubmit={handleSubmit} className="modal-form">
             <div className="form-grupo">
-              <label>Fecha Desde</label>
+              <label>Fecha desde</label>
               <input
                 type="date"
                 name="fechaDesde"
@@ -187,7 +187,7 @@ export function ModalCanchaDueno({ isOpen, tipo, cancha, onClose, onConfirmar })
             </div>
 
             <div className="form-grupo">
-              <label>Precio Base ($)</label>
+              <label>Precio base ($)</label>
               <input
                 type="number"
                 name="precioBase"
@@ -199,7 +199,7 @@ export function ModalCanchaDueno({ isOpen, tipo, cancha, onClose, onConfirmar })
             </div>
 
             <div className="form-grupo">
-              <label>Precio Adicional ($)</label>
+              <label>Precio adicional ($)</label>
               <input
                 type="number"
                 name="precioAdicional"
@@ -210,7 +210,7 @@ export function ModalCanchaDueno({ isOpen, tipo, cancha, onClose, onConfirmar })
             </div>
 
             <div className="form-grupo">
-              <label>Precio Seña ($)</label>
+              <label>Precio seña ($)</label>
               <input
                 type="number"
                 name="precioSena"
@@ -226,7 +226,7 @@ export function ModalCanchaDueno({ isOpen, tipo, cancha, onClose, onConfirmar })
                 Cancelar
               </button>
               <button type="submit" className="btn-guardar">
-                Guardar Precios
+                Guardar precios
               </button>
             </div>
           </form>

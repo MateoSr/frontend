@@ -59,7 +59,7 @@ function Login({ endpoint = '/api/login', redirectTo = '/' }) {
           </div>
           <form onSubmit={handleSubmit} className="login-form">
             <InputForum
-              label="Correo Electrónico"
+              label="Correo electrónico"
               type="email"
               id="email"
               value={email}
@@ -86,7 +86,7 @@ function Login({ endpoint = '/api/login', redirectTo = '/' }) {
               </div>
             </div>
             <button className="login-boton" type="submit">
-              Iniciar Sesión
+              Iniciar sesión
             </button>
           </form>
           <div className="login-footer">

@@ -90,7 +90,7 @@ export const CrearUsuario = () => {
     <>
       <main className="crear-usuario-contenedor">
         <h2 className="crear-usuario-titulo">
-          Crear Nuevo {tipoUsuarioId === 4 ? 'Dueño' : 'Encargado'}
+          Crear nuevo {tipoUsuarioId === 4 ? 'dueño' : 'encargado'}
         </h2>
 
         {/* Switch para cambiar entre IDs de tipoUsuario */}
@@ -192,7 +192,7 @@ export const CrearUsuario = () => {
       {mostrarModal && createPortal(
         <div className="modal-overlay">
           <div className="modal-confirmacion-contenido">
-            <h2>Verificar Datos</h2>
+            <h2>Verificar datos</h2>
 
             <p><strong>Rol:</strong> {tipoUsuarioId === 4 ? 'Dueño (ID 4)' : 'Encargado (ID 2)'}</p>
             <p><strong>Email:</strong> {formData.email}</p>

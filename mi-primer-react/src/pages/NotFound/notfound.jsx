@@ -11,7 +11,7 @@ function NotFound() {
       </p>
       
       <Link to="/" className="notfound-home">
-        <strong>Volver al Inicio</strong>
+        <strong>Volver al inicio</strong>
       </Link>
     </div>
   );

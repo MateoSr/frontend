@@ -12,8 +12,8 @@ const INICIO_POR_ROL = {
 };
 
 const PANEL_POR_ROL = {
-  Encargado: { to: '/menuEncargado', texto: 'Mi Panel' },
-  'Dueño': { to: '/menuDueño', texto: 'Mi Panel' },
+  Encargado: { to: '/menuEncargado', texto: 'Mi panel' },
+  'Dueño': { to: '/menuDueño', texto: 'Mi panel' },
   Administrador: { to: '/menuAdmin', texto: 'Panel admin' },
 };
 
@@ -69,12 +69,12 @@ function Header() {
               </li>
               {estaLog ? (
                 <li onClick={() => setMenuOpen(false)}>
-                  <NavLink to='/perfil' className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Mi Perfil</NavLink>
+                  <NavLink to='/perfil' className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Mi perfil</NavLink>
                 </li>
               ) : (
                 <li onClick={() => setMenuOpen(false)}>
                   <NavLink
-                    to='/login' className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Iniciar Sesión</NavLink>
+                    to='/login' className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>Iniciar sesión</NavLink>
                 </li>
               )}
             </>

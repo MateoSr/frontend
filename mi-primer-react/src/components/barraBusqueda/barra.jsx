@@ -54,7 +54,7 @@ function BarraBusqueda() {
             <form className='barraBusqueda-form' onSubmit={handleSubmit}>
                 <div className='filtro-form'>
                     <svg className='icon' viewBox="0 0 24 24" width="24" height="24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
-                    <input name='ciudad' type='text' placeholder='Buscar Ciudad' defaultValue={ciudadActual} required></input>
+                    <input name='ciudad' type='text' placeholder='Buscar ciudad' defaultValue={ciudadActual} required></input>
                 </div>
                 <div className='filtro-form'>
                     <svg className='icon' viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="10" /><path d="M12 2v20M2 12h20" /><path d="M6.2 6.2c3.2 3.2 3.2 8.4 0 11.6" /><path d="M17.8 6.2c-3.2 3.2-3.2 8.4 0 11.6" /></svg>
@@ -66,7 +66,7 @@ function BarraBusqueda() {
                         required
                     >
                         <option value="" disabled hidden>
-                            Seleccionar un Deporte
+                            Seleccionar un deporte
                         </option>
                         {deportes.map((dep) => (
                             <option key={dep.id} value={dep.id}>
@@ -82,7 +82,7 @@ function BarraBusqueda() {
                 <div className='filtro-form'>
                     <svg className='icon' viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 12" /></svg>
                     <select name='hora' required className="filtro-select" defaultValue={horaActual}>
-                        <option value="" disabled hidden style={{ color: "gray" }}>Seleccionar un Horario</option>
+                        <option value="" disabled hidden style={{ color: "gray" }}>Seleccionar un horario</option>
                         <option value="09:00">09:00</option>
                         <option value="09:30">09:30</option>
                         <option value="10:00">10:00</option>

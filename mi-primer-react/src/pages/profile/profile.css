@@ -16,17 +16,17 @@
   font-size: 2.2rem;
   font-weight: 800;
   margin: 0 0 0.4rem 0;
-  color: #0f172a;
+  color: var(--color-texto);
 }
 
 .perfil-subtitulo {
   font-size: 0.95rem;
-  color: #64748b;
+  color: var(--color-texto-gris);
   margin: 0;
 }
 
 .card-seccion {
-  background-color: #f8fafc;
+  background-color: var(--color-fondo);
   border: none;
   border-left: 5px solid #f97316;
   border-radius: 0 16px 16px 0;
@@ -38,7 +38,7 @@
 .seccion-subtitulo {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-texto);
   margin-top: 0;
   margin-bottom: 1.5rem;
 }
@@ -58,7 +58,7 @@
 
 .btn-primario {
   background-color: #f97316;
-  color: #ffffff;
+  color: var(--color-blanco);
   border: none;
   padding: 0.7rem 1.8rem;
   font-size: 0.95rem;
@@ -69,13 +69,13 @@
 }
 
 .btn-accent:hover {
-  background-color: #ea580c;
+  background-color: var(--color-primario-oscuro);
   transform: translateY(-1px);
 }
 
 .btn-secundario {
-  background-color: #e2e8f0;
-  color: #475569;
+  background-color: var(--color-borde);
+  color: var(--color-texto-terciario);
   border: none;
   padding: 0.7rem 1.5rem;
   font-size: 0.95rem;
@@ -86,11 +86,11 @@
 }
 
 .btn-secundario:hover {
-  background-color: #cbd5e1;
+  background-color: var(--color-borde-gris);
 }
 
 .turnos-vacio p {
-  color: #64748b;
+  color: var(--color-texto-gris);
   font-size: 0.95rem;
   margin: 0;
 }

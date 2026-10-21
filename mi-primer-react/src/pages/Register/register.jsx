@@ -73,7 +73,7 @@ function Register() {
         <div className="register-form-side">
           <div className="register-header">
             <div className="brand-logo">TL</div>
-            <h2>Crear Cuenta</h2>
+            <h2>Crear cuenta</h2>
             <p className="register-subtitle">Sumate a Turno Libre y empezá a reservar</p>
           </div>
 
@@ -105,7 +105,7 @@ function Register() {
 
             {/* Email */}
             <InputForum
-              label="Correo Electrónico"
+              label="Correo electrónico"
               type="email"
               id="email"
               value={usuario.email}
@@ -141,7 +141,7 @@ function Register() {
 
             {/* Fecha de Nacimiento */}
             <InputForum
-              label="Fecha de Nacimiento"
+              label="Fecha de nacimiento"
               type="date"
               id="fechaNacimiento"
               value={usuario.fechaNacimiento}
@@ -165,7 +165,7 @@ function Register() {
                 readOnly={false}
               />
               <InputForum
-                label="Confirmar Contraseña"
+                label="Confirmar contraseña"
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"

@@ -69,8 +69,8 @@ main{
 
 .boton-home {
     padding: 10px 20px;
-    background-color: #ee5801;
-    color: white;
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
     border: none;
     border-radius: 30px;
     cursor: pointer;
@@ -86,7 +86,7 @@ main{
 }
 
 .boton-home:active {
-    background-color: #ff5e00;
+    background-color: var(--color-primario-claro);
 }
 
 .contenedor-home-imagen{

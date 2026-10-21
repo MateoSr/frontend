@@ -101,7 +101,7 @@ export function TarjetaDatosComplejoMenu({ complejo, onGuardar }) {
         <form onSubmit={handleSubmit} className="form-editar-datos-complejo">
           <div className="grilla-form-datos-complejo">
             <div className="campo-datos-complejo">
-              <label>Nombre del Complejo</label>
+              <label>Nombre del complejo</label>
               <input
                 type="text"
                 name="nombre"

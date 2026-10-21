@@ -116,7 +116,7 @@ export const CrearComplejo = () => {
   return (
     <>
       <main className='crear-complejo-contenedor'>
-        <h2 className='crear-complejo-titulo'>Crear Nuevo Complejo</h2>
+        <h2 className='crear-complejo-titulo'>Crear nuevo complejo</h2>
         {error && <div className="mensaje-error">{error}</div>}
         <form className='crear-complejo-form' onSubmit={handleSubmit}>
           <div className='crear-complejo-campo'>
@@ -158,7 +158,7 @@ export const CrearComplejo = () => {
       {mostrarModal && datosConfirmacion && createPortal(
         <div className="modal-overlay-complejo">
           <div className="modal-confirmacion-contenido-complejo">
-            <h2>Verificar Datos del Complejo</h2>
+            <h2>Verificar datos del complejo</h2>
 
             <p><strong>Nombre:</strong> {datosConfirmacion.nombre}</p>
             <p><strong>Dirección:</strong> {datosConfirmacion.direccion}</p>

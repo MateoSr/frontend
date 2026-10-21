@@ -58,7 +58,7 @@ function Software() {
         <main>
             <section className='seccion-contenedor-imagen-complejo'>
                 <div className='contenedor-imagen-complejo'>
-                    <h1>Plataforma para Complejos Deportivos</h1>
+                    <h1>Plataforma para complejos deportivos</h1>
                     <h2>Optimizá el alquiler de tus canchas</h2>
                     <button className='btn-ver-planes' onClick={scrollToPlanes}>
                         Ver Planes
@@ -69,7 +69,7 @@ function Software() {
             <section className='seccion-celular'>
                 <div className='contenedor-imagen-celular'></div>
                 <div className='contenedor-texto-celular'>
-                    <h1>Reserva Automática de Turnos</h1>
+                    <h1>Reserva automática de turnos</h1>
                     <h2>Todas tus reservas, en un solo lugar</h2>
                     <p>Conecta WhatsApp, Instagram, Facebook y Google en un único sistema. Tus clientes consultan la disponibilidad en tiempo real y aseguran su cancha en segundos, sin intermediarios ni esperas.</p>
                 </div>
@@ -85,8 +85,8 @@ function Software() {
                     <form onSubmit={handleSubmit} className='formulario-contratacion'>
                         <InputForum label="Razón social" type="text" id="RazonSocial" value={formData.razonSocial} onChange={(e) => setFormData({...formData, razonSocial: e.target.value})} placeholder="Messi S.A." required={true} readOnly={false} />
                         <InputForum label="Nombre de contacto" type="text" id="nombre" value={formData.nombreContacto} onChange={(e) => setFormData({...formData, nombreContacto: e.target.value})} placeholder="Antonella Roccuzzo" required={true} readOnly={false} />
-                        <InputForum label="Correo Electrónico" type="email" id="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="tuemail@ejemplo.com" required={true} readOnly={false} />
-                        <InputForum label="Plan de Preferencia" type="select" id="plan" value={formData.plan} onChange={(e) => setFormData({...formData, plan: e.target.value})} required={true} options={[
+                        <InputForum label="Correo electrónico" type="email" id="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="tuemail@ejemplo.com" required={true} readOnly={false} />
+                        <InputForum label="Plan de preferencia" type="select" id="plan" value={formData.plan} onChange={(e) => setFormData({...formData, plan: e.target.value})} required={true} options={[
                             { value: 'Plan Base', label: 'Plan Base (1-3 Canchas)' },
                             { value: 'Plan Estándar', label: 'Plan Estándar (4-6 Canchas)' },
                             { value: 'Plan Full', label: 'Plan Full (7+ Canchas)' }
@@ -102,7 +102,7 @@ function Software() {
                             />
                         </div>
                         <button type="submit" className="btn-enviar-formulario">
-                            Enviar Solicitud
+                            Enviar solicitud
                         </button>
                     </form>
                 </div>

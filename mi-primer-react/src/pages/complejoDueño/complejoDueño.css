@@ -1,6 +1,6 @@
 .complejoDueño-container {
   padding: 30px;
-  background-color: #f8fafc;
+  background-color: var(--color-fondo);
   min-height: 100vh;
   box-sizing: border-box;
 }
@@ -13,7 +13,7 @@
 .complejoDueño-header h1 {
   margin: 0;
   font-size: 28px;
-  color: #0f172a;
+  color: var(--color-texto);
 }
 
 .complejoDueño-header h2 {
@@ -38,8 +38,8 @@
 }
 
 .complejoDueño-horarios {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-borde);
   border-radius: 12px;
   padding: 24px;
   width: 100%;
@@ -52,20 +52,20 @@
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 16px;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--color-fondo-gris);
   padding-bottom: 12px;
 }
 
 .complejoDueño-horarios-subtitulo {
   font-size: 18px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--color-texto);
   margin: 0;
 }
 
 .btn-agregar-horario {
   background-color: #f97316;
-  color: white;
+  color: var(--color-blanco);
   border: none;
   border-radius: 6px;
   padding: 8px 12px;
@@ -79,7 +79,7 @@
 }
 
 .btn-agregar-horario:hover {
-  background-color: #ea580c;
+  background-color: var(--color-primario-oscuro);
 }
 
 /* Formulario inline para alta/edición */
@@ -87,8 +87,8 @@
   display: flex;
   gap: 12px;
   align-items: flex-end;
-  background-color: #f8fafc;
-  border: 1px solid #cbd5e1;
+  background-color: var(--color-fondo);
+  border: 1px solid var(--color-borde-gris);
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 16px;
@@ -104,17 +104,17 @@
 .form-campo label {
   font-size: 11px;
   font-weight: 600;
-  color: #64748b;
+  color: var(--color-texto-gris);
   text-transform: uppercase;
 }
 
 .form-campo select,
 .form-campo input {
   padding: 6px 8px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--color-borde-gris);
   border-radius: 6px;
   font-size: 13px;
-  background-color: white;
+  background-color: var(--color-blanco);
 }
 
 .form-acciones {
@@ -135,13 +135,13 @@
 }
 
 .btn-guardar-horario {
-  background-color: #10b981;
-  color: white;
+  background-color: var(--color-exito);
+  color: var(--color-blanco);
 }
 
 .btn-cancelar-horario {
-  background-color: #ef4444;
-  color: white;
+  background-color: var(--color-error);
+  color: var(--color-blanco);
 }
 
 /* Listado de horarios */
@@ -156,14 +156,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 14px;
-  background-color: #f8fafc;
+  background-color: var(--color-fondo);
   border-radius: 8px;
   font-size: 14px;
-  border: 1px solid #f1f5f9;
+  border: 1px solid var(--color-fondo-gris);
 }
 
 .horario-fila strong {
-  color: #334155;
+  color: var(--color-texto-secundario);
   font-weight: 600;
 }
 
@@ -174,7 +174,7 @@
 }
 
 .horario-info-acciones span {
-  color: #059669;
+  color: var(--color-exito-fuerte);
   font-weight: 600;
   background-color: #ecfdf5;
   padding: 4px 10px;
@@ -194,20 +194,20 @@
 }
 
 .accion-horario.accion-editar {
-  color: #64748b;
+  color: var(--color-texto-gris);
 }
 
 .accion-horario.accion-editar:hover {
-  background-color: #e2e8f0;
-  color: #0f172a;
+  background-color: var(--color-borde);
+  color: var(--color-texto);
 }
 
 .accion-horario.accion-borrar {
-  color: #ef4444;
+  color: var(--color-error);
 }
 
 .accion-horario.accion-borrar:hover {
-  background-color: #fef2f2;
+  background-color: var(--color-error-fondo);
 }
 
 .horarios-vacio {
@@ -220,7 +220,7 @@
 .link-volver {
   display: inline-block;
   margin-top: 24px;
-  color: #2563eb;
+  color: var(--color-info);
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;

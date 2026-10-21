@@ -1,5 +1,5 @@
 .tarjeta-datos-complejo-menu {
-  background-color: #ffffff;
+  background-color: var(--color-blanco);
   border: 1px solid #eaecf0;
   border-radius: 16px;
   padding: 24px;
@@ -26,7 +26,7 @@
 
 .tarjeta-datos-complejo-menu-icono {
   background-color: #fff4ed;
-  color: #ff5500;
+  color: var(--color-primario-claro);
   width: 44px;
   height: 44px;
   border-radius: 12px;
@@ -56,8 +56,8 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: #ffffff;
-  border: 1px solid #d0d5dd;
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-borde-medio);
   color: #344054;
   padding: 8px 14px;
   border-radius: 8px;
@@ -70,8 +70,8 @@
 
 .btn-editar-datos-complejo:hover {
   background-color: #f9fafb;
-  border-color: #ff5500;
-  color: #ff5500;
+  border-color: var(--color-primario-claro);
+  color: var(--color-primario-claro);
 }
 
 /* Detalles (Modo Lectura) */
@@ -94,7 +94,7 @@
 }
 
 .icono-detalle-datos-complejo {
-  color: #ff5500;
+  color: var(--color-primario-claro);
   flex-shrink: 0;
 }
 
@@ -129,7 +129,7 @@
 
 .campo-datos-complejo input {
   padding: 8px 12px;
-  border: 1px solid #d0d5dd;
+  border: 1px solid var(--color-borde-medio);
   border-radius: 8px;
   font-size: 0.9rem;
   color: #101828;
@@ -139,7 +139,7 @@
 }
 
 .campo-datos-complejo input:focus {
-  border-color: #ff5500;
+  border-color: var(--color-primario-claro);
   box-shadow: 0 0 0 3px rgba(255, 85, 0, 0.12);
 }
 
@@ -153,8 +153,8 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background-color: #ff5500;
-  color: #ffffff;
+  background-color: var(--color-primario-claro);
+  color: var(--color-blanco);
   border: none;
   padding: 8px 16px;
   border-radius: 8px;
@@ -172,9 +172,9 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background-color: #ffffff;
+  background-color: var(--color-blanco);
   color: #344054;
-  border: 1px solid #d0d5dd;
+  border: 1px solid var(--color-borde-medio);
   padding: 8px 16px;
   border-radius: 8px;
   font-weight: 600;

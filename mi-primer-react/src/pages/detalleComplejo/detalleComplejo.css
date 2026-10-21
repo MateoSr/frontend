@@ -26,9 +26,9 @@
 
 
 .detalle-complejo-acordeon {
-    background-color: #ffffff;
+    background-color: var(--color-blanco);
     margin-bottom: 2rem;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--color-borde-suave);
     border-radius: 12px;
     color: #17324d;
     margin-top: 2rem;
@@ -39,7 +39,7 @@
 }
 
 .detalle-complejo-acordeon:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--sombra-suave);
     border-color: #d1d5db;
 }
 
@@ -76,8 +76,8 @@
 }
 
 .detalle-complejo-acordeon[open] summary {
-    border-bottom: 1px solid #e5e7eb;
-    background-color: #ffffff;
+    border-bottom: 1px solid var(--color-borde-suave);
+    background-color: var(--color-blanco);
 }
 
 
@@ -95,7 +95,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0.75rem 0;
-    border-bottom: 1px dashed #e5e7eb;
+    border-bottom: 1px dashed var(--color-borde-suave);
     color: #4b5563;
 }
 
