@@ -24,6 +24,7 @@ import { RutaProtegida, BloqueoPorRol } from './components/rutaProtegida/rutaPro
 import AdministrarUsuarios from './pages/administrarUsuarios/administrarUsuarios'
 import CrearUsuario from './pages/crearUsuario/crearUsuario'
 import ComplejoDueño from './pages/complejoDueño/complejoDueño'
+import PagoResultado from './pages/pagoResultado/pagoResultado'
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
             <ComplejoDueño />
           </RutaProtegida>} />
         <Route path="/confirmar-reserva" element={<ConfirmarReserva />} />
+        <Route path="/pago/resultado" element={<PagoResultado />} />
         <Route path="/detalle-complejo/:id" element={<DetalleComplejo />} />
         <Route path="/loginAdmin" element={<Login endpoint="/api/loginAdmin" redirectTo="/menuAdmin" />} />
         <Route path="/menuAdmin" element={<RutaProtegida rol="Administrador">

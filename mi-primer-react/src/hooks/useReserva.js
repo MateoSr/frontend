@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { crearReserva, crearReservaEncargado, obtenerDatosReserva } from '../services/reservaService';
+import { crearOrdenPago } from '../services/pagoService';
 import { useModal } from '../context/modal/ModalContext';
 import { combinarFechaHoraUTC } from '../utils/fechas';
 
@@ -82,8 +83,8 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
           complejoUbicacion: datosComplejo.ubicacion || '',
           deporte: cancha.deporte || cancha.tipoCancha?.deporte || '',
           duracion: cancha.duracion || cancha.tipoCancha?.duracion || 60,
-          precioSenia: cancha.precioSenia || '',
-          precioTotal: cancha.precioTotal || ''
+          precioSenia: cancha.precios.precioSena || '',
+          precioTotal: cancha.precios.precioBase || ''
         }));
 
       } catch (error) {
@@ -123,7 +124,7 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
       return;
     }
 
-    if (esEncargado && (!titular.nombre || !titular.apellido || !titular.telefono || !titular.email)) {
+    if (esEncargado && (!titular.nombre || !titular.apellido)) {
       mostrarAviso({
         titulo: 'Datos incompletos',
         mensaje: 'Completá todos los datos del cliente para agendar el turno.',
@@ -143,36 +144,58 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
     }
 
     const horaFin = calcularHoraFin(horaInicio, reserva.duracion);
-    const turno = {
-      tipoTurnoId: 1,
-      complejoId: parseInt(complejo, 10),
-      canchaNro: parseInt(canchaNro, 10),
-      fechaInicio: combinarFechaHoraUTC(fecha, horaInicio),
-      fechaFin: combinarFechaHoraUTC(fecha, horaFin),
-      estado: 'Reservado'
-    };
 
-    if (!esEncargado) {
-      turno.clienteId = titular.id;
-    }
+    if (esEncargado) {
+      const turno = {
+        tipoTurnoId: 1,
+        complejoId: parseInt(complejo, 10),
+        canchaNro: parseInt(canchaNro, 10),
+        fechaInicio: combinarFechaHoraUTC(fecha, horaInicio),
+        fechaFin: combinarFechaHoraUTC(fecha, horaFin),
+        estado: 'Reservado',
+        nombreSolicitante: titular.nombre,
+        apellidoSolicitante: titular.apellido,
+      };
 
-    try {
-      if (esEncargado) {
+      try {
         await crearReservaEncargado(turno, {
           nombre: titular.nombre,
           apellido: titular.apellido,
           telefono: titular.telefono,
           email: titular.email
         }, token);
-      } else {
-        await crearReserva(turno, token);
+        setMostrarModal(true);
+      } catch (error) {
+        console.error(error);
+        mostrarAviso({
+          titulo: 'Error',
+          mensaje: `Error creando la reserva: ${error.message}`,
+          tipo: 'error'
+        });
       }
-      setMostrarModal(true);
+      return;
+    }
+
+    try {
+      const resultado = await crearOrdenPago({
+        complejoId: parseInt(complejo, 10),
+        canchaNro: parseInt(canchaNro, 10),
+        fecha,
+        horaInicio,
+        duracion: reserva.duracion,
+        tipoTurnoId: 1
+      }, token);
+
+      if (resultado?.checkoutUrl) {
+        window.location.href = resultado.checkoutUrl;
+        return;
+      }
+      throw new Error('No se obtuvo el link de pago');
     } catch (error) {
       console.error(error);
       mostrarAviso({
         titulo: 'Error',
-        mensaje: `Error creando la reserva: ${error.message}`,
+        mensaje: `Error iniciando el pago: ${error.message}`,
         tipo: 'error'
       });
     }

@@ -151,8 +151,16 @@ h2 {
 .reserva-form {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+  gap: 6vh;
+}
+
+.reserva-container.modo-encargado {
+  max-width: 850px; /* Achica el ancho del contenedor para que no quede tan estirado */
+}
+
+.reserva-container.modo-encargado .reserva-grid {
+  /* Evita que la tarjeta del titular se estire a lo alto copiando la altura de los detalles del turno */
+  align-items: center; 
 }
 
 .input-group {

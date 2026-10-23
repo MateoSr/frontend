@@ -62,6 +62,18 @@ function formatearFecha(fecha) {
   return `${dia}/${mes}/${anio}`;
 }
 
+// Un bloque pasado no se puede agendar. Si tiene turno (pasado o vigente) y el
+// panel es del encargado, se puede consultar quién se sacó el turno.
+function obtenerTooltipCelda({ estaOcupado, esBloquePasado, esPanelEncargado }) {
+  if (esBloquePasado) {
+    if (esPanelEncargado && !estaOcupado) return 'Horario ya pasado';
+    if (esPanelEncargado) return 'Ver turno';
+    return 'Horario ya pasado';
+  }
+  if (esPanelEncargado && !estaOcupado) return 'Hacé clic para agendar un turno';
+  return undefined;
+}
+
 export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false }) => {
   const navigate = useNavigate();
   const [reservaSeleccionada, setReservaSeleccionada] = useState(null);
@@ -213,23 +225,26 @@ export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false
 
                 const fechaHoyAR = fechaArgentinaHoyISO();
                 const minutosAhoraAR = ahoraArgentinaMinutos();
-                const esBloquePasado = fechaAUsar === fechaHoyAR && inicioBloque < minutosAhoraAR;
+                const esBloquePasado = fechaAUsar < fechaHoyAR || (fechaAUsar === fechaHoyAR && inicioBloque < minutosAhoraAR);
 
                 return (
                   <div 
                     key={`celda-${cancha.nro}-${inicioBloque}`} 
                     className={`celda-turno ${estaOcupado ? 'ocupada' : esBloquePasado ? 'pasado' : 'libre'}`}
-                    title={esBloquePasado ? 'Horario ya pasado' : esPanelEncargado && !estaOcupado ? 'Hacé clic para agendar un turno' : undefined}
+                    title={obtenerTooltipCelda({ estaOcupado, esBloquePasado, esPanelEncargado })}
                     onClick={evento => {
-                      if (esBloquePasado) return;
-                      if (estaOcupado && esPanelEncargado && turnoActivo) {
-                        mostrarReserva(cancha, turnoActivo, evento);
-                      } else if (!estaOcupado) {
-                        if (esPanelEncargado) {
-                          agendarComoEncargado(cancha, hora);
-                        } else {
-                          abrirModal(cancha, hora, evento);
+                      if (estaOcupado) {
+                        // Si ya hay un turno (pasado o vigente) y el panel es del encargado, se consulta el turno.
+                        if (esPanelEncargado && turnoActivo) {
+                          mostrarReserva(cancha, turnoActivo, evento);
                         }
+                        return;
+                      }
+                      if (esBloquePasado) return;
+                      if (esPanelEncargado) {
+                        agendarComoEncargado(cancha, hora);
+                      } else {
+                        abrirModal(cancha, hora, evento);
                       }
                     }}
                   >
@@ -255,9 +270,11 @@ export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false
               <p>Cancha: {reservaSeleccionada.cancha.nro}</p>
               <p>Horario: {formatearHora(minutosTurnoAR(reservaSeleccionada.turno))} a {formatearHora(minutosArgentina(reservaSeleccionada.turno.fechaFin))}</p>
               <p>Estado: {reservaSeleccionada.turno.estado}</p>
-              <p><strong>{reservaSeleccionada.turno.cliente?.personaFisica
-                ? `${reservaSeleccionada.turno.cliente.personaFisica.nombre} ${reservaSeleccionada.turno.cliente.personaFisica.apellido}`
-                : reservaSeleccionada.turno.cliente?.personaJuridica?.razonSocial || 'Cliente sin nombre'}</strong></p>
+              <p><strong>{reservaSeleccionada.turno.cliente
+                ? `${reservaSeleccionada.turno.cliente.personaFisica
+                    ? `${reservaSeleccionada.turno.cliente.personaFisica.nombre} ${reservaSeleccionada.turno.cliente.personaFisica.apellido}`
+                    : reservaSeleccionada.turno.cliente.personaJuridica?.razonSocial || 'Cliente sin nombre'}`
+                : `${reservaSeleccionada.turno.nombreSolicitante || ''} ${reservaSeleccionada.turno.apellidoSolicitante || ''}`.trim() || 'Solicitante sin nombre'}</strong></p>
               <p>{reservaSeleccionada.turno.cliente?.email}</p>
               <p>{reservaSeleccionada.turno.cliente?.telefono}</p>
             </>

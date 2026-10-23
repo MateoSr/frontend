@@ -49,18 +49,31 @@ function Profile(){
     const buscarTurnos = async () => {
       const token = localStorage.getItem("gestor_token");
       try{
-        //id de ejemplo para probar la api hasta tener autenticacion
         const response = await fetch('http://localhost:3000/api/turnos', {
           method: 'GET', 
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}` // Estándar para envío de JWT
+            'Authorization': `Bearer ${token}`
           }
         });
         if(response.ok){
           const respuesta = await response.json()
           console.log(respuesta)
-          setTurnos(respuesta)
+          
+          // Ordenar: próximos primero (asc), luego pasados (desc)
+          const ahora = new Date();
+          const ordenados = [...respuesta].sort((a, b) => {
+            const fechaA = new Date(a.fechaInicio);
+            const fechaB = new Date(b.fechaInicio);
+            const esFuturoA = fechaA >= ahora;
+            const esFuturoB = fechaB >= ahora;
+            
+            if (esFuturoA && esFuturoB) return fechaA - fechaB; // ambos futuros: más cercano primero
+            if (!esFuturoA && !esFuturoB) return fechaB - fechaA; // ambos pasados: más reciente primero
+            return esFuturoA ? -1 : 1; // futuros antes que pasados
+          });
+          
+          setTurnos(ordenados);
         }
       }catch(error){
         console.log("Error cargando turnos del usuario:", error)

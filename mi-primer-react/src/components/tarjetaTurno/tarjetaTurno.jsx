@@ -22,6 +22,7 @@ export function TarjetaTurno({ turno, onCancelar }) {
       case 'finalizado': return 'estado-finalizado';
       case 'completado': return 'estado-finalizado';
       case 'cancelado': return 'estado-cancelado';
+      case 'pendiente de pago': return 'estado-pendiente';
       default: return '';
     }
   };
