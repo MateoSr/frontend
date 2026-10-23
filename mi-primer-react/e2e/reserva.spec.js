@@ -16,7 +16,6 @@ test.describe('Reserva de turno (flujo de cliente)', () => {
     await page.getByRole('button', { name: 'Iniciar Sesión' }).click();
 
     // El login guarda el token y redirige con window.location.href (recarga completa).
-    // Esperamos a que el token aparezca en localStorage antes de continuar.
     await page.waitForURL('/');
     await page.waitForFunction(() => Boolean(localStorage.getItem('gestor_token')));
     const token = await page.evaluate(() => localStorage.getItem('gestor_token'));
