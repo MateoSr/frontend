@@ -83,8 +83,8 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
           complejoUbicacion: datosComplejo.ubicacion || '',
           deporte: cancha.deporte || cancha.tipoCancha?.deporte || '',
           duracion: cancha.duracion || cancha.tipoCancha?.duracion || 60,
-          precioSenia: cancha.precios.precioSena || '',
-          precioTotal: cancha.precios.precioBase || ''
+          precioSenia: cancha.precios[0].precioSena || 'a',
+          precioTotal: cancha.precios[0].precioBase || 'a'
         }));
 
       } catch (error) {
