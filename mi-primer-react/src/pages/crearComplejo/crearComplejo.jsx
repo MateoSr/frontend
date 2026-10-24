@@ -15,11 +15,15 @@ export const CrearComplejo = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     direccion: '',
+    telefono: '',
     localidadId: '',
     imagenUrl: '/assets/foto-complejo.jpg',
     duenoId: '',
     encargadoId: ''
   });
+
+  const [imagenPreview, setImagenPreview] = useState(null);
+  const [imagenBase64, setImagenBase64] = useState(null);
 
   const [mostrarModal, setMostrarModal] = useState(false);
   const [datosConfirmacion, setDatosConfirmacion] = useState(null);
@@ -49,6 +53,33 @@ export const CrearComplejo = () => {
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+      setImagenPreview(null);
+      setImagenBase64(null);
+      return;
+    }
+
+    if (!file.type.startsWith('image/')) {
+      setError('Solo se permiten archivos de imagen');
+      return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      setError('La imagen no debe superar los 2MB');
+      return;
+    }
+
+    setError('');
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagenPreview(reader.result);
+      setImagenBase64(reader.result);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (e) => {
@@ -87,11 +118,16 @@ export const CrearComplejo = () => {
       const payload = {
         nombre: formData.nombre,
         direccion: formData.direccion,
+        telefono: formData.telefono,
         localidadId: parseInt(formData.localidadId, 10),
         imagenUrl: formData.imagenUrl,
         duenoId: parseInt(formData.duenoId, 10),
         encargadoId: parseInt(formData.encargadoId, 10)
       };
+
+      if (imagenBase64) {
+        payload.imagenBase64 = imagenBase64;
+      }
 
       await crearComplejo(payload);
       setMostrarModal(false);
@@ -128,6 +164,10 @@ export const CrearComplejo = () => {
             <input type="text" name="direccion" value={formData.direccion} onChange={handleChange} required />
           </div>
           <div className='crear-complejo-campo'>
+            <label>Teléfono:</label>
+            <input type="text" name="telefono" value={formData.telefono} onChange={handleChange} required />
+          </div>
+          <div className='crear-complejo-campo'>
             <label>Localidad:</label>
             <select name="localidadId" value={formData.localidadId} onChange={handleChange} required >
               <option value="" disabled>Seleccione una localidad</option>
@@ -138,10 +178,13 @@ export const CrearComplejo = () => {
               ))}
             </select>
           </div>
-          {/* <div className='crear-complejo-campo'>
-            <label>Imagen (Ruta/URL):</label>
-            <input type="text" name="imagenUrl" value={formData.imagenUrl} onChange={handleChange} placeholder="/assets/foto-complejo.jpg" />
-          </div> */}
+          <div className='crear-complejo-campo'>
+            <label>Imagen:</label>
+            <input type="file" accept="image/jpeg,image/png,image/webp" onChange={handleImageChange} />
+            {imagenPreview && (
+              <img src={imagenPreview} alt="Preview" style={{ maxWidth: '200px', marginTop: '10px', borderRadius: '8px' }} />
+            )}
+          </div>
           <div className='crear-complejo-campo'>
             <label>ID dueño:</label>
             <input type="text" name="duenoId" value={formData.duenoId} onChange={handleChange} placeholder="ID del dueño" />
@@ -162,8 +205,14 @@ export const CrearComplejo = () => {
 
             <p><strong>Nombre:</strong> {datosConfirmacion.nombre}</p>
             <p><strong>Dirección:</strong> {datosConfirmacion.direccion}</p>
+            <p><strong>Teléfono:</strong> {datosConfirmacion.telefono}</p>
             <p><strong>Localidad:</strong> {datosConfirmacion.localidadNombre}</p>
-            {/* <p><strong>Imagen:</strong> {datosConfirmacion.imagenUrl}</p> */}
+            {imagenPreview && (
+              <>
+                <p><strong>Imagen:</strong></p>
+                <img src={imagenPreview} alt="Preview" style={{ maxWidth: '200px', marginTop: '5px', borderRadius: '8px' }} />
+              </>
+            )}
 
             <hr className="modal-divisor-complejo" />
 
