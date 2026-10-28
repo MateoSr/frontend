@@ -36,7 +36,7 @@ function ResetPassword() {
             return
         }
         try {
-            const response = await fetch('${API_URL}/reset-password', {
+            const response = await fetch(`${API_URL}/reset-password`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

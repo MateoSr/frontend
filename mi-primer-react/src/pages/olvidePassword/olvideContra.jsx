@@ -15,7 +15,7 @@ function OlvideContra() {
     const enviarEmail = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch('${API_URL}/forgot', {
+            const response = await fetch(`${API_URL}/forgot`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),
