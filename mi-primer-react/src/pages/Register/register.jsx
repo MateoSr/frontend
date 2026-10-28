@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useModal } from '../../context/modal/ModalContext.jsx';
 import './register.css';
 
+
 function Register() {
   const { mostrarModal } = useModal();
   const [usuario, setUsuario] = useState({
@@ -33,7 +34,7 @@ function Register() {
     const { confirmPassword, ...datosFormulario } = usuario;
 
     try {
-      const response = await fetch('${API_URL}/register', {
+      const response = await fetch(`${API_URL}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 import { API_URL } from '../config/api.js';
-const HORARIO_API_URL = '`${API_URL}`/complejos'; // Ajustá con la URL base de tu backend
+const HORARIO_API_URL = `${API_URL}/complejos`; // Ajustá con la URL base de tu backend
 
 export const crearHorario = async (idComplejo, datosHorario) => {
   const response = await fetch(`${HORARIO_API_URL}/${idComplejo}/horarios`, {

@@ -50,7 +50,7 @@ function Profile(){
     const buscarTurnos = async () => {
       const token = localStorage.getItem("gestor_token");
       try{
-        const response = await fetch('${API_URL}/turnos', {
+        const response = await fetch(`${API_URL}/turnos`, {
           method: 'GET', 
           headers: {
             'Content-Type': 'application/json',
