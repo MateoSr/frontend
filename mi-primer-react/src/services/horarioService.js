@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000/api/complejos'; // Ajustá con la URL base de tu backend
+import { API_URL } from '../config/api.js';
+const API_URL = '`${API_URL}`/complejos'; // Ajustá con la URL base de tu backend
 
 export const crearHorario = async (idComplejo, datosHorario) => {
   const response = await fetch(`${API_URL}/${idComplejo}/horarios`, {

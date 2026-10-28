@@ -1,3 +1,4 @@
+import { API_URL } from '../../config/api.js';
 import InputForum from '../../components/inputForum/inputForum';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -32,7 +33,7 @@ function Register() {
     const { confirmPassword, ...datosFormulario } = usuario;
 
     try {
-      const response = await fetch('http://localhost:3000/api/register', {
+      const response = await fetch('${API_URL}/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

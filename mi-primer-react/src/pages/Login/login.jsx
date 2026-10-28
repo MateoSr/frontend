@@ -1,3 +1,4 @@
+import { API_URL } from '../../config/api.js';
 import InputForum from '../../components/inputForum/inputForum';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -14,7 +15,7 @@ function Login({ endpoint = '/api/login', redirectTo = '/' }) {
     const datosFormulario = { email, password };
 
     try {
-      const response = await fetch(`http://localhost:3000${endpoint}`, {
+      const response = await fetch(`${API_URL.replace(/\/api$/,"")}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datosFormulario),

@@ -1,7 +1,8 @@
-const API_URL = 'http://localhost:3000/api';
+import { API_URL } from '../config/api.js';
+import { API_URL } from '../config/api.js';
 
 export const obtenerUsuarioPorId = async (id) => {
-  const response = await fetch(`http://localhost:3000/api/users/${id}`);
+  const response = await fetch(`${API_URL}/users/${id}`);
   if (!response.ok) {
     throw new Error(`Usuario con ID ${id} no encontrado`);
   }

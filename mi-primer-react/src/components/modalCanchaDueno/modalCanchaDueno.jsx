@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
+import { API_URL } from '../../config/api.js';
 import './modalCanchaDueno.css';
 
 // Función auxiliar para obtener la fecha de hoy en formato YYYY-MM-DD
@@ -19,7 +20,7 @@ export function ModalCanchaDueno({ isOpen, tipo, cancha, onClose, onConfirmar })
   useEffect(() => {
         const fetchDeportes = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/tipoCancha');
+                const response = await fetch(`${API_URL}/tipoCancha`);
                 if (response.ok) {
                     const data = await response.json();
                     setDeportes(data);

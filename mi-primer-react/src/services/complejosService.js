@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000/api';
+import { API_URL } from '../config/api.js';
+import { API_URL } from '../config/api.js';
 
 export const obtenerComplejos = async (queryString, signal) => {
   const response = await fetch(`${API_URL}/complejos/busqueda?${queryString}`, { signal });

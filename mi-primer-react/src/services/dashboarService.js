@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000/api';
+import { API_URL } from '../config/api.js';
+const API_URL = '`${API_URL}`';
 
 export const obtenerDatosMenuDueno = async (token) => {
     const response = await fetch(`${API_URL}/menues/dueno`,{

@@ -1,3 +1,4 @@
+import { API_URL } from '../../config/api.js';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -14,7 +15,7 @@ function OlvideContra() {
     const enviarEmail = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch('http://localhost:3000/api/forgot', {
+            const response = await fetch('${API_URL}/forgot', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),
