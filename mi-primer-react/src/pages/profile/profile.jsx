@@ -1,3 +1,4 @@
+import { API_URL } from '../../config/api.js';
 import {useState,useEffect} from 'react'
 import './profile.css'
 import InputForum from '../../components/inputForum/inputForum';
@@ -21,7 +22,7 @@ function Profile(){
       const obtenerPerfil = async () => {
       try{
       
-        const response = await fetch(`http://localhost:3000/api/users/perfil`,{
+        const response = await fetch(`${API_URL}/users/perfil`,{
           method: "GET",
            headers: {
       "Content-Type": "application/json",
@@ -49,7 +50,7 @@ function Profile(){
     const buscarTurnos = async () => {
       const token = localStorage.getItem("gestor_token");
       try{
-        const response = await fetch('http://localhost:3000/api/turnos', {
+        const response = await fetch('${API_URL}/turnos', {
           method: 'GET', 
           headers: {
             'Content-Type': 'application/json',
@@ -86,7 +87,7 @@ function Profile(){
       try {
     const token = localStorage.getItem("gestor_token"); 
     
-    const respuesta = await fetch(`http://localhost:3000/api/turnos/${idTurno}/cancelar`, {
+    const respuesta = await fetch(`${API_URL}/turnos/${idTurno}/cancelar`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -139,7 +140,7 @@ function Profile(){
         //aca harias el put a la api actualizando los datos
         try{
           
-          const response = await fetch(`http://localhost:3000/api/users/perfil`,{
+          const response = await fetch(`${API_URL}/users/perfil`,{
             method:'PUT',
             headers: {
               'Content-Type': 'application/json',

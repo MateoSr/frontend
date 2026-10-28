@@ -1,3 +1,4 @@
+import { API_URL } from '../../config/api.js';
 import { useState } from "react"
 import './resetPassword.css'
 import InputForum from "../../components/inputForum/inputForum"
@@ -35,7 +36,7 @@ function ResetPassword() {
             return
         }
         try {
-            const response = await fetch('http://localhost:3000/api/reset-password', {
+            const response = await fetch('${API_URL}/reset-password', {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

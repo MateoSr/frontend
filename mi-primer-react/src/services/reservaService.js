@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000/api';
+import { API_URL } from '../config/api.js';
+
 
 const obtenerJson = async (url, options = {}) => {
   const response = await fetch(url, options);

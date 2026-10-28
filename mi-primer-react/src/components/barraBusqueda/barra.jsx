@@ -1,6 +1,7 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { fechaArgentinaHoyISO } from '../../utils/fechas';
+import { API_URL } from '../../config/api.js';
 import './barra.css'
 
 const HORARIOS = [
@@ -30,7 +31,7 @@ function BarraBusqueda() {
     useEffect(() => {
         const fetchDeportes = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/tipoCancha');
+                const response = await fetch(`${API_URL}/tipoCancha`);
                 if (response.ok) {
                     const data = await response.json();
                     setDeportes(data);

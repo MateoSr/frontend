@@ -1,7 +1,8 @@
-const API_URL = 'http://localhost:3000/api/complejos'; // Ajustá con la URL base de tu backend
+import { API_URL } from '../config/api.js';
+const HORARIO_API_URL = '`${API_URL}`/complejos'; // Ajustá con la URL base de tu backend
 
 export const crearHorario = async (idComplejo, datosHorario) => {
-  const response = await fetch(`${API_URL}/${idComplejo}/horarios`, {
+  const response = await fetch(`${HORARIO_API_URL}/${idComplejo}/horarios`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(datosHorario),
@@ -11,7 +12,7 @@ export const crearHorario = async (idComplejo, datosHorario) => {
 };
 
 export const modificarHorario = async (idComplejo, nroDia, datosHorario) => {
-  const response = await fetch(`${API_URL}/${idComplejo}/horarios/${nroDia}`, {
+  const response = await fetch(`${HORARIO_API_URL}/${idComplejo}/horarios/${nroDia}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(datosHorario),
@@ -21,7 +22,7 @@ export const modificarHorario = async (idComplejo, nroDia, datosHorario) => {
 };
 
 export const borrarHorario = async (idComplejo, nroDia) => {
-  const response = await fetch(`${API_URL}/${idComplejo}/horarios/${nroDia}`, {
+  const response = await fetch(`${HORARIO_API_URL}/${idComplejo}/horarios/${nroDia}`, {
     method: "DELETE",
   });
   if (!response.ok) throw new Error("Error al eliminar el horario.");

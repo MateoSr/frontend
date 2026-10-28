@@ -1,9 +1,10 @@
+import { API_URL } from '../../config/api.js';
 import { Link } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import './software.css';
-import Planes from '../../components/planes/planes';
-import InputForum from '../../components/inputForum/inputForum';
-import { useModal } from '../../context/modal/ModalContext';
+import Planes from '../../components/planes/planes.jsx';
+import InputForum from '../../components/inputForum/inputForum.jsx';
+import { useModal } from '../../context/modal/ModalContext.jsx';
 
 function Software() {
     const { mostrarModal } = useModal();
@@ -23,7 +24,7 @@ function Software() {
   e.preventDefault();
 
   try {
-    const response = await fetch('http://localhost:3000/api/contacto', {
+    const response = await fetch('${API_URL}/contacto', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData) // datos de razonSocial, nombreContacto, email, plan, comentario

@@ -1,7 +1,8 @@
-const API_URL = 'http://localhost:3000/api/complejos'; // Ajustá con tu URL base
+import { API_URL } from '../config/api.js';
+const COMPLEJOS_API_URL = `${API_URL}/complejos`;
 
 export const crearCancha = async (idComplejo, datosCancha) => {
-  const response = await fetch(`${API_URL}/${idComplejo}/canchas`, {
+  const response = await fetch(`${COMPLEJOS_API_URL}/${idComplejo}/canchas`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(datosCancha),
@@ -11,7 +12,7 @@ export const crearCancha = async (idComplejo, datosCancha) => {
 };
 
 export const modificarCancha = async (idComplejo, nroCancha, datosCancha) => {
-  const response = await fetch(`${API_URL}/${idComplejo}/canchas/${nroCancha}`, {
+  const response = await fetch(`${COMPLEJOS_API_URL}/${idComplejo}/canchas/${nroCancha}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(datosCancha),
@@ -21,7 +22,7 @@ export const modificarCancha = async (idComplejo, nroCancha, datosCancha) => {
 };
 
 export const borrarCancha = async (idComplejo, nroCancha) => {
-  const response = await fetch(`${API_URL}/${idComplejo}/canchas/${nroCancha}`, {
+  const response = await fetch(`${COMPLEJOS_API_URL}/${idComplejo}/canchas/${nroCancha}`, {
     method: "DELETE",
   });
   if (!response.ok) throw new Error("Error al eliminar la cancha.");
@@ -29,7 +30,7 @@ export const borrarCancha = async (idComplejo, nroCancha) => {
 };
 
 export const crearPrecioCancha = async (idComplejo, nroCancha, datosPrecio) => {
-  const response = await fetch(`${API_URL}/${idComplejo}/canchas/${nroCancha}/precios`, {
+  const response = await fetch(`${COMPLEJOS_API_URL}/${idComplejo}/canchas/${nroCancha}/precios`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(datosPrecio),

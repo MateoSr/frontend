@@ -1,8 +1,9 @@
-import InputForum from '../../components/inputForum/inputForum';
+import { API_URL } from '../../config/api.js';
+import InputForum from '../../components/inputForum/inputForum.jsx';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useModal } from '../../context/modal/ModalContext';
-import { decodificarPayload } from '../../utils/auth';
+import { useModal } from '../../context/modal/ModalContext.jsx';
+import { decodificarPayload } from '../../utils/auth.js';
 import './login.css';
 
 function Login({ endpoint = '/api/login', redirectTo = '/' }) {
@@ -14,7 +15,7 @@ function Login({ endpoint = '/api/login', redirectTo = '/' }) {
     const datosFormulario = { email, password };
 
     try {
-      const response = await fetch(`http://localhost:3000${endpoint}`, {
+      const response = await fetch(`${API_URL.replace(/\/api$/,"")}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datosFormulario),
