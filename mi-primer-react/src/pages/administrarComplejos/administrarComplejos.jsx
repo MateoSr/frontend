@@ -116,12 +116,6 @@ function AdministrarComplejos() {
                     <td className="col-acciones">
                       <div className="acciones-contenedor">
                         <button
-                          className="btn-tabla-accion btn-tabla-editar"
-                          onClick={() => navigate(`/editar-complejo/${complejo.id}`)}
-                        >
-                          Editar
-                        </button>
-                        <button
                           className="btn-tabla-accion btn-tabla-eliminar"
                           onClick={() => handleEliminar(complejo.id)}
                         >
