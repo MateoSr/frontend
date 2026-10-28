@@ -180,7 +180,7 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
       const resultado = await crearOrdenPago({
         complejoId: parseInt(complejo, 10),
         canchaNro: parseInt(canchaNro, 10),
-        fecha,
+        fechaInicioUTC,
         horaInicio,
         duracion: reserva.duracion,
         tipoTurnoId: 1
