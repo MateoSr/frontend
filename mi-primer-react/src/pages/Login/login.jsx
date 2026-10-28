@@ -1,9 +1,9 @@
 import { API_URL } from '../../config/api.js';
-import InputForum from '../../components/inputForum/inputForum';
+import InputForum from '../../components/inputForum/inputForum.jsx';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useModal } from '../../context/modal/ModalContext';
-import { decodificarPayload } from '../../utils/auth';
+import { useModal } from '../../context/modal/ModalContext.jsx';
+import { decodificarPayload } from '../../utils/auth.js';
 import './login.css';
 
 function Login({ endpoint = '/api/login', redirectTo = '/' }) {

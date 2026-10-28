@@ -1,8 +1,8 @@
 import { API_URL } from '../../config/api.js';
-import InputForum from '../../components/inputForum/inputForum';
+import InputForum from '../../components/inputForum/inputForum.jsx';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useModal } from '../../context/modal/ModalContext';
+import { useModal } from '../../context/modal/ModalContext.jsx';
 import './register.css';
 
 function Register() {
