@@ -1,5 +1,5 @@
 import { API_URL } from '../config/api.js';
-const API_URL = '`${API_URL}`';
+c
 
 const obtenerJson = async (url, options = {}) => {
   const response = await fetch(url, options);
