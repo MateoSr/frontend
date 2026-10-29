@@ -16,11 +16,12 @@ export const obtenerComplejos = async (queryString, signal) => {
 };
 
 export const crearComplejo = async (complejoData, /*token*/) => {
+  const token = localStorage.getItem('gestor_token');
   const response = await fetch(`${API_URL}/complejos`, {
     method: 'POST',
     headers: { 
       'Content-Type': 'application/json',
-      // 'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(complejoData),
   });
@@ -73,8 +74,10 @@ export const obtenerComplejoDelEncargado = async (signal) => {
 };
 
 export const eliminarComplejo = async (id) => {
+  const token = localStorage.getItem('gestor_token');
   const response = await fetch(`${API_URL}/complejos/${id}`, {
     method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
   });
 
   if (!response.ok) {
@@ -85,9 +88,13 @@ export const eliminarComplejo = async (id) => {
 };
 
 export const modificarComplejo = async (id,datosActualizados) => {
+  const token = localStorage.getItem('gestor_token');
   const response = await fetch(`${API_URL}/complejos/${id}`,{
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify(datosActualizados),
   });
   if (!response.ok) throw new Error("Error al modificar el complejo");
