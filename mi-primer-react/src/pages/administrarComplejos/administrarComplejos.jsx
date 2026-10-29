@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { obtenerTodosLosComplejos, eliminarComplejo } from '../../services/complejosService.js';
+import { obtenerTodosLosComplejos, darDeBajaComplejo } from '../../services/complejosService.js';
 import { useModal } from '../../context/modal/ModalContext';
 import './administrarComplejos.css';
 
@@ -31,23 +31,29 @@ function AdministrarComplejos() {
     cargarDatos();
   }, [mostrarModal]);
 
-  const handleEliminar = async (id) => {
+  const handleDarDeBaja = async (id) => {
     const confirmado = await confirmar({
-      titulo: 'Eliminar complejo',
-      mensaje: '¿Estás seguro de eliminar este complejo?',
+      titulo: 'Dar de baja complejo',
+      mensaje: '¿Estás seguro de dar de baja este complejo? Dejará de aparecer en la búsqueda.',
       tipo: 'peligro',
-      textoConfirmar: 'Eliminar'
+      textoConfirmar: 'Dar de baja'
     });
     if (!confirmado) return;
 
     try {
-      await eliminarComplejo(id);
-      setComplejos((prev) => prev.filter((complejo) => complejo.id !== id));
+      const data = await darDeBajaComplejo(id);
+      setComplejos((prev) =>
+        prev.map((complejo) =>
+          complejo.id === id
+            ? { ...complejo, estado: data.complejo?.estado ?? 'Inactivo' }
+            : complejo
+        )
+      );
     } catch (error) {
-      console.error('Error deleting complejo:', error);
+      console.error('Error giving complejo de baja:', error);
       mostrarModal({
         titulo: 'Error',
-        mensaje: 'No se pudo eliminar el complejo.',
+        mensaje: 'No se pudo dar de baja el complejo.',
         tipo: 'error'
       });
     }
@@ -104,6 +110,7 @@ function AdministrarComplejos() {
                   <th>Nro.</th>
                   <th>Nombre</th>
                   <th>Dirección</th>
+                  <th className="text-center">Estado</th>
                   <th className="text-center">Acciones</th>
                 </tr>
               </thead>
@@ -113,13 +120,23 @@ function AdministrarComplejos() {
                     <td className="col-id">#{complejo.id}</td>
                     <td className="col-nombre">{complejo.nombre}</td>
                     <td className="col-direccion">{complejo.direccion}</td>
+                    <td className="col-estado">
+                      <span
+                        className={`badge-estado ${
+                          complejo.estado === 'Inactivo' ? 'badge-inactivo' : 'badge-activo'
+                        }`}
+                      >
+                        {complejo.estado ?? 'Activo'}
+                      </span>
+                    </td>
                     <td className="col-acciones">
                       <div className="acciones-contenedor">
                         <button
                           className="btn-tabla-accion btn-tabla-eliminar"
-                          onClick={() => handleEliminar(complejo.id)}
+                          onClick={() => handleDarDeBaja(complejo.id)}
+                          disabled={complejo.estado === 'Inactivo'}
                         >
-                          Eliminar
+                          Dar de baja
                         </button>
                       </div>
                     </td>

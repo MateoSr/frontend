@@ -63,7 +63,10 @@ export const obtenerComplejoDelEncargado = async (signal) => {
 };
   
   export const obtenerTodosLosComplejos = async () => {
-  const response = await fetch(`${API_URL}/complejos`);
+  const token = localStorage.getItem('gestor_token');
+  const response = await fetch(`${API_URL}/complejos`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
   if (!response.ok) {
     throw new Error('No se pudieron cargar los complejos.');
@@ -71,6 +74,20 @@ export const obtenerComplejoDelEncargado = async (signal) => {
 
   const data = await response.json();
   return Array.isArray(data) ? data : data.data ?? [];
+};
+
+export const darDeBajaComplejo = async (id) => {
+  const token = localStorage.getItem('gestor_token');
+  const response = await fetch(`${API_URL}/complejos/${id}/baja`, {
+    method: 'PATCH',
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  if (!response.ok) {
+    throw new Error('No se pudo dar de baja el complejo.');
+  }
+
+  return await response.json();
 };
 
 export const eliminarComplejo = async (id) => {
