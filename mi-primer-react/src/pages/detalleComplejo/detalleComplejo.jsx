@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { HorariosCancha } from "../../components/horariosCancha/horariosCancha";
 import imagenComplejo from "../../assets/foto-complejo-AlAngulo.jpg";
-import { obtenerDetalleComplejo } from "../../services/complejosService";
+import { crearOpinion, obtenerDetalleComplejo } from "../../services/complejosService";
+import { useModal } from "../../context/modal/ModalContext.jsx";
+import { formatearFechaAR } from "../../utils/fechas";
 import "./detalleComplejo.css";
 
 const diasSemana = [
@@ -27,9 +29,12 @@ function formatearHora(valor) {
 function DetalleComplejo() {
     const { id } = useParams();
     const [searchParams] = useSearchParams();
+    const { mostrarModal } = useModal();
     const [complejo, setComplejo] = useState(null);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState("");
+    const [nuevaOpinion, setNuevaOpinion] = useState("");
+    const [enviandoOpinion, setEnviandoOpinion] = useState(false);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -59,6 +64,35 @@ function DetalleComplejo() {
 
         return () => controller.abort();
     }, [id]);
+
+    const handlePublicarOpinion = async (e) => {
+        e.preventDefault();
+        const descripcion = nuevaOpinion.trim();
+        if (!descripcion) return;
+
+        setEnviandoOpinion(true);
+        try {
+            const opinion = await crearOpinion(id, descripcion);
+            setComplejo((prev) => ({
+                ...prev,
+                opiniones: [opinion, ...(prev.opiniones ?? [])],
+            }));
+            setNuevaOpinion("");
+            mostrarModal({
+                titulo: "Opinión publicada",
+                mensaje: "¡Gracias por compartir tu experiencia!",
+                tipo: "exito",
+            });
+        } catch (error) {
+            mostrarModal({
+                titulo: "Error",
+                mensaje: error.message,
+                tipo: "error",
+            });
+        } finally {
+            setEnviandoOpinion(false);
+        }
+    };
 
     if (cargando) return <p className="detalle-complejo-estado">Cargando complejo...</p>;
     if (error) return <p className="detalle-complejo-estado">{error}</p>;
@@ -100,6 +134,47 @@ function DetalleComplejo() {
                     ))}
                 </div>
             </details>
+            <section className="detalle-complejo-opiniones">
+                <h2>Opiniones</h2>
+
+                {(complejo.opiniones ?? []).length === 0 ? (
+                    <p className="detalle-complejo-opiniones-vacio">
+                        Todavía no hay opiniones. Sé el primero en compartir la tuya.
+                    </p>
+                ) : (
+                    <ul className="detalle-complejo-opiniones-lista">
+                        {(complejo.opiniones ?? []).map((opinion) => (
+                            <li key={opinion.id} className="detalle-complejo-opinion">
+                                <p className="detalle-complejo-opinion-descripcion">
+                                    {opinion.descripcion}
+                                </p>
+                                <time
+                                    className="detalle-complejo-opinion-fecha"
+                                    dateTime={opinion.fecha}
+                                >
+                                    {formatearFechaAR(opinion.fecha)}
+                                </time>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+
+                <form className="detalle-complejo-opinion-form" onSubmit={handlePublicarOpinion}>
+                    <label htmlFor="nueva-opinion">Dejá tu opinión</label>
+                    <textarea
+                        id="nueva-opinion"
+                        name="nueva-opinion"
+                        value={nuevaOpinion}
+                        onChange={(e) => setNuevaOpinion(e.target.value)}
+                        maxLength={500}
+                        required
+                        placeholder="Contanos cómo fue tu experiencia"
+                    />
+                    <button type="submit" disabled={enviandoOpinion || !nuevaOpinion.trim()}>
+                        {enviandoOpinion ? "Publicando..." : "Publicar opinión"}
+                    </button>
+                </form>
+            </section>
         </main>
     );
 }

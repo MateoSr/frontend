@@ -33,6 +33,22 @@ export const crearComplejo = async (complejoData, /*token*/) => {
   return data;
 };
 
+export const crearOpinion = async (complejoId, descripcion) => {
+  const response = await fetch(`${API_URL}/complejos/${complejoId}/opiniones`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ descripcion }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || data.error || 'No se pudo publicar la opinión.');
+  }
+
+  return data;
+};
+
 export const obtenerDetalleComplejo = async (id, signal) => {
   const response = await fetch(`${API_URL}/complejos/${id}`, { signal });
 
