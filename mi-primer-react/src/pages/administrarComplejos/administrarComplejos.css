@@ -125,6 +125,34 @@
   text-align: right;
 }
 
+.col-estado {
+  text-align: center;
+  width: 110px;
+}
+
+.badge-estado {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.badge-activo {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.badge-inactivo {
+  background-color: var(--color-error-fondo);
+  color: var(--color-error-fuerte);
+}
+
+.btn-tabla-accion:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .acciones-contenedor {
   display: flex;
   justify-content: flex-end;

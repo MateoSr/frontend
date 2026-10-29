@@ -2,7 +2,10 @@ import { API_URL } from '../config/api.js';
 
 
 export const obtenerUsuarioPorId = async (id) => {
-  const response = await fetch(`${API_URL}/users/${id}`);
+  const token = localStorage.getItem('gestor_token');
+  const response = await fetch(`${API_URL}/users/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   if (!response.ok) {
     throw new Error(`Usuario con ID ${id} no encontrado`);
   }
@@ -10,11 +13,12 @@ export const obtenerUsuarioPorId = async (id) => {
 };
 
 export const crearUsuario = async (usuarioData, /*token*/) => {
+  const token = localStorage.getItem('gestor_token');
   const response = await fetch(`${API_URL}/users`, {
     method: 'POST',
     headers: { 
       'Content-Type': 'application/json',
-      // 'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(usuarioData),
   });
@@ -28,8 +32,10 @@ export const crearUsuario = async (usuarioData, /*token*/) => {
 };
 
 export const eliminarUsuario = async (id) => {
+  const token = localStorage.getItem('gestor_token');
   const response = await fetch(`${API_URL}/users/${id}`, {
     method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
   });
 
   if (!response.ok) {
@@ -40,7 +46,10 @@ export const eliminarUsuario = async (id) => {
 };
 
 export const obtenerTodosLosUsuarios = async () => {
-  const response = await fetch(`${API_URL}/users`);
+  const token = localStorage.getItem('gestor_token');
+  const response = await fetch(`${API_URL}/users`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
   if (!response.ok) {
     throw new Error('No se pudieron obtener los usuarios.');
