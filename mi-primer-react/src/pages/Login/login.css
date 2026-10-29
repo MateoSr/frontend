@@ -4,7 +4,7 @@
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  background-color: var(--color-fondo);
+  background-color: var(--color-blanco);
   font-family: system-ui, -apple-system, sans-serif;
   padding: 20px;
   box-sizing: border-box;
