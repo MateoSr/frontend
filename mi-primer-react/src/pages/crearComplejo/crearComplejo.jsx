@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { crearComplejo } from '../../services/complejosService';
 import { obtenerLocalidades } from '../../services/localidadesService';
 import { obtenerUsuarioPorId } from '../../services/usuariosService';
@@ -197,6 +197,7 @@ export const CrearComplejo = () => {
             {cargando ? 'Verificando...' : 'Crear Complejo'}
           </button>
         </form>
+        <Link to="/administrar-complejos" style={{ marginTop: '5vh' }} className="boton-volver">&larr; Volver a complejos</Link>
       </main>
       {mostrarModal && datosConfirmacion && createPortal(
         <div className="modal-overlay-complejo">

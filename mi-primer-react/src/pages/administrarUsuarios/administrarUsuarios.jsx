@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { obtenerTodosLosUsuarios, eliminarUsuario } from '../../services/usuariosService.js';
 import { useModal } from '../../context/modal/ModalContext';
 import './administrarUsuarios.css';
@@ -71,6 +71,8 @@ function AdministrarUsuarios() {
   return (
     <main className="admin-usuarios-page">
       <div className="admin-usuarios-card">
+        <Link to="/menuAdmin" className="boton-volver">&larr; Volver al menú</Link>
+
         <div className="admin-usuarios-header">
           <div className="admin-usuarios-titulo-box">
             <h2>Usuarios</h2>
