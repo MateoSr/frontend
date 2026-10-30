@@ -1,0 +1,208 @@
+.detalle-complejo {
+	width: min(100% - 2rem, 1200px);
+	margin: 2rem auto;
+}
+
+.detalle-complejo-imagen {
+	display: block;
+	width: 100%;
+	max-height: 360px;
+	object-fit: cover;
+	border-radius: 8px;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.5);
+}
+
+.detalle-complejo-nombre {
+	margin: 1rem 0 1.5rem;
+	text-align: center;
+}
+
+.detalle-complejo .contenedor-horarios-cancha {
+	width: calc(100vw - 2rem);
+	margin-left: 50%;
+	transform: translateX(-50%);
+	box-sizing: border-box;
+}
+
+
+.detalle-complejo-acordeon {
+    background-color: var(--color-blanco);
+    margin-bottom: 2rem;
+    border: 1px solid var(--color-borde-suave);
+    border-radius: 12px;
+    color: #17324d;
+    margin-top: 2rem;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.detalle-complejo-acordeon:hover {
+    box-shadow: var(--sombra-suave);
+    border-color: #d1d5db;
+}
+
+
+.detalle-complejo-acordeon summary {
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fafafa;
+    user-select: none;
+}
+
+.detalle-complejo-acordeon summary::-webkit-details-marker {
+    display: none; 
+}
+
+.detalle-complejo-acordeon summary::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #17324d;
+    border-bottom: 2px solid #17324d;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+
+.detalle-complejo-acordeon[open] summary::after {
+    transform: rotate(-135deg);
+}
+
+.detalle-complejo-acordeon[open] summary {
+    border-bottom: 1px solid var(--color-borde-suave);
+    background-color: var(--color-blanco);
+}
+
+
+.contenido-acordeon {
+    padding: 1.25rem;
+}
+
+.contenido-acordeon p {
+    margin: 0;
+    line-height: 1.5;
+    color: #4b5563;
+}
+
+.horario-fila {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed var(--color-borde-suave);
+    color: #4b5563;
+}
+
+
+.horario-fila:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.detalle-complejo-opiniones {
+    background-color: var(--color-blanco);
+    margin-top: 2rem;
+    border: 1px solid var(--color-borde-suave);
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.detalle-complejo-opiniones h2 {
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+    color: var(--color-texto);
+}
+
+.detalle-complejo-opiniones-vacio {
+    margin: 0 0 1.5rem;
+    color: var(--color-texto-gris);
+}
+
+.detalle-complejo-opiniones-lista {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.detalle-complejo-opinion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.75rem 1rem;
+    border-left: 3px solid var(--color-primario);
+    border-radius: 8px;
+    background-color: var(--color-fondo);
+}
+
+.detalle-complejo-opinion-descripcion {
+    margin: 0;
+    color: var(--color-texto-secundario);
+    line-height: 1.5;
+}
+
+.detalle-complejo-opinion-fecha {
+    font-size: 0.85rem;
+    color: var(--color-texto-gris);
+}
+
+.detalle-complejo-opinion-form {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.detalle-complejo-opinion-form label {
+    font-weight: 600;
+    color: var(--color-texto);
+}
+
+.detalle-complejo-opinion-form textarea {
+    width: 100%;
+    min-height: 90px;
+    padding: 0.75rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font: inherit;
+    color: var(--color-texto);
+    resize: vertical;
+}
+
+.detalle-complejo-opinion-form textarea:focus {
+    outline: 2px solid var(--color-primario-suave);
+    border-color: var(--color-primario);
+}
+
+.detalle-complejo-opinion-form button {
+    justify-self: start;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.detalle-complejo-opinion-form button:hover:not(:disabled) {
+    background-color: var(--color-primario-hover);
+}
+
+.detalle-complejo-opinion-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Responsive mobile */
+@media (max-width: 640px) { .detalle-complejo .contenedor-horarios-cancha { width: 100%; margin-left: 0; transform: none; } .horario-fila { flex-wrap: wrap; gap: 8px; } }
+

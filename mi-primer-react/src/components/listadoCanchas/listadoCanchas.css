@@ -1,0 +1,55 @@
+.listado-canchas {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 24px;
+  background: var(--color-blanco);
+  border: 1px solid var(--color-borde);
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+.listado-canchas-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.listado-canchas-kicker {
+  margin: 0 0 4px;
+  color: var(--color-primario);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.listado-canchas h2 { margin: 0; color: var(--color-texto); font-size: 22px; }
+.listado-canchas-contador { flex-shrink: 0; padding: 7px 12px; color: var(--color-texto-secundario); background: var(--color-fondo-gris); border-radius: 8px; font-size: 13px; font-weight: 700; }
+.tabla-canchas-wrapper { overflow-x: auto; border: 1px solid var(--color-borde); border-radius: 10px; }
+.tabla-canchas { width: 100%; min-width: 780px; border-collapse: collapse; color: var(--color-texto-secundario); font-size: 14px; }
+.tabla-canchas th, .tabla-canchas td { padding: 15px 16px; text-align: left; border-bottom: 1px solid var(--color-borde); white-space: nowrap; }
+.tabla-canchas th { color: var(--color-texto-gris); background: var(--color-fondo); font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+.tabla-canchas tbody tr:last-child td { border-bottom: 0; }
+.deporte-celda { color: var(--color-texto); font-weight: 700; }
+.columna-acciones, .acciones-celda { text-align: right !important; }
+.acciones-celda { display: flex; justify-content: flex-end; gap: 7px; }
+.accion { display: inline-grid; width: 34px; height: 34px; place-items: center; border: 1px solid var(--color-borde-gris); border-radius: 7px; background: var(--color-blanco); cursor: pointer; transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; }
+.accion svg, .boton-agregar-cancha svg { display: block; width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2; }
+.accion-editar { color: var(--color-info); }
+.accion-precio { color: var(--color-exito-fuerte); }
+.accion-borrar { color: var(--color-error-fuerte); }
+.accion:hover, .accion:focus-visible { color: var(--color-blanco); }
+.accion-editar:hover, .accion-editar:focus-visible { background: var(--color-info); border-color: var(--color-info); }
+.accion-precio:hover, .accion-precio:focus-visible { background: var(--color-exito-fuerte); border-color: var(--color-exito-fuerte); }
+.accion-borrar:hover, .accion-borrar:focus-visible { background: var(--color-error-fuerte); border-color: var(--color-error-fuerte); }
+.canchas-vacio { padding: 30px 16px !important; color: var(--color-texto-gris); text-align: center !important; }
+.boton-agregar-cancha { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 11px 16px; color: var(--color-blanco); background: var(--color-primario); border: 0; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; transition: background-color 0.2s ease, transform 0.2s ease; }
+.boton-agregar-cancha:hover, .boton-agregar-cancha:focus-visible { background: #c94700; transform: translateY(-1px); }
+
+@media (max-width: 640px) {
+  .listado-canchas { padding: 18px; }
+  .listado-canchas-header { align-items: flex-start; flex-direction: column; }
+}

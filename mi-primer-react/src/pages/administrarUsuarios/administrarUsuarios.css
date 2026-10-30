@@ -1,0 +1,170 @@
+.admin-usuarios-page {
+  width: 100%;
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 16px;
+}
+
+.admin-usuarios-card {
+  background: var(--color-blanco);
+  border-radius: 16px;
+  border: 1px solid var(--color-borde);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+}
+
+.admin-usuarios-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-usuarios-titulo-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-usuarios-titulo-box h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-texto);
+  margin: 0;
+}
+
+.admin-usuarios-badge {
+  background-color: var(--color-fondo-gris);
+  color: var(--color-texto-terciario);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--color-borde);
+}
+
+.btn-nuevo-usuario {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-nuevo-complejo:hover {
+  background-color: var(--color-primario-hover);
+}
+
+.admin-usuarios-toolbar {
+  margin-bottom: 20px;
+}
+
+.input-busqueda-usuario {
+  width: 100%;
+  max-width: 320px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: 1px solid var(--color-borde-gris);
+  border-radius: 8px;
+  outline: none;
+}
+
+.input-busqueda-usuario:focus {
+  border-color: var(--color-primario);
+}
+
+.admin-usuarios-tabla-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-usuarios-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.admin-usuarios-tabla thead tr {
+  background-color: var(--color-fondo);
+}
+
+.admin-usuarios-tabla th {
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-texto-gris);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.admin-usuarios-tabla td {
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  color: var(--color-texto-secundario);
+  border-bottom: 1px solid var(--color-fondo-gris);
+  vertical-align: middle;
+}
+
+.col-id {
+  color: var(--color-texto-gris);
+  font-weight: 600;
+  width: 60px;
+}
+
+.col-nombre {
+  font-weight: 700;
+  color: var(--color-texto);
+}
+
+.col-acciones {
+  width: 160px;
+  text-align: right;
+}
+
+.acciones-contenedor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-tabla-accion {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-tabla-editar {
+  background-color: var(--color-fondo);
+  color: var(--color-info);
+  border: 1px solid var(--color-borde-gris);
+}
+
+.btn-tabla-editar:hover {
+  background-color: #eff6ff;
+}
+
+.btn-tabla-eliminar {
+  background-color: var(--color-error-fondo);
+  color: var(--color-error-fuerte);
+  border: 1px solid #fecaca;
+}
+
+.btn-tabla-eliminar:hover {
+  background-color: var(--color-error-borde);
+}
+
+.admin-estado-tabla {
+  text-align: center;
+  padding: 30px;
+  color: var(--color-texto-gris);
+}
+/* Responsive mobile */
+@media (max-width: 640px) { .admin-usuarios-header { flex-direction: column; align-items: stretch; gap: 12px; } .admin-usuarios-header button { min-height: 44px; } }
+

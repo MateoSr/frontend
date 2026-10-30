@@ -1,0 +1,96 @@
+
+.tarjeta-complejo {
+  border: 1px solid var(--color-fondo-claro);
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: var(--color-blanco);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 100%;
+}
+
+.tarjeta-complejo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.complejo-media {
+  position: relative;
+  height: 200px;
+}
+
+.complejo-imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.precio-overlay {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: var(--color-blanco);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.precio-overlay strong {
+  font-size: 16px;
+}
+
+.complejo-info {
+  padding: 1.2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.complejo-info h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #2c3e50;
+}
+
+.complejo-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+.complejo-turnos {
+  padding: 0 1.2rem 1.2rem 1.2rem;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.complejo-turnos::-webkit-scrollbar {
+  height: 4px;
+}
+
+.complejo-turnos::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.turno-button {
+  background: var(--color-blanco);
+  border: 1px solid #bdc3c7;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 13px;
+  color: #7f8c8d;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.turno-button:hover {
+  border-color: var(--color-primario);
+  color: var(--color-primario);
+  background-color: #fde0d0;
+}

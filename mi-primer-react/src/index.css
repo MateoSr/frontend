@@ -1,0 +1,105 @@
+:root {
+  /* ============================================
+     Paleta de colores (Turno Libre)
+     Definida a partir de los valores repetidos
+     en los estilos de componentes y páginas.
+     ============================================ */
+
+  /* Naranja principal de la marca */
+  --color-primario: #ee5801;
+  --color-primario-hover: #d14d00;
+  --color-primario-claro: #ff5500;
+  --color-primario-oscuro: #ea580c;
+  --color-primario-suave: rgba(238, 88, 1, 0.3);
+  --color-primario-suave-25: rgba(238, 88, 1, 0.25);
+  --color-primario-fondo: rgba(238, 88, 1, 0.15);
+
+  /* Neutros */
+  --color-blanco: #ffffff;
+  --color-negro: #000000;
+  --color-texto: #0f172a;
+  --color-texto-secundario: #334155;
+  --color-texto-terciario: #475569;
+  --color-texto-gris: #64748b;
+  --color-texto-tenue: #6b7280;
+  --color-texto-oscuro: #374151;
+  --color-texto-grafito: #3c3c3c;
+
+  /* Grises de fondo y bordes */
+  --color-fondo: #f8fafc;
+  --color-fondo-gris: #f1f5f9;
+  --color-fondo-claro: #f0f0f0;
+  --color-borde: #e2e8f0;
+  --color-borde-suave: #e5e7eb;
+  --color-borde-gris: #cbd5e1;
+  --color-borde-medio: #d0d5dd;
+  --color-gris-claro: #cccccc;
+  --color-gris-medio: #666666;
+
+  /* Estados */
+  --color-error: #ef4444;
+  --color-error-fuerte: #dc2626;
+  --color-error-fondo: #fef2f2;
+  --color-error-borde: #fee2e2;
+  --color-exito: #10b981;
+  --color-exito-fuerte: #059669;
+  --color-info: #2563eb;
+
+  /* Sombras */
+  --sombra-suave: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --sombra-media: 0 20px 40px rgba(0, 0, 0, 0.08);
+  --sombra-fuerte: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --sombra-primario: 0 4px 12px rgba(238, 88, 1, 0.3);
+  --sombra-primario-suave: 0 4px 12px rgba(238, 88, 1, 0.25);
+
+  /* Radios de borde */
+  --radio-xs: 4px;
+  --radio-sm: 6px;
+  --radio-md: 8px;
+  --radio-lg: 12px;
+  --radio-xl: 16px;
+  --radio-pill: 30px;
+  --radio-redondo: 50%;
+
+  /* Transiciones */
+  --transicion-rapida: 0.2s ease;
+  --transicion-media: 0.3s ease;
+
+  /* Tipografía */
+  --fuente-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* Layout */
+  background-color: var(--color-blanco);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Botón reutilizable para volver a la pantalla anterior */
+.boton-volver {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-borde-gris);
+  border-radius: var(--radio-md);
+  background-color: var(--color-blanco);
+  color: var(--color-texto-secundario);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color var(--transicion-rapida), border-color var(--transicion-rapida), color var(--transicion-rapida);
+}
+
+.boton-volver:hover {
+  background-color: var(--color-fondo);
+  border-color: var(--color-primario);
+  color: var(--color-primario);
+}
+
+.boton-volver:focus-visible {
+  outline: 2px solid var(--color-primario-suave);
+  outline-offset: 2px;
+}

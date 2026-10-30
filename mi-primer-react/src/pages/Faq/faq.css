@@ -1,0 +1,36 @@
+main {
+  margin-top: 0px;
+  flex-grow: 1;
+  display: block;
+}
+
+.contenedor-faq {
+  text-align: left;
+  padding-left: 30vh;
+  padding-right: 30vh;
+  padding-top: 5vh;
+  
+}
+
+.titulo-faq{
+  text-align: center;
+  color: var(--color-primario-claro);
+  font-size: 6vh;
+}
+
+.lista-faq li{
+  padding-top: 7vh;
+  list-style: none;
+}
+
+.lista-faq li h2{
+  padding-bottom: 4.5vh;
+  font-size: 4vh;
+}
+
+.lista-faq li p {
+  font-size: 2.7vh;
+}
+/* Responsive mobile */
+@media (max-width: 768px) { .contenedor-faq { padding-left: 20px; padding-right: 20px; padding-top: 24px; } .titulo-faq { font-size: clamp(1.8rem, 8vw, 2.5rem); } .lista-faq li { padding-top: 24px; } .lista-faq li h2 { font-size: 1.15rem; padding-bottom: 12px; } .lista-faq li p { font-size: 1rem; line-height: 1.5; } }
+

@@ -1,0 +1,73 @@
+.pago-resultado-container {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.pago-resultado-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  padding: 2.5rem 2rem;
+}
+
+.pago-resultado-card.aprobado {
+  border-top: 4px solid #22c55e;
+}
+
+.pago-resultado-card.pendiente {
+  border-top: 4px solid #f59e0b;
+}
+
+.pago-resultado-card.rechazado,
+.pago-resultado-card.reembolsada,
+.pago-resultado-card.cancelada,
+.pago-resultado-card.expirada {
+  border-top: 4px solid #ef4444;
+}
+
+.pago-resultado-icono {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.pago-resultado-titulo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.pago-resultado-mensaje {
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.pago-resultado-botones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pago-resultado-boton {
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pago-resultado-boton.primario {
+  background: #0f766e;
+  color: #fff;
+}
+
+.pago-resultado-boton.secundario {
+  background: #f3f4f6;
+  color: #1f2937;
+}

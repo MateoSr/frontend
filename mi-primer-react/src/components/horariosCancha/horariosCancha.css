@@ -1,0 +1,136 @@
+.contenedor-horarios-cancha {
+  background: var(--color-blanco);
+  border-radius: 12px;
+  border: 1px solid var(--color-fondo-claro);
+  padding: 1.5rem;
+  font-family: sans-serif;
+  overflow-x: auto;
+}
+
+.fila-cabecera, .fila-cancha {
+  display: flex;
+  border-bottom: 1px solid var(--color-fondo-claro);
+}
+
+.columna-info-vacia, .info-cancha {
+  width: 250px; 
+  flex-shrink: 0;
+  padding: 1rem;
+  border-right: 1px solid var(--color-fondo-claro);
+}
+
+.info-cancha h4 {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.info-cancha p {
+  margin: 0;
+  font-size: 12px;
+  color: #888;
+}
+
+.contenedor-columnas-horas, .contenedor-celdas {
+  display: flex;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.celda-cabecera-hora,
+.celda-turno {
+  flex: 1 1 0;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 4px;
+}
+
+.celda-cabecera-hora {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  padding: 0.5rem 0;
+  border-right: 1px solid var(--color-fondo-claro);
+}
+
+.celda-turno {
+  border-right: 1px solid var(--color-fondo-claro);
+  min-height: 60px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.celda-turno.ocupada {
+  background-color: #798b9c; 
+  cursor: not-allowed;
+}
+
+.celda-turno.libre {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.celda-turno.libre:hover {
+  background-color: var(--color-primario); 
+  opacity: 0.2;
+}
+
+.celda-turno.pasado {
+  background-color: #e5e7eb;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.modal-contenido {
+  position: fixed;
+  text-align: center;
+  top: 1rem;
+  left: 1rem;
+  background: var(--color-blanco);
+  padding: 1.5rem;
+  border: 1px solid var(--color-fondo-claro);
+  border-radius: 12px;
+  width: min(360px, calc(100vw - 3rem));
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  z-index: 1000;
+}
+
+.modal-botones {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.btn-pagar {
+  background: var(--color-primario);
+  color: var(--color-blanco);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+/* Responsive mobile */
+@media (max-width: 640px) {
+  .contenedor-horarios-cancha { padding: 1rem; }
+  .columna-info-vacia, .info-cancha { width: min(150px, 40vw); padding: 0.75rem; }
+  /* Misma base para cabecera y celdas: si no, las columnas se desfasan */
+  .celda-cabecera-hora, .celda-turno { min-width: 48px; }
+  .celda-turno { min-height: 48px; }
+  /* Bottom-sheet compacto: pisa las coordenadas inline que calcula el JSX */
+  .modal-contenido {
+    top: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    transform: none !important;
+    max-height: 80dvh;
+    overflow-y: auto;
+    border-radius: 16px 16px 0 0;
+    padding: 1.25rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom));
+  }
+  .modal-botones button, .btn-pagar { min-height: 48px; width: 100%; font-size: 1rem; }
+}
+
