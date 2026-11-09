@@ -35,7 +35,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/faq" element={<Faq />} />
-        <Route path="/login" element={<Login endpoint="/api/login" redirectTo="/" />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/software" element={<Software />} />
         <Route path="/sobre-nosotros" element={<Aboutus />} />
@@ -49,7 +49,6 @@ function App() {
         <Route path="/confirmar-reserva" element={<ConfirmarReserva />} />
         <Route path="/pago/resultado" element={<PagoResultado />} />
         <Route path="/detalle-complejo/:id" element={<DetalleComplejo />} />
-        <Route path="/loginAdmin" element={<Login endpoint="/api/loginAdmin" redirectTo="/menuAdmin" />} />
         <Route path="/menuAdmin" element={<RutaProtegida rol="Administrador">
             <MenuAdmin />
           </RutaProtegida>} />

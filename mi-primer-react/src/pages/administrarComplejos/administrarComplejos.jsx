@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { obtenerTodosLosComplejos, darDeBajaComplejo } from '../../services/complejosService.js';
 import { useModal } from '../../context/modal/ModalContext';
 import './administrarComplejos.css';
@@ -67,6 +67,8 @@ function AdministrarComplejos() {
   return (
     <main className="admin-complejos-page">
       <div className="admin-complejos-card">
+        <Link to="/menuAdmin" className="boton-volver">&larr; Volver al menú</Link>
+
         {/* Cabecera del panel */}
         <div className="admin-complejos-header">
           <div className="admin-complejos-titulo-box">
@@ -120,15 +122,7 @@ function AdministrarComplejos() {
                     <td className="col-id">#{complejo.id}</td>
                     <td className="col-nombre">{complejo.nombre}</td>
                     <td className="col-direccion">{complejo.direccion}</td>
-                    <td className="col-estado">
-                      <span
-                        className={`badge-estado ${
-                          complejo.estado === 'Inactivo' ? 'badge-inactivo' : 'badge-activo'
-                        }`}
-                      >
-                        {complejo.estado ?? 'Activo'}
-                      </span>
-                    </td>
+                    <td className="col-estado">{complejo.estado}</td>
                     <td className="col-acciones">
                       <div className="acciones-contenedor">
                         <button

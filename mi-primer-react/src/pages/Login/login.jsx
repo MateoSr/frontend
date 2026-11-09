@@ -6,7 +6,7 @@ import { useModal } from '../../context/modal/ModalContext.jsx';
 import { decodificarPayload } from '../../utils/auth.js';
 import './login.css';
 
-function Login({ endpoint = '/api/login', redirectTo = '/' }) {
+function Login() {
   const { mostrarModal } = useModal();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +15,7 @@ function Login({ endpoint = '/api/login', redirectTo = '/' }) {
     const datosFormulario = { email, password };
 
     try {
-      const response = await fetch(`${API_URL.replace(/\/api$/,"")}${endpoint}`, {
+      const response = await fetch(`${API_URL.replace(/\/api$/,"")}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datosFormulario),
@@ -31,7 +31,7 @@ function Login({ endpoint = '/api/login', redirectTo = '/' }) {
           'Dueño': '/menuDueño',
           Administrador: '/menuAdmin',
         };
-        const destino = (payload && destinoPorRol[payload.rol]) ?? redirectTo;
+        const destino = (payload && destinoPorRol[payload.rol]) ?? '/';
         window.location.href = destino;
       } else {
         mostrarModal({

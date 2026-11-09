@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { crearUsuario } from '../../services/usuariosService';
 import { crearPersonaJuridica } from '../../services/personaJuridicaService';
@@ -186,6 +186,7 @@ export const CrearUsuario = () => {
             Crear {tipoUsuarioId === 4 ? 'Dueño' : 'Encargado'}
           </button>
         </form>
+        <Link to="/administrar-usuarios" style={{ marginTop: '5vh' }} className="boton-volver">&larr; Volver a usuarios</Link>
       </main>
 
       {/* Pop-up Modal de Confirmación */}
