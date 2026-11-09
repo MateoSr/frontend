@@ -8,7 +8,7 @@ const obtenerJson = async (url, options = {}) => {
     try {
       const data = await response.json();
       mensaje = data.message || mensaje;
-    } catch (_) {}
+    } catch { /* respuesta sin JSON */ }
     throw new Error(mensaje);
   }
   return response.json();

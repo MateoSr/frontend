@@ -51,7 +51,7 @@ export const CrearUsuario = () => {
             cuit: formData.cuit,
             razonSocial: formData.razonSocial,
           });
-        } catch (errPersona) {
+        } catch {
           console.log('Persona jurídica ya registrada previamente, asociando CUIT directamente.');
         }
       }

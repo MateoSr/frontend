@@ -29,16 +29,6 @@ export const modificarCancha = async (idComplejo, nroCancha, datosCancha) => {
   return await response.json();
 };
 
-export const borrarCancha = async (idComplejo, nroCancha) => {
-  const token = localStorage.getItem('gestor_token');
-  const response = await fetch(`${COMPLEJOS_API_URL}/${idComplejo}/canchas/${nroCancha}`, {
-    method: "DELETE",
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  if (!response.ok) throw new Error("Error al eliminar la cancha.");
-  return await response.json();
-};
-
 export const crearPrecioCancha = async (idComplejo, nroCancha, datosPrecio) => {
   const token = localStorage.getItem('gestor_token');
   const response = await fetch(`${COMPLEJOS_API_URL}/${idComplejo}/canchas/${nroCancha}/precios`, {

@@ -106,20 +106,6 @@ export const darDeBajaComplejo = async (id) => {
   return await response.json();
 };
 
-export const eliminarComplejo = async (id) => {
-  const token = localStorage.getItem('gestor_token');
-  const response = await fetch(`${API_URL}/complejos/${id}`, {
-    method: 'DELETE',
-    headers: { Authorization: `Bearer ${token}` },
-  });
-
-  if (!response.ok) {
-    throw new Error('No se pudo eliminar el complejo.');
-  }
-
-  return response.json();
-};
-
 export const modificarComplejo = async (id,datosActualizados) => {
   const token = localStorage.getItem('gestor_token');
   const response = await fetch(`${API_URL}/complejos/${id}`,{

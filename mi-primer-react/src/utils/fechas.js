@@ -1,10 +1,5 @@
 const OFFSET_AR_MS = 3 * 60 * 60 * 1000;
 
-export function fechaHoraAUTC(fecha, hora) {
-  if (!fecha || !hora) return null;
-  return new Date(`${fecha}T${hora}:00-03:00`);
-}
-
 export function combinarFechaHoraUTC(fechaISO, horaHHmm) {
   if (!fechaISO) return null;
   const fecha = String(fechaISO).split('T')[0];

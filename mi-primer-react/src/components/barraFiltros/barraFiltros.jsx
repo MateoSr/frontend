@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './barraFiltros.css';
 
 export const BarraFiltros = ({ onFiltroCambio }) => {

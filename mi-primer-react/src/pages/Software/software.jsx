@@ -1,5 +1,4 @@
 import { API_URL } from '../../config/api.js';
-import { Link } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import './software.css';
 import Planes from '../../components/planes/planes.jsx';

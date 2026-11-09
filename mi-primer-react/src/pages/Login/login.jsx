@@ -40,7 +40,7 @@ function Login() {
           tipo: 'error'
         });
       }
-    } catch (error) {
+    } catch {
       mostrarModal({
         titulo: 'Error',
         mensaje: "Error de conexión con el servidor",

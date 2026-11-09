@@ -1,4 +1,4 @@
-import { CircleDollarSign, Edit3, Plus, Trash2 } from 'lucide-react';
+import { CircleDollarSign, Edit3, Plus } from 'lucide-react';
 import './listadoCanchas.css';
 
 const formatearPrecio = (precio) => {
@@ -43,7 +43,7 @@ export function ListadoCanchas({
 					</thead>
 					<tbody>
 						{canchas.length > 0 ? (
-							canchas.map((cancha, indice) => (
+							canchas.map((cancha) => (
 								<tr key={cancha.nro}>
 									<td data-label="Nro.">{cancha.nro}</td>
 									<td data-label="Deporte" className="deporte-celda">

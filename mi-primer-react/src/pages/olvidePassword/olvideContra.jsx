@@ -1,5 +1,4 @@
 import { API_URL } from '../../config/api.js';
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import InputForum from '../../components/inputForum/inputForum';
@@ -9,7 +8,6 @@ import './olvideContra.css'
 function OlvideContra() {
     const { mostrarModal } = useModal();
     const [email, setEmail] = useState('')
-    const [estado, setEstado] = useState('')
 
 
     const enviarEmail = async (e) => {
@@ -28,7 +26,7 @@ function OlvideContra() {
                     tipo: 'exito'
                 })
             }
-        } catch (error) {
+        } catch {
             mostrarModal({
                 titulo: 'Error',
                 mensaje: "Error en servidor",

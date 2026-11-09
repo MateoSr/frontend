@@ -1,4 +1,3 @@
-import React from 'react';
 import { TarjetaComplejo } from '../tarjetaComplejo/tarjetaComplejo'; 
 import './grillaComplejos.css';
 

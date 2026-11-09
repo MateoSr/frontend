@@ -48,7 +48,7 @@ export default function PagoResultado() {
 
           if (resp.estado !== "pendiente") return;
           await new Promise((resolve) => setTimeout(resolve, 2000));
-        } catch (error) {
+        } catch {
           if (activo) {
             setEstado("rechazado");
             setMensaje("Ocurrió un error al consultar el estado del pago.");

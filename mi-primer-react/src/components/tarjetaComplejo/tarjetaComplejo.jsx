@@ -1,8 +1,7 @@
-import React from 'react';
 import './tarjetaComplejo.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 export const TarjetaComplejo = ({ complejo }) => {
-  const { nombre, direccion, precio, imagenUrl, disponibilidad } = complejo;
+  const { nombre, direccion, precio, imagenUrl } = complejo;
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 

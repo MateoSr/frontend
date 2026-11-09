@@ -18,7 +18,7 @@ const PANEL_POR_ROL = {
 };
 
 function Header() {
-  const [estaLog, setLog] = useState(() => {
+  const [estaLog] = useState(() => {
     const token = localStorage.getItem("gestor_token");
     return !!token;
   });
