@@ -70,15 +70,21 @@ export const useReserva = ({ complejo, canchaNro, inicio, duracion, modo }) => {
             email: perfil.email || ''
           });
         }
-        setReserva((reservaActual) => ({
-          ...reservaActual,
-          complejoNombre: datosComplejo.nombre || '',
-          complejoUbicacion: datosComplejo.ubicacion || '',
-          deporte: cancha.deporte || cancha.tipoCancha?.deporte || '',
-          duracion: cancha.duracion || cancha.tipoCancha?.duracion || 60,
-          precioSenia: cancha.precios[0].precioSena || 'a',
-          precioTotal: cancha.precios[0].precioBase || 'a'
-        }));
+        setReserva((reservaActual) => {
+          const canchaCompleta = datosComplejo.canchas?.find((c) => c.nro === Number(canchaNro)) ?? cancha;
+
+          return {
+            ...reservaActual,
+            complejoNombre: datosComplejo.nombre || '',
+            complejoUbicacion: [datosComplejo.direccion, datosComplejo.localidad?.nombre]
+              .filter(Boolean)
+              .join(', '),
+            deporte: canchaCompleta.tipoCancha?.deporte || canchaCompleta.deporte || '',
+            duracion: canchaCompleta.tipoCancha?.duracion || canchaCompleta.duracion || 60,
+            precioSenia: canchaCompleta.precios?.[0]?.precioSena ?? '',
+            precioTotal: canchaCompleta.precios?.[0]?.precioBase ?? ''
+          };
+        });
 
       } catch (error) {
         if (error.name !== 'AbortError') {
