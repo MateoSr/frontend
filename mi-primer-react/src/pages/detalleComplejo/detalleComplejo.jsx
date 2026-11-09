@@ -5,7 +5,6 @@ import imagenComplejo from "../../assets/foto-complejo-AlAngulo.jpg";
 import { crearOpinion, obtenerDetalleComplejo } from "../../services/complejosService";
 import { fechaEnZona, ZONA_COMPLEJO } from "../../utils/fechas";
 import { useModal } from "../../context/modal/ModalContext.jsx";
-import { formatearFechaAR } from "../../utils/fechas";
 import "./detalleComplejo.css";
 
 const diasSemana = [
