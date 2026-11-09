@@ -2,29 +2,22 @@ import { useEffect, useState } from 'react';
 import { crearReservaEncargado, obtenerDatosReserva } from '../services/reservaService';
 import { crearOrdenPago } from '../services/pagoService';
 import { useModal } from '../context/modal/ModalContext';
-import { combinarFechaHoraUTC } from '../utils/fechas';
+import { formatearFechaUTC, formatearHoraUTC } from '../utils/fechas';
 
-const calcularHoraFin = (horaInicio, duracionMinutos) => {
-  if (!horaInicio) return '';
-
-  const [horas, minutos] = horaInicio.split(':').map(Number);
-  const fecha = new Date();
-  fecha.setHours(horas, minutos + Number(duracionMinutos || 60), 0);
-
-  return `${fecha.getHours().toString().padStart(2, '0')}:${fecha
-    .getMinutes()
-    .toString()
-    .padStart(2, '0')}`;
-};
-
-export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => {
+export const useReserva = ({ complejo, canchaNro, inicio, duracion, modo }) => {
   const { mostrarModal: mostrarAviso } = useModal();
   const esEncargado = modo === 'encargado';
+  const inicioDate = inicio ? new Date(inicio) : null;
+  const inicioValido = inicioDate && !Number.isNaN(inicioDate.getTime());
+  const duracionMin = Number(duracion) || 60;
+  const finDate = inicioValido
+    ? new Date(inicioDate.getTime() + duracionMin * 60 * 1000)
+    : null;
+
   const [reserva, setReserva] = useState({
     complejo,
     canchaNro,
-    fecha,
-    horaInicio,
+    inicio,
     duracion: '',
     complejoNombre: '',
     complejoUbicacion: '',
@@ -77,15 +70,21 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
             email: perfil.email || ''
           });
         }
-        setReserva((reservaActual) => ({
-          ...reservaActual,
-          complejoNombre: datosComplejo.nombre || '',
-          complejoUbicacion: datosComplejo.ubicacion || '',
-          deporte: cancha.deporte || cancha.tipoCancha?.deporte || '',
-          duracion: cancha.duracion || cancha.tipoCancha?.duracion || 60,
-          precioSenia: cancha.precios[0].precioSena || 'a',
-          precioTotal: cancha.precios[0].precioBase || 'a'
-        }));
+        setReserva((reservaActual) => {
+          const canchaCompleta = datosComplejo.canchas?.find((c) => c.nro === Number(canchaNro)) ?? cancha;
+
+          return {
+            ...reservaActual,
+            complejoNombre: datosComplejo.nombre || '',
+            complejoUbicacion: [datosComplejo.direccion, datosComplejo.localidad?.nombre]
+              .filter(Boolean)
+              .join(', '),
+            deporte: canchaCompleta.tipoCancha?.deporte || canchaCompleta.deporte || '',
+            duracion: canchaCompleta.tipoCancha?.duracion || canchaCompleta.duracion || 60,
+            precioSenia: canchaCompleta.precios?.[0]?.precioSena ?? '',
+            precioTotal: canchaCompleta.precios?.[0]?.precioBase ?? ''
+          };
+        });
 
       } catch (error) {
         if (error.name !== 'AbortError') {
@@ -133,8 +132,16 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
       return;
     }
 
-    const fechaInicioUTC = combinarFechaHoraUTC(fecha, horaInicio);
-    if (fechaInicioUTC && fechaInicioUTC < new Date()) {
+    if (!inicioValido || !finDate) {
+      mostrarAviso({
+        titulo: 'Horario inválido',
+        mensaje: 'No se pudo interpretar el horario seleccionado.',
+        tipo: 'error'
+      });
+      return;
+    }
+
+    if (inicioDate < new Date()) {
       mostrarAviso({
         titulo: 'Horario inválido',
         mensaje: 'No se pueden crear turnos para fechas u horarios pasados.',
@@ -143,15 +150,13 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
       return;
     }
 
-    const horaFin = calcularHoraFin(horaInicio, reserva.duracion);
-
     if (esEncargado) {
       const turno = {
         tipoTurnoId: 1,
         complejoId: parseInt(complejo, 10),
         canchaNro: parseInt(canchaNro, 10),
-        fechaInicio: combinarFechaHoraUTC(fecha, horaInicio),
-        fechaFin: combinarFechaHoraUTC(fecha, horaFin),
+        fechaInicio: inicioDate.toISOString(),
+        fechaFin: finDate.toISOString(),
         estado: 'Reservado',
         nombreSolicitante: titular.nombre,
         apellidoSolicitante: titular.apellido,
@@ -180,9 +185,8 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
       const resultado = await crearOrdenPago({
         complejoId: parseInt(complejo, 10),
         canchaNro: parseInt(canchaNro, 10),
-        fecha,
-        horaInicio,
-        duracion: reserva.duracion,
+        fechaInicio: inicioDate.toISOString(),
+        duracion: duracionMin,
         tipoTurnoId: 1
       }, token);
 
@@ -207,7 +211,9 @@ export const useReserva = ({ complejo, canchaNro, fecha, horaInicio, modo }) => 
     cargando,
     mostrarModal,
     esEncargado,
-    horaFin: calcularHoraFin(reserva.horaInicio, reserva.duracion),
+    fecha: inicioValido ? formatearFechaUTC(inicioDate) : '',
+    horaInicio: inicioValido ? formatearHoraUTC(inicioDate) : '',
+    horaFin: finDate ? formatearHoraUTC(finDate) : '',
     handleChange,
     handleConfirmar
   };
