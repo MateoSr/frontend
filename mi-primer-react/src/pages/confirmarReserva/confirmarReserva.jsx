@@ -11,14 +11,15 @@ export default function ConfirmarReserva() {
 
   const complejo = searchParams.get('complejoId');
   const canchaNro = searchParams.get('canchaNro');
-  const fecha = searchParams.get('fecha');
-  const horaInicio = searchParams.get('horarioInicio');
+  const inicio = searchParams.get('inicio');
+  const duracion = searchParams.get('duracion');
   const modo = searchParams.get('modo');
 
   const {
     reserva,
     titular,
     cargando,
+    horaInicio,
     horaFin,
     mostrarModal,
     esEncargado,
@@ -27,8 +28,8 @@ export default function ConfirmarReserva() {
   } = useReserva({
     complejo: complejo || '',
     canchaNro: canchaNro || '',
-    fecha: fecha || '',
-    horaInicio: horaInicio || '',
+    inicio: inicio || '',
+    duracion: duracion || '',
     modo
   });
 

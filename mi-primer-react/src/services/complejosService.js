@@ -48,6 +48,21 @@ export const obtenerDetalleComplejo = async (id, signal) => {
   return response.json();
 };
 
+export const obtenerDisponibilidad = async (complejoId, fecha, signal) => {
+  const parametros = new URLSearchParams({ fecha });
+  const response = await fetch(
+    `${API_URL}/complejos/${complejoId}/disponibilidad?${parametros.toString()}`,
+    { signal }
+  );
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.message || data.error || 'No se pudo cargar la disponibilidad.');
+  }
+
+  return response.json();
+};
+
 export const obtenerComplejoDelEncargado = async (signal) => {
   const token = localStorage.getItem('gestor_token');
   const response = await fetch(`${API_URL}/complejos/encargado`, {

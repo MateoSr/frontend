@@ -2,64 +2,40 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import './horariosCancha.css';
-import { fechaArgentinaISO, minutosArgentina, ahoraArgentinaMinutos, fechaArgentinaHoyISO } from '../../utils/fechas';
-
-function extraerMinutos(valor) {
-  if (typeof valor !== 'string') return null;
-
-  const hora = valor.match(/(?:T|^)(\d{1,2}):(\d{2})/);
-  return hora ? Number(hora[1]) * 60 + Number(hora[2]) : null;
-}
-
-// Minutos desde medianoche en horario Argentina para un turno UTC.
-function minutosTurnoAR(turno) {
-  const inicio = minutosArgentina(turno.fechaInicio);
-  return inicio;
-}
-
-function fechaTurnoAR(turno) {
-  return fechaArgentinaISO(turno.fechaInicio);
-}
-
-// Determina si un turno (guardado en UTC) cae en el día y bloque indicados (hora Argentina).
-function coincideTurno(turno, fechaAUsar, inicioBloque, finBloque) {
-  const estado = turno.estado?.toLowerCase();
-  if (estado === 'cancelado' || estado === 'cancelada') return false;
-
-  const fechaActualStr = fechaAUsar.split('T')[0];
-  if (fechaTurnoAR(turno) !== fechaActualStr) return false;
-
-  const turnoInicio = minutosTurnoAR(turno);
-  let turnoFin = minutosArgentina(turno.fechaFin);
-  if (turnoInicio === null || turnoFin === null) return false;
-  if (turnoFin <= turnoInicio) turnoFin += 24 * 60;
-
-  return inicioBloque < turnoFin && finBloque > turnoInicio;
-}
-
-function formatearHora(minutos) {
-  const hora = Math.floor(minutos / 60);
-  const minutosRestantes = minutos % 60;
-  return `${String(hora).padStart(2, '0')}:${String(minutosRestantes).padStart(2, '0')}`;
-}
-
-function obtenerDuracion(cancha) {
-  const duracion = Number(cancha.tipoCancha?.duracion);
-  return Number.isFinite(duracion) && duracion > 0 ? duracion : 60;
-}
-
-// Función auxiliar para obtener la fecha de hoy en formato YYYY-MM-DD (hora local)
-function obtenerFechaHoy() {
-  const hoy = new Date();
-  const anio = hoy.getFullYear();
-  const mes = String(hoy.getMonth() + 1).padStart(2, '0');
-  const dia = String(hoy.getDate()).padStart(2, '0');
-  return `${anio}-${mes}-${dia}`;
-}
+import { obtenerDisponibilidad } from '../../services/complejosService';
+import {
+  ZONA_COMPLEJO,
+  fechaEnZona,
+  formatearFechaUTC,
+  formatearHoraUTC,
+  nombreZona,
+  offsetDias,
+  zonaNavegador
+} from '../../utils/fechas';
 
 function formatearFecha(fecha) {
   const [anio, mes, dia] = fecha.split('-');
   return `${dia}/${mes}/${anio}`;
+}
+
+function etiquetaDesfase(desfase) {
+  if (desfase > 0) return ' +1';
+  if (desfase < 0) return ' -1';
+  return '';
+}
+
+function calcularPosicion(celda, altoModal) {
+  const margen = 16;
+  const anchoModal = 360;
+  const espacioAbajo = window.innerHeight - celda.bottom - margen;
+  const top = espacioAbajo >= altoModal
+    ? celda.bottom + 8
+    : Math.max(margen, celda.top - altoModal - 8);
+  const left = Math.min(
+    Math.max(margen, celda.left),
+    window.innerWidth - anchoModal - margen
+  );
+  return { top, left };
 }
 
 // Un bloque pasado no se puede agendar. Si tiene turno (pasado o vigente) y el
@@ -76,21 +52,45 @@ function obtenerTooltipCelda({ estaOcupado, esBloquePasado, esPanelEncargado }) 
 
 export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false }) => {
   const navigate = useNavigate();
-  const [reservaSeleccionada, setReservaSeleccionada] = useState(null);
+  const [disponibilidad, setDisponibilidad] = useState(null);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState('');
+  const [seleccion, setSeleccion] = useState(null);
   const [posicionModal, setPosicionModal] = useState(null);
   const modalRef = useRef(null);
 
-  // Si no se pasa 'fechaActual' o viene vacía, usamos la fecha de hoy por defecto
-  const fechaAUsar = fechaActual ? fechaActual : obtenerFechaHoy();
-  
+  const fechaAUsar = fechaActual || fechaEnZona(new Date(), ZONA_COMPLEJO);
+  const zona = zonaNavegador();
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const cargarDisponibilidad = async () => {
+      setCargando(true);
+      setError('');
+      setDisponibilidad(null);
+
+      try {
+        const data = await obtenerDisponibilidad(complejo.id, fechaAUsar, controller.signal);
+        if (!controller.signal.aborted) setDisponibilidad(data);
+      } catch (err) {
+        if (err.name !== 'AbortError') setError(err.message);
+      } finally {
+        if (!controller.signal.aborted) setCargando(false);
+      }
+    };
+
+    cargarDisponibilidad();
+    return () => controller.abort();
+  }, [complejo.id, fechaAUsar]);
 
   const cerrarModal = () => {
-    setReservaSeleccionada(null);
+    setSeleccion(null);
     setPosicionModal(null);
   };
 
   useEffect(() => {
-    if (!reservaSeleccionada) return undefined;
+    if (!seleccion) return undefined;
 
     const cerrarAlHacerClickAfuera = (evento) => {
       if (!modalRef.current?.contains(evento.target)) {
@@ -100,84 +100,53 @@ export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false
 
     document.addEventListener('mousedown', cerrarAlHacerClickAfuera);
     return () => document.removeEventListener('mousedown', cerrarAlHacerClickAfuera);
-  }, [reservaSeleccionada]);
+  }, [seleccion]);
 
-  const fechaSeleccionada = new Date(`${fechaAUsar}T00:00:00Z`);
-  const diaSeleccionado = fechaSeleccionada.getUTCDay() || 7;
-  const horario = complejo.horarios?.find(item => item.nroDia === diaSeleccionado);
-  const aperturaMinutos = extraerMinutos(horario?.horaApertura);
-  const cierreHorario = extraerMinutos(horario?.horaCierre);
-  
-  const cierreMinutos = aperturaMinutos !== null
-    && cierreHorario !== null
-    && cierreHorario <= aperturaMinutos
-    ? cierreHorario + 24 * 60
-    : cierreHorario;
+  if (cargando) return <p>Cargando horarios...</p>;
+  if (error) return <p>{error}</p>;
+  if (!disponibilidad) return null;
 
-  const canchas = complejo.canchas ?? [];
-
-  if (aperturaMinutos === null || cierreMinutos === null) {
+  if (!disponibilidad.abierto || disponibilidad.columnas.length === 0) {
     return <p>No hay un horario configurado para este complejo.</p>;
   }
 
-  // Todas las filas deben compartir la misma escala para que cada celda quede
-  // alineada con la hora que muestra la cabecera.
-  const duracionGrilla = Math.min(...canchas.map(obtenerDuracion), 60);
-  const totalBloques = Math.floor((cierreMinutos - aperturaMinutos) / duracionGrilla);
+  const canchasReales = complejo.canchas ?? [];
 
-  const abrirModal = (cancha, horaString, evento) => {
+  const abrirConfirmacion = (cancha, columna, evento) => {
     const celda = evento.currentTarget.getBoundingClientRect();
-    const anchoModal = 360;
-    const altoModal = 190;
-    const margen = 16;
-    const espacioAbajo = window.innerHeight - celda.bottom - margen;
-    const top = espacioAbajo >= altoModal
-      ? celda.bottom + 8
-      : Math.max(margen, celda.top - altoModal - 8);
-    const left = Math.min(
-      Math.max(margen, celda.left),
-      window.innerWidth - anchoModal - margen
-    );
-
-    setPosicionModal({ top, left });
-    setReservaSeleccionada({
-      fecha: fechaAUsar, // Usará la seleccionada o la de hoy por defecto
+    setPosicionModal(calcularPosicion(celda, 220));
+    setSeleccion({
+      tipo: 'confirmar',
       canchaNro: cancha.nro,
-      complejoId: complejo.id,
-      horarioInicio: horaString
+      duracion: cancha.duracion,
+      inicio: columna.inicio,
+      fin: columna.fin
     });
   };
 
-  const mostrarReserva = (cancha, turno, evento) => {
+  const mostrarDetalle = (cancha, turno, evento) => {
     const celda = evento.currentTarget.getBoundingClientRect();
-    const margen = 16;
-    const altoModal = 240;
-    const anchoModal = 360;
-    const espacioAbajo = window.innerHeight - celda.bottom - margen;
-    const top = espacioAbajo >= altoModal
-      ? celda.bottom + 8
-      : Math.max(margen, celda.top - altoModal - 8);
-    const left = Math.min(
-      Math.max(margen, celda.left),
-      window.innerWidth - anchoModal - margen
-    );
-
-    setPosicionModal({ top, left });
-    setReservaSeleccionada({ cancha, turno });
+    setPosicionModal(calcularPosicion(celda, 260));
+    setSeleccion({ tipo: 'detalle', cancha, turno });
   };
 
-  const confirmarYPagar = () => {
-    const parametros = new URLSearchParams(reservaSeleccionada);
-    navigate(`/confirmar-reserva?${parametros.toString()}`);
-  };
-
-  const agendarComoEncargado = (cancha, horaString) => {
+  const agendarComoEncargado = (cancha, columna) => {
     const parametros = new URLSearchParams({
       complejoId: String(complejo.id),
       canchaNro: String(cancha.nro),
-      fecha: fechaAUsar,
-      horarioInicio: horaString,
+      inicio: columna.inicio,
+      duracion: String(cancha.duracion),
       modo: 'encargado'
+    });
+    navigate(`/confirmar-reserva?${parametros.toString()}`);
+  };
+
+  const confirmarYPagar = () => {
+    const parametros = new URLSearchParams({
+      complejoId: String(complejo.id),
+      canchaNro: String(seleccion.canchaNro),
+      inicio: seleccion.inicio,
+      duracion: String(seleccion.duracion)
     });
     navigate(`/confirmar-reserva?${parametros.toString()}`);
   };
@@ -186,104 +155,105 @@ export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false
     <>
       <div className="contenedor-horarios-cancha">
         {!esPanelEncargado && (
-          <div className="info-fecha-grilla" style={{ marginBottom: '10px', fontWeight: 'bold',fontSize: '2.2vh' }}>
-            Fecha: {formatearFecha(fechaAUsar)}
+          <div className="info-fecha-grilla" style={{ marginBottom: '10px', fontWeight: 'bold', fontSize: '2.2vh' }}>
+            Fecha: {formatearFecha(fechaAUsar)} (hora del complejo)
           </div>
         )}
+        <div style={{ marginBottom: '8px', fontSize: '1.8vh', opacity: 0.8 }}>
+          Horarios mostrados en {nombreZona(zona)}
+        </div>
         <div className="fila-cabecera">
           <div className="columna-info-vacia"></div>
           <div className="contenedor-columnas-horas">
-            {Array.from({ length: totalBloques }, (_, indice) => {
-              const inicio = aperturaMinutos + indice * duracionGrilla;
+            {disponibilidad.columnas.map((columna) => {
+              const desfase = offsetDias(columna.inicio, fechaAUsar, zona);
               return (
-                <div key={`cabecera-${inicio}`} className="celda-cabecera-hora">
-                  {formatearHora(inicio)}
+                <div key={`cabecera-${columna.inicio}`} className="celda-cabecera-hora">
+                  {formatearHoraUTC(columna.inicio, zona)}{etiquetaDesfase(desfase)}
                 </div>
               );
             })}
           </div>
         </div>
-        {canchas.map((cancha) => (
+        {disponibilidad.canchas.map((cancha) => (
           <div key={`${complejo.id}-${cancha.nro}`} className="fila-cancha">
             <div className="info-cancha">
               <h4>Cancha {cancha.nro}</h4>
-              <p>{cancha.tipoCancha?.deporte ?? 'Deporte no especificado'}</p>
+              <p>{cancha.deporte}</p>
             </div>
 
             <div className="contenedor-celdas">
-              {Array.from({ length: totalBloques }, (_, indice) => {
-                const inicioBloque = aperturaMinutos + indice * duracionGrilla;
-                const finBloque = Math.min(inicioBloque + duracionGrilla, cierreMinutos);
-                const hora = formatearHora(inicioBloque);
-                
-                const estaOcupado = (cancha.turnos ?? []).some(turno => {
-                  return coincideTurno(turno, fechaAUsar, inicioBloque, finBloque);
-                });
-                const turnoActivo = (cancha.turnos ?? []).find(turno => {
-                  return coincideTurno(turno, fechaAUsar, inicioBloque, finBloque);
-                });
+              {cancha.celdas.map((celda, indice) => {
+                const columna = disponibilidad.columnas[indice];
+                if (!columna) return null;
 
-                const fechaHoyAR = fechaArgentinaHoyISO();
-                const minutosAhoraAR = ahoraArgentinaMinutos();
-                const esBloquePasado = fechaAUsar < fechaHoyAR || (fechaAUsar === fechaHoyAR && inicioBloque < minutosAhoraAR);
+                const estaOcupado = !celda.disponible;
+                const esBloquePasado = columna.pasado;
+                const realCancha = canchasReales.find((item) => item.nro === cancha.nro);
 
                 return (
-                  <div 
-                    key={`celda-${cancha.nro}-${inicioBloque}`} 
+                  <div
+                    key={`celda-${cancha.nro}-${columna.inicio}`}
                     className={`celda-turno ${estaOcupado ? 'ocupada' : esBloquePasado ? 'pasado' : 'libre'}`}
-                    title={obtenerTooltipCelda({ estaOcupado, esBloquePasado, esPanelEncargado })}
-                    onClick={evento => {
+                    title={obtenerTooltipCelda({ estaOcupado, esBloquePasado: esBloquePasado, esPanelEncargado })}
+                    onClick={(evento) => {
                       if (estaOcupado) {
-                        // Si ya hay un turno (pasado o vigente) y el panel es del encargado, se consulta el turno.
-                        if (esPanelEncargado && turnoActivo) {
-                          mostrarReserva(cancha, turnoActivo, evento);
+                        if (esPanelEncargado && celda.turnoId && realCancha) {
+                          const turno = (realCancha.turnos ?? []).find((item) => item.id === celda.turnoId);
+                          if (turno) mostrarDetalle(realCancha, turno, evento);
                         }
                         return;
                       }
                       if (esBloquePasado) return;
                       if (esPanelEncargado) {
-                        agendarComoEncargado(cancha, hora);
+                        agendarComoEncargado(cancha, columna);
                       } else {
-                        abrirModal(cancha, hora, evento);
+                        abrirConfirmacion(cancha, columna, evento);
                       }
                     }}
-                  >
-                  </div>
+                  ></div>
                 );
               })}
             </div>
           </div>
         ))}
-
       </div>
 
-      {reservaSeleccionada && createPortal(
+      {seleccion && createPortal(
         <aside
           ref={modalRef}
           className="modal-contenido"
           style={{ top: posicionModal.top, left: posicionModal.left }}
           aria-label="Confirmar reserva"
         >
-          {reservaSeleccionada.turno ? (
+          {seleccion.tipo === 'detalle' ? (
             <>
               <h3>Detalle de la reserva</h3>
-              <p>Cancha: {reservaSeleccionada.cancha.nro}</p>
-              <p>Horario: {formatearHora(minutosTurnoAR(reservaSeleccionada.turno))} a {formatearHora(minutosArgentina(reservaSeleccionada.turno.fechaFin))}</p>
-              <p>Estado: {reservaSeleccionada.turno.estado}</p>
-              <p><strong>{reservaSeleccionada.turno.cliente
-                ? `${reservaSeleccionada.turno.cliente.personaFisica
-                    ? `${reservaSeleccionada.turno.cliente.personaFisica.nombre} ${reservaSeleccionada.turno.cliente.personaFisica.apellido}`
-                    : reservaSeleccionada.turno.cliente.personaJuridica?.razonSocial || 'Cliente sin nombre'}`
-                : `${reservaSeleccionada.turno.nombreSolicitante || ''} ${reservaSeleccionada.turno.apellidoSolicitante || ''}`.trim() || 'Solicitante sin nombre'}</strong></p>
-              <p>{reservaSeleccionada.turno.cliente?.email}</p>
-              <p>{reservaSeleccionada.turno.cliente?.telefono}</p>
+              <p>Cancha: {seleccion.cancha.nro}</p>
+              <p>
+                Horario: {formatearHoraUTC(seleccion.turno.fechaInicio, zona)} a{' '}
+                {formatearHoraUTC(seleccion.turno.fechaFin, zona)}
+              </p>
+              <p>Estado: {seleccion.turno.estado}</p>
+              <p><strong>{seleccion.turno.cliente
+                ? `${seleccion.turno.cliente.personaFisica
+                    ? `${seleccion.turno.cliente.personaFisica.nombre} ${seleccion.turno.cliente.personaFisica.apellido}`
+                    : seleccion.turno.cliente.personaJuridica?.razonSocial || 'Cliente sin nombre'}`
+                : `${seleccion.turno.nombreSolicitante || ''} ${seleccion.turno.apellidoSolicitante || ''}`.trim() || 'Solicitante sin nombre'}</strong></p>
+              <p>{seleccion.turno.cliente?.email}</p>
+              <p>{seleccion.turno.cliente?.telefono}</p>
             </>
           ) : (
             <>
               <h3>Confirmar reserva</h3>
-              <p>Fecha: {reservaSeleccionada.fecha}</p>
-              <p>Horario: {reservaSeleccionada.horarioInicio} hs</p>
-              <p>Cancha: {reservaSeleccionada.canchaNro}</p>
+              <p>Fecha: {formatearFechaUTC(seleccion.inicio, zona)}</p>
+              <p>
+                Horario: {formatearHoraUTC(seleccion.inicio, zona)} a {formatearHoraUTC(seleccion.fin, zona)}
+              </p>
+              {offsetDias(seleccion.inicio, fechaAUsar, zona) > 0 && (
+                <p>Corresponde al día siguiente en tu zona horaria.</p>
+              )}
+              <p>Cancha: {seleccion.canchaNro}</p>
               <div className="modal-botones">
                 <button className="btn-pagar" onClick={confirmarYPagar}>Ir a pagar</button>
               </div>

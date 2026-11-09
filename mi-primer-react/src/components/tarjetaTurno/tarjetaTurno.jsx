@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useModal } from '../../context/modal/ModalContext';
-import { formatearFechaAR, horaArgentinaHHmm } from '../../utils/fechas';
+import { formatearFechaUTC, formatearHoraUTC } from '../../utils/fechas';
 import './tarjetaTurno.css';
 
 const imagen_fallo = "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=600";
@@ -77,8 +77,8 @@ export function TarjetaTurno({ turno, onCancelar }) {
         <p className="cancha-info"> Deporte {cancha.tipoCancha.deporte}</p>
         
         <div className="tarjeta-fechas">
-          <span className="fecha-item">📅 {formatearFechaAR(fechaInicio)}</span>
-          <span className="fecha-item">⏰ {horaArgentinaHHmm(fechaInicio)}</span>
+          <span className="fecha-item">📅 {formatearFechaUTC(fechaInicio)}</span>
+          <span className="fecha-item">⏰ {formatearHoraUTC(fechaInicio)}</span>
         </div>
       </div>
     </div>

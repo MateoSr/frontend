@@ -1,52 +1,79 @@
-const OFFSET_AR_MS = 3 * 60 * 60 * 1000;
+export const ZONA_COMPLEJO = 'America/Argentina/Buenos_Aires';
+
+const zonaValida = (zona) => zona || ZONA_COMPLEJO;
+
+export function zonaNavegador() {
+  return Intl.DateTimeFormat().resolvedOptions().timeZone || ZONA_COMPLEJO;
+}
+
+const aFecha = (instante) => {
+  if (!instante) return null;
+  const fecha = instante instanceof Date ? instante : new Date(instante);
+  return Number.isNaN(fecha.getTime()) ? null : fecha;
+};
+
+export function formatearHoraUTC(instanteUTC, zona = zonaNavegador()) {
+  const fecha = aFecha(instanteUTC);
+  if (!fecha) return '';
+  return new Intl.DateTimeFormat('es-AR', {
+    timeZone: zonaValida(zona),
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  }).format(fecha);
+}
+
+export function formatearFechaUTC(instanteUTC, zona = zonaNavegador()) {
+  const fecha = aFecha(instanteUTC);
+  if (!fecha) return '';
+  return new Intl.DateTimeFormat('es-AR', {
+    timeZone: zonaValida(zona),
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  }).format(fecha);
+}
+
+export function fechaEnZona(instante, zona = ZONA_COMPLEJO) {
+  const fecha = aFecha(instante);
+  if (!fecha) return '';
+  const partes = new Intl.DateTimeFormat('en-CA', {
+    timeZone: zonaValida(zona),
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).formatToParts(fecha);
+  const valor = (tipo) => partes.find((parte) => parte.type === tipo)?.value;
+  return `${valor('year')}-${valor('month')}-${valor('day')}`;
+}
+
+export function offsetDias(instanteUTC, fechaBase, zona = zonaNavegador()) {
+  if (!instanteUTC || !fechaBase) return 0;
+  const diaInstante = fechaEnZona(instanteUTC, zona);
+  if (!diaInstante) return 0;
+  const msInstante = Date.parse(`${diaInstante}T00:00:00Z`);
+  const msBase = Date.parse(`${fechaBase}T00:00:00Z`);
+  if (Number.isNaN(msInstante) || Number.isNaN(msBase)) return 0;
+  return Math.round((msInstante - msBase) / (24 * 60 * 60 * 1000));
+}
+
+export function nombreZona(zona = zonaNavegador()) {
+  try {
+    const partes = new Intl.DateTimeFormat('es-AR', {
+      timeZone: zonaValida(zona),
+      timeZoneName: 'long'
+    }).formatToParts(new Date());
+    return partes.find((parte) => parte.type === 'timeZoneName')?.value || zona;
+  } catch {
+    return zona;
+  }
+}
+
+export function fechaArgentinaHoyISO() {
+  return fechaEnZona(new Date(), ZONA_COMPLEJO);
+}
 
 export function fechaHoraAUTC(fecha, hora) {
   if (!fecha || !hora) return null;
   return new Date(`${fecha}T${hora}:00-03:00`);
-}
-
-export function combinarFechaHoraUTC(fechaISO, horaHHmm) {
-  if (!fechaISO) return null;
-  const fecha = String(fechaISO).split('T')[0];
-  if (!horaHHmm) return new Date(`${fecha}T00:00:00-03:00`);
-  return new Date(`${fecha}T${horaHHmm}:00-03:00`);
-}
-
-export function minutosArgentina(instanteUTC) {
-  if (!instanteUTC) return null;
-  const enAR = new Date(new Date(instanteUTC).getTime() - OFFSET_AR_MS);
-  return enAR.getUTCHours() * 60 + enAR.getUTCMinutes();
-}
-
-export function fechaArgentinaISO(instanteUTC) {
-  if (!instanteUTC) return '';
-  const enAR = new Date(new Date(instanteUTC).getTime() - OFFSET_AR_MS);
-  return enAR.toISOString().split('T')[0];
-}
-
-export function horaArgentinaHHmm(instanteUTC) {
-  const minutos = minutosArgentina(instanteUTC);
-  if (minutos === null) return '';
-  return `${String(Math.floor(minutos / 60) % 24).padStart(2, '0')}:${String(
-    minutos % 60
-  ).padStart(2, '0')}`;
-}
-
-export function formatearFechaAR(instanteUTC) {
-  const fecha = fechaArgentinaISO(instanteUTC);
-  if (!fecha) return '';
-  const [anio, mes, dia] = fecha.split('-');
-  return `${dia}/${mes}/${anio}`;
-}
-
-export function ahoraArgentinaMinutos() {
-  const ahora = new Date();
-  const enAR = new Date(ahora.getTime() - OFFSET_AR_MS);
-  return enAR.getUTCHours() * 60 + enAR.getUTCMinutes();
-}
-
-export function fechaArgentinaHoyISO() {
-  const ahora = new Date();
-  const enAR = new Date(ahora.getTime() - OFFSET_AR_MS);
-  return enAR.toISOString().split('T')[0];
 }

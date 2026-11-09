@@ -3,6 +3,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { HorariosCancha } from "../../components/horariosCancha/horariosCancha";
 import imagenComplejo from "../../assets/foto-complejo-AlAngulo.jpg";
 import { obtenerDetalleComplejo } from "../../services/complejosService";
+import { fechaEnZona, ZONA_COMPLEJO } from "../../utils/fechas";
 import "./detalleComplejo.css";
 
 const diasSemana = [
@@ -74,7 +75,7 @@ function DetalleComplejo() {
             <h1 className="detalle-complejo-nombre">{complejo.nombre}</h1>
             <HorariosCancha
                 complejo={complejo}
-                fechaActual={searchParams.get("fecha") || new Date().toISOString().slice(0, 10)}
+                fechaActual={searchParams.get("fecha") || fechaEnZona(new Date(), ZONA_COMPLEJO)}
             />
             <details className="detalle-complejo-acordeon" open>
                 <summary>Ubicación</summary>
