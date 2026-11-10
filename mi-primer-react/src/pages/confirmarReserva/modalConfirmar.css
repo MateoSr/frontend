@@ -56,9 +56,9 @@
 }
 
 .modal-confirmacion-contenido .modal-subtexto {
-  font-size: 0.9rem !important;
-  color: var(--color-texto-gris) !important;
-  margin-bottom: 24px !important;
+  font-size: 0.9rem;
+  color: var(--color-texto-gris);
+  margin-bottom: 24px;
 }
 
 /* Botón que redirige al Home */

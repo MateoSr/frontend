@@ -54,7 +54,7 @@ function CarruselDeporte() {
         onTransitionEnd={manejarFinTransicion}
         style={{ 
             transform: `translate3d(-${paso * porcentajePorImagen}%, 0, 0)`,
-            transition: conTransicion ? 'transform 0.8s ease-in-out' : 'none' 
+            '--carrusel-transition': conTransicion ? 'transform 0.8s ease-in-out' : 'none'
         }}
     >
     {imagenesDuplicadas.map((img, index) => (

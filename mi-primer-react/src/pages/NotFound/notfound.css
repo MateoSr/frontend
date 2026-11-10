@@ -38,8 +38,8 @@
 /* --- Estilos del Botón de Enlace (El Arreglo Clave) --- */
 .notfound-home {
   /* 1. Resetear el aspecto nativo de enlace */
-  text-decoration: none !important; /* Forzar quitar subrayado */
-  color: var(--color-blanco) !important; /* Forzar texto blanco */
+  text-decoration: none; /* Quitar el subrayado nativo */
+  color: var(--color-blanco);
   display: inline-flex; /* Para alineación perfecta del texto */
   align-items: center; /* Centrado vertical del texto */
   justify-content: center; /* Centrado horizontal del texto */
@@ -60,7 +60,7 @@
 /* 4. Asegurar que el texto interno (strong) no traiga estilos */
 .notfound-home strong {
   color: inherit;
-  text-decoration: none !important;
+  text-decoration: none;
   line-height: 1;
 }
 

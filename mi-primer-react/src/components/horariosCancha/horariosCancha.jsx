@@ -223,7 +223,10 @@ export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false
         <aside
           ref={modalRef}
           className="modal-contenido"
-          style={{ top: posicionModal.top, left: posicionModal.left }}
+          style={{
+            '--modal-top': `${posicionModal.top}px`,
+            '--modal-left': `${posicionModal.left}px`,
+          }}
           aria-label="Confirmar reserva"
         >
           {seleccion.tipo === 'detalle' ? (

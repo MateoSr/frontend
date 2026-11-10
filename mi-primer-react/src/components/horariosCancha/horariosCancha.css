@@ -84,8 +84,8 @@
 .modal-contenido {
   position: fixed;
   text-align: center;
-  top: 1rem;
-  left: 1rem;
+  top: var(--modal-top, 1rem);
+  left: var(--modal-left, 1rem);
   background: var(--color-blanco);
   padding: 1.5rem;
   border: 1px solid var(--color-fondo-gris);
@@ -116,16 +116,16 @@
   /* Misma base para cabecera y celdas: si no, las columnas se desfasan */
   .celda-cabecera-hora, .celda-turno { min-width: 48px; }
   .celda-turno { min-height: 48px; }
-  /* Bottom-sheet compacto: pisa las coordenadas inline que calcula el JSX */
+  /* Bottom-sheet compacto: anula las variables de posición del JSX */
   .modal-contenido {
-    top: auto !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    width: auto !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    transform: none !important;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    max-width: 100%;
+    margin: 0;
+    transform: none;
     max-height: 80dvh;
     overflow-y: auto;
     border-radius: 16px 16px 0 0;

@@ -98,11 +98,11 @@
   border-radius: 3px;
 }
 
-.estado-normal {
+.tarjeta-metrica .subtitulo-metrica.estado-normal {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--color-texto-terciario) !important;
+  color: var(--color-texto-terciario);
   font-weight: 500;
 }
 

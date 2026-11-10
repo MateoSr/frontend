@@ -28,6 +28,7 @@
 .carrusel-ancho-cinta {
     display: flex;
     width: 100%; 
+    transition: var(--carrusel-transition, transform 0.8s ease-in-out);
 }
 
 .carrusel-ancho-item {
@@ -55,5 +56,5 @@
   .carrusel-ancho-item { padding: 0 10px; margin-bottom: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .carrusel-ancho-cinta { transition: none !important; }
+  .carrusel-ancho-cinta { transition: none; }
 }

@@ -96,10 +96,10 @@
   border-top: 1px solid var(--color-borde);
 }
 
-.modal-subtexto-complejo {
+.modal-confirmacion-contenido-complejo .modal-subtexto-complejo {
   font-size: 1.125rem;
   color: var(--color-texto-gris);
-  margin-bottom: 15px !important;
+  margin-bottom: 15px;
 }
 
 .modal-acciones-complejo {
