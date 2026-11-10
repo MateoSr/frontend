@@ -156,7 +156,7 @@ export const HorariosCancha = ({ complejo, fechaActual, esPanelEncargado = false
       <div className="contenedor-horarios-cancha">
         {!esPanelEncargado && (
           <div className="info-fecha-grilla" style={{ marginBottom: '10px', fontWeight: 'bold', fontSize: '2.2vh' }}>
-            Fecha: {formatearFecha(fechaAUsar)} (hora del complejo)
+            Fecha: {formatearFecha(fechaAUsar)} 
           </div>
         )}
         <div style={{ marginBottom: '8px', fontSize: '1.8vh', opacity: 0.8 }}>

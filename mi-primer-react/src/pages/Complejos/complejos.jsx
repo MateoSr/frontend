@@ -1,21 +1,44 @@
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import BarraBusqueda from '../../components/barraBusqueda/barra';
 import { BarraFiltros } from '../../components/barraFiltros/barraFiltros';
 import { GrillaComplejos } from '../../components/grillaComplejos/grillaComplejos';
+import Paginacion from '../../components/paginacion/paginacion';
 import { useComplejos } from '../../hooks/useComplejos';
 import './complejos.css';
 
 export const Complejos = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const ordenActual = searchParams.get('sort') || 'relevantes';
+  const paginaActual = Math.max(1, Number(searchParams.get('page')) || 1);
   const queryString = searchParams.toString();
-  const { complejos, cargando, error } = useComplejos(queryString);
+  const { complejos, total, totalPaginas, cargando, error } = useComplejos(queryString);
+
+  useEffect(() => {
+    if (cargando) {
+      return;
+    }
+
+    if (totalPaginas > 0 && paginaActual > totalPaginas) {
+      const nuevosParametros = new URLSearchParams(searchParams);
+      nuevosParametros.set('page', String(totalPaginas));
+      setSearchParams(nuevosParametros, { replace: true });
+      return;
+    }
+
+    if (totalPaginas === 0 && paginaActual > 1) {
+      const nuevosParametros = new URLSearchParams(searchParams);
+      nuevosParametros.delete('page');
+      setSearchParams(nuevosParametros, { replace: true });
+    }
+  }, [cargando, paginaActual, totalPaginas, searchParams, setSearchParams]);
 
   const cambiarOrden = (e) => {
     const nuevoOrden = e.target.value;
 
     const nuevosParametros = new URLSearchParams(searchParams);
     nuevosParametros.set('sort', nuevoOrden);
+    nuevosParametros.delete('page');
     setSearchParams(nuevosParametros);
   };
 
@@ -30,24 +53,16 @@ export const Complejos = () => {
     }
 
     nuevosParametros.set('sort', ordenActual);
+    nuevosParametros.delete('page');
     setSearchParams(nuevosParametros);
   };
 
-  const complejosOrdenados = [...complejos].sort((a, b) => {
-    if (ordenActual === 'precio_menor') {
-      return a.precio - b.precio;
-    }
-    if (ordenActual === 'precio_mayor') {
-      return b.precio - a.precio;
-    }
-    if (ordenActual === 'nombre_az') {
-      return a.nombre.localeCompare(b.nombre);
-    }
-    if (ordenActual === 'nombre_za') {
-      return b.nombre.localeCompare(a.nombre);
-    }
-    return 0;
-  });
+  const cambiarPagina = (nuevaPagina) => {
+    const nuevosParametros = new URLSearchParams(searchParams);
+    nuevosParametros.set('page', String(nuevaPagina));
+    setSearchParams(nuevosParametros);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="contenedor-pagina">
@@ -60,7 +75,7 @@ export const Complejos = () => {
         </aside>
         <main className="seccion-resultados">
           <div className="encabezado-resultados">
-            <h1>{cargando ? 'Buscando complejos...' : `${complejosOrdenados.length} complejos encontrados`}</h1>
+            <h1>{cargando ? 'Buscando complejos...' : `${total} complejos encontrados`}</h1>
             <div className="selector-orden">
               Ordenar por:
               <select value={ordenActual} onChange={cambiarOrden}>
@@ -72,7 +87,18 @@ export const Complejos = () => {
               </select>
             </div>
           </div>
-          {error ? <p>{error}</p> : <GrillaComplejos complejos={complejosOrdenados} />}
+          {error ? (
+            <p>{error}</p>
+          ) : (
+            <>
+              <GrillaComplejos complejos={complejos} />
+              <Paginacion
+                paginaActual={paginaActual}
+                totalPaginas={totalPaginas}
+                onCambiarPagina={cambiarPagina}
+              />
+            </>
+          )}
         </main>
       </div>
     </div>
