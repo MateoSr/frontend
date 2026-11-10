@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { busquedaComplejoDueno } from '../../services/complejosService';
 import { obtenerDatosMenuDueno } from '../../services/dashboarService';
 import { useModal } from '../../context/modal/ModalContext';
+import { hayToken } from '../../utils/tokenStorage';
 
 
 
@@ -15,8 +16,7 @@ function MenuDueño() {
   const [datos,setDatos] = useState({})
 
   useEffect(() => {
-      const token = localStorage.getItem('gestor_token');
-      if (!token) {
+      if (!hayToken()) {
         mostrarModal({
           titulo: 'Sesión requerida',
           mensaje: 'No estás logueado. Por favor, inicia sesión.',

@@ -3,6 +3,7 @@ import { crearReservaEncargado, obtenerDatosReserva } from '../services/reservaS
 import { crearOrdenPago } from '../services/pagoService';
 import { useModal } from '../context/modal/ModalContext';
 import { formatearFechaUTC, formatearHoraUTC } from '../utils/fechas';
+import { hayToken } from '../utils/tokenStorage';
 
 export const useReserva = ({ complejo, canchaNro, inicio, duracion, modo }) => {
   const { mostrarModal: mostrarAviso } = useModal();
@@ -36,8 +37,7 @@ export const useReserva = ({ complejo, canchaNro, inicio, duracion, modo }) => {
   const [mostrarModal, setMostrarModal] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('gestor_token');
-    if (!token) {
+    if (!hayToken()) {
       mostrarAviso({
         titulo: 'Sesión requerida',
         mensaje: 'No estás logueado. Por favor, inicia sesión.',
@@ -112,8 +112,7 @@ export const useReserva = ({ complejo, canchaNro, inicio, duracion, modo }) => {
   };
 
   const handleConfirmar = async () => {
-    const token = localStorage.getItem('gestor_token');
-    if (!token) {
+    if (!hayToken()) {
       mostrarAviso({
         titulo: 'Sesión expirada',
         mensaje: 'Sesión expirada. Por favor, inicia sesión nuevamente.',

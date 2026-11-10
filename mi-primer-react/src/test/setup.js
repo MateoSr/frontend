@@ -2,9 +2,10 @@
 import '@testing-library/jest-dom/vitest';
 import { cleanup } from '@testing-library/react';
 import { afterEach } from 'vitest';
+import { eliminarToken } from '../utils/tokenStorage';
 
-// Limpia el DOM y el almacenamiento entre tests para evitar contaminación.
+// Limpia el DOM y el token entre tests para evitar contaminación.
 afterEach(() => {
   cleanup();
-  localStorage.clear();
+  eliminarToken();
 });

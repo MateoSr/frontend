@@ -1,3 +1,5 @@
+import { obtenerToken, eliminarToken } from './tokenStorage';
+
 export function decodificarPayload(token) {
   try {
     const partePayload = token.split('.')[1];
@@ -13,15 +15,15 @@ export function decodificarPayload(token) {
 }
 
 export function obtenerRol() {
-  const token = localStorage.getItem('gestor_token');
+  const token = obtenerToken();
   if (!token) return null;
   const payload = decodificarPayload(token);
   if (!payload) {
-    localStorage.removeItem('gestor_token');
+    eliminarToken();
     return null;
   }
   if (payload.exp && payload.exp * 1000 < Date.now()) {
-    localStorage.removeItem('gestor_token');
+    eliminarToken();
     return null;
   }
   return payload.rol ?? null;

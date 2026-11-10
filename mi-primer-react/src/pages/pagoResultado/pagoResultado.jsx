@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { consultarEstadoOrden } from "../../services/pagoService";
+import { hayToken } from "../../utils/tokenStorage";
 import "./pagoResultado.css";
 
 export default function PagoResultado() {
@@ -18,8 +19,7 @@ export default function PagoResultado() {
     let activo = true;
 
     const consultar = async () => {
-      const token = localStorage.getItem("gestor_token");
-      if (!token || !externalReference) {
+      if (!hayToken() || !externalReference) {
         if (activo) {
           setEstado("rechazado");
           setMensaje("No pudimos identificar la orden de pago.");

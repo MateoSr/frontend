@@ -1,14 +1,13 @@
 import axios from 'axios';
 import { API_URL } from '../config/api.js';
-
-const TOKEN_KEY = 'gestor_token';
+import { obtenerToken } from '../utils/tokenStorage.js';
 
 export const api = axios.create({ baseURL: API_URL });
 
 // Antes de cada request: agrega el token si existe.
 // Los endpoints públicos pueden pasar { skipAuth: true } para no enviarlo.
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem(TOKEN_KEY);
+  const token = obtenerToken();
   if (token && !config.skipAuth) {
     config.headers.Authorization = `Bearer ${token}`;
   }

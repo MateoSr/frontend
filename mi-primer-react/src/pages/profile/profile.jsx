@@ -4,6 +4,7 @@ import './profile.css'
 import InputForum from '../../components/inputForum/inputForum';
 import TarjetaTurno from '../../components/tarjetaTurno/tarjetaTurno';
 import { useModal } from '../../context/modal/ModalContext';
+import { hayToken, eliminarToken } from '../../utils/tokenStorage';
 
 function Profile(){
     const { mostrarModal } = useModal();
@@ -13,8 +14,7 @@ function Profile(){
     const [originalUsuario, setOriginalUsuario] = useState({});
 
     useEffect(() => {
-      const token = localStorage.getItem("gestor_token");
-      if (!token) {
+      if (!hayToken()) {
       console.log("No hay token almacenado. El usuario no está logueado.");
       return;
       }
@@ -94,8 +94,7 @@ function Profile(){
 
     async function actualizarCambios(e){
         e.preventDefault()
-        const token = localStorage.getItem("gestor_token");
-        if (!token) {
+        if (!hayToken()) {
         console.log("No hay token almacenado. El usuario no está logueado.");
         return;
         }
@@ -130,7 +129,7 @@ function Profile(){
     }
 
     const cerrarSesion = () => {
-      localStorage.removeItem("gestor_token");
+      eliminarToken();
       window.location.href = '/';
     }
 
