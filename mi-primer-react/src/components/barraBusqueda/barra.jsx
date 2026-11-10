@@ -1,7 +1,7 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { fechaArgentinaHoyISO } from '../../utils/fechas';
-import { API_URL } from '../../config/api.js';
+import { api } from '../../services/apiClient.js';
 import IconUbicacion from '../../assets/icons/ubicacion.svg?react';
 import IconPelota from '../../assets/icons/pelota.svg?react';
 import IconCalendario from '../../assets/icons/calendario.svg?react';
@@ -38,11 +38,8 @@ function BarraBusqueda() {
     useEffect(() => {
         const fetchDeportes = async () => {
             try {
-                const response = await fetch(`${API_URL}/tipoCancha`);
-                if (response.ok) {
-                    const data = await response.json();
-                    setDeportes(data);
-                }
+                const data = await api.get('/tipoCancha', { skipAuth: true });
+                setDeportes(data);
             } catch (error) {
                 console.error("Error al cargar los deportes:", error);
             }

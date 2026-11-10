@@ -29,7 +29,7 @@ export default function PagoResultado() {
 
       for (let intento = 0; intento < 10 && activo; intento += 1) {
         try {
-          const resp = await consultarEstadoOrden(externalReference, token);
+          const resp = await consultarEstadoOrden(externalReference);
           if (!activo) return;
 
           setEstado(resp.estado);

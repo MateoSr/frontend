@@ -1,13 +1,6 @@
-import { API_URL } from '../config/api.js';
-
+import { api } from './apiClient.js';
 
 export const obtenerLocalidades = async () => {
-  const response = await fetch(`${API_URL}/localidad`);
-  
-  if (!response.ok) {
-    throw new Error('Error al obtener las localidades');
-  }
-
-  const data = await response.json();
+  const data = await api.get('/localidad', { skipAuth: true });
   return Array.isArray(data) ? data : data.data ?? [];
 };

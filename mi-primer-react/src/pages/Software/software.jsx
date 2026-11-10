@@ -1,4 +1,4 @@
-import { API_URL } from '../../config/api.js';
+import { api } from '../../services/apiClient.js';
 import { useState, useRef } from 'react';
 import './software.css';
 import Planes from '../../components/planes/planes.jsx';
@@ -23,33 +23,18 @@ function Software() {
   e.preventDefault();
 
   try {
-    const response = await fetch(`${API_URL}/contacto`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData) // datos de razonSocial, nombreContacto, email, plan, comentario
+    const data = await api.post('/contacto', formData, { skipAuth: true });
+    mostrarModal({
+      titulo: 'Solicitud enviada',
+      mensaje: data.message,
+      tipo: 'exito'
     });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      mostrarModal({
-        titulo: 'Solicitud enviada',
-        mensaje: data.message,
-        tipo: 'exito'
-      });
-      // Limpiar formulario o cerrar modal
-    } else {
-      mostrarModal({
-        titulo: 'Error',
-        mensaje: data.message || "Error al enviar formulario",
-        tipo: 'error'
-      });
-    }
+    // Limpiar formulario o cerrar modal
   } catch (error) {
     console.error("Error de conexión:", error);
     mostrarModal({
       titulo: 'Error',
-      mensaje: "Error de conexión con el servidor",
+      mensaje: error.message || "Error al enviar formulario",
       tipo: 'error'
     });
   }

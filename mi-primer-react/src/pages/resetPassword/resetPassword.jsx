@@ -1,4 +1,4 @@
-import { API_URL } from '../../config/api.js';
+import { api } from '../../services/apiClient.js';
 import { useState } from "react"
 import './resetPassword.css'
 import InputForum from "../../components/inputForum/inputForum"
@@ -36,34 +36,22 @@ function ResetPassword() {
             return
         }
         try {
-            const response = await fetch(`${API_URL}/reset-password`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ token:token, password: credenciales.password }),
+            const data = await api.patch(
+                '/reset-password',
+                { token: token, password: credenciales.password },
+                { skipAuth: true }
+            );
+            await mostrarModal({
+                titulo: 'Contraseña actualizada',
+                mensaje: data.message || "Credenciales cambiadas",
+                tipo: 'exito'
             });
-            const data = await response.json()
-            if (response.ok) {
-                await mostrarModal({
-                    titulo: 'Contraseña actualizada',
-                    mensaje: data.message || "Credenciales cambiadas",
-                    tipo: 'exito'
-                });
-                navigate('/login')
-            } else {
-                mostrarModal({
-                    titulo: 'Error',
-                    mensaje: data.message || "Error al crear usuario",
-                    tipo: 'error'
-                });
-            }
-
+            navigate('/login')
         } catch (error) {
             console.log("Error en la conexion", error);
             mostrarModal({
                 titulo: 'Error',
-                mensaje: "Error en la conexión con el servidor",
+                mensaje: error.message || "Error al crear usuario",
                 tipo: 'error'
             });
         }

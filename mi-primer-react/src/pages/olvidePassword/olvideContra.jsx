@@ -1,4 +1,4 @@
-import { API_URL } from '../../config/api.js';
+import { api } from '../../services/apiClient.js';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import InputForum from '../../components/inputForum/inputForum';
@@ -13,23 +13,16 @@ function OlvideContra() {
     const enviarEmail = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch(`${API_URL}/forgot`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email }),
-            });
-            const data = await response.json()
-            if (response.ok) {
-                mostrarModal({
-                    titulo: 'Email enviado',
-                    mensaje: data.message || "Email enviado",
-                    tipo: 'exito'
-                })
-            }
-        } catch {
+            const data = await api.post('/forgot', { email }, { skipAuth: true });
+            mostrarModal({
+                titulo: 'Email enviado',
+                mensaje: data.message || "Email enviado",
+                tipo: 'exito'
+            })
+        } catch (error) {
             mostrarModal({
                 titulo: 'Error',
-                mensaje: "Error en servidor",
+                mensaje: error.message || "Error en servidor",
                 tipo: 'error'
             })
         }

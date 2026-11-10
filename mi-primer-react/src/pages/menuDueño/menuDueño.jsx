@@ -29,7 +29,7 @@ function MenuDueño() {
       //obteniendo los datos de los comnplejos del dueño
       const obtenerComplejos = async () => {
         try{
-          const data = await busquedaComplejoDueno(token)
+          const data = await busquedaComplejoDueno()
           setComplejos(data)
           console.log(complejos)
         }catch(error){
@@ -46,7 +46,7 @@ function MenuDueño() {
 
       const obtenerDatos = async () => {
         try{
-          const data = await obtenerDatosMenuDueno(token)
+          const data = await obtenerDatosMenuDueno()
           console.log(data)
           setDatos(data)
         }catch(error){

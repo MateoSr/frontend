@@ -1,36 +1,14 @@
-import { API_URL } from '../config/api.js';
+import { api } from './apiClient.js';
 
-
-const obtenerJson = async (url, options = {}) => {
-  const response = await fetch(url, options);
-
-  if (!response.ok) {
-    throw new Error('No se pudo completar la solicitud de la reserva.');
-  }
-
-  return response.json();
-};
-
-export const obtenerDatosReserva = async ({ complejoId, canchaNro, token, signal }) => {
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`
-  };
-
+export const obtenerDatosReserva = async ({ complejoId, canchaNro, signal }) => {
   const [perfil, complejo, cancha] = await Promise.all([
-    obtenerJson(`${API_URL}/users/perfil`, { headers, signal }),
-    obtenerJson(`${API_URL}/complejos/${complejoId}`, { signal }),
-    obtenerJson(`${API_URL}/complejos/${complejoId}/canchas/${canchaNro}`, { signal })
+    api.get('/users/perfil', { signal }),
+    api.get(`/complejos/${complejoId}`, { signal, skipAuth: true }),
+    api.get(`/complejos/${complejoId}/canchas/${canchaNro}`, { signal, skipAuth: true }),
   ]);
 
   return { perfil, complejo, cancha };
 };
 
-export const crearReservaEncargado = async (turno, cliente, token) => obtenerJson(`${API_URL}/turnos/encargado`, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`
-  },
-  body: JSON.stringify({ turno, cliente })
-});
+export const crearReservaEncargado = (turno, cliente) =>
+  api.post('/turnos/encargado', { turno, cliente });
