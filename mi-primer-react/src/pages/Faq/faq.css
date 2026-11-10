@@ -14,7 +14,7 @@ main {
 
 .titulo-faq{
   text-align: center;
-  color: var(--color-primario-claro);
+  color: var(--color-primario);
   font-size: 6vh;
 }
 

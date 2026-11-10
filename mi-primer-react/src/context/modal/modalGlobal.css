@@ -49,7 +49,7 @@
 }
 
 .modal-global-icono-exito {
-  color: #16a34a;
+  color: var(--color-exito);
 }
 
 .modal-global-icono-error {
@@ -70,14 +70,14 @@
 
 .modal-global-contenido h2 {
   margin: 0 0 10px 0;
-  color: #111827;
+  color: var(--color-texto);
   font-size: 1.35rem;
   font-weight: 700;
 }
 
 .modal-global-contenido p {
   margin: 0 0 22px 0;
-  color: var(--color-texto-oscuro);
+  color: var(--color-texto-secundario);
   font-size: 1rem;
   line-height: 1.5;
   word-break: break-word;
@@ -115,7 +115,7 @@
 }
 
 .modal-global-btn-peligro:hover {
-  background-color: var(--color-error-fuerte);
+  background-color: var(--color-error);
 }
 
 .modal-global-btn-secundario {

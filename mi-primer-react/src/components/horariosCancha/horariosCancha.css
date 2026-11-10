@@ -1,7 +1,7 @@
 .contenedor-horarios-cancha {
   background: var(--color-blanco);
   border-radius: 12px;
-  border: 1px solid var(--color-fondo-claro);
+  border: 1px solid var(--color-fondo-gris);
   padding: 1.5rem;
   font-family: sans-serif;
   overflow-x: auto;
@@ -9,26 +9,26 @@
 
 .fila-cabecera, .fila-cancha {
   display: flex;
-  border-bottom: 1px solid var(--color-fondo-claro);
+  border-bottom: 1px solid var(--color-fondo-gris);
 }
 
 .columna-info-vacia, .info-cancha {
   width: 250px; 
   flex-shrink: 0;
   padding: 1rem;
-  border-right: 1px solid var(--color-fondo-claro);
+  border-right: 1px solid var(--color-fondo-gris);
 }
 
 .info-cancha h4 {
   margin: 0 0 4px 0;
   font-size: 14px;
-  color: #333;
+  color: var(--color-texto-secundario);
 }
 
 .info-cancha p {
   margin: 0;
   font-size: 12px;
-  color: #888;
+  color: var(--color-texto-gris);
 }
 
 .contenedor-columnas-horas, .contenedor-celdas {
@@ -48,20 +48,20 @@
 .celda-cabecera-hora {
   text-align: center;
   font-size: 13px;
-  color: #666;
+  color: var(--color-texto-gris);
   padding: 0.5rem 0;
-  border-right: 1px solid var(--color-fondo-claro);
+  border-right: 1px solid var(--color-fondo-gris);
 }
 
 .celda-turno {
-  border-right: 1px solid var(--color-fondo-claro);
+  border-right: 1px solid var(--color-fondo-gris);
   min-height: 60px;
   border-radius: 6px;
   transition: all 0.2s ease;
 }
 
 .celda-turno.ocupada {
-  background-color: #798b9c; 
+  background-color: var(--color-texto-gris); 
   cursor: not-allowed;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .celda-turno.pasado {
-  background-color: #e5e7eb;
+  background-color: var(--color-borde);
   cursor: not-allowed;
   opacity: 0.6;
 }
@@ -88,7 +88,7 @@
   left: 1rem;
   background: var(--color-blanco);
   padding: 1.5rem;
-  border: 1px solid var(--color-fondo-claro);
+  border: 1px solid var(--color-fondo-gris);
   border-radius: 12px;
   width: min(360px, calc(100vw - 3rem));
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);

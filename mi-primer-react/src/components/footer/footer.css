@@ -1,5 +1,6 @@
 .footer-caja {
-    background-color: rgb(43, 37, 32);
+    --footer-fondo: rgb(43, 37, 32);
+    background-color: var(--footer-fondo);
     border-top: 1px solid rgba(0, 0, 0, 0.06);
     padding: 40px 20px;
     margin-top: 60px;

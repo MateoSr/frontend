@@ -19,7 +19,7 @@
 .complejoDueño-header h2 {
   margin: 4px 0 0 0;
   font-size: 14px;
-  color: #f97316;
+  color: var(--color-primario);
 }
 
 .complejoDueño-body {
@@ -64,7 +64,7 @@
 }
 
 .btn-agregar-horario {
-  background-color: #f97316;
+  background-color: var(--color-primario);
   color: var(--color-blanco);
   border: none;
   border-radius: 6px;
@@ -79,7 +79,7 @@
 }
 
 .btn-agregar-horario:hover {
-  background-color: var(--color-primario-oscuro);
+  background-color: var(--color-primario);
 }
 
 /* Formulario inline para alta/edición */
@@ -174,9 +174,9 @@
 }
 
 .horario-info-acciones span {
-  color: var(--color-exito-fuerte);
+  color: var(--color-exito);
   font-weight: 600;
-  background-color: #ecfdf5;
+  background-color: color-mix(in srgb, var(--color-exito) 10%, var(--color-blanco));
   padding: 4px 10px;
   border-radius: 6px;
   font-size: 13px;
@@ -212,7 +212,7 @@
 
 .horarios-vacio {
   text-align: center;
-  color: #94a3b8;
+  color: var(--color-texto-gris);
   font-size: 13px;
   padding: 16px 0;
 }

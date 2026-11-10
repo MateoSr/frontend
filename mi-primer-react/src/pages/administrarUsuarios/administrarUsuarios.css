@@ -147,17 +147,17 @@
 }
 
 .btn-tabla-editar:hover {
-  background-color: #eff6ff;
+  background-color: color-mix(in srgb, var(--color-info) 10%, var(--color-blanco));
 }
 
 .btn-tabla-eliminar {
   background-color: var(--color-error-fondo);
-  color: var(--color-error-fuerte);
-  border: 1px solid #fecaca;
+  color: var(--color-error);
+  border: 1px solid color-mix(in srgb, var(--color-error) 20%, var(--color-blanco));
 }
 
 .btn-tabla-eliminar:hover {
-  background-color: var(--color-error-borde);
+  background-color: color-mix(in srgb, var(--color-error) 20%, var(--color-blanco));
 }
 
 .admin-estado-tabla {
