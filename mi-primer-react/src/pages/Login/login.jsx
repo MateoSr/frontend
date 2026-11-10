@@ -1,4 +1,4 @@
-import { API_URL } from '../../config/api.js';
+import { api } from '../../services/apiClient.js';
 import InputForum from '../../components/inputForum/inputForum.jsx';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -15,35 +15,21 @@ function Login() {
     const datosFormulario = { email, password };
 
     try {
-      const response = await fetch(`${API_URL.replace(/\/api$/,"")}/api/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(datosFormulario),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        const token = data.token.token;
-        localStorage.setItem("gestor_token", token);
-        const payload = decodificarPayload(token);
-        const destinoPorRol = {
-          Encargado: '/menuEncargado',
-          'Dueño': '/menuDueño',
-          Administrador: '/menuAdmin',
-        };
-        const destino = (payload && destinoPorRol[payload.rol]) ?? '/';
-        window.location.href = destino;
-      } else {
-        mostrarModal({
-          titulo: 'Error de inicio de sesión',
-          mensaje: data.error,
-          tipo: 'error'
-        });
-      }
-    } catch {
+      const data = await api.post('/login', datosFormulario, { skipAuth: true });
+      const token = data.token.token;
+      localStorage.setItem("gestor_token", token);
+      const payload = decodificarPayload(token);
+      const destinoPorRol = {
+        Encargado: '/menuEncargado',
+        'Dueño': '/menuDueño',
+        Administrador: '/menuAdmin',
+      };
+      const destino = (payload && destinoPorRol[payload.rol]) ?? '/';
+      window.location.href = destino;
+    } catch (error) {
       mostrarModal({
-        titulo: 'Error',
-        mensaje: "Error de conexión con el servidor",
+        titulo: 'Error de inicio de sesión',
+        mensaje: error.message,
         tipo: 'error'
       });
     }

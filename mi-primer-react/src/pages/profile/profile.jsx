@@ -1,4 +1,4 @@
-import { API_URL } from '../../config/api.js';
+import { api } from '../../services/apiClient.js';
 import {useState,useEffect} from 'react'
 import './profile.css'
 import InputForum from '../../components/inputForum/inputForum';
@@ -21,20 +21,10 @@ function Profile(){
       //funciuon que trae los datos del usuario
       const obtenerPerfil = async () => {
       try{
-      
-        const response = await fetch(`${API_URL}/users/perfil`,{
-          method: "GET",
-           headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}` 
-        }
-        })
-        if(response.ok){
-          const data = await response.json()
-          console.log(data)
-          setUsuario(data)
-          setOriginalUsuario(data)
-        }
+        const data = await api.get('/users/perfil')
+        console.log(data)
+        setUsuario(data)
+        setOriginalUsuario(data)
       }catch(error){
         mostrarModal({
           titulo: 'Error',
@@ -48,34 +38,24 @@ function Profile(){
 
     useEffect(() => {
     const buscarTurnos = async () => {
-      const token = localStorage.getItem("gestor_token");
       try{
-        const response = await fetch(`${API_URL}/turnos`, {
-          method: 'GET', 
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          }
+        const respuesta = await api.get('/turnos')
+        console.log(respuesta)
+        
+        // Ordenar: próximos primero (asc), luego pasados (desc)
+        const ahora = new Date();
+        const ordenados = [...respuesta].sort((a, b) => {
+          const fechaA = new Date(a.fechaInicio);
+          const fechaB = new Date(b.fechaInicio);
+          const esFuturoA = fechaA >= ahora;
+          const esFuturoB = fechaB >= ahora;
+          
+          if (esFuturoA && esFuturoB) return fechaA - fechaB; // ambos futuros: más cercano primero
+          if (!esFuturoA && !esFuturoB) return fechaB - fechaA; // ambos pasados: más reciente primero
+          return esFuturoA ? -1 : 1; // futuros antes que pasados
         });
-        if(response.ok){
-          const respuesta = await response.json()
-          console.log(respuesta)
-          
-          // Ordenar: próximos primero (asc), luego pasados (desc)
-          const ahora = new Date();
-          const ordenados = [...respuesta].sort((a, b) => {
-            const fechaA = new Date(a.fechaInicio);
-            const fechaB = new Date(b.fechaInicio);
-            const esFuturoA = fechaA >= ahora;
-            const esFuturoB = fechaB >= ahora;
-            
-            if (esFuturoA && esFuturoB) return fechaA - fechaB; // ambos futuros: más cercano primero
-            if (!esFuturoA && !esFuturoB) return fechaB - fechaA; // ambos pasados: más reciente primero
-            return esFuturoA ? -1 : 1; // futuros antes que pasados
-          });
-          
-          setTurnos(ordenados);
-        }
+        
+        setTurnos(ordenados);
       }catch(error){
         console.log("Error cargando turnos del usuario:", error)
       }
@@ -85,37 +65,19 @@ function Profile(){
 
     const cancelarTurno = async (idTurno) => {
       try {
-    const token = localStorage.getItem("gestor_token"); 
-    
-    const respuesta = await fetch(`${API_URL}/turnos/${idTurno}/cancelar`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+    await api.patch(`/turnos/${idTurno}/cancelar`);
+
+    await mostrarModal({
+      titulo: 'Turno cancelado',
+      mensaje: "Turno cancelado correctamente",
+      tipo: 'exito'
     });
-
-    const data = await respuesta.json();
-
-    if (respuesta.ok) {
-      await mostrarModal({
-        titulo: 'Turno cancelado',
-        mensaje: "Turno cancelado correctamente",
-        tipo: 'exito'
-      });
-      setTurnos(prevTurnos => prevTurnos.filter(t => t.id !== idTurno));
-      window.location.reload();
-    } else {
-      mostrarModal({
-        titulo: 'Error',
-        mensaje: data.error || "No se pudo cancelar el turno",
-        tipo: 'error'
-      });
-    }
-  } catch {
+    setTurnos(prevTurnos => prevTurnos.filter(t => t.id !== idTurno));
+    window.location.reload();
+  } catch (error) {
     mostrarModal({
       titulo: 'Error',
-      mensaje: "Error de conexión con el servidor",
+      mensaje: error.message || "No se pudo cancelar el turno",
       tipo: 'error'
     });
   }
@@ -139,24 +101,14 @@ function Profile(){
         }
         //aca harias el put a la api actualizando los datos
         try{
-          
-          const response = await fetch(`${API_URL}/users/perfil`,{
-            method:'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify(usuario)
-            });
-            if(response.ok){
-              mostrarModal({
-                titulo: 'Perfil actualizado',
-                mensaje: "¡Perfil actualizado con éxito!",
-                tipo: 'exito'
-              });
-              setOriginalUsuario(usuario);
-              setIsEditing(false);
-            }
+          await api.put('/users/perfil', usuario);
+          mostrarModal({
+            titulo: 'Perfil actualizado',
+            mensaje: "¡Perfil actualizado con éxito!",
+            tipo: 'exito'
+          });
+          setOriginalUsuario(usuario);
+          setIsEditing(false);
         }catch(error){
         mostrarModal({
           titulo: 'Error',

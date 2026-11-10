@@ -57,7 +57,6 @@ export const useReserva = ({ complejo, canchaNro, inicio, duracion, modo }) => {
         const { perfil, complejo: datosComplejo, cancha } = await obtenerDatosReserva({
           complejoId: complejo,
           canchaNro,
-          token,
           signal: controller.signal
         });
 
@@ -168,7 +167,7 @@ export const useReserva = ({ complejo, canchaNro, inicio, duracion, modo }) => {
           apellido: titular.apellido,
           telefono: titular.telefono,
           email: titular.email
-        }, token);
+        });
         setMostrarModal(true);
       } catch (error) {
         console.error(error);
@@ -188,7 +187,7 @@ export const useReserva = ({ complejo, canchaNro, inicio, duracion, modo }) => {
         fechaInicio: inicioDate.toISOString(),
         duracion: duracionMin,
         tipoTurnoId: 1
-      }, token);
+      });
 
       if (resultado?.checkoutUrl) {
         window.location.href = resultado.checkoutUrl;

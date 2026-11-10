@@ -1,4 +1,4 @@
-import { API_URL } from '../../config/api.js';
+import { api } from '../../services/apiClient.js';
 import InputForum from '../../components/inputForum/inputForum.jsx';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -34,34 +34,18 @@ function Register() {
     const { confirmPassword, ...datosFormulario } = usuario;
 
     try {
-      const response = await fetch(`${API_URL}/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosFormulario),
+      const data = await api.post('/register', datosFormulario, { skipAuth: true });
+      await mostrarModal({
+        titulo: 'Cuenta creada',
+        mensaje: data.message,
+        tipo: 'exito'
       });
-
-      const data = await response.json();
-      if (response.ok) {
-        await mostrarModal({
-          titulo: 'Cuenta creada',
-          mensaje: data.message,
-          tipo: 'exito'
-        });
-        window.location.href = '/login';
-      } else {
-        mostrarModal({
-          titulo: 'Error',
-          mensaje: data.message || "Error al crear usuario",
-          tipo: 'error'
-        });
-      }
+      window.location.href = '/login';
     } catch (error) {
       console.log("Error en la conexion", error);
       mostrarModal({
         titulo: 'Error',
-        mensaje: "Error en la conexión con el servidor",
+        mensaje: error.message || "Error al crear usuario",
         tipo: 'error'
       });
     }

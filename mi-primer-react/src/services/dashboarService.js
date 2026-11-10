@@ -1,12 +1,3 @@
-import { API_URL } from '../config/api.js';
+import { api } from './apiClient.js';
 
-export const obtenerDatosMenuDueno = async (token) => {
-    const response = await fetch(`${API_URL}/menues/dueno`,{
-          method: "GET",
-           headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}` 
-        }})
-    if(!response) throw new Error("Error al cargar los datos")
-  return await response.json();
-}
+export const obtenerDatosMenuDueno = () => api.get('/menues/dueno');
