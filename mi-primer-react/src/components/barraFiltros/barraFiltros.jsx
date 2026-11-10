@@ -6,12 +6,27 @@ export const BarraFiltros = ({ onFiltroCambio }) => {
     const [inputMin, setInputMin] = useState('');
     const [inputMax, setInputMax] = useState('');
 
+    const soloDigitos = (valor) => valor.replace(/\D/g, '');
+
+    const parsearPrecio = (valor, porDefecto) => {
+      const limpio = valor.trim();
+      if (limpio === '') return porDefecto;
+      const numero = Number(limpio);
+      return Number.isFinite(numero) ? numero : porDefecto;
+    };
+
     const aplicarFiltroManual = () => {
-    const min = inputMin !== '' ? Number(inputMin) : 0;
-    const max = inputMax !== '' ? Number(inputMax) : Infinity;
-    
-    onFiltroCambio({ min, max });
-  };
+      const min = parsearPrecio(inputMin, 0);
+      const max = parsearPrecio(inputMax, Infinity);
+
+      // Si el usuario invirtió los valores, los ordenamos.
+      if (max !== Infinity && min > max) {
+        onFiltroCambio({ min: max, max: min });
+        return;
+      }
+
+      onFiltroCambio({ min, max });
+    };
 
   return (
     <div className="contenedor-filtros">
@@ -20,21 +35,25 @@ export const BarraFiltros = ({ onFiltroCambio }) => {
 
         <div className="rango-precio">
           <input 
-            type="number" 
+            type="text" 
+            inputMode="numeric"
+            pattern="[0-9]*"
+            autoComplete="off"
             placeholder="Mínimo" 
             className="input-precio" 
-            min="0"
             value={inputMin}
-            onChange={(e) => setInputMin(e.target.value)}
+            onChange={(e) => setInputMin(soloDigitos(e.target.value))}
           />
           <span className="separador">-</span>
           <input 
-            type="number" 
+            type="text" 
+            inputMode="numeric"
+            pattern="[0-9]*"
+            autoComplete="off"
             placeholder="Máximo" 
             className="input-precio" 
-            min="0"
             value={inputMax}
-            onChange={(e) => setInputMax(e.target.value)}
+            onChange={(e) => setInputMax(soloDigitos(e.target.value))}
           />
           <button 
             className="btn-aplicar-precio" 

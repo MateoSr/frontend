@@ -4,6 +4,13 @@ import './confirmarReserva.css';
 import './modalConfirmar.css';
 import InputForum from '../../components/inputForum/inputForum';
 import { useReserva } from '../../hooks/useReserva';
+import IconEdificio from '../../assets/icons/edificio.svg?react';
+import IconUbicacion from '../../assets/icons/ubicacion.svg?react';
+import IconCancha from '../../assets/icons/cancha.svg?react';
+import IconMoneda from '../../assets/icons/moneda.svg?react';
+import IconReloj from '../../assets/icons/reloj.svg?react';
+import IconBilletera from '../../assets/icons/billetera.svg?react';
+import IconTarjeta from '../../assets/icons/tarjeta.svg?react';
 
 export default function ConfirmarReserva() {
   const navigate = useNavigate();
@@ -58,9 +65,7 @@ export default function ConfirmarReserva() {
             <div className="info-grupo con-linea">
               <span className="info-label">Complejo</span>
               <div className="info-detalle">
-                <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m-4 0V11m0 0h4m-4 0H9m4 0V5" />
-                </svg>
+                <IconEdificio className="icon" />
                 <span className="info-valor destacado">
                   {cargando ? 'Cargando...' : reserva?.complejoNombre || 'Gol Gana'}
                 </span>
@@ -70,10 +75,7 @@ export default function ConfirmarReserva() {
             <div className="info-grupo con-linea">
               <span className="info-label">Ubicación</span>
               <div className="info-detalle">
-                <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
+                <IconUbicacion className="icon" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                 <span className="info-valor">
                   {cargando ? 'Cargando...' : reserva?.complejoUbicacion || 'Cullen 1665, Rosario'}
                 </span>
@@ -83,9 +85,7 @@ export default function ConfirmarReserva() {
             <div className="info-grupo con-linea">
               <span className="info-label">Cancha</span>
               <div className="info-detalle">
-                <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                </svg>
+                <IconCancha className="icon" />
                 <span className="info-valor">Cancha {canchaNro}</span>
               </div>
             </div>
@@ -93,9 +93,7 @@ export default function ConfirmarReserva() {
             <div className="info-grupo con-linea">
               <span className="info-label">Deporte</span>
               <div className="info-detalle">
-                <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+                <IconMoneda className="icon" />
                 <span className="info-valor">
                   {cargando ? 'Cargando...' : reserva?.deporte || 'Fútbol 5'}
                 </span>
@@ -106,9 +104,7 @@ export default function ConfirmarReserva() {
               <div className="info-grupo">
                 <span className="info-label">Hora inicio</span>
                 <div className="info-detalle">
-                  <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                  <IconReloj className="icon" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                   <span className="info-valor">{horaInicio} hs</span>
                 </div>
               </div>
@@ -116,9 +112,7 @@ export default function ConfirmarReserva() {
               <div className="info-grupo">
                 <span className="info-label">Hora fin</span>
                 <div className="info-detalle">
-                  <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                  <IconReloj className="icon" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                   <span className="info-valor">{horaFin} hs</span>
                 </div>
               </div>
@@ -127,9 +121,7 @@ export default function ConfirmarReserva() {
             <div className="info-grupo precio-row con-linea">
               <span className="info-label">Precio seña</span>
               <div className="info-detalle">
-                <svg className="icon icon-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
+                <IconBilletera className="icon icon-orange" />
                 <span className="info-valor sena">
                   $ {cargando ? '...' : reserva?.precioSenia}
                 </span>
@@ -139,9 +131,7 @@ export default function ConfirmarReserva() {
             <div className="info-grupo precio-row total">
               <span className="info-label">Precio total</span>
               <div className="info-detalle">
-                <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
+                <IconTarjeta className="icon" />
                 <span className="info-valor total-monto">
                   $ {cargando ? '...' : reserva?.precioTotal}
                 </span>
