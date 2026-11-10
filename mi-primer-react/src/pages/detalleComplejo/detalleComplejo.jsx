@@ -152,7 +152,7 @@ function DetalleComplejo() {
                                     className="detalle-complejo-opinion-fecha"
                                     dateTime={opinion.fecha}
                                 >
-                                    {formatearFechaAR(opinion.fecha)}
+                                    {formatearHora(opinion.fecha)}
                                 </time>
                             </li>
                         ))}

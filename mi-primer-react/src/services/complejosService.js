@@ -4,15 +4,33 @@ export const obtenerComplejos = async (queryString, signal) => {
   const response = await fetch(`${API_URL}/complejos/busqueda?${queryString}`, { signal });
 
   if (response.status === 404) {
-    return [];
+    return { data: [], total: 0, page: 1, limit: 12, totalPages: 0 };
   }
 
   if (!response.ok) {
     throw new Error('No se pudieron cargar los complejos.');
   }
 
-  const data = await response.json();
-  return Array.isArray(data) ? data : data.data ?? [];
+  const payload = await response.json();
+
+  if (Array.isArray(payload)) {
+    return {
+      data: payload,
+      total: payload.length,
+      page: 1,
+      limit: payload.length || 12,
+      totalPages: payload.length > 0 ? 1 : 0,
+    };
+  }
+
+  const data = payload.data ?? [];
+  return {
+    data,
+    total: payload.total ?? data.length,
+    page: payload.page ?? 1,
+    limit: payload.limit ?? 12,
+    totalPages: payload.totalPages ?? (data.length > 0 ? 1 : 0),
+  };
 };
 
 export const crearComplejo = async (complejoData, /*token*/) => {
