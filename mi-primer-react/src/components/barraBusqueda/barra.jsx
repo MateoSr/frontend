@@ -16,9 +16,12 @@ const HORARIOS = [
 ];
 
 function getHoraActualAR() {
-    const ahora = new Date();
-    const enAR = new Date(ahora.getTime() - 3 * 60 * 60 * 1000);
-    return enAR.toISOString().slice(11, 16);
+    return new Intl.DateTimeFormat('es-AR', {
+        timeZone: 'America/Argentina/Buenos_Aires',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    }).format(new Date());
 }
 
 function BarraBusqueda() {
