@@ -1,11 +1,11 @@
 .barraBusqueda-contenedor {
   margin: 20px auto;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--color-blanco);
   border-radius: 30px;
   min-height: 50px;
   width: fit-content;
   max-width: 95%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--sombra-suave);
   padding: 5px 15px;
 }
 
@@ -78,26 +78,26 @@
 }
 
 .boton:active {
-  background-color: var(--color-primario-claro);
+  background-color: var(--color-primario);
   transform: scale(0.95);
 }
 
 .icon {
-  stroke: var(--color-primario-claro);
-  fill: rgb(255, 255, 255);
+  stroke: var(--color-primario);
+  fill: var(--color-blanco);
   flex-shrink: 0;
 }
 
 .filtro-select:invalid {
-  color: #a0a0a0;
+  color: var(--color-texto-gris);
 }
 
 .filtro-select option {
-  color: #333333;
+  color: var(--color-texto-secundario);
 }
 
 .filtro-select option[disabled] {
-  color: #a0a0a0;
+  color: var(--color-texto-gris);
 }
 
 @media (max-width: 1024px) {
@@ -124,7 +124,7 @@
 
   .filtro-form {
     margin: 10px 15px;
-    border-bottom: 1px solid var(--color-fondo-claro);
+    border-bottom: 1px solid var(--color-fondo-gris);
     padding-bottom: 10px;
   }
 

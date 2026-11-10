@@ -28,9 +28,9 @@
 .detalle-complejo-acordeon {
     background-color: var(--color-blanco);
     margin-bottom: 2rem;
-    border: 1px solid var(--color-borde-suave);
+    border: 1px solid var(--color-borde);
     border-radius: 12px;
-    color: #17324d;
+    color: var(--color-texto);
     margin-top: 2rem;
     box-sizing: border-box;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
@@ -40,7 +40,7 @@
 
 .detalle-complejo-acordeon:hover {
     box-shadow: var(--sombra-suave);
-    border-color: #d1d5db;
+    border-color: var(--color-borde-gris);
 }
 
 
@@ -52,7 +52,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fafafa;
+    background-color: var(--color-fondo);
     user-select: none;
 }
 
@@ -64,8 +64,8 @@
     content: "";
     width: 8px;
     height: 8px;
-    border-right: 2px solid #17324d;
-    border-bottom: 2px solid #17324d;
+    border-right: 2px solid var(--color-texto);
+    border-bottom: 2px solid var(--color-texto);
     transform: rotate(45deg);
     transition: transform 0.3s ease;
 }
@@ -76,7 +76,7 @@
 }
 
 .detalle-complejo-acordeon[open] summary {
-    border-bottom: 1px solid var(--color-borde-suave);
+    border-bottom: 1px solid var(--color-borde);
     background-color: var(--color-blanco);
 }
 
@@ -88,15 +88,15 @@
 .contenido-acordeon p {
     margin: 0;
     line-height: 1.5;
-    color: #4b5563;
+    color: var(--color-texto-terciario);
 }
 
 .horario-fila {
     display: flex;
     justify-content: space-between;
     padding: 0.75rem 0;
-    border-bottom: 1px dashed var(--color-borde-suave);
-    color: #4b5563;
+    border-bottom: 1px dashed var(--color-borde);
+    color: var(--color-texto-terciario);
 }
 
 
@@ -108,7 +108,7 @@
 .detalle-complejo-opiniones {
     background-color: var(--color-blanco);
     margin-top: 2rem;
-    border: 1px solid var(--color-borde-suave);
+    border: 1px solid var(--color-borde);
     border-radius: 12px;
     padding: 1.25rem;
     box-sizing: border-box;

@@ -1,6 +1,6 @@
 .contenedor-grilla {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
   margin-top: 1rem;
 }
@@ -8,11 +8,20 @@
 .mensaje-vacio {
   padding: 3rem;
   text-align: center;
-  color: #777;
-  background-color: #f9f9f9;
+  color: var(--color-texto-gris);
+  background-color: var(--color-fondo);
   border-radius: 8px;
   margin-top: 1rem;
 }
 
-.contenedor-grilla { grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); }
+@media (max-width: 1024px) {
+  .contenedor-grilla {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 
+@media (max-width: 640px) {
+  .contenedor-grilla {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,74 @@
+.paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 2rem 0 1rem;
+}
+
+.paginacion-lista {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.paginacion-boton,
+.paginacion-numero {
+  border: 1px solid var(--color-borde-gris);
+  background-color: var(--color-blanco);
+  color: var(--color-texto-secundario);
+  border-radius: var(--radio-sm);
+  padding: 0.5rem 0.85rem;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color var(--transicion-rapida), border-color var(--transicion-rapida), color var(--transicion-rapida);
+}
+
+.paginacion-numero {
+  min-width: 38px;
+  padding: 0.5rem 0.6rem;
+}
+
+.paginacion-boton:hover:not(:disabled),
+.paginacion-numero:hover:not(.activo) {
+  background-color: var(--color-fondo);
+  border-color: var(--color-primario);
+  color: var(--color-primario);
+}
+
+.paginacion-numero.activo {
+  background-color: var(--color-primario);
+  border-color: var(--color-primario);
+  color: var(--color-blanco);
+  font-weight: 600;
+}
+
+.paginacion-boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paginacion-elipsis {
+  padding: 0 0.25rem;
+  color: var(--color-texto-gris);
+}
+
+@media (max-width: 480px) {
+  .paginacion {
+    gap: 0.35rem;
+  }
+
+  .paginacion-boton {
+    padding: 0.45rem 0.6rem;
+    font-size: 13px;
+  }
+
+  .paginacion-numero {
+    min-width: 34px;
+    padding: 0.45rem 0.5rem;
+  }
+}

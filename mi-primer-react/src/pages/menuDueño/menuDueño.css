@@ -4,7 +4,7 @@
   background-color: var(--color-fondo); /* Fondo gris claro moderno */
   min-height: 100vh;
   font-family: 'Segoe UI', system-ui, sans-serif;
-  color: #1e293b;
+  color: var(--color-texto);
   box-sizing: border-box;
 }
 

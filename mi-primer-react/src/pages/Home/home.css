@@ -82,11 +82,11 @@ main{
 }
 
 .boton-home:hover {
-    background-color: #d34d00;
+    background-color: var(--color-primario-hover);
 }
 
 .boton-home:active {
-    background-color: var(--color-primario-claro);
+    background-color: var(--color-primario);
 }
 
 .contenedor-home-imagen{
@@ -111,7 +111,7 @@ main{
 }
 
 .hero-titulo {
-  color: #ffff;
+  color: var(--color-blanco);
   text-shadow: 4px 4px 10px rgba(0, 0, 0, 1);
   font-size: 50px;
   text-align: center;

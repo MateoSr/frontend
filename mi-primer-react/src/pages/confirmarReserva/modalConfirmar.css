@@ -43,13 +43,13 @@
 .modal-confirmacion-contenido h2 {
   margin-top: 0;
   margin-bottom: 12px;
-  color: #111827;
+  color: var(--color-texto);
   font-size: 1.5rem;
   font-weight: 700;
 }
 
 .modal-confirmacion-contenido p {
-  color: var(--color-texto-oscuro);
+  color: var(--color-texto-secundario);
   font-size: 1rem;
   line-height: 1.5;
   margin-bottom: 8px;
@@ -57,7 +57,7 @@
 
 .modal-confirmacion-contenido .modal-subtexto {
   font-size: 0.9rem !important;
-  color: var(--color-texto-tenue) !important;
+  color: var(--color-texto-gris) !important;
   margin-bottom: 24px !important;
 }
 

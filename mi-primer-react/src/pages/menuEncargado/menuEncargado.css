@@ -2,7 +2,7 @@
   min-height: calc(100vh - 160px);
   padding: 3rem clamp(1rem, 5vw, 5rem);
   background: var(--color-blanco);
-  color: #18251f;
+  color: var(--color-texto);
 }
 
 .menu-encargado-cabecera,
@@ -37,24 +37,24 @@
 .menu-encargado-cabecera p:not(.menu-encargado-etiqueta),
 .menu-encargado-grilla-cabecera p {
   margin: 2vh;
-  color: #64736b;
+  color: var(--color-texto-gris);
 }
 
 .menu-encargado-fecha {
   display: grid;
   gap: .45rem;
-  color: #64736b;
+  color: var(--color-texto-gris);
   font-size: .8rem;
   font-weight: 700;
   text-transform: uppercase;
 }
 
 .menu-encargado-fecha input {
-  border: 1px solid #ccd5cd;
+  border: 1px solid var(--color-borde-gris);
   border-radius: 6px;
   padding: .7rem .8rem;
   background: var(--color-blanco);
-  color: #18251f;
+  color: var(--color-texto);
   font: inherit;
   text-transform: none;
 }
@@ -64,8 +64,8 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
   margin: 2.5rem 0;
-  border: 1px solid #dce4dc;
-  background: #dce4dc;
+  border: 1px solid var(--color-borde);
+  background: var(--color-borde);
 }
 
 .menu-encargado-resumen div {
@@ -80,14 +80,14 @@
 }
 
 .menu-encargado-resumen span {
-  color: #64736b;
+  color: var(--color-texto-gris);
   font-size: .8rem;
   text-transform: uppercase;
 }
 
 .menu-encargado-grilla {
   padding: 1.5rem;
-  border: 1px solid #dce4dc;
+  border: 1px solid var(--color-borde);
   background: var(--color-blanco);
   border-radius: 12px;
   display: grid;
@@ -110,7 +110,7 @@
   display: flex;
   align-items: center;
   gap: .45rem;
-  color: #64736b;
+  color: var(--color-texto-gris);
   font-size: .8rem;
   white-space: nowrap;
 }
@@ -123,7 +123,7 @@
 }
 
 .leyenda-libre { border: 1px solid var(--color-primario); }
-.leyenda-ocupada { margin-left: .8rem; background: #798b9c; }
+.leyenda-ocupada { margin-left: .8rem; background: var(--color-texto-gris); }
 
 .menu-encargado .celda-turno.ocupada {
   cursor: pointer;
@@ -138,7 +138,7 @@
   display: grid;
   place-items: center;
   padding: 2rem;
-  color: #64736b;
+  color: var(--color-texto-gris);
 }
 
 @media (max-width: 700px) {

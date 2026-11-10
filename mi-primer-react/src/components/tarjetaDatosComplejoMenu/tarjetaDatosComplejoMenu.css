@@ -1,6 +1,6 @@
 .tarjeta-datos-complejo-menu {
   background-color: var(--color-blanco);
-  border: 1px solid #eaecf0;
+  border: 1px solid var(--color-borde);
   border-radius: 16px;
   padding: 24px;
   margin: 0 auto 24px auto;
@@ -25,8 +25,8 @@
 }
 
 .tarjeta-datos-complejo-menu-icono {
-  background-color: #fff4ed;
-  color: var(--color-primario-claro);
+  background-color: var(--color-primario-fondo);
+  color: var(--color-primario);
   width: 44px;
   height: 44px;
   border-radius: 12px;
@@ -40,13 +40,13 @@
   margin: 0;
   font-size: 1.35rem;
   font-weight: 700;
-  color: #101828;
+  color: var(--color-texto);
   line-height: 1.2;
 }
 
 .tarjeta-datos-complejo-menu-subtitulo {
   font-size: 0.85rem;
-  color: #667085;
+  color: var(--color-texto-gris);
   margin-top: 2px;
   display: block;
 }
@@ -57,8 +57,8 @@
   align-items: center;
   gap: 8px;
   background-color: var(--color-blanco);
-  border: 1px solid var(--color-borde-medio);
-  color: #344054;
+  border: 1px solid var(--color-borde-gris);
+  color: var(--color-texto-secundario);
   padding: 8px 14px;
   border-radius: 8px;
   font-size: 0.875rem;
@@ -69,9 +69,9 @@
 }
 
 .btn-editar-datos-complejo:hover {
-  background-color: #f9fafb;
-  border-color: var(--color-primario-claro);
-  color: var(--color-primario-claro);
+  background-color: var(--color-fondo);
+  border-color: var(--color-primario);
+  color: var(--color-primario);
 }
 
 /* Detalles (Modo Lectura) */
@@ -81,7 +81,7 @@
   gap: 24px;
   align-items: center;
   padding-top: 16px;
-  border-top: 1px solid #f2f4f7;
+  border-top: 1px solid var(--color-fondo-gris);
 }
 
 .item-detalle-datos-complejo {
@@ -89,12 +89,12 @@
   align-items: center;
   gap: 8px;
   font-size: 0.9rem;
-  color: #344054;
+  color: var(--color-texto-secundario);
   font-weight: 500;
 }
 
 .icono-detalle-datos-complejo {
-  color: var(--color-primario-claro);
+  color: var(--color-primario);
   flex-shrink: 0;
 }
 
@@ -104,7 +104,7 @@
   flex-direction: column;
   gap: 18px;
   padding-top: 16px;
-  border-top: 1px solid #f2f4f7;
+  border-top: 1px solid var(--color-fondo-gris);
 }
 
 .grilla-form-datos-complejo {
@@ -122,25 +122,25 @@
 .campo-datos-complejo label {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #344054;
+  color: var(--color-texto-secundario);
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
 
 .campo-datos-complejo input {
   padding: 8px 12px;
-  border: 1px solid var(--color-borde-medio);
+  border: 1px solid var(--color-borde-gris);
   border-radius: 8px;
   font-size: 0.9rem;
-  color: #101828;
+  color: var(--color-texto);
   outline: none;
   transition: all 0.2s ease;
   box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
 }
 
 .campo-datos-complejo input:focus {
-  border-color: var(--color-primario-claro);
-  box-shadow: 0 0 0 3px rgba(255, 85, 0, 0.12);
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px var(--color-primario-fondo);
 }
 
 .acciones-form-datos-complejo {
@@ -153,7 +153,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background-color: var(--color-primario-claro);
+  background-color: var(--color-primario);
   color: var(--color-blanco);
   border: none;
   padding: 8px 16px;
@@ -165,7 +165,7 @@
 }
 
 .btn-guardar-datos-complejo:hover {
-  background-color: #e04b00;
+  background-color: var(--color-primario-hover);
 }
 
 .btn-cancelar-datos-complejo {
@@ -173,8 +173,8 @@
   align-items: center;
   gap: 6px;
   background-color: var(--color-blanco);
-  color: #344054;
-  border: 1px solid var(--color-borde-medio);
+  color: var(--color-texto-secundario);
+  border: 1px solid var(--color-borde-gris);
   padding: 8px 16px;
   border-radius: 8px;
   font-weight: 600;
@@ -184,7 +184,7 @@
 }
 
 .btn-cancelar-datos-complejo:hover {
-  background-color: #f9fafb;
+  background-color: var(--color-fondo);
 }
 
 @media (max-width: 640px) {

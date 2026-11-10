@@ -12,7 +12,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--sombra-suave);
     position: sticky;
     z-index: 1000;
     background-color: var(--color-blanco);
@@ -116,7 +116,7 @@
 
     .nav-links li {
         margin: 0;
-        border-bottom: 1px solid var(--color-fondo-claro);
+        border-bottom: 1px solid var(--color-fondo-gris);
     }
 
     .nav-links li:last-child {

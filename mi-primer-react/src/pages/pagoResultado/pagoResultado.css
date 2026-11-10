@@ -7,9 +7,9 @@
 }
 
 .pago-resultado-card {
-  background: #fff;
+  background: var(--color-blanco);
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--sombra-suave);
   max-width: 420px;
   width: 100%;
   text-align: center;
@@ -17,18 +17,18 @@
 }
 
 .pago-resultado-card.aprobado {
-  border-top: 4px solid #22c55e;
+  border-top: 4px solid var(--color-exito);
 }
 
 .pago-resultado-card.pendiente {
-  border-top: 4px solid #f59e0b;
+  border-top: 4px solid var(--color-primario);
 }
 
 .pago-resultado-card.rechazado,
 .pago-resultado-card.reembolsada,
 .pago-resultado-card.cancelada,
 .pago-resultado-card.expirada {
-  border-top: 4px solid #ef4444;
+  border-top: 4px solid var(--color-error);
 }
 
 .pago-resultado-icono {
@@ -43,7 +43,7 @@
 }
 
 .pago-resultado-mensaje {
-  color: #4b5563;
+  color: var(--color-texto-terciario);
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
@@ -63,11 +63,11 @@
 }
 
 .pago-resultado-boton.primario {
-  background: #0f766e;
-  color: #fff;
+  background: var(--color-primario);
+  color: var(--color-blanco);
 }
 
 .pago-resultado-boton.secundario {
-  background: #f3f4f6;
-  color: #1f2937;
+  background: var(--color-fondo-gris);
+  color: var(--color-texto);
 }
