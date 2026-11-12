@@ -4,7 +4,7 @@ import './profile.css'
 import InputForum from '../../components/inputForum/inputForum';
 import TarjetaTurno from '../../components/tarjetaTurno/tarjetaTurno';
 import { useModal } from '../../context/modal/ModalContext';
-import { hayToken, eliminarToken } from '../../utils/tokenStorage';
+import { hayToken, limpiarSesion } from '../../utils/tokenStorage';
 
 function Profile(){
     const { mostrarModal } = useModal();
@@ -129,7 +129,7 @@ function Profile(){
     }
 
     const cerrarSesion = () => {
-      eliminarToken();
+      limpiarSesion();
       window.location.href = '/';
     }
 

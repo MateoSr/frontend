@@ -1,4 +1,4 @@
-import { obtenerToken, eliminarToken } from './tokenStorage';
+import { obtenerToken } from './tokenStorage';
 
 export function decodificarPayload(token) {
   try {
@@ -14,17 +14,24 @@ export function decodificarPayload(token) {
   }
 }
 
+/**
+ * Milisegundos que faltan para que venza el token.
+ * null si no hay token, es inválido o no tiene exp.
+ */
+export function msHastaExpiracion(token = obtenerToken()) {
+  if (!token) return null;
+  const payload = decodificarPayload(token);
+  if (!payload?.exp) return null;
+  return payload.exp * 1000 - Date.now();
+}
+
 export function obtenerRol() {
   const token = obtenerToken();
   if (!token) return null;
   const payload = decodificarPayload(token);
-  if (!payload) {
-    eliminarToken();
-    return null;
-  }
-  if (payload.exp && payload.exp * 1000 < Date.now()) {
-    eliminarToken();
-    return null;
-  }
+  if (!payload) return null;
+  // No borramos el token vencido acá: el módulo de sesión puede renovarlo
+  // con el refresh token antes de decidir cerrar sesión.
+  if (payload.exp && payload.exp * 1000 <= Date.now()) return null;
   return payload.rol ?? null;
 }

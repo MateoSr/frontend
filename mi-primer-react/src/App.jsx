@@ -25,11 +25,12 @@ import AdministrarUsuarios from './pages/administrarUsuarios/administrarUsuarios
 import CrearUsuario from './pages/crearUsuario/crearUsuario'
 import ComplejoDueño from './pages/complejoDueño/complejoDueño'
 import PagoResultado from './pages/pagoResultado/pagoResultado'
+import SesionExpiracion from './components/sesionExpiracion/sesionExpiracion'
 
 
 function App() {
   return (
-    <>
+    <SesionExpiracion>
       <Header></Header>
       <BloqueoPorRol>
       <Routes>
@@ -77,7 +78,7 @@ function App() {
       </Routes >
       </BloqueoPorRol>
       <Footer></Footer>
-    </>
+    </SesionExpiracion>
   )
 }
 

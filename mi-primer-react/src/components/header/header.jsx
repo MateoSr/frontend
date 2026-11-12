@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react'; // Aprovechamos la librería que instalaste
 import logo from '../../assets/logo.png';
 import { obtenerRol } from '../../utils/auth';
-import { hayToken, eliminarToken } from '../../utils/tokenStorage';
+import { hayToken, limpiarSesion } from '../../utils/tokenStorage';
 import './header.css';
 
 const INICIO_POR_ROL = {
@@ -29,7 +29,7 @@ function Header() {
   const panel = rol ? PANEL_POR_ROL[rol] : null;
 
   const cerrarSesion = () => {
-    eliminarToken();
+    limpiarSesion();
     setMenuOpen(false);
     window.location.href = '/login';
   };

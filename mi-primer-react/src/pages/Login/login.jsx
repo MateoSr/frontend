@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useModal } from '../../context/modal/ModalContext.jsx';
 import { decodificarPayload } from '../../utils/auth.js';
-import { guardarToken } from '../../utils/tokenStorage.js';
+import { guardarTokens, guardarUltimaActividad } from '../../utils/tokenStorage.js';
 import './login.css';
 
 function Login() {
@@ -18,7 +18,8 @@ function Login() {
     try {
       const data = await api.post('/login', datosFormulario, { skipAuth: true });
       const token = data.token.token;
-      guardarToken(token);
+      guardarTokens(data.token);
+      guardarUltimaActividad();
       const payload = decodificarPayload(token);
       const destinoPorRol = {
         Encargado: '/menuEncargado',
