@@ -1,0 +1,115 @@
+.tarjetas-menu-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  width: 100%;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.tarjeta-metrica {
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: var(--sombra-suave);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 140px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-metrica:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.tarjeta-blanca {
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-fondo-gris);
+}
+
+.tarjeta-naranja {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+}
+
+.tarjeta-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.titulo-metrica {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-texto-gris);
+}
+
+.tarjeta-naranja .titulo-metrica {
+  color: color-mix(in srgb, var(--color-exito) 10%, var(--color-blanco));
+}
+
+.icono-contenedor {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.fondo-suave { background-color: var(--color-fondo-gris); }
+.verde-claro { background-color: rgba(255, 255, 255, 0.2); }
+
+.tarjeta-cuerpo {
+  margin-top: 12px;
+}
+
+.valor-metrica {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-texto);
+  margin: 0 0 4px 0;
+  letter-spacing: -0.5px;
+}
+
+.tarjeta-naranja .valor-metrica { color: var(--color-blanco); }
+
+.subtitulo-metrica {
+  font-size: 12px;
+  color: var(--color-texto-gris);
+  margin: 0;
+}
+
+.tarjeta-naranja .subtitulo-metrica { color: var(--color-blanco); }
+
+.barra-progreso-fondo {
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-fondo-gris);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.barra-progreso-fill {
+  height: 100%;
+  background-color: var(--color-primario);
+  border-radius: 3px;
+}
+
+.tarjeta-metrica .subtitulo-metrica.estado-normal {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-texto-terciario);
+  font-weight: 500;
+}
+
+.punto-verde {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-exito);
+  border-radius: 50%;
+  display: inline-block;
+}
