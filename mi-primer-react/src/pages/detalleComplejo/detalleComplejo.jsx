@@ -148,9 +148,9 @@ function DetalleComplejo() {
                                 </p>
                                 <time
                                     className="detalle-complejo-opinion-fecha"
-                                    dateTime={opinion.fecha}
+                                    date={opinion.fecha}
                                 >
-                                    {formatearHora(opinion.fecha)}
+                                    {new Date(opinion.fecha).toLocaleDateString("es-AR")}
                                 </time>
                             </li>
                         ))}
